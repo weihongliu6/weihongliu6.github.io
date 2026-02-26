@@ -32,39 +32,37 @@
       line-height: 1.5;
     }
 
-    /* Carousel (no JS) */
-    .carousel{
+    /* Auto slideshow */
+    .slideshow{
+      position: relative;
       margin: 18px 0 18px;
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .card{
-      flex: 0 0 78%;
-      max-width: 520px;
-      background: white;
-      border: 1px solid #eee;
       border-radius: 14px;
       overflow: hidden;
-      scroll-snap-align: start;
+      background: #fff;
+      border: 1px solid #eee;
       box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
-    @media (min-width: 800px){
-      .card{ flex-basis: 46%; }
-    }
-    .card img{
+    .slide{
       width: 100%;
       height: auto;
+      display: none;
+    }
+    .caption{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 14px;
+      color: white;
+      background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .caption b{
       display: block;
+      font-size: 16px;
+      margin-bottom: 4px;
     }
-    .card .cap{
-      padding: 12px 14px 14px;
-    }
-    .cap b{ display:block; margin-bottom: 6px; }
-    .cap span{ color:#555; font-size: 14px; line-height: 1.45; }
 
     .section{
       background: white;
@@ -81,6 +79,7 @@
     a:hover{ text-decoration: underline; }
     ul{ margin: 8px 0 0 18px; }
     .muted{ color:#666; }
+
     footer{ margin-top: 22px; color:#777; font-size: 13px; }
   </style>
 </head>
@@ -92,29 +91,15 @@
       <p class="subtitle">Photography and reflections by Dr Weihong Liu</p>
     </header>
 
-    <div class="carousel" aria-label="Featured works">
-      <div class="card">
-        <img src="VeniceModified.jpg" alt="Featured work 1" />
-        <div class="cap">
-          <b>Venice — Long Exposure</b>
-          <span class="muted">A study of time traces and stillness.</span>
-        </div>
-      </div>
+    <!-- Auto slideshow (3 images) -->
+    <div class="slideshow" aria-label="Featured works">
+      <img class="slide" src="VeniceModified.jpg" alt="Venice long exposure">
+      <img class="slide" src="TempleMonks1Modified.jpg" alt="Temple moving figures">
+      <img class="slide" src="WQTK3757.JPG" alt="Night scene">
 
-      <div class="card">
-        <img src="TempleMonks1Modified.jpg" alt="Featured work 2" />
-        <div class="cap">
-          <b>Temple — Moving figures</b>
-          <span class="muted">Motion as a soft brush over reality.</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="WQTK3757.JPG" alt="Featured work 3" />
-        <div class="cap">
-          <b>Night scene</b>
-          <span class="muted">Light, atmosphere, and the human trace.</span>
-        </div>
+      <div class="caption" id="captionBox">
+        <b id="capTitle">Venice — Long Exposure</b>
+        <span id="capText">A study of time traces and stillness.</span>
       </div>
     </div>
 
@@ -136,5 +121,38 @@
       © Dr Weihong Liu — Digital Studio
     </footer>
   </div>
+
+  <script>
+    // Auto slideshow (simple + stable)
+    const slides = document.getElementsByClassName("slide");
+
+    const captions = [
+      { title: "Venice — Long Exposure", text: "A study of time traces and stillness." },
+      { title: "Temple — Moving figures", text: "Motion as a soft brush over reality." },
+      { title: "Night scene", text: "Light, atmosphere, and the human trace." }
+    ];
+
+    let idx = 0;
+
+    function showSlide(n){
+      for (let i=0; i<slides.length; i++){
+        slides[i].style.display = "none";
+      }
+      slides[n].style.display = "block";
+
+      document.getElementById("capTitle").innerText = captions[n].title;
+      document.getElementById("capText").innerText  = captions[n].text;
+    }
+
+    function nextSlide(){
+      idx = (idx + 1) % slides.length;
+      showSlide(idx);
+      setTimeout(nextSlide, 3500); // change speed here (ms)
+    }
+
+    // start
+    showSlide(idx);
+    setTimeout(nextSlide, 3500);
+  </script>
 </body>
 </html>
