@@ -1,158 +1,153 @@
 <!doctype html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dr Weihong Liu Digital Studio</title>
 
-  <style>
-    body{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      margin: 0;
-      color: #111;
-      background: #fafafa;
-    }
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-    }
-    header{
-      padding: 12px 0 8px;
-    }
-    h1{
-      margin: 0 0 6px;
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: -0.5px;
-    }
-    .subtitle{
-      margin: 0;
-      color: #555;
-      font-size: clamp(14px, 2.2vw, 16px);
-      line-height: 1.5;
-    }
+<meta charset="utf-8">
 
-    /* Auto slideshow */
-    .slideshow{
-      position: relative;
-      margin: 18px 0 18px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid #eee;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-    }
-    .slide{
-      width: 100%;
-      height: auto;
-      display: none;
-    }
-    .caption{
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 12px 14px;
-      color: white;
-      background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
-      font-size: 14px;
-      line-height: 1.35;
-    }
-    .caption b{
-      display: block;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    .section{
-      background: white;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-top: 14px;
-    }
-    .section h2{
-      margin: 6px 0 10px;
-      font-size: 18px;
-    }
-    a{ color: #0b63ce; text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-    ul{ margin: 8px 0 0 18px; }
-    .muted{ color:#666; }
+<title>Dr Weihong Liu Digital Studio</title>
 
-    footer{ margin-top: 22px; color:#777; font-size: 13px; }
-  </style>
+<style>
+
+body{
+font-family:Arial;
+margin:40px;
+}
+
+h1{
+font-size:36px;
+}
+
+
+.slider{
+
+max-width:900px;
+margin:auto;
+overflow:hidden;
+border-radius:12px;
+
+}
+
+.slides{
+
+display:flex;
+
+width:300%;
+
+animation:slide 12s infinite;
+
+}
+
+.slides img{
+
+width:100%;
+
+}
+
+
+
+@keyframes slide{
+
+0%{
+transform:translateX(0%);
+}
+
+33%{
+transform:translateX(0%);
+}
+
+
+38%{
+transform:translateX(-100%);
+}
+
+66%{
+transform:translateX(-100%);
+}
+
+
+71%{
+transform:translateX(-200%);
+}
+
+100%{
+transform:translateX(-200%);
+}
+
+}
+
+</style>
+
 </head>
 
+
+
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Dr Weihong Liu Digital Studio</h1>
-      <p class="subtitle">Photography and reflections by Dr Weihong Liu</p>
-    </header>
 
-    <!-- Auto slideshow (3 images) -->
-    <div class="slideshow" aria-label="Featured works">
-      <img class="slide" src="VeniceModified.jpg" alt="Venice long exposure">
-      <img class="slide" src="TempleMonks1Modified.jpg" alt="Temple moving figures">
-      <img class="slide" src="WQTK3757.JPG" alt="Night scene">
 
-      <div class="caption" id="captionBox">
-        <b id="capTitle">Venice — Long Exposure</b>
-        <span id="capText">A study of time traces and stillness.</span>
-      </div>
-    </div>
+<h1>Dr Weihong Liu Digital Studio</h1>
 
-    <div class="section">
-      <h2>Sections</h2>
-      <ul>
-        <li><a href="works.html">Photography Works</a></li>
-        <li>
-          Projects
-          <ul>
-            <li><a href="projects/venice.html">Venice Photography</a></li>
-          </ul>
-        </li>
-        <li class="muted">Articles (coming soon)</li>
-      </ul>
-    </div>
+<p>Photography and reflections by Dr Weihong Liu</p>
 
-    <footer>
-      © Dr Weihong Liu — Digital Studio
-    </footer>
-  </div>
 
-  <script>
-    // Auto slideshow (simple + stable)
-    const slides = document.getElementsByClassName("slide");
 
-    const captions = [
-      { title: "Venice — Long Exposure", text: "A study of time traces and stillness." },
-      { title: "Temple — Moving figures", text: "Motion as a soft brush over reality." },
-      { title: "Night scene", text: "Light, atmosphere, and the human trace." }
-    ];
+<div class="slider">
 
-    let idx = 0;
+<div class="slides">
 
-    function showSlide(n){
-      for (let i=0; i<slides.length; i++){
-        slides[i].style.display = "none";
-      }
-      slides[n].style.display = "block";
+<img src="VeniceModified.jpg">
 
-      document.getElementById("capTitle").innerText = captions[n].title;
-      document.getElementById("capText").innerText  = captions[n].text;
-    }
+<img src="TempleMonks1Modified.jpg">
 
-    function nextSlide(){
-      idx = (idx + 1) % slides.length;
-      showSlide(idx);
-      setTimeout(nextSlide, 3500); // change speed here (ms)
-    }
+<img src="WQTK3757.JPG">
 
-    // start
-    showSlide(idx);
-    setTimeout(nextSlide, 3500);
-  </script>
+</div>
+
+</div>
+
+
+
+<h2>Sections</h2>
+
+<ul>
+
+<li>
+<a href="works.html">
+Photography Works
+</a>
+</li>
+
+
+<li>
+
+Projects
+
+<ul>
+
+<li>
+
+<a href="projects/venice.html">
+Venice Photography
+</a>
+
+</li>
+
+</ul>
+
+</li>
+
+
+<li>
+Articles (coming soon)
+</li>
+
+
+</ul>
+
+
+
 </body>
+
 </html>
