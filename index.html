@@ -1,153 +1,193 @@
 <!doctype html>
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dr Weihong Liu Digital Studio</title>
 
-<meta charset="utf-8">
+  <style>
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      margin:0;
+      background:#fafafa;
+      color:#111;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:24px 16px 40px;
+    }
 
-<title>Dr Weihong Liu Digital Studio</title>
+    h1{
+      margin:0 0 6px;
+      font-size:clamp(26px,4vw,40px);
+      letter-spacing:-0.5px;
+    }
 
-<style>
+    .subtitle{
+      margin:0 0 18px;
+      color:#555;
+      font-size:clamp(14px,2.2vw,16px);
+      line-height:1.5;
+    }
 
-body{
-font-family:Arial;
-margin:40px;
-}
+    /* ===== Continuous slider ===== */
+    .marquee{
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      background:#fff;
+      border:1px solid #eee;
+      box-shadow:0 6px 20px rgba(0,0,0,0.06);
+    }
 
-h1{
-font-size:36px;
-}
+    /* height of the “window” */
+    .marquee .track{
+      display:flex;
+      width:max-content;
+      animation: scroll 30s linear infinite;
+    }
 
+    /* Each slide block */
+    .marquee .item{
+      flex:0 0 auto;
+      width:min(90vw, 720px);
+      height:420px;
+      position:relative;
+    }
 
-.slider{
+    /* Responsive height */
+    @media (max-width: 700px){
+      .marquee .item{ height: 320px; }
+    }
 
-max-width:900px;
-margin:auto;
-overflow:hidden;
-border-radius:12px;
+    .marquee img{
+      width:100%;
+      height:100%;
+      object-fit:cover;   /* key for nice cropping */
+      display:block;
+    }
 
-}
+    /* Caption overlay */
+    .cap{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding:12px 14px;
+      color:#fff;
+      background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+      font-size:14px;
+      line-height:1.35;
+    }
+    .cap b{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
 
-.slides{
+    /* Continuous movement */
+    @keyframes scroll{
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-display:flex;
+    /* ===== Sections box ===== */
+    .section{
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:14px;
+      padding:14px 16px;
+      margin-top:14px;
+    }
+    .section h2{
+      margin:6px 0 10px;
+      font-size:18px;
+    }
+    a{ color:#0b63ce; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    ul{ margin:8px 0 0 18px; }
+    .muted{ color:#666; }
 
-width:300%;
-
-animation:slide 12s infinite;
-
-}
-
-.slides img{
-
-width:100%;
-
-}
-
-
-
-@keyframes slide{
-
-0%{
-transform:translateX(0%);
-}
-
-33%{
-transform:translateX(0%);
-}
-
-
-38%{
-transform:translateX(-100%);
-}
-
-66%{
-transform:translateX(-100%);
-}
-
-
-71%{
-transform:translateX(-200%);
-}
-
-100%{
-transform:translateX(-200%);
-}
-
-}
-
-</style>
-
+    footer{ margin-top:22px; color:#777; font-size:13px; }
+  </style>
 </head>
 
-
-
 <body>
+  <div class="wrap">
+    <h1>Dr Weihong Liu Digital Studio</h1>
+    <p class="subtitle">Photography and reflections by Dr Weihong Liu</p>
 
+    <!-- Continuous slider:
+         We duplicate the same 3 items twice so the loop is seamless. -->
+    <div class="marquee" aria-label="Featured works continuous slider">
+      <div class="track">
+        <!-- Set 1 -->
+        <div class="item">
+          <img src="VeniceModified.jpg" alt="Venice long exposure">
+          <div class="cap">
+            <b>Venice — Long Exposure</b>
+            <span>A study of time traces and stillness.</span>
+          </div>
+        </div>
 
-<h1>Dr Weihong Liu Digital Studio</h1>
+        <div class="item">
+          <img src="TempleMonks1Modified.jpg" alt="Temple moving figures">
+          <div class="cap">
+            <b>Temple — Moving figures</b>
+            <span>Motion as a soft brush over reality.</span>
+          </div>
+        </div>
 
-<p>Photography and reflections by Dr Weihong Liu</p>
+        <div class="item">
+          <img src="WQTK3757.JPG" alt="Night scene">
+          <div class="cap">
+            <b>Night scene</b>
+            <span>Light, atmosphere, and the human trace.</span>
+          </div>
+        </div>
 
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="item">
+          <img src="VeniceModified.jpg" alt="Venice long exposure duplicate">
+          <div class="cap">
+            <b>Venice — Long Exposure</b>
+            <span>A study of time traces and stillness.</span>
+          </div>
+        </div>
 
+        <div class="item">
+          <img src="TempleMonks1Modified.jpg" alt="Temple moving figures duplicate">
+          <div class="cap">
+            <b>Temple — Moving figures</b>
+            <span>Motion as a soft brush over reality.</span>
+          </div>
+        </div>
 
-<div class="slider">
+        <div class="item">
+          <img src="WQTK3757.JPG" alt="Night scene duplicate">
+          <div class="cap">
+            <b>Night scene</b>
+            <span>Light, atmosphere, and the human trace.</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="slides">
+    <div class="section">
+      <h2>Sections</h2>
+      <ul>
+        <li><a href="works.html">Photography Works</a></li>
+        <li>
+          Projects
+          <ul>
+            <li><a href="projects/venice.html">Venice Photography</a></li>
+          </ul>
+        </li>
+        <li class="muted">Articles (coming soon)</li>
+      </ul>
+    </div>
 
-<img src="VeniceModified.jpg">
-
-<img src="TempleMonks1Modified.jpg">
-
-<img src="WQTK3757.JPG">
-
-</div>
-
-</div>
-
-
-
-<h2>Sections</h2>
-
-<ul>
-
-<li>
-<a href="works.html">
-Photography Works
-</a>
-</li>
-
-
-<li>
-
-Projects
-
-<ul>
-
-<li>
-
-<a href="projects/venice.html">
-Venice Photography
-</a>
-
-</li>
-
-</ul>
-
-</li>
-
-
-<li>
-Articles (coming soon)
-</li>
-
-
-</ul>
-
-
-
+    <footer>© Dr Weihong Liu — Digital Studio</footer>
+  </div>
 </body>
-
 </html>
