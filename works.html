@@ -2,29 +2,218 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>作品 | 慢下来，看见世界</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>摄影作品 | Photography Works</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;max-width:1100px;margin:60px auto;padding:0 18px;line-height:1.7}
-    .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
-    .ph{aspect-ratio:1/1;background:#eee;border-radius:10px}
-    a{color:#0b57d0;text-decoration:none}
-    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    :root{
+      --bg:#f4f4f2;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#666;
+      --border: rgba(0,0,0,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+      --max: 980px;
+    }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+      text-align: center;
+    }
+
+    /* Header */
+    .title-zh{
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      margin: 10px 0 6px;
+    }
+    .title-en{
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+    .desc{
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 auto 18px;
+      max-width: 680px;
+    }
+
+    /* Back link */
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back a{
+      display:inline-block;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      text-decoration:none;
+      color: var(--text);
+      background: rgba(255,255,255,.6);
+    }
+    .back a:hover{ transform: translateY(-1px); }
+
+    /* Gallery grid */
+    .grid{
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      text-align: left;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-decoration:none;
+      color: inherit;
+      display:block;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.12);
+    }
+    .thumb{
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display:block;
+    }
+    .meta{
+      padding: 12px 12px 14px;
+    }
+    .meta .name-zh{
+      font-weight: 800;
+      font-size: 15px;
+      margin: 0 0 4px;
+    }
+    .meta .name-en{
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    .meta .info{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    footer{
+      margin-top: 26px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
-  <div class="top">
-    <h1>作品</h1>
-    <a href="index.html">← 返回首页</a>
-  </div>
+  <div class="wrap">
 
-  <p>这里会放你的摄影作品网格。先用占位图块，下一步我们把真实照片放上来。</p>
+    <div class="topbar">
+      <div class="back">
+        <a href="index.html">← 返回主页 Home</a>
+      </div>
+      <div></div>
+    </div>
 
-  <div class="grid">
-    <div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div>
-    <div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div>
-    <div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div>
+    <div class="title-zh">摄影作品</div>
+    <div class="title-en">Photography Works</div>
+    <p class="desc">
+      精选摄影作品集，侧重呈现单张作品的视觉与气质。<br/>
+      A curated gallery of selected works — focused on single images and their mood.
+    </p>
+
+    <div class="grid">
+      <!-- 1 -->
+      <a class="card" href="#" title="未来可链接到单张作品页">
+        <img class="thumb" src="images/works/venice.jpg" alt="Venice long exposure" />
+        <div class="meta">
+          <p class="name-zh">威尼斯 · 慢门</p>
+          <p class="name-en">Venice — Long Exposure</p>
+          <p class="info">Italy · Time traces & stillness</p>
+        </div>
+      </a>
+
+      <!-- 2 -->
+      <a class="card" href="#">
+        <img class="thumb" src="images/works/night.jpg" alt="Night scene" />
+        <div class="meta">
+          <p class="name-zh">夜景 · 人的痕迹</p>
+          <p class="name-en">Night Scene — Human Trace</p>
+          <p class="info">Light · atmosphere · presence</p>
+        </div>
+      </a>
+
+      <!-- 3 -->
+      <a class="card" href="#">
+        <img class="thumb" src="images/works/temple.jpg" alt="Temple moving figures" />
+        <div class="meta">
+          <p class="name-zh">寺庙 · 流动的人</p>
+          <p class="name-en">Temple — Moving Figures</p>
+          <p class="info">Motion as a soft brush</p>
+        </div>
+      </a>
+
+      <!-- 4 -->
+      <a class="card" href="#">
+        <img class="thumb" src="images/works/marina.jpg" alt="Marina bay blue night" />
+        <div class="meta">
+          <p class="name-zh">滨海湾 · 蓝夜</p>
+          <p class="name-en">Marina Bay — Blue Night</p>
+          <p class="info">City · calm · long exposure</p>
+        </div>
+      </a>
+
+      <!-- 5 -->
+      <a class="card" href="#">
+        <img class="thumb" src="images/works/banff.jpg" alt="Banff reflection" />
+        <div class="meta">
+          <p class="name-zh">班夫 · 倒影</p>
+          <p class="name-en">Banff — Reflection</p>
+          <p class="info">Mountain · water · silence</p>
+        </div>
+      </a>
+
+      <!-- 6 -->
+      <a class="card" href="#">
+        <img class="thumb" src="images/works/adelaide.jpg" alt="Adelaide street" />
+        <div class="meta">
+          <p class="name-zh">阿德莱德 · 街头</p>
+          <p class="name-en">Adelaide — Street</p>
+          <p class="info">Everyday light · everyday life</p>
+        </div>
+      </a>
+    </div>
+
+    <footer>© 影子观察 | Shadow Observer</footer>
   </div>
 </body>
 </html>
