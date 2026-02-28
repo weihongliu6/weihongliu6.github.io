@@ -12,33 +12,59 @@
 
 body{
 margin:0;
-background:black;
+font-family:Georgia, serif;
+
+background-image:url("images/articles/articles-cover.jpg");
+background-size:cover;
+background-position:center;
+
 color:white;
-font-family:Arial;
 text-align:center;
 }
 
-.header{
-margin-top:60px;
-font-size:32px;
+.overlay{
+background:rgba(0,0,0,0.40);
+min-height:100vh;
+padding-top:120px;
 }
 
-.desc{
-margin-top:10px;
-color:gray;
-font-size:18px;
+.title{
+font-size:52px;
+letter-spacing:3px;
+margin-bottom:15px;
+}
+
+.subtitle{
+font-size:20px;
+color:#dddddd;
+margin-bottom:40px;
+}
+
+.quote{
+font-size:20px;
+color:#dddddd;
+margin-bottom:70px;
+font-style:italic;
+line-height:1.8;
+}
+
+.articlelist{
+font-size:24px;
+line-height:2.4;
+}
+
+a{
+color:white;
+text-decoration:none;
+}
+
+a:hover{
+color:#dddddd;
 }
 
 .back{
-margin-top:40px;
-display:block;
-color:white;
-text-decoration:none;
+margin-top:80px;
 font-size:18px;
-}
-
-.back:hover{
-color:gray;
 }
 
 </style>
@@ -47,36 +73,36 @@ color:gray;
 
 <body>
 
-<div class="header">
+<div class="overlay">
+
+<div class="title">
 Articles
 </div>
 
-<div class="desc">
+<div class="subtitle">
 Essays on photography, travel and reflection
 </div>
 
-<div class="list">
-
-<a class="item" href="articles/hermit.html">
-
-<div class="t">
-现代世界还有隐士吗？
-</div>
-
-<div class="s">
-在一个人人都可以被看见的时代，不热衷于被看见，
+<div class="quote">
+在一个人人都可以被看见的时代，不热衷于被看见，<br>
 本身也许正是一种新的隐居。
 </div>
 
+<div class="articlelist">
+
+<a href="articles/hermit.html">
+现代世界还有隐士吗？
 </a>
 
 </div>
 
-<br><br>
-
-<a class="back" href="index.html">
+<div class="back">
+<a href="index.html">
 ← Back to Home
 </a>
+</div>
+
+</div>
 
 </body>
 
