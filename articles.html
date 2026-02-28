@@ -2,196 +2,236 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>思想随笔 | Dr Weihong Liu</title>
 
 <style>
-  body{
-    margin:0;
-    font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
-    background-image:url("images/articles/articles-cover.jpg");
-    background-size:cover;
-    background-position:center;
-    color:white;
-  }
 
-  /* 顶部渐变遮罩：让标题区更清楚，但不“压黑”整张封面 */
-  .overlay{
-    min-height:100vh;
-    position:relative;
-    padding-top:90px;
-    text-align:center;
-  }
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  background-image:url("images/articles/articles-cover.jpg");
+  background-size:cover;
+  background-position:center;
+  color:white;
+}
 
-  .overlay:before{
-    content:"";
-    position:absolute;
-    left:0; top:0; right:0; bottom:0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.72) 0%,
-      rgba(0,0,0,0.35) 35%,
-      rgba(0,0,0,0.08) 65%,
-      rgba(0,0,0,0.12) 100%
-    );
-    pointer-events:none;
-  }
+/* 顶部渐变遮罩 */
 
-  .content{
-    position:relative;
-    z-index:1;
-  }
+.overlay{
+  min-height:100vh;
+  position:relative;
+  padding-top:90px;
+  text-align:center;
+}
 
-  .title{
-    font-size:54px;
-    letter-spacing:3px;
-    margin:0 0 10px 0;
-    font-weight:650;
-    text-shadow: 0 3px 14px rgba(0,0,0,0.90);
-  }
+.overlay:before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0; bottom:0;
 
-  .subtitle{
-    font-size:20px;
-    color:#f3f3f3;
-    margin:0 0 10px 0;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.85);
-  }
+  background:
+  linear-gradient(to bottom,
+  rgba(0,0,0,0.68) 0%,
+  rgba(0,0,0,0.35) 35%,
+  rgba(0,0,0,0.10) 60%,
+  rgba(0,0,0,0.15) 100%);
 
-  .subtitle2{
-    font-size:18px;
-    color:#e5e5e5;
-    margin:0 0 38px 0;
-    letter-spacing:2px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.85);
-  }
+  pointer-events:none;
+}
 
-  .quote{
-    font-size:20px;
-    color:#ffffff;
-    margin:0 auto 55px auto;
-    font-style:italic;
-    line-height:1.9;
-    max-width:760px;
-    padding:0 24px;
-    text-shadow: 0 2px 14px rgba(0,0,0,0.90);
-  }
+.content{
+  position:relative;
+  z-index:1;
+}
 
-  /* 目录区：像杂志目录，但不加黑背景框 */
-  .articlelist{
-    width:640px;
-    margin:40px auto 0 auto;
-    text-align:left;
-    padding:0 10px;
-  }
+.title{
+  font-size:54px;
+  letter-spacing:3px;
+  margin:0 0 10px 0;
+  font-weight:600;
+  text-shadow: 0 3px 14px rgba(0,0,0,0.85);
+}
 
-  .articlelist a{
-    display:block;
-    padding:10px 0;
-    font-size:24px;
-    line-height:1.55;
-    color:#eaf2ff;              /* 让链接不再变“蓝” */
-    text-decoration:none;
-    text-shadow:0 3px 14px rgba(0,0,0,0.95);
-  }
+.subtitle{
+  font-size:20px;
+  color:#f0f0f0;
+  margin:0 0 32px 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.80);
+}
 
-  .articlelist a:hover{
-    color:#ffffff;
-  }
+.subtitle2{
+  font-size:18px;
+  color:#dddddd;
+  margin-bottom:40px;
+  letter-spacing:2px;
+}
 
-  .more{
-    font-size:20px !important;
-    letter-spacing:1px;
-    opacity:0.95;
-  }
+.quote{
+  font-size:20px;
+  color:#ffffff;
+  margin:0 auto 55px auto;
+  font-style:italic;
+  line-height:1.8;
+  max-width:760px;
+  padding:0 24px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.85);
+}
 
-  /* 返回主页：固定左下角 */
-  .backHome{
-    position:fixed;
-    left:22px;
-    bottom:18px;
-    z-index:10;
-    font-size:16px;
-    padding:10px 14px;
-    background: rgba(0,0,0,0.36);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius:999px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.90);
-  }
+/* 目录 */
 
-  .backHome a{
-    color:#ffffff;
-    text-decoration:none;
-  }
+.articlelist{
+  width:600px;
+  margin:40px auto;
+  text-align:left;
+}
 
-  .backHome a:hover{
-    color:#eaf2ff;
-  }
+.articlelist a{
 
-  /* 手机端 */
-  @media (max-width:700px){
-    .overlay{ padding-top:70px; }
+  display:block;
+  padding:10px 0px;
+  font-size:24px;
+  line-height:1.6;
 
-    .title{ font-size:36px; }
-    .subtitle{ font-size:16px; }
-    .subtitle2{ font-size:15px; }
+  color:#eaf2ff;
+  text-decoration:none;
 
-    .quote{
-      font-size:17px;
-      padding:0 20px;
-      margin-bottom:38px;
-    }
+  text-shadow:0 3px 12px rgba(0,0,0,0.9);
 
-    .articlelist{
-      width:100%;
-      margin:24px auto 0 auto;
-      padding:0 22px;
-      box-sizing:border-box;
-    }
+}
 
-    .articlelist a{
-      font-size:20px;
-      padding:10px 0;
-    }
+.articlelist a:hover{
+  color:white;
+}
 
-    .backHome{
-      left:14px;
-      bottom:12px;
-      font-size:14px;
-      padding:9px 12px;
-    }
-  }
+/* 更多文章 */
+
+.more{
+  font-size:20px !important;
+}
+
+/* 返回主页 */
+
+.backHome{
+
+  position:fixed;
+  left:22px;
+  bottom:18px;
+
+  font-size:16px;
+
+  padding:10px 14px;
+
+  background: rgba(0,0,0,0.38);
+
+  border-radius:999px;
+
+}
+
+.backHome a{
+color:white;
+text-decoration:none;
+}
+
+/* 手机适配 */
+
+@media (max-width:700px){
+
+.title{
+font-size:36px;
+}
+
+.subtitle{
+font-size:16px;
+}
+
+.subtitle2{
+font-size:15px;
+}
+
+.quote{
+font-size:17px;
+padding:0 20px;
+}
+
+.articlelist{
+width:90%;
+font-size:20px;
+}
+
+}
+
 </style>
+
 </head>
 
+
 <body>
-  <div class="overlay">
-    <div class="content">
 
-      <div class="title">思想随笔</div>
-      <div class="subtitle">Reflections and Essays</div>
-      <div class="subtitle2">摄影 · 旅行 · 思考</div>
+<div class="overlay">
+<div class="content">
 
-      <div class="quote">
-        在一个人人都可以被看见的时代，不热衷于被看见，<br>
-        本身也许正是一种新的隐居。
-      </div>
+<div class="title">
+思想随笔
+</div>
 
-      <div class="articlelist">
-        <a href="articles/hermit.html">01 现代世界还有隐士吗？</a>
-        <a href="#">02（待添加）</a>
-        <a href="#">03（待添加）</a>
-        <a href="#">04（待添加）</a>
-        <a href="#">05（待添加）</a>
+<div class="subtitle">
+Reflections and Essays
+</div>
 
-        <!-- ✅ 关键：list 页在 /articles/ 文件夹里 -->
-        <a class="more" href="articles/articles-list.html">06 更多文章…</a>
-      </div>
+<div class="subtitle2">
+摄影 · 旅行 · 思考
+</div>
 
-    </div>
-  </div>
 
-  <div class="backHome">
-    <a href="index.html">← Back to Home</a>
-  </div>
+<div class="quote">
+
+在一个人人都可以被看见的时代，不热衷于被看见，
+
+本身也许正是一种新的隐居。
+
+</div>
+
+
+<div class="articlelist">
+
+<a href="articles/hermit.html">
+01 现代世界还有隐士吗？
+</a>
+
+<a href="articles/ModernCivilization.html">
+02 人类，可能是文明进展的过渡物种
+</a>
+
+<a href="#">
+03（待添加）
+</a>
+
+<a href="#">
+04（待添加）
+</a>
+
+<a href="#">
+05（待添加）
+</a>
+
+<a class="more" href="articles-list.html">
+06 更多文章…
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="backHome">
+
+<a href="index.html">
+← Back to Home
+</a>
+
+</div>
+
+
 </body>
 </html>
