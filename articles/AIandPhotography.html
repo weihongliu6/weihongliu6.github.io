@@ -1,1 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>AI 时代，摄影将走向何处？｜Dr Weihong Liu</title>
+  <meta name="description" content="AI 并未终结摄影，而是促使摄影回归其本质：在场经验、现实指向与作者责任。" />
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --link:#d9d9de;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
+
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+    }
+    .topbar a{
+      color:var(--link);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-right:8px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:24px 18px 80px;
+    }
+
+    header{
+      padding:18px 0 14px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
+    }
+
+    .title-zh{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:.5px;
+      margin:0 0 10px;
+    }
+
+    .title-en{
+      font-size:20px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .title-sub{
+      font-size:16px;
+      color:#9a9aa0;
+      margin:0 0 16px 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .meta span{
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
+
+    .lead{
+      margin:18px 0 18px;
+      padding:16px 18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dcdcdf;
+      font-size:18px;
+    }
+
+    h2{
+      margin:28px 0 10px;
+      font-size:20px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      letter-spacing:.2px;
+    }
+
+    p{
+      margin:12px 0;
+      text-align:justify;
+      text-justify:inter-ideograph;
+    }
+
+    blockquote{
+      margin:18px 0;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-left:4px solid #3a3a44;
+      border-radius:10px;
+      color:#d7d7db;
+    }
+
+    .footer{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .footer a{ color:var(--link); text-decoration:none; }
+
+    @media (max-width:700px){
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <a href="../articles.html">← 返回 Articles</a>
+    <a href="../index.html">返回主页 Home</a>
+  </div>
+
+  <main class="wrap">
+    <header>
+      <h1 class="title-zh">AI 时代，摄影将走向何处？</h1>
+      <p class="title-en">Where Will Photography Go in the Age of AI?</p>
+      <p class="title-sub">——关于真实性、可达性与真实经验的思考</p>
+
+      <div class="meta">
+        <span>作者：Dr Weihong Liu</span>
+        <span>栏目：思想随笔</span>
+        <span>关键词：AI / 摄影 / 真实性 / 可达性 / 纪实</span>
+      </div>
+    </header>
+
+    <div class="lead">
+      <strong>摘要</strong><br>
+      人工智能图像生成技术的迅猛发展，使摄影是否会被取代成为一个被频繁讨论的话题。然而，这一问题往往被简化为技术层面的对抗，忽略了摄影作为一种媒介所承载的审美责任与人类经验。本文认为，AI 并未终结摄影，而是促使摄影回归其本质。通过对摄影制度属性、旅行摄影的“可达性”、生活影像的关系价值以及纪实摄影的责任主体进行分析，文章指出，摄影的不可替代性并不在于画面是否足够美观，而在于拍摄行为是否真实发生、是否指向现实世界、是否承担作者责任。AI 可以作为影像生产的有效工具，亦可发展为独立的图像艺术形式，但其无法替代摄影作为一种在场经验与现实见证的媒介。AI 时代真正终结的，是摄影作为技术优势的阶段，而非摄影本身。
+    </div>
+
+    <article>
+      <p>人工智能图像生成技术的迅猛发展，使“摄影是否会被取代”成为一个频繁被讨论的问题。然而，这个问题本身往往被简化为技术对抗，甚至陷入情绪化的立场对立。事实上，这并不是一个“你死我活”的问题，而是一个关于媒介边界、审美责任与人类经验的问题。</p>
+
+      <p>如果我们把摄影仅仅理解为“制造图像的技术”，那么它确实正在迅速失去优势；但如果我们把摄影理解为一种与现实发生关系的行为，那么 AI 的出现，反而促使摄影回到它最根本的位置。</p>
+
+      <h2>一、摄影作为一种制度化的审美活动，并不会消失</h2>
+      <p>摄影并不仅仅存在于个人创作之中，它还长期存在于一整套制度化结构内：摄影协会、专业杂志、双年展、学术平台与各类摄影竞赛。</p>
+
+      <p>这些机构的核心，从来不只是“图像是否好看”，而是更为根本的判断标准：作者是谁，拍摄是否真实发生，是否指向现实世界，是否承担伦理与表达责任。</p>
+
+      <p>正是在这一点上，纯 AI 图像与摄影之间存在无法弥合的差异。AI 图像并非“虚假”，而是没有拍摄行为。</p>
+
+      <p>因此，将纯 AI 作品排除在摄影竞赛与摄影平台之外，并非保守或排斥新技术，而是维护摄影作为一种媒介的基本边界。未来，围绕“是否为 AI 生成”的识别机制只会更加明确，而不会消失。摄影作为一种制度化审美活动，具备自我防卫与自我修复的能力。</p>
+
+      <h2>二、旅行摄影的核心不是美，而是“可达性”</h2>
+      <p>在 AI 时代，生成一幅壮丽、梦幻、甚至从未存在过的风景图像，已不再困难。但正因为如此，旅行摄影的价值反而变得更加清晰。</p>
+
+      <p>旅行摄影的核心，不是制造视觉奇观，而是传达一种极其重要的信息：我到过那里。这并不是一句浪漫的修辞，而是一种现实性的声明。它意味着时间、路线、身体经验与真实的空间接触。</p>
+
+      <p>AI 可以生成“看起来合理的地方”，却无法保证：你如何抵达？你在何时站在那里？你是否疲惫，空气的湿度，阳光的方向，行走后的停顿，等等。</p>
+
+      <p>因此，缺乏可达性的图像，终究只是空中楼阁、海市蜃楼。旅行摄影的不可替代性，并不在于它是否“更好看”，而在于它来自真实世界，并可被再次抵达。</p>
+
+      <h2>三、摄影的生活性，是 AI 无法进入的领域</h2>
+      <p>摄影最稳固、也最不需要辩护的领域，恰恰不是艺术，而是生活。</p>
+
+      <p>生日聚会、家庭合影、朋友相聚、日常片段——这些影像并不以构图、光影或审美为前提，却承载着人与人之间的关系。</p>
+
+      <p>这些照片的价值，来自“我们是谁”，而不是“画面多好”。AI 无法替代它们，并非因为技术不足，而是因为关系不可生成。摄影在此作为一种社会行为存在，而非图像艺术。</p>
+
+      <h2>四、纪实摄影不可替代的，不是画面，而是责任</h2>
+      <p>纪实摄影的核心，从来不是“画面是否真实”，而是：谁拍摄？在什么情境下？面向谁？承担什么后果？</p>
+
+      <p>纪实摄影之所以成立，是因为它背后存在一个承担责任的主体。而 AI 不承担任何后果。</p>
+
+      <p>因此，纪实摄影在 AI 时代不会消失，反而会变得更加严肃——需要更多的证据链、更清晰的拍摄过程、更明确的作者身份。</p>
+
+      <h2>五、AI 在摄影中的位置：工具，而非替代者</h2>
+      <p>在摄影实践中，AI 的价值是明确且正当的：它可以作为工具，帮助去除瑕疵、优化画面、提高表达完成度，而不破坏图像与现实之间的联系。</p>
+
+      <p>但与此同时，AI 也应被清楚地认识为一种独立的图像艺术形式。正如油画、水彩、版画各自拥有独立的艺术语言，AI 更像是一支高度复杂、极具潜力的“画笔”。</p>
+
+      <p>摄影的出现并没有杀死绘画，AI 的出现，也不会杀死摄影。它们通向不同的创作路径。</p>
+
+      <h2>六、AI 时代，摄影不是消失，而是回归本质</h2>
+      <p>AI 时代终结的，并不是摄影本身，而是摄影作为技术优势的时代。未来留下来的，不是“会拍照的人”，而是用摄影进行思考的人。</p>
+
+      <p>摄影将重新被理解为：一种在场体验，一种时间的投入，一种选择与放弃，一种观看世界的立场。</p>
+
+      <blockquote>
+        摄影真正的对手，并不是 AI，而是空洞、快速、无记忆的视觉消费。
+      </blockquote>
+
+      <p>在这个意义上，笔者一直以来内心笃信的“慢下来”不再是一种风格，而是一种态度。</p>
+    </article>
+
+    <div class="footer">
+      <div>© Dr Weihong Liu · Digital Studio</div>
+      <div style="margin-top:6px;">
+        <a href="../articles.html">返回 Articles</a> ·
+        <a href="../index.html">返回 Home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
