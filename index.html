@@ -1,62 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dr Weihong Liu Digital <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dr Weihong Liu Digital Studio</title>
+  <title>影子观察数字工作室 | Shadow Observer Digital Studio</title>
 
   <style>
     :root{
-      --bg:#fafafa;
       --text:#111;
       --muted:#555;
       --card:#fff;
-      --border:#eee;
-      --shadow:0 6px 20px rgba(0,0,0,0.06);
-      --radius:14px;
-      --wrap:980px;
+      --border: rgba(0,0,0,.08);
+      --shadow:0 10px 30px rgba(0,0,0,0.08);
+      --radius:18px;
+      --wrap:1100px;
     }
 
+    /* ===== Background (Option B: faint art background) ===== */
     body{
-      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       margin:0;
-      background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
+
+      background:
+        linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)),
+        url("images/background.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
     }
 
- .wrap{
-max-width:1100px;
-margin:0 auto;
-padding:24px 16px 40px;
-}
-.intro{
-max-width:720px;
-.intro{
-  margin:26px auto 34px;
-}
-text-align:center;
-font-size:15px;
-line-height:1.7;
-color:#555;
-}
-   h1{
-  margin:0 0 6px;
-  font-size:clamp(26px,4vw,40px);
-  text-align:center;
-}
+    .wrap{
+      max-width:var(--wrap);
+      margin:0 auto;
+      padding:26px 16px 44px;
+    }
+
+    h1{
+      margin:0 0 6px;
+      font-size:clamp(26px,4vw,40px);
+      text-align:center;
+      letter-spacing:-0.5px;
+    }
 
     .subtitle{
-  margin:0 0 18px;
-  color:var(--muted);
-  font-size:clamp(14px,2.2vw,16px);
-  line-height:1.5;
-  text-align:center;
-}
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:clamp(14px,2.2vw,16px);
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .en{
+      font-size:0.6em;
+      color:#888;
+      letter-spacing:1px;
+      font-weight:400;
+    }
 
     /* ===== Continuous slider (seamless) ===== */
     .marquee{
@@ -68,33 +68,30 @@ color:#555;
       box-shadow:var(--shadow);
     }
 
-    /* the moving strip */
     .track{
       display:flex;
-      width:max-content;              /* key */
+      width:max-content;
       animation: scroll 30s linear infinite;
     }
 
-    /* each slide */
     .item{
       position:relative;
       flex:0 0 auto;
-      width:min(90vw, 720px);         /* responsive width */
-      height:420px;                   /* desktop height */
+      width:min(90vw, 720px);
+      height:420px;
     }
 
     @media (max-width: 700px){
-      .item{ height:320px; }          /* phone height */
+      .item{ height:320px; }
     }
 
     .item img{
       width:100%;
       height:100%;
-      object-fit:cover;               /* standardize cropping */
+      object-fit:cover;
       display:block;
     }
 
-    /* caption overlay */
     .cap{
       position:absolute;
       left:0; right:0; bottom:0;
@@ -110,40 +107,93 @@ color:#555;
       margin-bottom:4px;
     }
 
-    /* smooth continuous motion: move by half track (because we duplicate the set) */
     @keyframes scroll{
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-    /* Pause on hover (optional, nice on desktop) */
     .marquee:hover .track{
       animation-play-state: paused;
     }
 
-    /* ===== Sections box ===== */
-    .section{
-      margin-top:14px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:14px 16px;
-      box-shadow:var(--shadow);
+    /* ===== Intro ===== */
+    .intro{
+      max-width:720px;
+      margin:18px auto 26px;
+      text-align:center;
+      line-height:1.8;
     }
 
-    .section h2{
-      margin:6px 0 10px;
-      font-size:18px;
+    .intro .zh{
+      font-size:17px;
+      color:#444;
+      margin-bottom:8px;
     }
 
-    a{ color:#0b63ce; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
+    .intro .en{
+      font-size:14px;
+      color:#777;
+    }
 
-    ul{ margin:8px 0 0 18px; }
-    .muted{ color:#666; }
+    /* ===== Navigation pills (bilingual) ===== */
+    .nav-row{
+      margin-top: 22px;
+      margin-bottom: 14px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .nav-pill{
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:999px;
+
+      background:rgba(248,249,251,0.92);
+      border:1px solid rgba(220,227,234,0.95);
+
+      box-shadow:0 4px 12px rgba(30,80,180,0.08);
+      min-width:135px;
+
+      transition: transform .15s ease, background .15s ease, border .15s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-pill:hover{
+      transform: translateY(-2px);
+      background:rgba(238,244,255,0.95);
+      border:1px solid rgba(188,208,255,0.95);
+    }
+
+    .nav-pill .zh{
+      font-size:16px;
+      font-weight:600;
+      color:#1a5fb4;
+      line-height:1.1;
+    }
+
+    .nav-pill .en{
+      margin-top:3px;
+      font-size:11px;
+      color:#5b7fbf;
+      letter-spacing:0.3px;
+      line-height:1.1;
+    }
+
+    @media (max-width: 520px){
+      .nav-pill{ min-width:105px; padding:9px 12px; }
+      .nav-pill .zh{ font-size:13px; }
+      .nav-pill .en{ font-size:11px; }
+    }
 
     footer{
       margin-top:22px;
+      text-align:center;
       color:#777;
       font-size:13px;
     }
@@ -153,279 +203,89 @@ color:#555;
 <body>
   <div class="wrap">
     <h1>
-影子观察数字工作室<br>
-<span class="en">Shadow Observer Digital Studio</span>
-</h1>
+      影子观察数字工作室<br>
+      <span class="en">Shadow Observer Digital Studio</span>
+    </h1>
 
-<p class="subtitle">
-摄影与思考<br>
-<span class="en">Photography and Reflections</span>
-</p>
+    <p class="subtitle">
+      摄影与思考<br>
+      <span class="en">Photography and Reflections</span>
+    </p>
 
-    <!-- Continuous slider:
-         We duplicate the same 3 items twice so the loop is seamless.
-         IMPORTANT: do NOT leave any naked src="..." text. Must be inside <img ...> -->
+    <!-- Continuous slider: duplicate set for seamless loop -->
     <div class="marquee" aria-label="Featured works continuous slider">
       <div class="track">
         <!-- Set 1 -->
         <div class="item">
-<img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
-<div class="cap">
-<b>威尼斯 · 时间的水面</b>
-<span>水与光之间，城市在时间中缓缓流动。</span>
-</div>
-</div>
+          <img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
+          <div class="cap">
+            <b>威尼斯 · 时间的水面</b>
+            <span>水与光之间，城市在时间中缓缓流动。</span>
+          </div>
+        </div>
 
         <div class="item">
-<img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
-<div class="cap">
-<b>黄金海岸</b>
-<span>城市与海水之间，时间被慢慢拉长。</span>
-</div>
-</div>
+          <img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
+          <div class="cap">
+            <b>黄金海岸</b>
+            <span>城市与海水之间，时间被慢慢拉长。</span>
+          </div>
+        </div>
 
         <div class="item">
-<img src="images/featured/Carousel3.jpg" alt="甘南寺院">
-<div class="cap">
-<b>甘南寺院</b>
-<span>群山之间，信仰与土地静静相依。</span>
-</div>
-</div>
+          <img src="images/featured/Carousel3.jpg" alt="甘南寺院">
+          <div class="cap">
+            <b>甘南寺院</b>
+            <span>群山之间，信仰与土地静静相依。</span>
+          </div>
+        </div>
 
-        <!-- Set 2 (duplicate for seamless loop) -->
-        <!-- Set 2 duplicate -->
+        <!-- Set 2 (duplicate) -->
+        <div class="item">
+          <img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
+          <div class="cap">
+            <b>威尼斯 · 时间的水面</b>
+            <span>水与光之间，城市在时间中缓缓流动。</span>
+          </div>
+        </div>
 
-<div class="item">
-<img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
-<div class="cap">
-<b>威尼斯 · 时间的水面</b>
-<span>水与光之间，城市在时间中缓缓流动。</span>
-</div>
-</div>
+        <div class="item">
+          <img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
+          <div class="cap">
+            <b>黄金海岸</b>
+            <span>城市与海水之间，时间被慢慢拉长。</span>
+          </div>
+        </div>
 
-<div class="item">
-<img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
-<div class="cap">
-<b>黄金海岸</b>
-<span>城市与海水之间，时间被慢慢拉长。</span>
-</div>
-</div>
-
-<div class="item">
-<img src="images/featured/Carousel3.jpg" alt="甘南寺院">
-<div class="cap">
-<b>甘南寺院</b>
-<span>群山之间，信仰与土地静静相依。</span>
-</div>
-</div>
+        <div class="item">
+          <img src="images/featured/Carousel3.jpg" alt="甘南寺院">
+          <div class="cap">
+            <b>甘南寺院</b>
+            <span>群山之间，信仰与土地静静相依。</span>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="intro">
+      <div class="zh">
+        影子观察数字工作室记录摄影与思想的交汇，在快速变化的世界中慢下来观察与理解。
+      </div>
+      <div class="en">
+        Shadow Observer Digital Studio explores photography and ideas, observing the world slowly in an age of acceleration.
+      </div>
+    </div>
 
-<div class="zh">
-影子观察数字工作室记录摄影与思想的交汇，
-在快速变化的世界中慢下来观察与理解。
-</div>
-
-<div class="en">
-Shadow Observer Digital Studio explores photography and ideas,
-observing the world slowly in an age of acceleration.
-</div>
-
-</div>
-<div class="nav-row" aria-label="Main navigation">
-  <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span></a>
-  <a class="nav-pill" href="projects.html"><span class="zh">摄影专辑</span><span class="en">Projects</span></a>
-  <a class="nav-pill" href="music.html"><span class="zh">AI 音乐视频</span><span class="en">AI Music Videos</span></a>
-  <a class="nav-pill" href="articles.html"><span class="zh">思想随笔</span><span class="en">Reflections and Essays</span></a>
-  <a class="nav-pill" href="books.html"><span class="zh">书籍</span><span class="en">Books</span></a>
-  <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
-</div>
+    <div class="nav-row" aria-label="Main navigation">
+      <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span></a>
+      <a class="nav-pill" href="projects.html"><span class="zh">摄影专辑</span><span class="en">Projects</span></a>
+      <a class="nav-pill" href="AIMusicVideos.html"><span class="zh">AI 音乐视频</span><span class="en">AI Music Videos</span></a>
+      <a class="nav-pill" href="articles.html"><span class="zh">思想随笔</span><span class="en">Reflections and Essays</span></a>
+      <a class="nav-pill" href="books.html"><span class="zh">书籍</span><span class="en">Books</span></a>
+      <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
+    </div>
 
     <footer>© Dr Weihong Liu — Digital Studio</footer>
   </div>
 </body>
-</html></title>
-
-  <style>
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      margin:0;
-      background:#fafafa;
-      color:#111;
-    }
-
-    .wrap{
-      max-width:980px;
-      margin:0 auto;
-      padding:24px 16px 40px;
-    }
-
-    h1{
-      margin:0 0 6px;
-      font-size:clamp(26px,4vw,40px);
-      letter-spacing:-0.5px;
-    }
-
-    .subtitle{
-      margin:0 0 18px;
-      color:#555;
-      font-size:clamp(14px,2.2vw,16px);
-      line-height:1.5;
-    }
-   .en{
-font-size:0.6em;
-color:#888;
-letter-spacing:1px;
-font-weight:400;
-}
-
-    /* ===== Continuous slider ===== */
-    .marquee{
-      position:relative;
-      overflow:hidden;
-      border-radius:14px;
-      background:#fff;
-      border:1px solid #eee;
-      box-shadow:0 6px 20px rgba(0,0,0,0.06);
-    }
-    
-/* ===== Navigation pills (bilingual) ===== */
-.nav-row{
- margin-top: 26px;
- margin-bottom: 14px;
- display:flex;
- justify-content:center;
- align-items:center;
- gap:14px;
- flex-wrap:wrap;
-}
-
-.nav-pill{
- display:inline-flex;
- flex-direction:column;
- align-items:center;
- text-decoration:none;
- padding:12px 18px;
- border-radius:999px;
-
- background:#f8f9fb;
- border:1px solid #dce3ea;
-
- box-shadow:0 4px 12px rgba(30,80,180,0.08);
-
- min-width:135px;
-}
-.nav-pill:hover{
- transform: translateY(-2px);
- background:#eef4ff;
- border:1px solid #bcd0ff;
-}
-.nav-pill .zh{
- font-size: 16px;
- font-weight: 600;
-color:#1a5fb4;
- line-height: 1.1;
-}
-
-.nav-pill .en{
- margin-top: 3px;
- font-size: 11px;
- color:#5b7fbf;
- letter-spacing: 0.3px;
- line-height: 1.1;
-}
-
-/* 手机上更紧凑一点 */
-@media (max-width: 520px){
-  .nav-pill{ min-width: 105px; padding: 9px 12px; }
-  .nav-pill .zh{ font-size: 13px; }
-  .nav-pill .en{ font-size: 11px; }
-}    /* height of the “window” */
-    .marquee .track{
-      display:flex;
-      width:max-content;
-      animation: scroll 30s linear infinite;
-    }
-
-    /* Each slide block */
-    .marquee .item{
-      flex:0 0 auto;
-      width:min(90vw, 720px);
-      height:420px;
-      position:relative;
-    }
-
-    /* Responsive height */
-    @media (max-width: 700px){
-      .marquee .item{ height: 320px; }
-    }
-
-    .marquee img{
-      width:100%;
-      height:100%;
-      object-fit:cover;   /* key for nice cropping */
-      display:block;
-    }
-
-    /* Caption overlay */
-    .cap{
-      position:absolute;
-      left:0; right:0; bottom:0;
-      padding:12px 14px;
-      color:#fff;
-      background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
-      font-size:14px;
-      line-height:1.35;
-    }
-    .cap b{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-    }
-    .intro{
-  max-width:720px;
-  margin:18px auto 26px;
-  text-align:center;
-  line-height:1.8;
-}
-
-.intro .zh{
-  font-size:17px;
-  color:#444;
-  margin-bottom:8px;
-}
-
-.intro .en{
-  font-size:14px;
-  color:#777;
-}
-
-    /* Continuous movement */
-    @keyframes scroll{
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ===== Sections box ===== */
-    .section{
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:14px;
-      padding:14px 16px;
-      margin-top:14px;
-    }
-    .section h2{
-      margin:6px 0 10px;
-      font-size:18px;
-    }
-    
-    a{ color:#0b63ce; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    ul{ margin:8px 0 0 18px; }
-    .muted{ color:#666; }
-
-    footer{ margin-top:22px; color:#777; font-size:13px; }
-  </style>
-</head>
-
+</html>
