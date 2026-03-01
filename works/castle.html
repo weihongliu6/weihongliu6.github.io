@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>多瑙河 · 古堡与光 | Danube Castle — Light in the Mist</title>
+  <title>多瑙河畔 · 古堡与光 | Danube Castle — Light in the Mist</title>
+
   <style>
     :root{
       --bg:#f4f4f2;
@@ -15,25 +16,26 @@
       --radius: 18px;
       --max: 980px;
     }
+    *{ box-sizing: border-box; }
     body{
       margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
       background: var(--bg);
       color: var(--text);
     }
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 28px 16px 70px;
+      padding: 22px 16px 70px;
     }
 
-    /* Top bar */
+    /* top pills */
     .topbar{
       display:flex;
       justify-content: space-between;
       align-items:center;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .pill{
       display:inline-block;
@@ -42,18 +44,15 @@
       border-radius: 999px;
       text-decoration:none;
       color: var(--text);
-      background: rgba(255,255,255,.6);
-      box-shadow: 0 8px 18px rgba(0,0,0,.05);
-      transition: transform .15s ease, box-shadow .15s ease;
+      background: rgba(255,255,255,.65);
+      transition: transform .12s ease;
+      font-size: 13px;
       white-space: nowrap;
     }
-    .pill:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(0,0,0,.08);
-    }
+    .pill:hover{ transform: translateY(-1px); }
     .pill.muted{ color: var(--muted); }
 
-    /* Card */
+    /* card */
     .card{
       background: var(--card);
       border: 1px solid var(--border);
@@ -62,67 +61,44 @@
       box-shadow: var(--shadow);
     }
 
-    /* Hero image */
+    /* hero image */
     .hero{
       position: relative;
+      background: #000;
     }
     .hero img{
       width: 100%;
       height: auto;
       display:block;
     }
-    .hero::after{
-      content:"";
-      position:absolute;
-      left:0; right:0; bottom:0;
-      height: 38%;
-      background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
-      pointer-events:none;
-    }
     .hero-caption{
       position:absolute;
       left: 18px;
-      right: 18px;
-      bottom: 14px;
+      bottom: 16px;
       color: #fff;
-      z-index: 1;
+      text-shadow: 0 6px 20px rgba(0,0,0,.45);
     }
     .hero-caption .zh{
-      font-size: 22px;
-      font-weight: 800;
+      font-weight: 900;
+      font-size: 20px;
+      margin: 0 0 2px;
       letter-spacing: .2px;
-      margin: 0 0 6px;
     }
     .hero-caption .en{
-      font-size: 14px;
-      font-weight: 600;
-      opacity: .92;
+      font-weight: 700;
+      font-size: 13px;
       margin: 0;
+      opacity: .95;
     }
 
-    /* Text section */
+    /* content */
     .content{
-      padding: 18px 18px 16px;
-      text-align: left;
-    }
-    .meta{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 10px 0 14px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .tag{
-      padding: 6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,.7);
+      padding: 18px 18px 22px;
     }
     .title-zh{
       font-size: 26px;
       font-weight: 900;
-      margin: 4px 0 6px;
+      margin: 2px 0 4px;
       letter-spacing: .2px;
     }
     .title-en{
@@ -131,42 +107,59 @@
       color: var(--muted);
       margin: 0 0 10px;
     }
-    .divider{
-      height:1px;
-      background: rgba(0,0,0,.08);
-      margin: 14px 0 14px;
+
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 12px;
     }
-    .para{
-      margin: 0 0 12px;
-      line-height: 1.85;
-      font-size: 15px;
-    }
-    .para.en{
-      color: #333;
-      font-size: 14px;
-      line-height: 1.8;
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      padding: 6px 10px;
+      border-radius: 999px;
     }
 
-    /* Prev/Next */
+    .divider{
+      height: 1px;
+      background: rgba(0,0,0,.06);
+      margin: 14px 0 14px;
+    }
+
+    .para{
+      font-size: 14px;
+      line-height: 1.85;
+      color: #333;
+      margin: 0 0 10px;
+    }
+    .para.en{
+      color: var(--muted);
+    }
+
+    /* optional: next/prev */
     .nav{
-      margin-top: 16px;
       display:flex;
       justify-content: space-between;
+      align-items:center;
       gap: 10px;
-      flex-wrap: wrap;
+      margin-top: 14px;
     }
 
     footer{
       margin-top: 18px;
-      font-size: 12px;
+      text-align:center;
       color: #777;
-      text-align: center;
+      font-size: 12px;
     }
 
+    /* mobile tweaks */
     @media (max-width: 560px){
-      .hero-caption .zh{ font-size: 20px; }
+      .hero-caption .zh{ font-size: 18px; }
+      .content{ padding: 16px 14px 18px; }
       .title-zh{ font-size: 22px; }
-      .content{ padding: 16px 14px 14px; }
     }
   </style>
 </head>
@@ -180,19 +173,22 @@
     </div>
 
     <div class="card">
+      <!-- ✅ 1) 改这里：图片路径 -->
       <div class="hero">
-        <!-- ✅ 把下面这一行的扩展名改成你的真实文件名，比如 .jpg / .jpeg -->
         <img src="../images/works/PhotographyWorks-1.jpg" alt="Danube Castle — Light in the Mist">
         <div class="hero-caption">
-          <p class="zh">多瑙河 · 古堡与光</p>
+          <!-- ✅ 2) 改这里：封面标题 -->
+          <p class="zh">多瑙河畔 · 古堡与光</p>
           <p class="en">Danube Castle — Light in the Mist</p>
         </div>
       </div>
 
       <div class="content">
-        <div class="title-zh">多瑙河 · 古堡与光</div>
+        <!-- ✅ 3) 改这里：页面标题（与上面可一致） -->
+        <div class="title-zh">多瑙河畔 · 古堡与光</div>
         <div class="title-en">Danube Castle — Light in the Mist</div>
 
+        <!-- ✅ 4) 改这里：标签（地点/关键词/风格） -->
         <div class="meta">
           <span class="tag">地点：德国 · 多瑙河沿岸</span>
           <span class="tag">关键词：雾 / 光 / 记忆</span>
@@ -201,23 +197,20 @@
 
         <div class="divider"></div>
 
+        <!-- ✅ 5) 改这里：中文一句/一段 -->
         <p class="para">
-          云雾掠过山坡，古堡像一段被时间保留的句子，缓慢浮现。
-          我更愿意把这张照片理解为“记忆的显影”：光并不急于照亮一切，
-          它只是轻轻提示——有些存在，本就该以缓慢的方式被看见。
+          云雾掠过山坡，古老城堡像记忆一样缓慢浮现。光并不急于照亮一切，它只是提醒——有些存在，本就该以慢慢的方式被看见。
         </p>
 
+        <!-- ✅ 6) 改这里：英文一句/一段 -->
         <p class="para en">
-          Mist drifts over the hillside, and the castle appears like a sentence preserved by time.
-          I see this image as a kind of developing process: light doesn’t rush to reveal everything—
-          it simply suggests that some presences are meant to be seen slowly.
+          A castle emerges slowly, as if memory rises through the mist. Light doesn’t rush to reveal everything—it simply reminds us that some things are meant to be seen in slowness.
         </p>
 
-        <div class="divider"></div>
-
+        <!-- 可选：下一张/上一张（以后你做完其他作品页再填） -->
         <div class="nav">
-          <a class="pill muted" href="#">← 上一张 (待添加)</a>
-          <a class="pill" href="dunes.html">下一张：南澳沙丘 →</a>
+          <a class="pill muted" href="#">← Prev</a>
+          <a class="pill muted" href="#">Next →</a>
         </div>
       </div>
     </div>
