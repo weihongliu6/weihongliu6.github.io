@@ -28,21 +28,25 @@
   text-decoration:none;
   color:var(--text);
   background:rgba(255,255,255,.6);
-  transition: transform .12s ease, background .12s ease;
+  transition: transform .12s ease, background .12s ease, color .12s ease;
 }
 
-.pill:hover{ transform: translateY(-1px); }
+.pill:hover{
+  transform: translateY(-1px);
+}
 
-.pill.muted{ color:var(--muted); }
+/* 蓝色按钮（Prev / Next / 高清图统一风格） */
 
-/* 蓝色版本（给 Next / 高清按钮用） */
 .pill.primary{
-  color:var(--link);
+  color: var(--link);
   border-color: var(--linkBorder);
 }
 
 .pill.primary:hover{
-  background: var(--linkBg);
+  background: var(--link);
+  color:#fff;
+  border-color: var(--link);
+  transform: translateY(-1px);
 }
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
     .hero{position:relative;}
@@ -109,7 +113,7 @@
 </a>
 </div>
        <div class="nav">
-  <a class="pill muted" href="castle.html">← Prev上一张</a>
+ <a class="pill primary" href="castle.html">← Prev上一张</a>
   <a class="pill primary" href="moraine.html">Next下一张 →</a>
 </div>
       </div>
