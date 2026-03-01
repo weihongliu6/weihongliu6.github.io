@@ -37,28 +37,39 @@
       gap: 12px;
       margin-bottom: 16px;
     }
-    .pill{
-  display:inline-block;
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid #4a90e2;
-  text-decoration:none;
-  color:#4a90e2;
-  background:white;
-  font-size:13px;
-  white-space:nowrap;
-  transition:all .2s ease;
-}
+   /* 蓝色按钮系统（统一版） */
 
-.pill:hover{
-  background:#4a90e2;
-  color:white;
+.pill{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(255,255,255,.6);
 }
 
 .pill.muted{
-  border:1px solid #ccc;
-  color:#888;
-  background:white;
+  color:var(--muted);
+}
+
+/* 蓝按钮 */
+
+:root{
+  --link:#0b5ed7;
+  --linkBorder: rgba(11,94,215,.55);
+}
+
+.pill.primary{
+  color:var(--link);
+  border-color:var(--linkBorder);
+  background:rgba(255,255,255,.6);
+}
+
+.pill.primary:hover{
+  background:var(--link);
+  color:#fff;
+  border-color:var(--link);
 }
     /* card */
     .card{
@@ -221,7 +232,7 @@ alt="Danube Castle — Light in the Mist">
         </p>
         <div style="margin-top:25px; text-align:center;">
 
-<a class="pill"
+<a class="pill primary"
 href="../images/works/PhotographyWorks-1.jpg"
 target="_blank">
 
@@ -233,7 +244,7 @@ target="_blank">
 
         <!-- 可选：下一张/上一张（以后你做完其他作品页再填） -->
         <div class="nav">
-  <a class="pill" href="dunes.html">Next 下一张 →</a>
+  <a class="pill primary" href="dunes.html">
 </div>
       </div>
     </div>
