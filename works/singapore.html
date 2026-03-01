@@ -11,6 +11,23 @@
     .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;}
     .pill{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:999px;text-decoration:none;color:var(--text);background:rgba(255,255,255,.6);}
     .pill.muted{color:var(--muted);}
+    /* 蓝色按钮（默认白底蓝字；hover 实蓝底白字） */
+:root{
+  --link:#0b5ed7;
+  --linkBorder: rgba(11,94,215,.55);
+}
+
+.pill.primary{
+  color: var(--link);
+  border-color: var(--linkBorder);
+  background: rgba(255,255,255,.6); /* 默认保持白底 */
+}
+
+.pill.primary:hover{
+  background: var(--link);  /* hover 变实蓝 */
+  color: #fff;
+  border-color: var(--link);
+}
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
     .hero{position:relative;}
     .hero img{width:100%;display:block;max-height:640px;object-fit:cover;cursor:pointer;}
@@ -70,13 +87,13 @@
         <p class="para en">Light cuts through the skyline; the night turns into a stage. By the water, you can almost hear the echo of illumination.</p>
 <!-- 高清图按钮（放在内容区底部，nav 上方） -->
 <div class="actions">
-  <a class="pill" href="../images/works/PhotographyWorks-2.jpg" target="_blank" rel="noopener">
-    查看高清图 · View Full Resolution
-  </a>
+ <a class="pill primary" href="../images/works/PhotographyWorks-5.jpg" target="_blank" rel="noopener">
+  查看高清图 · View Full Resolution
+</a>
 </div>
         <div class="nav">
-          <a class="pill muted" href="goldcoast.html">← Prev上一张</a>
-          <a class="pill muted" href="sydney.html">Next 下一张→</a>
+          <a class="pill primary" href="goldcoast.html">← Prev上一张</a>
+<a class="pill primary" href="sydney.html">Next 下一张→</a>
         </div>
       </div>
     </div>
