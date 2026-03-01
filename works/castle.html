@@ -57,18 +57,19 @@
 
 :root{
   --link:#0b5ed7;
-  --linkBorder: rgba(11,94,215,.55);
 }
 
+/* 高清按钮默认状态 */
 .pill.primary{
   color:var(--link);
-  border-color:var(--linkBorder);
-  background:rgba(255,255,255,.6);
+  border-color:var(--link);
+  background:white;
 }
 
+/* hover 时变实蓝 */
 .pill.primary:hover{
   background:var(--link);
-  color:#fff;
+  color:white;
   border-color:var(--link);
 }
     /* card */
@@ -231,6 +232,8 @@ alt="Danube Castle — Light in the Mist">
           A castle emerges slowly, as if memory rises through the mist. Light doesn’t rush to reveal everything—it simply reminds us that some things are meant to be seen in slowness.
         </p>
         <div style="margin-top:25px; text-align:center;">
+
+<div class="actions">
 
 <a class="pill primary"
 href="../images/works/PhotographyWorks-1.jpg"
