@@ -1,212 +1,181 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>书籍 | Books</title>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#f4f4f2;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#666;
+      --border: rgba(0,0,0,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius:18px;
+      --max:980px;
+      --link:#0b5fff;
+      --linkBorder: rgba(11,95,255,.35);
+    }
 
-<title>书籍 | Books</title>
+    *{ box-sizing:border-box; }
 
-<style>
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
 
-:root{
---bg:#f4f4f2;
---card:#ffffff;
---text:#222;
---muted:#666;
---border: rgba(0,0,0,.08);
---shadow: 0 10px 30px rgba(0,0,0,.08);
---radius:18px;
---max:980px;
-}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px 16px 60px;
+    }
 
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
-background:var(--bg);
-color:var(--text);
-}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
 
-.wrap{
-max-width:var(--max);
-margin:0 auto;
-padding:22px 16px 60px;
-}
+    .pill{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,.7);
+      transition: transform .12s ease, background .12s ease, color .12s ease;
+      white-space:nowrap;
+    }
+    .pill:hover{ transform: translateY(-1px); }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-margin-bottom:18px;
-}
+    /* 蓝色按钮（Apple Books） */
+    .pill.primary{
+      color: var(--link);
+      border-color: var(--linkBorder);
+      background:#fff;
+    }
+    .pill.primary:hover{
+      background: var(--link);
+      color:#fff;
+      border-color: var(--link);
+    }
 
-.pill{
-display:inline-block;
-padding:10px 14px;
-border-radius:999px;
-border:1px solid var(--border);
-text-decoration:none;
-color:var(--text);
-background:white;
-}
+    /* ✅ 书架：两本并排，手机自动变一列 */
+    .bookshelf{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:26px;
+      align-items: stretch;
+    }
+    @media (max-width:700px){
+      .bookshelf{ grid-template-columns: 1fr; }
+    }
 
-.card{
-background:white;
-border:1px solid var(--border);
-border-radius:var(--radius);
-box-shadow:var(--shadow);
-padding:30px;
-text-align:center;
-margin-bottom:26px;
-}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:30px;
+      text-align:center;
+    }
 
-.cover{
-width:260px;
-border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,.2);
-}
+    .cover{
+      width:260px;
+      max-width:100%;
+      border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      display:block;
+      margin:0 auto;
+    }
 
-.title{
-font-size:22px;
-font-weight:700;
-margin-top:18px;
-}
+    .title{
+      font-size:22px;
+      font-weight:800;
+      margin-top:18px;
+      letter-spacing:.2px;
+    }
 
-.subtitle{
-color:var(--muted);
-margin-top:6px;
-}
+    .subtitle{
+      color:var(--muted);
+      margin-top:6px;
+      line-height:1.6;
+      font-size:14px;
+    }
 
-.actions{
-margin-top:18px;
-}
+    .actions{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+    }
 
-.primary{
-padding:10px 18px;
-border-radius:999px;
-border:1px solid #0b5fff;
-color:#0b5fff;
-text-decoration:none;
-background:white;
-}
-
-.primary:hover{
-background:#0b5fff;
-color:white;
-}
-
-footer{
-margin-top:28px;
-text-align:center;
-color:#777;
-font-size:12px;
-}
-
-</style>
-
+    footer{
+      margin-top:28px;
+      text-align:center;
+      color:#777;
+      font-size:12px;
+    }
+  </style>
 </head>
 
-
 <body>
+  <div class="wrap">
 
-<div class="wrap">
+    <div class="topbar">
+      <a class="pill" href="index.html">← 返回主页 Home</a>
+      <a class="pill" href="works.html">摄影作品 Works</a>
+    </div>
 
+    <!-- ✅ 两本书并排：把两个 card 放进 bookshelf -->
+    <div class="bookshelf">
 
-<div class="topbar">
+      <!-- 第一册 -->
+      <div class="card">
+        <img class="cover" src="images/slowdown-book.jpg" alt="慢下来，看见世界 / Slow Down, See the World">
 
-<a class="pill" href="index.html">
-← 返回主页 Home
-</a>
+        <div class="title">慢下来，看见世界</div>
+        <div class="subtitle">Slow Down, See the World</div>
+        <div class="subtitle">
+          慢门摄影的时间之眼<br>
+          The Time Gaze of Long Exposure Photography
+        </div>
 
-<a class="pill" href="works.html">
-摄影作品 Works
-</a>
+        <div class="actions">
+          <a class="pill primary"
+             href="https://books.apple.com/au/book/%E6%85%A2%E4%B8%8B%E6%9D%A5-%E7%9C%8B%E8%A7%81%E4%B8%96%E7%95%8C-slow-down-and-see-the-world/id6757672905"
+             target="_blank" rel="noopener">
+            Apple Books 阅读
+          </a>
+        </div>
+      </div>
 
-</div>
+      <!-- 第二册 -->
+      <div class="card">
+        <img class="cover" src="images/longexposure-book.jpg" alt="从慢门摄影到生活哲学 / From Long Exposure Photography to Life Philosophy">
 
+        <div class="title">从慢门摄影到生活哲学</div>
+        <div class="subtitle">From Long Exposure Photography to Life Philosophy</div>
+        <div class="subtitle">从摄影观看到时间与存在的思考</div>
 
+        <div class="actions">
+          <a class="pill primary"
+             href="https://books.apple.com/au/book/%E4%BB%8E%E6%85%A2%E9%97%A8%E6%91%84%E5%BD%B1%E5%88%B0%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/id6758567346"
+             target="_blank" rel="noopener">
+            Apple Books 阅读
+          </a>
+        </div>
+      </div>
 
-<!-- 第一册 -->
+    </div>
 
-<div class="card">
-
-<img class="cover"
-src="images/slowdown-book.jpg">
-
-<div class="title">
-慢下来，看见世界
-</div>
-
-<div class="subtitle">
-Slow Down, See the World
-</div>
-
-<div class="subtitle">
-慢门摄影的时间之眼
-<br>
-The Time Gaze of Long Exposure Photography
-</div>
-
-<div class="actions">
-
-<a class="pill primary"
-href="https://books.apple.com/au/book/%E6%85%A2%E4%B8%8B%E6%9D%A5-%E7%9C%8B%E8%A7%81%E4%B8%96%E7%95%8C-slow-down-and-see-the-world/id6757672905"
-target="_blank">
-
-Apple Books 阅读
-
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- 第二册 -->
-
-<div class="card">
-
-<img class="cover"
-src="images/longexposure-book.jpg">
-
-<div class="title">
-从慢门摄影到生活哲学
-</div>
-
-<div class="subtitle">
-From Long Exposure Photography to Life Philosophy
-</div>
-
-<div class="subtitle">
-从摄影观看到时间与存在的思考
-</div>
-
-<div class="actions">
-
-<a class="pill primary"
-href="https://books.apple.com/au/book/%E4%BB%8E%E6%85%A2%E9%97%A8%E6%91%84%E5%BD%B1%E5%88%B0%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/id6758567346"
-target="_blank">
-
-Apple Books 阅读
-
-</a>
-
-</div>
-
-</div>
-
-
-
-<footer>
-
-© Dr Weihong Liu — Digital Studio
-
-</footer>
-
-
-</div>
-
-
+    <footer>© Dr Weihong Liu — Digital Studio</footer>
+  </div>
 </body>
 </html>
