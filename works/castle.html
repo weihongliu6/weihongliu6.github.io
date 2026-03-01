@@ -38,20 +38,28 @@
       margin-bottom: 16px;
     }
     .pill{
-      display:inline-block;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      text-decoration:none;
-      color: var(--text);
-      background: rgba(255,255,255,.65);
-      transition: transform .12s ease;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-    .pill:hover{ transform: translateY(-1px); }
-    .pill.muted{ color: var(--muted); }
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid #4a90e2;
+  text-decoration:none;
+  color:#4a90e2;
+  background:white;
+  font-size:13px;
+  white-space:nowrap;
+  transition:all .2s ease;
+}
 
+.pill:hover{
+  background:#4a90e2;
+  color:white;
+}
+
+.pill.muted{
+  border:1px solid #ccc;
+  color:#888;
+  background:white;
+}
     /* card */
     .card{
       background: var(--card);
