@@ -19,7 +19,7 @@
       --linkBorder: rgba(11,95,255,.35);
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
 
     body{
       margin:0;
@@ -55,7 +55,6 @@
     }
     .pill:hover{ transform: translateY(-1px); }
 
-    /* 蓝色按钮（Apple Books） */
     .pill.primary{
       color: var(--link);
       border-color: var(--linkBorder);
@@ -67,7 +66,17 @@
       border-color: var(--link);
     }
 
-    /* ✅ 书架：两本并排，手机自动变一列 */
+    /* 第二个按钮（打开App）做成浅灰 */
+    .pill.ghost{
+      color:#333;
+      border-color: rgba(0,0,0,.12);
+      background: rgba(255,255,255,.65);
+    }
+    .pill.ghost:hover{
+      background: rgba(0,0,0,.06);
+      color:#111;
+    }
+
     .bookshelf{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -110,10 +119,13 @@
       font-size:14px;
     }
 
+    /* 两个按钮并排 */
     .actions{
       margin-top:18px;
       display:flex;
       justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
     footer{
@@ -133,7 +145,6 @@
       <a class="pill" href="works.html">摄影作品 Works</a>
     </div>
 
-    <!-- ✅ 两本书并排：把两个 card 放进 bookshelf -->
     <div class="bookshelf">
 
       <!-- 第一册 -->
@@ -148,10 +159,17 @@
         </div>
 
         <div class="actions">
+          <!-- ✅ 网页试读：尽量留在浏览器 -->
           <a class="pill primary"
-             href="https://books.apple.com/au/book/%E6%85%A2%E4%B8%8B%E6%9D%A5-%E7%9C%8B%E8%A7%81%E4%B8%96%E7%95%8C-slow-down-and-see-the-world/id6757672905"
+             href="https://books.apple.com/au/book/id6757672905"
              target="_blank" rel="noopener">
-            Apple Books 阅读
+            网页试读 · Sample
+          </a>
+
+          <!-- 可选：明确打开 App -->
+          <a class="pill ghost"
+             href="itms-books://books.apple.com/au/book/id6757672905">
+            打开 App
           </a>
         </div>
       </div>
@@ -162,13 +180,23 @@
 
         <div class="title">从慢门摄影到生活哲学</div>
         <div class="subtitle">From Long Exposure Photography to Life Philosophy</div>
-        <div class="subtitle">从摄影观看到时间与存在的思考</div>
+
+        <!-- ✅ 这里补上你说缺的英文副标题 -->
+        <div class="subtitle">
+          从摄影观看到时间与存在的思考<br>
+          Reflections on Time and Being Through Photography
+        </div>
 
         <div class="actions">
           <a class="pill primary"
-             href="https://books.apple.com/au/book/%E4%BB%8E%E6%85%A2%E9%97%A8%E6%91%84%E5%BD%B1%E5%88%B0%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/id6758567346"
+             href="https://books.apple.com/au/book/id6758567346"
              target="_blank" rel="noopener">
-            Apple Books 阅读
+            网页试读 · Sample
+          </a>
+
+          <a class="pill ghost"
+             href="itms-books://books.apple.com/au/book/id6758567346">
+            打开 App
           </a>
         </div>
       </div>
