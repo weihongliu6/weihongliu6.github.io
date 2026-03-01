@@ -7,213 +7,100 @@
 
   <style>
     :root{
-      --bg:#f4f4f2;
-      --card:#ffffff;
-      --text:#222;
-      --muted:#666;
-      --border: rgba(0,0,0,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 18px;
-      --max: 980px;
+      --bg:#f4f4f2; --card:#fff; --text:#222; --muted:#666;
+      --border: rgba(0,0,0,.08); --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius:18px; --max:980px;
+
+      /* dunes 同款蓝色系统 */
+      --link:#0b5fff;
+      --linkBorder: rgba(11,95,255,.35);
+      --linkBg: rgba(11,95,255,.08);
     }
-    *{ box-sizing: border-box; }
+
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background:var(--bg);
+      color:var(--text);
     }
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 22px 16px 70px;
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 16px 60px;}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;}
+
+    /* Pills（完全复制 dunes） */
+    .pill{
+      display:inline-block;
+      padding:10px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,.6);
+      transition: transform .12s ease, background .12s ease, color .12s ease;
+    }
+    .pill:hover{ transform: translateY(-1px); }
+    .pill.muted{ color:var(--muted); }
+
+    /* 蓝色按钮（Next / 高清图统一风格） */
+    .pill.primary{
+      color: var(--link);
+      border-color: var(--linkBorder);
+    }
+    .pill.primary:hover{
+      background: var(--link);
+      color:#fff;
+      border-color: var(--link);
+      transform: translateY(-1px);
     }
 
-    /* top pills */
-    .topbar{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-   /* 蓝色按钮系统（统一版） */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+    .hero{position:relative;}
+    .hero img{width:100%;display:block;max-height:640px;object-fit:cover;cursor:pointer;}
+    .hero-caption{position:absolute;left:18px;bottom:14px;color:#fff;text-shadow:0 8px 20px rgba(0,0,0,.45);}
+    .hero-caption .zh{font-weight:900;font-size:20px;margin:0;}
+    .hero-caption .en{font-weight:700;font-size:13px;margin:4px 0 0;opacity:.95;}
 
-.pill{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  text-decoration:none;
-  color:var(--text);
-  background:rgba(255,255,255,.6);
-}
+    .content{padding:18px 18px 22px;}
+    .title-zh{font-size:22px;font-weight:900;margin:0 0 4px;}
+    .title-en{font-size:14px;font-weight:700;color:var(--muted);margin:0 0 12px;}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px;}
+    .tag{display:inline-block;font-size:12px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.65);padding:6px 10px;border-radius:999px;}
+    .divider{height:1px;background:rgba(0,0,0,.06);margin:14px 0 14px;}
+    .para{margin:0 0 10px;line-height:1.8;color:#333;font-size:14px;}
+    .para.en{color:var(--muted);}
 
-.pill.muted{
-  color:var(--muted);
-}
+    .actions{ margin-top:14px; display:flex; justify-content:center; }
+    .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;}
 
-/* 蓝按钮 */
+    footer{margin-top:18px;font-size:12px;color:#777;text-align:center;}
 
-:root{
-  --link:#0b5ed7;
-}
-
-/* 高清按钮默认状态 */
-.pill.primary{
-  color:var(--link);
-  border-color:var(--link);
-  background:white;
-}
-
-/* hover 时变实蓝 */
-.pill.primary:hover{
-  background:var(--link);
-  color:white;
-  border-color:var(--link);
-}
-    /* card */
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    /* hero image */
-    .hero{
-      position: relative;
-      background: #000;
-    }
-    .hero img{
-      width: 100%;
-      height: auto;
-      display:block;
-    }
-    .hero-caption{
-      position:absolute;
-      left: 18px;
-      bottom: 16px;
-      color: #fff;
-      text-shadow: 0 6px 20px rgba(0,0,0,.45);
-    }
-    .hero-caption .zh{
-      font-weight: 900;
-      font-size: 20px;
-      margin: 0 0 2px;
-      letter-spacing: .2px;
-    }
-    .hero-caption .en{
-      font-weight: 700;
-      font-size: 13px;
-      margin: 0;
-      opacity: .95;
-    }
-
-    /* content */
-    .content{
-      padding: 18px 18px 22px;
-    }
-    .title-zh{
-      font-size: 26px;
-      font-weight: 900;
-      margin: 2px 0 4px;
-      letter-spacing: .2px;
-    }
-    .title-en{
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--muted);
-      margin: 0 0 10px;
-    }
-
-    .meta{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 8px 0 12px;
-    }
-    .tag{
-      font-size: 12px;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.7);
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
-
-    .divider{
-      height: 1px;
-      background: rgba(0,0,0,.06);
-      margin: 14px 0 14px;
-    }
-
-    .para{
-      font-size: 14px;
-      line-height: 1.85;
-      color: #333;
-      margin: 0 0 10px;
-    }
-    .para.en{
-      color: var(--muted);
-    }
-
-    /* optional: next/prev */
-    .nav{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap: 10px;
-      margin-top: 14px;
-    }
-.nav { display:flex; gap:12px; }
-.nav a:last-child { margin-left:auto; }
-    
-    footer{
-      margin-top: 18px;
-      text-align:center;
-      color: #777;
-      font-size: 12px;
-    }
-
-    /* mobile tweaks */
-    @media (max-width: 560px){
-      .hero-caption .zh{ font-size: 18px; }
-      .content{ padding: 16px 14px 18px; }
-      .title-zh{ font-size: 22px; }
-    }
+    /* Lightbox */
+    .lb{position:fixed;inset:0;background:rgba(0,0,0,.86);display:none;align-items:center;justify-content:center;z-index:9999;padding:18px;}
+    .lb.open{display:flex;}
+    .lb img{max-width:96vw;max-height:92vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.45);}
+    .lb .close{position:fixed;top:16px;right:16px;color:#fff;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.25);border-radius:999px;padding:10px 12px;cursor:pointer;font-size:14px;}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-
     <div class="topbar">
       <a class="pill" href="../works.html">← 返回作品列表 Works</a>
       <a class="pill muted" href="../index.html">返回主页 Home</a>
     </div>
 
     <div class="card">
-      <!-- ✅ 1) 改这里：图片路径 -->
       <div class="hero">
-        <a href="../images/works/PhotographyWorks-1.jpg" target="_blank">
-<img src="../images/works/PhotographyWorks-1.jpg"
-alt="Danube Castle — Light in the Mist">
-</a>
+        <img id="heroImg" src="../images/works/PhotographyWorks-1.jpg" alt="Danube Castle — Light in the Mist">
         <div class="hero-caption">
-          <!-- ✅ 2) 改这里：封面标题 -->
           <p class="zh">多瑙河畔 · 古堡与光</p>
           <p class="en">Danube Castle — Light in the Mist</p>
         </div>
       </div>
 
       <div class="content">
-        <!-- ✅ 3) 改这里：页面标题（与上面可一致） -->
         <div class="title-zh">多瑙河畔 · 古堡与光</div>
         <div class="title-en">Danube Castle — Light in the Mist</div>
 
-        <!-- ✅ 4) 改这里：标签（地点/关键词/风格） -->
         <div class="meta">
           <span class="tag">地点：德国 · 多瑙河沿岸</span>
           <span class="tag">关键词：雾 / 光 / 记忆</span>
@@ -222,34 +109,41 @@ alt="Danube Castle — Light in the Mist">
 
         <div class="divider"></div>
 
-        <!-- ✅ 5) 改这里：中文一句/一段 -->
-        <p class="para">
-          云雾掠过山坡，古老城堡像记忆一样缓慢浮现。光并不急于照亮一切，它只是提醒——有些存在，本就该以慢慢的方式被看见。
-        </p>
+        <p class="para">云雾掠过山坡，古老城堡像记忆一样缓慢浮现。光并不急于照亮一切，它只是提醒——有些存在，本就该以慢慢的方式被看见。</p>
+        <p class="para en">A castle emerges slowly, as if memory rises through the mist. Light doesn’t rush to reveal everything—it simply reminds us that some things are meant to be seen in slowness.</p>
 
-        <!-- ✅ 6) 改这里：英文一句/一段 -->
-        <p class="para en">
-          A castle emerges slowly, as if memory rises through the mist. Light doesn’t rush to reveal everything—it simply reminds us that some things are meant to be seen in slowness.
-        </p>
-      <!-- 高清图按钮 -->
-<div class="actions">
-  <a class="pill primary"
-     href="../images/works/PhotographyWorks-1.jpg"
-     target="_blank"
-     
-     查看高清图 · View Full Resolution
-  </a>
-</div>
+        <!-- 高清图按钮（居中，dunes 同款） -->
+        <div class="actions">
+          <a class="pill primary" href="../images/works/PhotographyWorks-1.jpg" target="_blank" rel="noopener">
+            查看高清图 · View Full Resolution
+          </a>
+        </div>
 
-<!-- 只有 Next 按钮 -->
-<div class="nav">
-  <a class="pill primary" href="dunes.html">
-    Next 下一张 →
-  </a>
-</div>
+        <!-- 只有 Next（第一张） -->
+        <div class="nav">
+          <span></span>
+          <a class="pill primary" href="dunes.html">Next下一张 →</a>
+        </div>
+      </div>
     </div>
 
     <footer>© 影子观察 | Shadow Observer</footer>
   </div>
+
+  <div class="lb" id="lb">
+    <button class="close" id="lbClose">✕ Close</button>
+    <img id="lbImg" src="../images/works/PhotographyWorks-1.jpg" alt="Full view">
+  </div>
+
+  <script>
+    const heroImg = document.getElementById('heroImg');
+    const lb = document.getElementById('lb');
+    const lbClose = document.getElementById('lbClose');
+
+    heroImg.addEventListener('click', () => lb.classList.add('open'));
+    lbClose.addEventListener('click', () => lb.classList.remove('open'));
+    lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('open'); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') lb.classList.remove('open'); });
+  </script>
 </body>
 </html>
