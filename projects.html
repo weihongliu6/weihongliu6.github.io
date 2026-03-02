@@ -7,14 +7,14 @@
 
   <style>
     :root{
-      --bg:#0b0b0c;
-      --card:#111114;
-      --text:#f1f1f2;
-      --muted:#b7b7bb;
-      --line:#26262b;
-      --radius:18px;
-      --shadow:0 16px 40px rgba(0,0,0,.35);
-    }
+  --bg:#f6f7fb;          /* 页面背景：浅灰蓝 */
+  --card:#ffffff;        /* 卡片/侧栏底色：白 */
+  --text:#111319;        /* 主文字：深色 */
+  --muted:#5f6571;       /* 次文字：灰 */
+  --line:#e6e8ef;        /* 分割线：浅灰 */
+  --radius:18px;
+  --shadow:0 16px 40px rgba(0,0,0,.12); /* 阴影更轻 */
+}
     body{
       margin:0;
       background:var(--bg);
@@ -24,29 +24,28 @@
     }
 
     /* topbar */
-    .topbar{
-      position:sticky; top:0;
-      background:rgba(11,11,12,.82);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-      padding:12px 16px;
-      z-index:10;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .topbar a{
-      color:#d9d9de;
-      text-decoration:none;
-      border:1px solid var(--line);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:14px;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
-
+   .topbar{
+  position:sticky; top:0;
+  background:rgba(246,247,251,.82);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+  padding:12px 16px;
+  z-index:10;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.topbar a{
+  color:#1b1f2a;
+  text-decoration:none;
+  border:1px solid var(--line);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:14px;
+  background:#fff;
+}
     .wrap{
-      max-width:1100px;
+      max-width:1280px;
       margin:0 auto;
       padding:22px 18px 90px;
     }
@@ -78,8 +77,8 @@
     /* ===== Main layout ===== */
     .layout{
       display:grid;
-      grid-template-columns: 1fr 220px;
-      gap:18px;
+      grid-template-columns: 1fr 240px;
+      gap:34px;
       align-items:start;
       margin-top:18px;
     }
@@ -96,10 +95,10 @@
       box-shadow:var(--shadow);
       background:#000;
       aspect-ratio: 16 / 9;
-      min-height: 420px;
+      min-height: 520px;
     }
     @media (max-width: 820px){
-      .frame{ min-height: 320px; }
+      .frame{ min-height: 360px; }
       .title-zh{ font-size:32px; }
       .title-en{ font-size:16px; }
     }
@@ -235,11 +234,12 @@
 
     /* ===== Right side icons ===== */
     .side{
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px;
-      background:rgba(255,255,255,.02);
-    }
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  background:var(--card);
+  box-shadow:0 10px 26px rgba(0,0,0,.06);
+}
     .side h3{
       margin:0 0 10px;
       font-size:14px;
