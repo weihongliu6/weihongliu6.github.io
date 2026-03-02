@@ -3,32 +3,634 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>摄影专辑 | Projects</title>
+  <title>摄影专辑｜Photography Projects</title>
+
   <style>
-    body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:#0b0b0c; color:#eee; }
-    .topbar{ position:sticky; top:0; background:rgba(11,11,12,.86); backdrop-filter:blur(10px); border-bottom:1px solid #26262b; padding:12px 16px; }
-    .topbar a{ color:#ddd; text-decoration:none; border:1px solid #26262b; padding:8px 12px; border-radius:999px; margin-right:8px; font-size:14px; }
-    .wrap{ max-width:900px; margin:0 auto; padding:40px 18px 80px; }
-    h1{ font-size:36px; margin:0 0 8px; }
-    p{ color:#b7b7bb; line-height:1.8; }
-    .card{ margin-top:18px; padding:16px 18px; border:1px solid #26262b; border-radius:14px; background:rgba(255,255,255,.02); }
-    .card a{ color:#fff; text-decoration:none; }
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#f1f1f2;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --radius:18px;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
+
+    /* topbar */
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .topbar a{
+      color:#d9d9de;
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:22px 18px 90px;
+    }
+
+    header{
+      text-align:center;
+      padding:14px 0 10px;
+    }
+    .title-zh{
+      font-size:40px;
+      font-weight:700;
+      letter-spacing:1px;
+      margin:0 0 6px;
+    }
+    .title-en{
+      margin:0;
+      color:var(--muted);
+      font-size:18px;
+      letter-spacing:.3px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .rule{
+      width:86px;
+      height:1px;
+      margin:14px auto 6px;
+      background:rgba(255,255,255,.28);
+    }
+
+    /* ===== Main layout ===== */
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr 220px;
+      gap:18px;
+      align-items:start;
+      margin-top:18px;
+    }
+    @media (max-width: 900px){
+      .layout{ grid-template-columns: 1fr; }
+    }
+
+    /* ===== Slideshow frame ===== */
+    .frame{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      background:#000;
+      aspect-ratio: 16 / 9;
+      min-height: 420px;
+    }
+    @media (max-width: 820px){
+      .frame{ min-height: 320px; }
+      .title-zh{ font-size:32px; }
+      .title-en{ font-size:16px; }
+    }
+
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity .5s ease;
+    }
+    .slide.active{ opacity:1; }
+
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.70), rgba(0,0,0,.12) 55%, rgba(0,0,0,.12));
+      pointer-events:none;
+    }
+
+    /* caption */
+    .caption{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:18px;
+      z-index:2;
+    }
+    .cap-title{
+      margin:0 0 6px;
+      font-size:30px;
+      line-height:1.08;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      text-shadow: 0 8px 22px rgba(0,0,0,.45);
+    }
+    .cap-line{
+      width:88px;
+      height:2px;
+      background:rgba(255,255,255,.55);
+      margin:8px 0 10px;
+      border-radius:999px;
+    }
+    .cap-sub{
+      margin:0;
+      color:rgba(255,255,255,.85);
+      font-size:15px;
+      line-height:1.5;
+      text-shadow: 0 8px 22px rgba(0,0,0,.45);
+    }
+
+    /* prev/next */
+    .ctrl{
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 10px;
+      z-index:3;
+      pointer-events:none;
+    }
+    .btn{
+      pointer-events:auto;
+      width:44px; height:44px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border .12s ease;
+      user-select:none;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size:22px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background:rgba(0,0,0,.48);
+      border:1px solid rgba(255,255,255,.30);
+    }
+
+    .dots{
+      position:absolute;
+      left:0; right:0;
+      bottom:12px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      z-index:3;
+      pointer-events:auto;
+    }
+    .dot{
+      width:8px; height:8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.12);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .dot.active{
+      background:rgba(255,255,255,.75);
+      transform: scale(1.15);
+    }
+
+    /* enlarge button inside frame */
+    .enlarge{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      z-index:4;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      padding:10px 12px;
+      cursor:pointer;
+      user-select:none;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size:13px;
+    }
+    .enlarge:hover{
+      background:rgba(0,0,0,.5);
+      border-color: rgba(255,255,255,.30);
+    }
+
+    /* ===== Right side icons ===== */
+    .side{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      background:rgba(255,255,255,.02);
+    }
+    .side h3{
+      margin:0 0 10px;
+      font-size:14px;
+      color:var(--muted);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      letter-spacing:.2px;
+    }
+    .albums{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .album-btn{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:12px;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+      transition: transform .12s ease, background .12s ease, border .12s ease;
+      user-select:none;
+    }
+    .album-btn:hover{
+      transform: translateY(-1px);
+      background:rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.14);
+    }
+    .album-btn.active{
+      background:rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.22);
+    }
+    .ico{
+      width:34px; height:34px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-weight:700;
+      color:#eaeaea;
+    }
+    .album-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.25;
+    }
+    .album-text b{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size:14px;
+    }
+    .album-text span{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* ===== Fullscreen modal ===== */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.92);
+      display:none;
+      z-index:999;
+    }
+    .modal.open{ display:block; }
+
+    .modal-inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .modal-frame{
+      position:relative;
+      width:min(1200px, 96vw);
+      aspect-ratio: 16/9;
+      background:#000;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+    @media (max-width: 700px){
+      .modal-inner{ padding:14px; }
+      .cap-title{ font-size:24px; }
+    }
+
+    .close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      z-index:5;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      padding:10px 12px;
+      cursor:pointer;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size:13px;
+    }
+    .close:hover{ background:rgba(0,0,0,.55); border-color:rgba(255,255,255,.30); }
+
+    footer{
+      margin-top:28px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
   </style>
 </head>
+
 <body>
   <div class="topbar">
     <a href="index.html">← 返回主页 Home</a>
   </div>
 
-  <main class="wrap">
-    <h1>摄影专辑</h1>
-    <p>Photography Projects</p>
+  <div class="wrap">
+    <header>
+      <h1 class="title-zh">摄影专辑</h1>
+      <p class="title-en">Photography Projects</p>
+      <div class="rule"></div>
+      <p class="title-en" style="margin-top:6px;">以系列方式呈现影像与文字</p>
+    </header>
 
-    <div class="card">
-      <a href="slowshutter.html">01 慢门影像专辑（Slow Shutter Project） →</a>
-      <p>以时间为媒介的影像记录。</p>
+    <div class="layout">
+      <!-- LEFT: slideshow frame -->
+      <section>
+        <div class="frame" id="mainFrame" aria-label="Project slideshow">
+          <!-- slides injected by JS -->
+          <div class="caption" aria-live="polite">
+            <div class="cap-title" id="capTitle"></div>
+            <div class="cap-line"></div>
+            <p class="cap-sub" id="capSub"></p>
+          </div>
+
+          <div class="ctrl">
+            <div class="btn" id="prevBtn" aria-label="Previous slide">‹</div>
+            <div class="btn" id="nextBtn" aria-label="Next slide">›</div>
+          </div>
+
+          <div class="dots" id="dots" aria-label="Slide dots"></div>
+
+          <div class="enlarge" id="enlargeBtn" title="Enlarge / Fullscreen">Enlarge ⤢</div>
+        </div>
+      </section>
+
+      <!-- RIGHT: album icons -->
+      <aside class="side">
+        <h3>切换专辑</h3>
+        <div class="albums">
+          <div class="album-btn active" data-album="albumA" id="btnA">
+            <div class="ico">A</div>
+            <div class="album-text">
+              <b>慢门影像专辑</b>
+              <span>Slow Shutter Project</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumB" id="btnB">
+            <div class="ico">B</div>
+            <div class="album-text">
+              <b>专辑 B</b>
+              <span>Album B (placeholder)</span>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
 
-  </main>
+    <footer>© Dr Weihong Liu · Digital Studio</footer>
+  </div>
+
+  <!-- FULLSCREEN MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <button class="close" id="closeBtn">Close ✕</button>
+    <div class="modal-inner">
+      <div class="modal-frame" id="modalFrame" aria-label="Fullscreen slideshow">
+        <!-- slides injected by JS (same album) -->
+        <div class="caption" aria-live="polite">
+          <div class="cap-title" id="mCapTitle"></div>
+          <div class="cap-line"></div>
+          <p class="cap-sub" id="mCapSub"></p>
+        </div>
+
+        <div class="ctrl">
+          <div class="btn" id="mPrevBtn" aria-label="Previous slide">‹</div>
+          <div class="btn" id="mNextBtn" aria-label="Next slide">›</div>
+        </div>
+
+        <div class="dots" id="mDots" aria-label="Slide dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 1) 在这里配置你的两个专辑（图片路径 + 标题 + 短句）=====
+    const ALBUMS = {
+      albumA: {
+        nameZh: "慢门影像专辑",
+        nameEn: "Slow Shutter Project",
+        slides: [
+          { src: "images/projects/albumA/01.jpg", title: "Hopeful Water", sub: "水与光之间，城市在时间中缓缓流动。" },
+          { src: "images/projects/albumA/02.jpg", title: "Majestic Shore", sub: "城市与海水之间，时间被慢慢拉长。" },
+          { src: "images/projects/albumA/03.jpg", title: "Quiet Temple", sub: "群山之间，信仰与土地静静相依。" },
+        ]
+      },
+      albumB: {
+        nameZh: "专辑 B",
+        nameEn: "Album B",
+        slides: [
+          { src: "images/projects/albumB/01.jpg", title: "Album B — 01", sub: "这里放专辑B的短句。" },
+          { src: "images/projects/albumB/02.jpg", title: "Album B — 02", sub: "这里放专辑B的短句。" },
+          { src: "images/projects/albumB/03.jpg", title: "Album B — 03", sub: "这里放专辑B的短句。" },
+        ]
+      }
+    };
+
+    // ===== 2) 通用渲染函数（主框 & 全屏框各一套）=====
+    function makeSlideshow(opts){
+      const {
+        mountEl, capTitleEl, capSubEl, dotsEl,
+        prevBtn, nextBtn,
+        onSlideChange
+      } = opts;
+
+      let albumKey = "albumA";
+      let idx = 0;
+      let slidesDom = [];
+
+      function clearSlides(){
+        slidesDom.forEach(n => n.remove());
+        slidesDom = [];
+      }
+
+      function renderSlides(){
+        clearSlides();
+        const slides = ALBUMS[albumKey].slides;
+
+        slides.forEach((s, i) => {
+          const wrap = document.createElement("div");
+          wrap.className = "slide" + (i === idx ? " active" : "");
+          wrap.innerHTML = `
+            <img src="${s.src}" alt="${ALBUMS[albumKey].nameZh} ${i+1}">
+            <div class="overlay"></div>
+          `;
+          mountEl.appendChild(wrap);
+          slidesDom.push(wrap);
+        });
+
+        renderDots();
+        applyCaption();
+      }
+
+      function renderDots(){
+        dotsEl.innerHTML = "";
+        const slides = ALBUMS[albumKey].slides;
+        slides.forEach((_, i) => {
+          const d = document.createElement("div");
+          d.className = "dot" + (i === idx ? " active" : "");
+          d.addEventListener("click", () => go(i));
+          dotsEl.appendChild(d);
+        });
+      }
+
+      function applyCaption(){
+        const s = ALBUMS[albumKey].slides[idx];
+        capTitleEl.textContent = s.title || "";
+        capSubEl.textContent = s.sub || "";
+        if (typeof onSlideChange === "function") onSlideChange(albumKey, idx);
+      }
+
+      function go(i){
+        const slides = ALBUMS[albumKey].slides;
+        const next = (i + slides.length) % slides.length;
+
+        slidesDom[idx].classList.remove("active");
+        idx = next;
+        slidesDom[idx].classList.add("active");
+
+        renderDots();
+        applyCaption();
+      }
+
+      function next(){ go(idx + 1); }
+      function prev(){ go(idx - 1); }
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+
+      // external API
+      return {
+        setAlbum(key){
+          if (!ALBUMS[key]) return;
+          albumKey = key;
+          idx = 0;
+          renderSlides();
+        },
+        getState(){ return { albumKey, idx }; },
+        go,
+        next,
+        prev,
+        render(){ renderSlides(); }
+      };
+    }
+
+    // ===== 3) 初始化：主框 slideshow =====
+    const mainFrame = document.getElementById("mainFrame");
+    const mainShow = makeSlideshow({
+      mountEl: mainFrame,
+      capTitleEl: document.getElementById("capTitle"),
+      capSubEl: document.getElementById("capSub"),
+      dotsEl: document.getElementById("dots"),
+      prevBtn: document.getElementById("prevBtn"),
+      nextBtn: document.getElementById("nextBtn"),
+      onSlideChange: () => {} // 需要联动时可用
+    });
+    mainShow.render();
+
+    // ===== 4) 右侧 icon：切换专辑 =====
+    const btnA = document.getElementById("btnA");
+    const btnB = document.getElementById("btnB");
+
+    function setActiveBtn(key){
+      [btnA, btnB].forEach(b => b.classList.remove("active"));
+      (key === "albumA" ? btnA : btnB).classList.add("active");
+    }
+
+    btnA.addEventListener("click", () => {
+      setActiveBtn("albumA");
+      mainShow.setAlbum("albumA");
+    });
+    btnB.addEventListener("click", () => {
+      setActiveBtn("albumB");
+      mainShow.setAlbum("albumB");
+    });
+
+    // ===== 5) 全屏 modal slideshow（enlarge）=====
+    const modal = document.getElementById("modal");
+    const enlargeBtn = document.getElementById("enlargeBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const modalFrame = document.getElementById("modalFrame");
+    const modalShow = makeSlideshow({
+      mountEl: modalFrame,
+      capTitleEl: document.getElementById("mCapTitle"),
+      capSubEl: document.getElementById("mCapSub"),
+      dotsEl: document.getElementById("mDots"),
+      prevBtn: document.getElementById("mPrevBtn"),
+      nextBtn: document.getElementById("mNextBtn"),
+    });
+
+    function openModal(){
+      const { albumKey, idx } = mainShow.getState();
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      modalShow.setAlbum(albumKey);
+      modalShow.go(idx); // 同步到主框当前那一张
+    }
+
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    enlargeBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+
+    // 点击遮罩区域也关闭（只要点到黑背景，不点到框）
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // ===== 6) 键盘：左右切图 / ESC 关闭全屏 =====
+    window.addEventListener("keydown", (e) => {
+      const isOpen = modal.classList.contains("open");
+
+      if (e.key === "Escape" && isOpen) closeModal();
+
+      if (e.key === "ArrowLeft") (isOpen ? modalShow : mainShow).prev();
+      if (e.key === "ArrowRight") (isOpen ? modalShow : mainShow).next();
+    });
+  </script>
 </body>
 </html>
