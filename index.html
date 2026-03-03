@@ -215,6 +215,15 @@
       color:#777;
       font-size:13px;
     }
+    .gc-homecount{
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  opacity: .45;
+  transform: scale(.92);
+  font: 12px/1.4 system-ui, -apple-system, "Helvetica Neue", Arial;
+  color: #777;
+}
   </style>
 
 <script data-goatcounter="https://weihongliu.goatcounter.com/count"
@@ -312,7 +321,26 @@
       <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
     </div>
 
-    <footer>© Dr Weihong Liu — Digital Studio</footer>
-  </div>
+   <footer>© Dr Weihong Liu · Digital Studio</footer>
+<div id="gc-homecount" class="gc-homecount"></div>
+
+<script>
+(function(){
+  var t = setInterval(function(){
+    if (window.goatcounter && window.goatcounter.visit_count) {
+      clearInterval(t);
+      window.goatcounter.visit_count({
+        append: '#gc-homecount',
+        path: 'TOTAL',
+        no_branding: true,
+        type: 'html',
+        style: 'div{border:0;background:transparent;padding:0}#gcvc-for{display:none}'
+      });
+    }
+  }, 100);
+})();
+</script>
+
+</div>
 </body>
 </html>
