@@ -329,38 +329,31 @@
       <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
     </div>
 
-    <footer>© Dr Weihong Liu · Digital Studio</footer>
-    <div id="gc-homecount" class="gc-homecount"></div>
-  </div>
+  <footer>© Dr Weihong Liu · Digital Studio</footer>
+<div id="gc-homecount" class="gc-homecount"></div>
 
-  <!-- Homepage-only: show TOTAL visits (quiet). If fail -> hide (no 403/login boxes). -->
- <script>
-(async function(){
+<script>
+(async function () {
   const el = document.getElementById('gc-homecount');
   if (!el) return;
+
+  // 低调：默认不显示，成功再显示
   el.style.display = 'none';
 
-  try{
-    // 取全站总 pageviews（goatcounter API）
-    // 注意：这个 API 返回的是统计汇总，不会跳登录页
-    const url = 'https://weihongliu.goatcounter.com/api/v0/stats/total';
+  try {
+    // 你可以把命名空间/key 改成更像你的站点（只要唯一即可）
+    // 每次访问 index.html，会自动 +1 并返回最新值
+    const url = 'https://api.countapi.xyz/hit/weihongliu6-github-io/home';
     const r = await fetch(url, { cache: 'no-store' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const j = await r.json();
 
-    // 兼容不同返回字段：total / count / pageviews
-    const n =
-      (j && typeof j.total === 'number') ? j.total :
-      (j && typeof j.count === 'number') ? j.count :
-      (j && typeof j.pageviews === 'number') ? j.pageviews :
-      null;
+    if (!j || typeof j.value !== 'number') return;
 
-    if (n === null) return;
-
-   el.textContent = n.toLocaleString();
+   el.textContent = j.value.toLocaleString();
     el.style.display = 'flex';
-  } catch(e){
-    // keep hidden
+  } catch (e) {
+    // 失败就不显示，保持干净
   }
 })();
 </script>
