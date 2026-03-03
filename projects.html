@@ -148,50 +148,19 @@
        - “下一张”从右向左逐步显现（clip-path 从 100% -> 0）
        - 动画完成后，把旧 slide 复位隐藏（无动画复位）
     */
-    .slide{
-      position:absolute;
-      inset:0;
-      z-index:1;
-
-      /* 初始隐藏：完全被裁掉 */
-      clip-path: inset(0 100% 0 0);
-      -webkit-clip-path: inset(0 100% 0 0);
-
-      /* 默认不播放过渡（由 JS 控制什么时候需要过渡） */
-      transition: none;
-
-      /* 防止某些浏览器渲染抖动 */
-      will-change: clip-path;
-    }
-
-    /* 当前显示（完整） */
-    .slide.active{
-      z-index:2;
-      clip-path: inset(0 0 0 0);
-      -webkit-clip-path: inset(0 0 0 0);
-    }
-
-    /* 进入动画：慢慢 sweep 覆盖上一张 */
-    .slide.anim{
-      transition: clip-path var(--wipeDuration) ease;
-      -webkit-transition: -webkit-clip-path var(--wipeDuration) ease;
-    }
-
-    /* 用于“旧图保持完整” */
-    .slide.hold{
-      z-index:1;
-      clip-path: inset(0 0 0 0);
-      -webkit-clip-path: inset(0 0 0 0);
-      transition:none;
-    }
-
-    /* 复位隐藏：瞬间回到裁切状态 */
-    .slide.reset{
-      transition:none !important;
-      -webkit-transition:none !important;
-      clip-path: inset(0 100% 0 0) !important;
-      -webkit-clip-path: inset(0 100% 0 0) !important;
-    }
+    /* ===== FADE (crossfade) ===== */
+.slide{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  opacity:0;
+  transition: opacity 700ms ease;
+  will-change: opacity;
+}
+.slide.active{
+  z-index:2;
+  opacity:1;
+}
 
     .slide img{
       width:100%;
@@ -626,48 +595,32 @@
         });
       }
 
-      function go(targetIndex, userAction=false){
-        const slides = ALBUMS[albumKey].slides;
-        const next = (targetIndex + slides.length) % slides.length;
-        if (next === idx || isAnimating) return;
+     function go(targetIndex, userAction=false){
+  const slides = ALBUMS[albumKey].slides;
+  const next = (targetIndex + slides.length) % slides.length;
+  if (next === idx || isAnimating) return;
 
-        // 用户操作 -> 重置自动计时
-        if (userAction) restartAuto();
+  if (userAction) restartAuto();
 
-        const prevIdx = idx;
-        const prevEl = slidesDom[prevIdx];
-        const nextEl = slidesDom[next];
+  const prevIdx = idx;
+  const prevEl = slidesDom[prevIdx];
+  const nextEl = slidesDom[next];
 
-        isAnimating = true;
+  isAnimating = true;
 
-        // 旧图：保持完整在底层
-        prevEl.classList.remove("reset");
-        prevEl.classList.add("hold");
-        prevEl.classList.remove("active");
-        // 仍然保持 full（hold 已经 full）
+  // 让下一张淡入
+  nextEl.classList.add("active");
+  // 上一张淡出
+  prevEl.classList.remove("active");
 
-        // 新图：从右向左 wipe 显示
-        nextEl.classList.remove("reset");
-        nextEl.classList.add("active");
+  idx = next;
+  renderDots();
+  applyCaption();
 
-        // 强制 reflow，让 transition 生效（关键）
-        void nextEl.offsetWidth;
-
-        nextEl.classList.add("anim"); // 开始动画（clip-path 从 100% -> 0）
-
-        // 更新 index + dots + caption（现在显示的是 next）
-        idx = next;
-        renderDots();
-        applyCaption();
-
-        // 动画结束后：把旧图复位隐藏，避免叠着耗性能
-        setTimeout(() => {
-          prevEl.classList.remove("hold");
-          prevEl.classList.add("reset");
-          normalizeAllExcept(idx);
-          isAnimating = false;
-        }, WIPE_MS + 50);
-      }
+  setTimeout(() => {
+    isAnimating = false;
+  }, 750); // 与 700ms 接近即可
+}
 
       function next(userAction=false){ go(idx + 1, userAction); }
       function prev(userAction=false){ go(idx - 1, userAction); }
