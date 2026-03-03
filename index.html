@@ -16,7 +16,6 @@
       --wrap:1100px;
     }
 
-    /* ===== Background (Option B: faint art background) ===== */
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -32,8 +31,8 @@
       background-position:center;
       background-attachment:fixed;
     }
+
     @media (max-width: 820px){
-      /* iOS 上 fixed 背景偶尔会抖动/溢出，手机降级更稳 */
       body{ background-attachment:scroll; }
     }
 
@@ -60,7 +59,6 @@
       text-align:center;
     }
 
-    /* Small English style (global) */
     .en{
       font-size:0.75em;
       color:#777;
@@ -68,7 +66,6 @@
       font-weight:300;
     }
 
-    /* ===== Title underline (book-like) ===== */
     .titleline{
       width:120px;
       height:1px;
@@ -76,7 +73,6 @@
       margin:18px auto 22px;
     }
 
-    /* ===== Continuous slider (seamless) ===== */
     .marquee{
       position:relative;
       overflow:hidden;
@@ -119,6 +115,7 @@
       font-size:14px;
       line-height:1.35;
     }
+
     .cap b{
       display:block;
       font-size:16px;
@@ -134,7 +131,6 @@
       animation-play-state: paused;
     }
 
-    /* ===== Intro ===== */
     .intro{
       max-width:720px;
       margin:18px auto 26px;
@@ -148,7 +144,6 @@
       margin-bottom:8px;
     }
 
-    /* Override English in intro */
     .intro .en{
       font-size:14px;
       color:#777;
@@ -156,7 +151,6 @@
       font-weight:300;
     }
 
-    /* ===== Navigation pills (bilingual) ===== */
     .nav-row{
       margin-top: 22px;
       margin-bottom: 14px;
@@ -174,13 +168,10 @@
       text-decoration:none;
       padding:12px 18px;
       border-radius:999px;
-
       background:rgba(248,249,251,0.92);
       border:1px solid rgba(220,227,234,0.95);
-
       box-shadow:0 4px 12px rgba(30,80,180,0.08);
       min-width:135px;
-
       transition: transform .15s ease, background .15s ease, border .15s ease;
       backdrop-filter: blur(6px);
     }
@@ -207,12 +198,6 @@
       font-weight:400;
     }
 
-    @media (max-width: 520px){
-      .nav-pill{ min-width:105px; padding:9px 12px; }
-      .nav-pill .zh{ font-size:13px; }
-      .nav-pill .en{ font-size:11px; }
-    }
-
     footer{
       margin-top:22px;
       text-align:center;
@@ -220,19 +205,17 @@
       font-size:13px;
     }
 
-    /* homepage counter (very subtle) */
-    .gc-homecount{
-      margin-top: 8px;
-      display: flex;
-      justify-content: center;
-      opacity: .35;
-      transform: scale(.92);
-      font: 12px/1.4 system-ui, -apple-system, "Helvetica Neue", Arial;
-      color: #777;
+    /* 小型 visits 徽章 */
+    .visit-badge{
+      display:block;
+      margin:10px auto 0;
+      height:16px;
+      opacity:.35;
+      filter:grayscale(1);
     }
   </style>
 
-  <!-- GoatCounter tracking (for backend stats) -->
+  <!-- GoatCounter 后台统计 -->
   <script data-goatcounter="https://weihongliu.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -254,13 +237,11 @@
       <span class="en">Photography and Reflections</span>
     </p>
 
-    <!-- Continuous slider: duplicate set for seamless loop -->
-    <div class="marquee" aria-label="Featured works continuous slider">
+    <div class="marquee">
       <div class="track">
 
-        <!-- Set 1 -->
         <div class="item">
-          <img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
+          <img src="images/featured/Carousel1.jpg">
           <div class="cap">
             <b>威尼斯 · 时间的水面</b>
             <span>水与光之间，城市在时间中缓缓流动。</span>
@@ -268,7 +249,7 @@
         </div>
 
         <div class="item">
-          <img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
+          <img src="images/featured/Carousel2.jpg">
           <div class="cap">
             <b>黄金海岸</b>
             <span>城市与海水之间，时间被慢慢拉长。</span>
@@ -276,32 +257,7 @@
         </div>
 
         <div class="item">
-          <img src="images/featured/Carousel3.jpg" alt="甘南寺院">
-          <div class="cap">
-            <b>甘南寺院</b>
-            <span>群山之间，信仰与土地静静相依。</span>
-          </div>
-        </div>
-
-        <!-- Set 2 (duplicate) -->
-        <div class="item">
-          <img src="images/featured/Carousel1.jpg" alt="威尼斯长曝光">
-          <div class="cap">
-            <b>威尼斯 · 时间的水面</b>
-            <span>水与光之间，城市在时间中缓缓流动。</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <img src="images/featured/Carousel2.jpg" alt="黄金海岸长曝光">
-          <div class="cap">
-            <b>黄金海岸</b>
-            <span>城市与海水之间，时间被慢慢拉长。</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <img src="images/featured/Carousel3.jpg" alt="甘南寺院">
+          <img src="images/featured/Carousel3.jpg">
           <div class="cap">
             <b>甘南寺院</b>
             <span>群山之间，信仰与土地静静相依。</span>
@@ -320,7 +276,7 @@
       </div>
     </div>
 
-    <div class="nav-row" aria-label="Main navigation">
+    <div class="nav-row">
       <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span></a>
       <a class="nav-pill" href="projects.html"><span class="zh">摄影专辑</span><span class="en">Projects</span></a>
       <a class="nav-pill" href="AIMusicVideos.html"><span class="zh">AI 音乐视频</span><span class="en">AI Music Videos</span></a>
@@ -329,33 +285,13 @@
       <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
     </div>
 
-  <footer>© Dr Weihong Liu · Digital Studio</footer>
-<div id="gc-homecount" class="gc-homecount"></div>
+    <footer>© Dr Weihong Liu · Digital Studio</footer>
 
-<script>
-(async function () {
-  const el = document.getElementById('gc-homecount');
-  if (!el) return;
+    <!-- visits 小框 -->
+    <img class="visit-badge"
+      alt="visits"
+      src="https://img.shields.io/badge/dynamic/json?label=visits&query=%24.value&url=https%3A%2F%2Fapi.countapi.xyz%2Fhit%2Fweihongliu6-github-io%2Fhome&color=777777&labelColor=eeeeee&style=flat" />
 
-  // 低调：默认不显示，成功再显示
-  el.style.display = 'none';
-
-  try {
-    // 你可以把命名空间/key 改成更像你的站点（只要唯一即可）
-    // 每次访问 index.html，会自动 +1 并返回最新值
-    const url = 'https://api.countapi.xyz/hit/weihongliu6-github-io/home';
-    const r = await fetch(url, { cache: 'no-store' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const j = await r.json();
-
-    if (!j || typeof j.value !== 'number') return;
-
-   el.textContent = j.value.toLocaleString();
-    el.style.display = 'flex';
-  } catch (e) {
-    // 失败就不显示，保持干净
-  }
-})();
-</script>
+  </div>
 </body>
 </html>
