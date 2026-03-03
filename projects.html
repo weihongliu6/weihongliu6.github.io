@@ -16,6 +16,9 @@
       --line:rgba(20,21,24,.10);
       --radius:20px;
       --shadow:0 18px 50px rgba(0,0,0,.10);
+
+      /* ===== slideshow timing ===== */
+      --wipeDuration: 1800ms;   /* ✅ sweep 覆盖速度：越大越慢 */
     }
 
     /* ===== Global fixes for real responsive ===== */
@@ -35,7 +38,6 @@
       background-size:cover;
       background-position:center;
 
-      /* iOS Safari 对 fixed 背景容易出“假横向溢出/抖动”，桌面保留 fixed，手机自动降级 */
       background-attachment:fixed;
     }
     @media (max-width: 820px){
@@ -73,7 +75,7 @@
       width:100%;
       max-width:1320px;
       margin:0 auto;
-      padding:2px 18px 70px; /* 往上提 + 底部少一点 */
+      padding:2px 18px 70px;
     }
     @media (max-width: 820px){
       .wrap{ padding:2px 14px 56px; }
@@ -83,7 +85,7 @@
     .layout{
       display:grid;
       grid-template-columns: 1fr 270px;
-      gap:56px;                       /* ✅ 右侧 icon 不要贴太近 */
+      gap:56px;
       align-items:start;
       margin-top:40px;
     }
@@ -91,9 +93,9 @@
       .layout{ grid-template-columns: 1fr; gap:18px; }
     }
 
-    /* ===== Left header (center relative to frame) ===== */
+    /* ===== Left header ===== */
     .leftHeader{
-      text-align:center;              /* ✅ 相对左栏居中 = 相对 slide frame 居中 */
+      text-align:center;
       padding:10px 0 16px;
     }
     .title-zh{
@@ -130,27 +132,66 @@
       box-shadow:var(--shadow);
       background:#000;
 
-      /* ✅ 16:9 固定比例 + 用 clamp 控制高度，不再用 min-height 顶爆手机 */
       aspect-ratio: 16 / 9;
       height:auto;
       min-height: unset;
     }
 
-    /* 如果你很想“桌面更大”，用 clamp 给一个安全高度范围 */
     @media (min-width: 981px){
-      .frame{
-        /* 大屏：至少 520px，高一些更大气；但不会超过比例极限 */
-        min-height: 520px;
-      }
+      .frame{ min-height: 520px; }
     }
 
+    /* ===== SWEEP / WIPE ANIMATION =====
+       思路：
+       - 所有 slide 都铺满叠加
+       - “上一张”保持完整在底层
+       - “下一张”从右向左逐步显现（clip-path 从 100% -> 0）
+       - 动画完成后，把旧 slide 复位隐藏（无动画复位）
+    */
     .slide{
       position:absolute;
       inset:0;
-      opacity:0;
-      transition: opacity .5s ease;
+      z-index:1;
+
+      /* 初始隐藏：完全被裁掉 */
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
+
+      /* 默认不播放过渡（由 JS 控制什么时候需要过渡） */
+      transition: none;
+
+      /* 防止某些浏览器渲染抖动 */
+      will-change: clip-path;
     }
-    .slide.active{ opacity:1; }
+
+    /* 当前显示（完整） */
+    .slide.active{
+      z-index:2;
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
+    }
+
+    /* 进入动画：慢慢 sweep 覆盖上一张 */
+    .slide.anim{
+      transition: clip-path var(--wipeDuration) ease;
+      -webkit-transition: -webkit-clip-path var(--wipeDuration) ease;
+    }
+
+    /* 用于“旧图保持完整” */
+    .slide.hold{
+      z-index:1;
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
+      transition:none;
+    }
+
+    /* 复位隐藏：瞬间回到裁切状态 */
+    .slide.reset{
+      transition:none !important;
+      -webkit-transition:none !important;
+      clip-path: inset(0 100% 0 0) !important;
+      -webkit-clip-path: inset(0 100% 0 0) !important;
+    }
 
     .slide img{
       width:100%;
@@ -172,19 +213,12 @@
       left:22px;
       right:22px;
       bottom:18px;
-      z-index:2;
+      z-index:5;
+      pointer-events:none;
     }
 
     .cap-title{ display:none; }
-
-    .cap-line{
-      width:88px;
-      height:2px;
-      background:rgba(255,255,255,.55);
-      margin:0 0 10px;
-      border-radius:999px;
-      display:none;
-    }
+    .cap-line{ display:none; }
 
     .cap-sub{
       margin:0;
@@ -198,7 +232,7 @@
 
     @media (max-width: 820px){
       .caption{ left:14px; right:14px; bottom:14px; }
-      .cap-sub{ font-size:15px; max-width:100%; } /* ✅ 手机不挤 */
+      .cap-sub{ font-size:15px; max-width:100%; }
     }
 
     /* prev/next */
@@ -209,7 +243,7 @@
       justify-content:space-between;
       align-items:center;
       padding:0 12px;
-      z-index:3;
+      z-index:6;
       pointer-events:none;
     }
     .btn{
@@ -241,7 +275,7 @@
       display:flex;
       justify-content:center;
       gap:8px;
-      z-index:3;
+      z-index:6;
       pointer-events:auto;
     }
     .dot{
@@ -262,7 +296,7 @@
       position:absolute;
       right:14px;
       bottom:14px;
-      z-index:4;
+      z-index:7;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(0,0,0,.28);
@@ -394,7 +428,7 @@
       position:absolute;
       top:16px;
       right:16px;
-      z-index:5;
+      z-index:1000;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(0,0,0,.35);
@@ -426,7 +460,7 @@
   <div class="wrap">
     <div class="layout">
 
-      <!-- LEFT: header + slideshow frame -->
+      <!-- LEFT -->
       <section>
         <header class="leftHeader">
           <h1 class="title-zh">摄影专辑</h1>
@@ -437,6 +471,7 @@
 
         <div class="frame" id="mainFrame" aria-label="Project slideshow">
           <!-- slides injected by JS -->
+
           <div class="caption" aria-live="polite">
             <div class="cap-title" id="capTitle"></div>
             <div class="cap-line"></div>
@@ -449,14 +484,13 @@
           </div>
 
           <div class="dots" id="dots" aria-label="Slide dots"></div>
-
           <div class="enlarge" id="enlargeBtn" title="Enlarge / Fullscreen">Enlarge ⤢</div>
         </div>
 
         <footer>© Dr Weihong Liu · Digital Studio</footer>
       </section>
 
-      <!-- RIGHT: album icons -->
+      <!-- RIGHT -->
       <aside class="side">
         <h3>切换专辑</h3>
         <div class="albums">
@@ -486,7 +520,7 @@
     <button class="close" id="closeBtn">Close ✕</button>
     <div class="modal-inner">
       <div class="modal-frame" id="modalFrame" aria-label="Fullscreen slideshow">
-        <!-- slides injected by JS (same album) -->
+        <!-- slides injected by JS -->
         <div class="caption" aria-live="polite">
           <div class="cap-title" id="mCapTitle"></div>
           <div class="cap-line"></div>
@@ -504,7 +538,7 @@
   </div>
 
   <script>
-    // ===== 1) 配置专辑（已替换为你现在的文件名/路径）=====
+    // ===== 1) 专辑配置 =====
     const ALBUMS = {
       albumA: {
         nameZh: "慢门影像专辑",
@@ -526,17 +560,19 @@
       }
     };
 
-    // ===== 2) 通用渲染函数（主框 & 全屏框各一套）=====
+    // ===== 2) 动画/自动轮播参数 =====
+    const AUTO_PLAY = true;
+    const AUTO_INTERVAL = 6500; // ✅ 自动切换间隔（毫秒）建议 5500~8500
+    const WIPE_MS = 1800;       // ✅ 必须与 CSS --wipeDuration 对应（这里用于 setTimeout）
+
     function makeSlideshow(opts){
-      const {
-        mountEl, capTitleEl, capSubEl, dotsEl,
-        prevBtn, nextBtn,
-        onSlideChange
-      } = opts;
+      const { mountEl, capTitleEl, capSubEl, dotsEl, prevBtn, nextBtn } = opts;
 
       let albumKey = "albumA";
       let idx = 0;
       let slidesDom = [];
+      let timer = null;
+      let isAnimating = false;
 
       function clearSlides(){
         slidesDom.forEach(n => n.remove());
@@ -549,7 +585,7 @@
 
         slides.forEach((s, i) => {
           const wrap = document.createElement("div");
-          wrap.className = "slide" + (i === idx ? " active" : "");
+          wrap.className = "slide" + (i === idx ? " active hold" : " reset");
           wrap.innerHTML = `
             <img src="${s.src}" alt="${ALBUMS[albumKey].nameZh} ${i+1}">
             <div class="overlay"></div>
@@ -568,7 +604,7 @@
         slides.forEach((_, i) => {
           const d = document.createElement("div");
           d.className = "dot" + (i === idx ? " active" : "");
-          d.addEventListener("click", () => go(i));
+          d.addEventListener("click", () => go(i, true));
           dotsEl.appendChild(d);
         });
       }
@@ -577,26 +613,87 @@
         const s = ALBUMS[albumKey].slides[idx];
         capTitleEl.textContent = s.title || "";
         capSubEl.textContent = s.sub || "";
-        if (typeof onSlideChange === "function") onSlideChange(albumKey, idx);
       }
 
-      function go(i){
+      function normalizeAllExcept(activeIndex){
+        slidesDom.forEach((el, i) => {
+          el.classList.remove("anim");
+          if (i !== activeIndex){
+            // 其它全部瞬间隐藏
+            el.classList.remove("active", "hold");
+            el.classList.add("reset");
+          }
+        });
+      }
+
+      function go(targetIndex, userAction=false){
         const slides = ALBUMS[albumKey].slides;
-        const next = (i + slides.length) % slides.length;
+        const next = (targetIndex + slides.length) % slides.length;
+        if (next === idx || isAnimating) return;
 
-        slidesDom[idx].classList.remove("active");
+        // 用户操作 -> 重置自动计时
+        if (userAction) restartAuto();
+
+        const prevIdx = idx;
+        const prevEl = slidesDom[prevIdx];
+        const nextEl = slidesDom[next];
+
+        isAnimating = true;
+
+        // 旧图：保持完整在底层
+        prevEl.classList.remove("reset");
+        prevEl.classList.add("hold");
+        prevEl.classList.remove("active");
+        // 仍然保持 full（hold 已经 full）
+
+        // 新图：从右向左 wipe 显示
+        nextEl.classList.remove("reset");
+        nextEl.classList.add("active");
+
+        // 强制 reflow，让 transition 生效（关键）
+        void nextEl.offsetWidth;
+
+        nextEl.classList.add("anim"); // 开始动画（clip-path 从 100% -> 0）
+
+        // 更新 index + dots + caption（现在显示的是 next）
         idx = next;
-        slidesDom[idx].classList.add("active");
-
         renderDots();
         applyCaption();
+
+        // 动画结束后：把旧图复位隐藏，避免叠着耗性能
+        setTimeout(() => {
+          prevEl.classList.remove("hold");
+          prevEl.classList.add("reset");
+          normalizeAllExcept(idx);
+          isAnimating = false;
+        }, WIPE_MS + 50);
       }
 
-      function next(){ go(idx + 1); }
-      function prev(){ go(idx - 1); }
+      function next(userAction=false){ go(idx + 1, userAction); }
+      function prev(userAction=false){ go(idx - 1, userAction); }
 
-      prevBtn.addEventListener("click", prev);
-      nextBtn.addEventListener("click", next);
+      prevBtn.addEventListener("click", () => prev(true));
+      nextBtn.addEventListener("click", () => next(true));
+
+      // ===== autoplay =====
+      function startAuto(){
+        if (!AUTO_PLAY) return;
+        stopAuto();
+        timer = setInterval(() => next(false), AUTO_INTERVAL);
+      }
+      function stopAuto(){
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+      function restartAuto(){
+        if (!AUTO_PLAY) return;
+        stopAuto();
+        timer = setInterval(() => next(false), AUTO_INTERVAL);
+      }
+
+      // 悬停暂停（桌面端友好）
+      mountEl.addEventListener("mouseenter", stopAuto);
+      mountEl.addEventListener("mouseleave", startAuto);
 
       return {
         setAlbum(key){
@@ -604,16 +701,21 @@
           albumKey = key;
           idx = 0;
           renderSlides();
+          restartAuto();
         },
         getState(){ return { albumKey, idx }; },
-        go,
-        next,
-        prev,
-        render(){ renderSlides(); }
+        go: (i)=>go(i,true),
+        next: ()=>next(true),
+        prev: ()=>prev(true),
+        render(){
+          renderSlides();
+          startAuto();
+        },
+        startAuto, stopAuto, restartAuto
       };
     }
 
-    // ===== 3) 初始化：主框 slideshow =====
+    // ===== 3) 主框 slideshow =====
     const mainFrame = document.getElementById("mainFrame");
     const mainShow = makeSlideshow({
       mountEl: mainFrame,
@@ -622,11 +724,10 @@
       dotsEl: document.getElementById("dots"),
       prevBtn: document.getElementById("prevBtn"),
       nextBtn: document.getElementById("nextBtn"),
-      onSlideChange: () => {}
     });
     mainShow.render();
 
-    // ===== 4) 右侧 icon：切换专辑 =====
+    // ===== 4) 右侧切换专辑 =====
     const btnA = document.getElementById("btnA");
     const btnB = document.getElementById("btnB");
 
@@ -644,7 +745,7 @@
       mainShow.setAlbum("albumB");
     });
 
-    // ===== 5) 全屏 modal slideshow（enlarge）=====
+    // ===== 5) 全屏 modal slideshow =====
     const modal = document.getElementById("modal");
     const enlargeBtn = document.getElementById("enlargeBtn");
     const closeBtn = document.getElementById("closeBtn");
@@ -663,13 +764,20 @@
       const { albumKey, idx } = mainShow.getState();
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
+
       modalShow.setAlbum(albumKey);
-      modalShow.go(idx);
+      // modalShow.setAlbum 会把 idx 归零，因此这里再跳到当前 idx
+      setTimeout(() => modalShow.go(idx), 0);
+
+      // 打开时暂停主框 autoplay，避免后台跳动
+      mainShow.stopAuto();
     }
 
     function closeModal(){
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
+      // 关闭后恢复主框 autoplay
+      mainShow.startAuto();
     }
 
     enlargeBtn.addEventListener("click", openModal);
