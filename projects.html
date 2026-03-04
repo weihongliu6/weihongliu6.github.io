@@ -173,7 +173,7 @@
   opacity:1;
   z-index:3;
   clip-path: inset(0 0 0 100%);        /* 初始：完全被裁掉 */
-  transition: clip-path 3200ms ease;   /* ✅ 扫入速度：越大越慢 */
+  transition: clip-path 3600ms cubic-bezier(.2,.7,.1,1); /* ✅ 扫入速度：越大越慢 */
   will-change: clip-path;
 }
 
@@ -557,7 +557,7 @@
 
     // ===== 2) 动画/自动轮播参数 =====
     const AUTO_PLAY = true;
-    const AUTO_INTERVAL = 6500; // ✅ 自动切换间隔（毫秒）建议 5500~8500
+    const AUTO_INTERVAL = 9000; // ✅ 自动切换间隔（毫秒）建议 5500~8500
     const WIPE_MS = 1800;       // ✅ 必须与 CSS --wipeDuration 对应（这里用于 setTimeout）
 
     function makeSlideshow(opts){
