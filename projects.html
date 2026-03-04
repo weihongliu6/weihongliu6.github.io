@@ -152,19 +152,39 @@
 /* ===== Slide in from right ===== */
 
 /* ===== Slide sweep: new slides in from right ===== */
+/* ===== SWEEP (wipe from right) ===== */
 .slide{
   position:absolute;
   inset:0;
   z-index:1;
-  transform: translateX(100%);                 /* 默认在右侧外面 */
-  transition: transform var(--wipeDuration) ease;
-  will-change: transform;
+  opacity:0;
+  pointer-events:none;
 }
 
-/* 当前显示的那张（在上层） */
+/* 当前显示那张（底层完整保留） */
 .slide.active{
+  opacity:1;
   z-index:2;
-  transform: translateX(0);
+}
+
+/* 即将进入那张：从右向左“扫入”覆盖 */
+.slide.wipe{
+  opacity:1;
+  z-index:3;
+  clip-path: inset(0 0 0 100%);          /* 右侧开始：完全不可见 */
+  transition: clip-path 3200ms ease;     /* ✅ 扫入速度：越大越慢 */
+  will-change: clip-path;
+}
+
+/* 触发动画：逐步显示全图 */
+.slide.wipe.play{
+  clip-path: inset(0 0 0 0);
+}
+
+/* 用于瞬间复位，不要动画 */
+.slide.wipe.reset{
+  transition: none !important;
+  clip-path: inset(0 0 0 100%);
 }
 
 /* 旧图保持在底层不动（给它一个稳定的 0 位置） */
@@ -612,7 +632,7 @@
         });
       }
 
-    function go(targetIndex, userAction=false){
+  function go(targetIndex, userAction=false){
   const slides = ALBUMS[albumKey].slides;
   const next = (targetIndex + slides.length) % slides.length;
   if (next === idx || isAnimating) return;
@@ -625,34 +645,26 @@
 
   isAnimating = true;
 
-  // 1) 旧图固定在底层
-  prevEl.classList.add("hold");
-  prevEl.classList.remove("reset");
-
-  // 2) 新图先“瞬移”到右侧外面（无动画）
-  nextEl.classList.add("reset");
-  nextEl.classList.add("hold");
-  nextEl.classList.remove("active");
-
-  // 强制浏览器应用 reset 状态（关键）
+  // 1) 旧图保持 active 不动（底层）
+  // 2) 新图准备 wipe：先瞬间放到“右侧完全遮罩”状态
+  nextEl.classList.add("active", "wipe", "reset");
+  // 强制浏览器立刻应用 reset（关键）
   nextEl.getBoundingClientRect();
-
-  // 3) 开始滑入：去掉 reset + 加 active => 从右滑到 0 覆盖
+  // 去掉 reset，下一帧开始播放 sweep
   nextEl.classList.remove("reset");
-  nextEl.classList.add("active");
+  nextEl.classList.add("play");
 
-  // 更新索引/圆点/字幕
   idx = next;
   renderDots();
   applyCaption();
 
-  // 4) 动画结束后：把旧图瞬移走（不动画）
+  // 动画结束后：把旧图瞬间隐藏；新图清理 wipe 状态但继续 active
+  const WIPE_DONE_MS = 3300; // 要 >= CSS 3200ms（多留一点点）
   setTimeout(() => {
     prevEl.classList.remove("active");
-    prevEl.classList.remove("hold");
-    prevEl.classList.add("reset");
+    nextEl.classList.remove("wipe", "play");
     isAnimating = false;
-  }, WIPE_MS);
+  }, WIPE_DONE_MS);
 }
 
       function next(userAction=false){ go(idx + 1, userAction); }
