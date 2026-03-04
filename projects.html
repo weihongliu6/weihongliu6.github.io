@@ -153,6 +153,7 @@
 
 /* ===== Slide sweep: new slides in from right ===== */
 /* ===== SWEEP (wipe from right) ===== */
+/* ===== SWEEP (wipe from right): new covers old, old stays still ===== */
 .slide{
   position:absolute;
   inset:0;
@@ -161,42 +162,30 @@
   pointer-events:none;
 }
 
-/* 当前显示那张（底层完整保留） */
+/* 底图：当前这张完整显示，保持不动 */
 .slide.active{
   opacity:1;
   z-index:2;
 }
 
-/* 即将进入那张：从右向左“扫入”覆盖 */
+/* 新图：从右向左扫入覆盖 */
 .slide.wipe{
   opacity:1;
   z-index:3;
-  clip-path: inset(0 0 0 100%);          /* 右侧开始：完全不可见 */
-  transition: clip-path 3200ms ease;     /* ✅ 扫入速度：越大越慢 */
+  clip-path: inset(0 0 0 100%);        /* 初始：完全被裁掉 */
+  transition: clip-path 3200ms ease;   /* ✅ 扫入速度：越大越慢 */
   will-change: clip-path;
 }
 
-/* 触发动画：逐步显示全图 */
+/* 播放：裁剪到 0，露出整张图 */
 .slide.wipe.play{
   clip-path: inset(0 0 0 0);
 }
 
-/* 用于瞬间复位，不要动画 */
+/* 复位：不要动画，瞬间回到“完全被裁掉” */
 .slide.wipe.reset{
   transition: none !important;
   clip-path: inset(0 0 0 100%);
-}
-
-/* 旧图保持在底层不动（给它一个稳定的 0 位置） */
-.slide.hold{
-  z-index:1;
-  transform: translateX(0);
-}
-
-/* 重置到右侧外面，但不触发动画（用于动画结束后把旧图“瞬移”走） */
-.slide.reset{
-  transition: none !important;
-  transform: translateX(100%) !important;
 }
     .slide img{
       width:100%;
@@ -591,7 +580,7 @@
 
         slides.forEach((s, i) => {
           const wrap = document.createElement("div");
-          wrap.className = "slide" + (i === idx ? " active hold" : " reset");
+        wrap.className = "slide" + (i === idx ? " active" : "");
           wrap.innerHTML = `
             <img src="${s.src}" alt="${ALBUMS[albumKey].nameZh} ${i+1}">
             <div class="overlay"></div>
@@ -647,12 +636,11 @@
 
   // 1) 旧图保持 active 不动（底层）
   // 2) 新图准备 wipe：先瞬间放到“右侧完全遮罩”状态
-  nextEl.classList.add("active", "wipe", "reset");
-  // 强制浏览器立刻应用 reset（关键）
-  nextEl.getBoundingClientRect();
-  // 去掉 reset，下一帧开始播放 sweep
-  nextEl.classList.remove("reset");
-  nextEl.classList.add("play");
+ nextEl.classList.remove("wipe","play","reset");   // ✅ 先清干净
+nextEl.classList.add("active","wipe","reset");
+nextEl.getBoundingClientRect();
+nextEl.classList.remove("reset");
+nextEl.classList.add("play");
 
   idx = next;
   renderDots();
