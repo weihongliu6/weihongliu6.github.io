@@ -168,15 +168,13 @@
   z-index:2;
 }
 
-/* 新图：从右向左扫入覆盖 */
 .slide.wipe{
   opacity:1;
   z-index:3;
-  clip-path: inset(0 0 0 100%);        /* 初始：完全被裁掉 */
-  transition: clip-path 3600ms cubic-bezier(.2,.7,.1,1); /* ✅ 扫入速度：越大越慢 */
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 3600ms linear;   /* ✅ 匀速，不再先快后慢 */
   will-change: clip-path;
 }
-
 /* 播放：裁剪到 0，露出整张图 */
 .slide.wipe.play{
   clip-path: inset(0 0 0 0);
