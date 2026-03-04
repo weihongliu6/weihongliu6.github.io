@@ -656,7 +656,7 @@
 }
 
       function next(userAction=false){ go(idx + 1, userAction); }
-      function prev(userAction=false){ go(idx - 1, userAction); }
+function prev(userAction=false){ go(idx + 1, userAction); } // 仍然从右滑入，保持循环方向一致
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
