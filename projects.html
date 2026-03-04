@@ -141,50 +141,48 @@
       .frame{ min-height: 520px; }
     }
 
-    /* ===== SWEEP / WIPE ANIMATION =====
-       思路：
-       - 所有 slide 都铺满叠加
-       - “上一张”保持完整在底层
-       - “下一张”从右向左逐步显现（clip-path 从 100% -> 0）
-       - 动画完成后，把旧 slide 复位隐藏（无动画复位）
-    */
-    /* ===== FADE (crossfade) ===== */
-/* ===== Slide in from right ===== */
+    /* ===== SWEEP (wipe from right): new covers old, old stays still ===== */
+    .slide{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      opacity:0;
+      pointer-events:none;
+      /* ✅ 关键：避免 wipe 结束瞬间 clip-path 从“存在”变成“无”带来跳动 */
+      clip-path: inset(0 0 0 0);
+    }
 
-/* ===== Slide sweep: new slides in from right ===== */
-/* ===== SWEEP (wipe from right) ===== */
-/* ===== SWEEP (wipe from right): new covers old, old stays still ===== */
-.slide{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  opacity:0;
-  pointer-events:none;
-}
+    /* 底图：当前这张完整显示，保持不动 */
+    .slide.active{
+      opacity:1;
+      z-index:2;
+      clip-path: inset(0 0 0 0); /* ✅ 保持一致 */
+    }
 
-/* 底图：当前这张完整显示，保持不动 */
-.slide.active{
-  opacity:1;
-  z-index:2;
-}
+    /* 新图：从右向左扫入覆盖（匀速） */
+    .slide.wipe{
+      opacity:1;
+      z-index:3;
+      clip-path: inset(0 0 0 100%);
+      transition: clip-path 4600ms linear;   /* ✅ 匀速，不再先快后慢 */
+      will-change: clip-path;
+    }
+    .slide.wipe.play{
+      clip-path: inset(0 0 0 0);
+    }
 
-.slide.wipe{
-  opacity:1;
-  z-index:3;
-  clip-path: inset(0 0 0 100%);
-  transition: clip-path 4600ms linear;   /* ✅ 匀速，不再先快后慢 */
-  will-change: clip-path;
-}
-/* 播放：裁剪到 0，露出整张图 */
-.slide.wipe.play{
-  clip-path: inset(0 0 0 0);
-}
+    /* 复位：不要动画，瞬间回到“完全被裁掉” */
+    .slide.wipe.reset{
+      transition: none !important;
+      clip-path: inset(0 0 0 100%);
+    }
 
-/* 复位：不要动画，瞬间回到“完全被裁掉” */
-.slide.wipe.reset{
-  transition: none !important;
-  clip-path: inset(0 0 0 100%);
-}
+    /* ✅ 平滑结束：旧图短暂淡出，避免“咔哒”一下消失 */
+    .slide.fadeout{
+      transition: opacity 260ms linear;
+      opacity:0;
+    }
+
     .slide img{
       width:100%;
       height:100%;
@@ -441,24 +439,23 @@
       font-size:13px;
       font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
     }
+
     .slow-desc{
-  max-width:900px;
-  margin:34px auto 10px;
-  text-align:center;
-}
-
-.slow-desc h3{
-  font-size:20px;
-  margin-bottom:10px;
-  font-weight:600;
-}
-
-.slow-desc p{
-  color:#4a4f57;
-  font-size:16px;
-  line-height:1.8;
-  margin:8px 0;
-}
+      max-width:900px;
+      margin:34px auto 10px;
+      text-align:center;
+    }
+    .slow-desc h3{
+      font-size:20px;
+      margin-bottom:10px;
+      font-weight:600;
+    }
+    .slow-desc p{
+      color:#4a4f57;
+      font-size:16px;
+      line-height:1.8;
+      margin:8px 0;
+    }
   </style>
 </head>
 
@@ -488,8 +485,6 @@
             <p class="cap-sub" id="capSub"></p>
           </div>
 
-          
-
           <div class="ctrl">
             <div class="btn" id="prevBtn" aria-label="Previous slide">‹</div>
             <div class="btn" id="nextBtn" aria-label="Next slide">›</div>
@@ -499,23 +494,23 @@
           <div class="enlarge" id="enlargeBtn" title="Enlarge / Fullscreen">Enlarge ⤢</div>
         </div>
 
-<div class="slow-desc">
-  <h3>慢门摄影 · Slow Shutter Photography</h3>
+        <div class="slow-desc">
+          <h3>慢门摄影 · Slow Shutter Photography</h3>
 
-  <p>
-  慢门摄影并不是简单地延长曝光时间，而是一种重新理解时间与光线的方式。
-  当快门变慢，水流变得柔软，云层开始移动，城市的灯光被时间拉长。
-  在这种影像之中，瞬间不再只是一个瞬间，而成为时间缓慢展开的痕迹。
-  </p>
+          <p>
+            慢门摄影并不是简单地延长曝光时间，而是一种重新理解时间与光线的方式。
+            当快门变慢，水流变得柔软，云层开始移动，城市的灯光被时间拉长。
+            在这种影像之中，瞬间不再只是一个瞬间，而成为时间缓慢展开的痕迹。
+          </p>
 
-  <p>
-  Slow shutter photography is not merely about using a longer exposure.
-  It is a way of observing how time and light interact within a scene.
-  When the shutter slows down, water becomes fluid, clouds begin to drift,
-  and city lights stretch across the frame.
-  </p>
-</div>
-        
+          <p>
+            Slow shutter photography is not merely about using a longer exposure.
+            It is a way of observing how time and light interact within a scene.
+            When the shutter slows down, water becomes fluid, clouds begin to drift,
+            and city lights stretch across the frame.
+          </p>
+        </div>
+
         <footer>© Dr Weihong Liu · Digital Studio</footer>
       </section>
 
@@ -545,7 +540,6 @@
   </div>
 
   <!-- FULLSCREEN MODAL -->
- 
   <div class="modal" id="modal" aria-hidden="true">
     <button class="close" id="closeBtn">Close ✕</button>
     <div class="modal-inner">
@@ -593,8 +587,9 @@
     // ===== 2) 动画/自动轮播参数 =====
     const FIRST_DELAY = 1000; // ✅ 首张只停 1 秒
     const AUTO_PLAY = true;
-    const AUTO_INTERVAL = 9000; // ✅ 自动切换间隔（毫秒）建议 5500~8500
-    const WIPE_MS = 1800;       // ✅ 必须与 CSS --wipeDuration 对应（这里用于 setTimeout）
+    const AUTO_INTERVAL = 9000; // ✅ 自动切换间隔（毫秒）
+    // 注意：真实 sweep 时长由 CSS 4600ms 决定，这里用于 JS 的结尾处理
+    const WIPE_DONE_MS = 4700;  // ✅ >= 4600ms，留一点余量
 
     function makeSlideshow(opts){
       const { mountEl, capTitleEl, capSubEl, dotsEl, prevBtn, nextBtn } = opts;
@@ -603,6 +598,7 @@
       let idx = 0;
       let slidesDom = [];
       let timer = null;
+      let firstTimer = null;
       let isAnimating = false;
 
       function clearSlides(){
@@ -616,7 +612,7 @@
 
         slides.forEach((s, i) => {
           const wrap = document.createElement("div");
-        wrap.className = "slide" + (i === idx ? " active" : "");
+          wrap.className = "slide" + (i === idx ? " active" : "");
           wrap.innerHTML = `
             <img src="${s.src}" alt="${ALBUMS[albumKey].nameZh} ${i+1}">
             <div class="overlay"></div>
@@ -646,86 +642,74 @@
         capSubEl.textContent = s.sub || "";
       }
 
-      function normalizeAllExcept(activeIndex){
-        slidesDom.forEach((el, i) => {
-          el.classList.remove("anim");
-          if (i !== activeIndex){
-            // 其它全部瞬间隐藏
-            el.classList.remove("active", "hold");
-            el.classList.add("reset");
-          }
-        });
+      function go(targetIndex, userAction=false){
+        const slides = ALBUMS[albumKey].slides;
+        const next = (targetIndex + slides.length) % slides.length;
+        if (next === idx || isAnimating) return;
+
+        if (userAction) restartAuto();
+
+        const prevIdx = idx;
+        const prevEl = slidesDom[prevIdx];
+        const nextEl = slidesDom[next];
+
+        isAnimating = true;
+
+        // 新图准备 wipe：先瞬间放到“右侧完全遮罩”状态
+        nextEl.classList.remove("wipe","play","reset","fadeout");
+        nextEl.classList.add("active","wipe","reset");
+        nextEl.getBoundingClientRect();     // 强制应用 reset
+        nextEl.classList.remove("reset");
+        nextEl.classList.add("play");       // 播放 sweep
+
+        idx = next;
+        renderDots();
+        applyCaption();
+
+        // ✅ 平滑结束：先清理新图 wipe，再让旧图短淡出，然后移除旧图 active
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            nextEl.classList.remove("wipe", "play");
+          });
+
+          prevEl.classList.add("fadeout");
+          setTimeout(() => {
+            prevEl.classList.remove("active", "fadeout");
+            isAnimating = false;
+          }, 280);
+        }, WIPE_DONE_MS);
       }
 
-  function go(targetIndex, userAction=false){
-  const slides = ALBUMS[albumKey].slides;
-  const next = (targetIndex + slides.length) % slides.length;
-  if (next === idx || isAnimating) return;
-
-  if (userAction) restartAuto();
-
-  const prevIdx = idx;
-  const prevEl = slidesDom[prevIdx];
-  const nextEl = slidesDom[next];
-
-  isAnimating = true;
-
-  // 1) 旧图保持 active 不动（底层）
-  // 2) 新图准备 wipe：先瞬间放到“右侧完全遮罩”状态
- nextEl.classList.remove("wipe","play","reset");   // ✅ 先清干净
-nextEl.classList.add("active","wipe","reset");
-nextEl.getBoundingClientRect();
-nextEl.classList.remove("reset");
-nextEl.classList.add("play");
-
-  idx = next;
-  renderDots();
-  applyCaption();
-
-  // 动画结束后：把旧图瞬间隐藏；新图清理 wipe 状态但继续 active
-  const WIPE_DONE_MS = 3300; // 要 >= CSS 3200ms（多留一点点）
-  setTimeout(() => {
-    prevEl.classList.remove("active");
-    nextEl.classList.remove("wipe", "play");
-    isAnimating = false;
-  }, WIPE_DONE_MS);
-}
-
       function next(userAction=false){ go(idx + 1, userAction); }
-function prev(userAction=false){ go(idx + 1, userAction); } // 仍然从右滑入，保持循环方向一致
+      function prev(userAction=false){ go(idx + 1, userAction); } // 维持同方向循环（你当前设定）
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
 
-      // ===== autoplay =====
-     // ===== autoplay (首张1秒，之后按AUTO_INTERVAL循环) =====
-let firstTimer = null;
+      // ===== autoplay (首张1秒，之后按AUTO_INTERVAL循环) =====
+      function startAuto(){
+        if (!AUTO_PLAY) return;
+        stopAuto();
 
-function startAuto(){
-  if (!AUTO_PLAY) return;
-  stopAuto();
+        firstTimer = setTimeout(() => {
+          next(false);
+          timer = setInterval(() => next(false), AUTO_INTERVAL);
+        }, FIRST_DELAY);
+      }
 
-  // ✅ 首次：1秒后先切一次
-  firstTimer = setTimeout(() => {
-    next(false);
+      function stopAuto(){
+        if (firstTimer) clearTimeout(firstTimer);
+        firstTimer = null;
 
-    // ✅ 然后进入正常循环
-    timer = setInterval(() => next(false), AUTO_INTERVAL);
-  }, FIRST_DELAY);
-}
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
 
-function stopAuto(){
-  if (firstTimer) clearTimeout(firstTimer);
-  firstTimer = null;
+      function restartAuto(){
+        if (!AUTO_PLAY) return;
+        startAuto();
+      }
 
-  if (timer) clearInterval(timer);
-  timer = null;
-}
-
-function restartAuto(){
-  if (!AUTO_PLAY) return;
-  startAuto(); // 直接复用 startAuto 逻辑
-}
       // 悬停暂停（桌面端友好）
       mountEl.addEventListener("mouseenter", stopAuto);
       mountEl.addEventListener("mouseleave", startAuto);
@@ -796,13 +780,12 @@ function restartAuto(){
     });
 
     function openModal(){
-      const { albumKey, idx } = mainShow.getState();
+      const state = mainShow.getState();
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
 
-      modalShow.setAlbum(albumKey);
-      // modalShow.setAlbum 会把 idx 归零，因此这里再跳到当前 idx
-      setTimeout(() => modalShow.go(idx), 0);
+      modalShow.setAlbum(state.albumKey);
+      setTimeout(() => modalShow.go(state.idx), 0);
 
       // 打开时暂停主框 autoplay，避免后台跳动
       mainShow.stopAuto();
