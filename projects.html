@@ -7,7 +7,6 @@
 
   <style>
     :root{
-      /* light theme */
       --bg:#f4f5f7;
       --bg2:#eef0f3;
       --card:rgba(255,255,255,.72);
@@ -16,12 +15,9 @@
       --line:rgba(20,21,24,.10);
       --radius:20px;
       --shadow:0 18px 50px rgba(0,0,0,.10);
-
-      /* ===== slideshow timing ===== */
-      --wipeDuration: 1800ms;   /* ✅ sweep 覆盖速度：越大越慢 */
+      --wipeDuration: 1800ms;
     }
 
-    /* ===== Global fixes for real responsive ===== */
     *, *::before, *::after{ box-sizing:border-box; }
     html, body{ width:100%; margin:0; overflow-x:hidden; }
     img, video, iframe{ max-width:100%; height:auto; display:block; }
@@ -30,21 +26,17 @@
       color:var(--text);
       font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC";
       line-height:1.9;
-
-      /* 摄影背景图 */
       background:
         linear-gradient(rgba(255,255,255,0.80), rgba(255,255,255,0.80)),
         url("images/background-projects.jpg");
       background-size:cover;
       background-position:center;
-
       background-attachment:fixed;
     }
     @media (max-width: 820px){
       body{ background-attachment:scroll; }
     }
 
-    /* topbar */
     .topbar{
       position:sticky; top:0;
       background:rgba(244,245,247,.70);
@@ -81,7 +73,6 @@
       .wrap{ padding:2px 14px 56px; }
     }
 
-    /* ===== Main layout ===== */
     .layout{
       display:grid;
       grid-template-columns: 1fr 270px;
@@ -93,7 +84,6 @@
       .layout{ grid-template-columns: 1fr; gap:18px; }
     }
 
-    /* ===== Left header ===== */
     .leftHeader{
       text-align:center;
       padding:10px 0 16px;
@@ -122,7 +112,6 @@
       .title-en{ font-size:16px; }
     }
 
-    /* ===== Slideshow frame ===== */
     .frame{
       position:relative;
       width:100%;
@@ -131,53 +120,40 @@
       border:1px solid rgba(20,21,24,.10);
       box-shadow:var(--shadow);
       background:#000;
-
       aspect-ratio: 16 / 9;
       height:auto;
       min-height: unset;
     }
-
     @media (min-width: 981px){
       .frame{ min-height: 520px; }
     }
 
-    /* ===== SWEEP (wipe from right): new covers old, old stays still ===== */
+    /* ===== WIPE (linear) + smooth ending ===== */
     .slide{
       position:absolute;
       inset:0;
       z-index:1;
       opacity:0;
       pointer-events:none;
-      /* ✅ 关键：避免 wipe 结束瞬间 clip-path 从“存在”变成“无”带来跳动 */
-      clip-path: inset(0 0 0 0);
+      clip-path: inset(0 0 0 0); /* keep consistent to avoid tiny jump */
     }
-
-    /* 底图：当前这张完整显示，保持不动 */
     .slide.active{
       opacity:1;
       z-index:2;
-      clip-path: inset(0 0 0 0); /* ✅ 保持一致 */
+      clip-path: inset(0 0 0 0);
     }
-
-    /* 新图：从右向左扫入覆盖（匀速） */
     .slide.wipe{
       opacity:1;
       z-index:3;
       clip-path: inset(0 0 0 100%);
-      transition: clip-path 4600ms linear;   /* ✅ 匀速，不再先快后慢 */
+      transition: clip-path 4600ms linear;   /* ✅ always slow & linear */
       will-change: clip-path;
     }
-    .slide.wipe.play{
-      clip-path: inset(0 0 0 0);
-    }
-
-    /* 复位：不要动画，瞬间回到“完全被裁掉” */
+    .slide.wipe.play{ clip-path: inset(0 0 0 0); }
     .slide.wipe.reset{
       transition: none !important;
       clip-path: inset(0 0 0 100%);
     }
-
-    /* ✅ 平滑结束：旧图短暂淡出，避免“咔哒”一下消失 */
     .slide.fadeout{
       transition: opacity 260ms linear;
       opacity:0;
@@ -197,7 +173,6 @@
       pointer-events:none;
     }
 
-    /* caption */
     .caption{
       position:absolute;
       left:22px;
@@ -206,10 +181,8 @@
       z-index:5;
       pointer-events:none;
     }
-
     .cap-title{ display:none; }
     .cap-line{ display:none; }
-
     .cap-sub{
       margin:0;
       color:rgba(255,255,255,.90);
@@ -219,13 +192,11 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
       max-width:78%;
     }
-
     @media (max-width: 820px){
       .caption{ left:14px; right:14px; bottom:14px; }
       .cap-sub{ font-size:15px; max-width:100%; }
     }
 
-    /* prev/next */
     .ctrl{
       position:absolute;
       inset:0;
@@ -281,7 +252,6 @@
       transform: scale(1.15);
     }
 
-    /* enlarge button inside frame */
     .enlarge{
       position:absolute;
       right:14px;
@@ -302,7 +272,6 @@
       border-color: rgba(255,255,255,.30);
     }
 
-    /* ===== Right side icons ===== */
     .side{
       border:1px solid var(--line);
       border-radius:16px;
@@ -314,7 +283,6 @@
     @media (max-width: 980px){
       .side{ width:100%; }
     }
-
     .side h3{
       margin:0 0 12px;
       font-size:13px;
@@ -385,7 +353,6 @@
       text-overflow:ellipsis;
     }
 
-    /* ===== Fullscreen modal ===== */
     .modal{
       position:fixed;
       inset:0;
@@ -477,8 +444,6 @@
         </header>
 
         <div class="frame" id="mainFrame" aria-label="Project slideshow">
-          <!-- slides injected by JS -->
-
           <div class="caption" aria-live="polite">
             <div class="cap-title" id="capTitle"></div>
             <div class="cap-line"></div>
@@ -496,13 +461,11 @@
 
         <div class="slow-desc">
           <h3>慢门摄影 · Slow Shutter Photography</h3>
-
           <p>
             慢门摄影并不是简单地延长曝光时间，而是一种重新理解时间与光线的方式。
             当快门变慢，水流变得柔软，云层开始移动，城市的灯光被时间拉长。
             在这种影像之中，瞬间不再只是一个瞬间，而成为时间缓慢展开的痕迹。
           </p>
-
           <p>
             Slow shutter photography is not merely about using a longer exposure.
             It is a way of observing how time and light interact within a scene.
@@ -544,7 +507,6 @@
     <button class="close" id="closeBtn">Close ✕</button>
     <div class="modal-inner">
       <div class="modal-frame" id="modalFrame" aria-label="Fullscreen slideshow">
-        <!-- slides injected by JS -->
         <div class="caption" aria-live="polite">
           <div class="cap-title" id="mCapTitle"></div>
           <div class="cap-line"></div>
@@ -584,12 +546,12 @@
       }
     };
 
-    // ===== 2) 动画/自动轮播参数 =====
-    const FIRST_DELAY = 1000; // ✅ 首张只停 1 秒
+    // ===== 2) timing =====
+    const FIRST_DELAY = 1000;      // ✅ only once (on entering this page / or after album switch)
     const AUTO_PLAY = true;
-    const AUTO_INTERVAL = 9000; // ✅ 自动切换间隔（毫秒）
-    // 注意：真实 sweep 时长由 CSS 4600ms 决定，这里用于 JS 的结尾处理
-    const WIPE_DONE_MS = 4700;  // ✅ >= 4600ms，留一点余量
+    const AUTO_INTERVAL = 9000;    // ✅ normal pause between slides (after a wipe finishes)
+    const WIPE_MS = 4600;          // ✅ must match CSS transition (clip-path 4600ms)
+    const TAIL_FADE_MS = 280;      // ✅ fade old slide out a bit
 
     function makeSlideshow(opts){
       const { mountEl, capTitleEl, capSubEl, dotsEl, prevBtn, nextBtn } = opts;
@@ -597,9 +559,11 @@
       let albumKey = "albumA";
       let idx = 0;
       let slidesDom = [];
-      let timer = null;
-      let firstTimer = null;
       let isAnimating = false;
+
+      // ✅ one-shot scheduler (NO setInterval => no double-pause, no drift)
+      let autoTimer = null;
+      let firstAuto = true;
 
       function clearSlides(){
         slidesDom.forEach(n => n.remove());
@@ -642,12 +606,12 @@
         capSubEl.textContent = s.sub || "";
       }
 
-      function go(targetIndex, userAction=false){
+      function go(targetIndex, userAction=false, onDone=null){
         const slides = ALBUMS[albumKey].slides;
         const next = (targetIndex + slides.length) % slides.length;
         if (next === idx || isAnimating) return;
 
-        if (userAction) restartAuto();
+        if (userAction) restartAuto(false); // user action => resume with normal interval (no FIRST_DELAY)
 
         const prevIdx = idx;
         const prevEl = slidesDom[prevIdx];
@@ -655,18 +619,17 @@
 
         isAnimating = true;
 
-        // 新图准备 wipe：先瞬间放到“右侧完全遮罩”状态
         nextEl.classList.remove("wipe","play","reset","fadeout");
         nextEl.classList.add("active","wipe","reset");
-        nextEl.getBoundingClientRect();     // 强制应用 reset
+        nextEl.getBoundingClientRect();
         nextEl.classList.remove("reset");
-        nextEl.classList.add("play");       // 播放 sweep
+        nextEl.classList.add("play");
 
         idx = next;
         renderDots();
         applyCaption();
 
-        // ✅ 平滑结束：先清理新图 wipe，再让旧图短淡出，然后移除旧图 active
+        // finish wipe
         setTimeout(() => {
           requestAnimationFrame(() => {
             nextEl.classList.remove("wipe", "play");
@@ -676,41 +639,50 @@
           setTimeout(() => {
             prevEl.classList.remove("active", "fadeout");
             isAnimating = false;
-          }, 280);
-        }, WIPE_DONE_MS);
+            if (typeof onDone === "function") onDone();
+          }, TAIL_FADE_MS);
+        }, WIPE_MS + 40);
       }
 
-      function next(userAction=false){ go(idx + 1, userAction); }
-      function prev(userAction=false){ go(idx + 1, userAction); } // 维持同方向循环（你当前设定）
+      function next(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); }
+      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep same direction loop
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
 
-      // ===== autoplay (首张1秒，之后按AUTO_INTERVAL循环) =====
+      // ===== autoplay: schedule next ONLY after previous is fully done =====
+      function clearAuto(){
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+
+      function scheduleAfter(pauseMs){
+        clearAuto();
+        autoTimer = setTimeout(() => {
+          // start wipe, then when done, wait AUTO_INTERVAL and go again
+          next(false, () => scheduleAfter(AUTO_INTERVAL));
+        }, pauseMs);
+      }
+
       function startAuto(){
         if (!AUTO_PLAY) return;
-        stopAuto();
-
-        firstTimer = setTimeout(() => {
-          next(false);
-          timer = setInterval(() => next(false), AUTO_INTERVAL);
-        }, FIRST_DELAY);
+        // ✅ first time only: 1s; after that always AUTO_INTERVAL
+        const pause = firstAuto ? FIRST_DELAY : AUTO_INTERVAL;
+        firstAuto = false;
+        scheduleAfter(pause);
       }
 
       function stopAuto(){
-        if (firstTimer) clearTimeout(firstTimer);
-        firstTimer = null;
-
-        if (timer) clearInterval(timer);
-        timer = null;
+        clearAuto();
       }
 
-      function restartAuto(){
+      function restartAuto(useFirstDelay=true){
         if (!AUTO_PLAY) return;
+        // if you want FIRST_DELAY again (e.g. after album switch), set useFirstDelay=true
+        if (useFirstDelay) firstAuto = true;
         startAuto();
       }
 
-      // 悬停暂停（桌面端友好）
       mountEl.addEventListener("mouseenter", stopAuto);
       mountEl.addEventListener("mouseleave", startAuto);
 
@@ -720,7 +692,7 @@
           albumKey = key;
           idx = 0;
           renderSlides();
-          restartAuto();
+          restartAuto(true); // ✅ after album switch: show first slide 1s then start
         },
         getState(){ return { albumKey, idx }; },
         go: (i)=>go(i,true),
@@ -728,13 +700,15 @@
         prev: ()=>prev(true),
         render(){
           renderSlides();
+          // ✅ entering page: show first slide 1s then start, and later cycles will NOT repeat 1s
+          firstAuto = true;
           startAuto();
         },
         startAuto, stopAuto, restartAuto
       };
     }
 
-    // ===== 3) 主框 slideshow =====
+    // ===== main slideshow =====
     const mainFrame = document.getElementById("mainFrame");
     const mainShow = makeSlideshow({
       mountEl: mainFrame,
@@ -746,7 +720,7 @@
     });
     mainShow.render();
 
-    // ===== 4) 右侧切换专辑 =====
+    // ===== album buttons =====
     const btnA = document.getElementById("btnA");
     const btnB = document.getElementById("btnB");
 
@@ -764,7 +738,7 @@
       mainShow.setAlbum("albumB");
     });
 
-    // ===== 5) 全屏 modal slideshow =====
+    // ===== modal slideshow =====
     const modal = document.getElementById("modal");
     const enlargeBtn = document.getElementById("enlargeBtn");
     const closeBtn = document.getElementById("closeBtn");
@@ -780,21 +754,19 @@
     });
 
     function openModal(){
-      const state = mainShow.getState();
+      const { albumKey, idx } = mainShow.getState();
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
 
-      modalShow.setAlbum(state.albumKey);
-      setTimeout(() => modalShow.go(state.idx), 0);
+      modalShow.setAlbum(albumKey);
+      setTimeout(() => modalShow.go(idx), 0);
 
-      // 打开时暂停主框 autoplay，避免后台跳动
       mainShow.stopAuto();
     }
 
     function closeModal(){
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
-      // 关闭后恢复主框 autoplay
       mainShow.startAuto();
     }
 
