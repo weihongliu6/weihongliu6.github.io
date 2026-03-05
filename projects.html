@@ -128,14 +128,14 @@
       .frame{ min-height: 520px; }
     }
 
-    /* ===== WIPE (linear) + smooth ending ===== */
+    /* ===== Slides ===== */
     .slide{
       position:absolute;
       inset:0;
       z-index:1;
       opacity:0;
       pointer-events:none;
-      clip-path: inset(0 0 0 0); /* keep consistent to avoid tiny jump */
+      clip-path: inset(0 0 0 0);
     }
     .slide.active{
       opacity:1;
@@ -146,7 +146,7 @@
       opacity:1;
       z-index:3;
       clip-path: inset(0 0 0 100%);
-      transition: clip-path 5000ms linear;   /* ✅ always slow & linear */
+      transition: clip-path 5000ms linear;
       will-change: clip-path;
     }
     .slide.wipe.play{ clip-path: inset(0 0 0 0); }
@@ -524,7 +524,7 @@
   </div>
 
   <script>
-    // ===== 1) 专辑配置 =====
+    // ===== 1) albums =====
     const ALBUMS = {
       albumA: {
         nameZh: "慢门影像专辑",
@@ -546,12 +546,11 @@
       }
     };
 
-    // ===== 2) timing =====
-    const FIRST_DELAY = 1000;      // ✅ only once (on entering this page / or after album switch)
+    // ===== 2) timing (ALL pauses = 2 seconds) =====
     const AUTO_PLAY = true;
-    const AUTO_INTERVAL = 9000;    // ✅ normal pause between slides (after a wipe finishes)
-    const WIPE_MS = 4600;          // ✅ must match CSS transition (clip-path 4600ms)
-    const TAIL_FADE_MS = 280;      // ✅ fade old slide out a bit
+    const PAUSE_MS = 2000;      // ✅ first pause = between pauses = 2s
+    const WIPE_MS = 5000;       // ✅ must match CSS transition: clip-path 5000ms
+    const TAIL_FADE_MS = 260;   // ✅ same as CSS fadeout
 
     function makeSlideshow(opts){
       const { mountEl, capTitleEl, capSubEl, dotsEl, prevBtn, nextBtn } = opts;
@@ -561,9 +560,13 @@
       let slidesDom = [];
       let isAnimating = false;
 
-      // ✅ one-shot scheduler (NO setInterval => no double-pause, no drift)
+      // one-shot scheduler (no interval drift, no double pause)
       let autoTimer = null;
-      let firstAuto = true;
+
+      function clearAuto(){
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = null;
+      }
 
       function clearSlides(){
         slidesDom.forEach(n => n.remove());
@@ -606,82 +609,72 @@
         capSubEl.textContent = s.sub || "";
       }
 
+      function scheduleNext(){
+        if (!AUTO_PLAY) return;
+        clearAuto();
+        autoTimer = setTimeout(() => {
+          next(false, () => scheduleNext());
+        }, PAUSE_MS);
+      }
+
+      function stopAuto(){ clearAuto(); }
+
+      function startAuto(){
+        if (!AUTO_PLAY) return;
+        // ✅ always wait PAUSE_MS before each wipe (including the first one)
+        scheduleNext();
+      }
+
+      function restartAuto(){
+        if (!AUTO_PLAY) return;
+        startAuto();
+      }
+
       function go(targetIndex, userAction=false, onDone=null){
         const slides = ALBUMS[albumKey].slides;
-        const next = (targetIndex + slides.length) % slides.length;
-        if (next === idx || isAnimating) return;
+        const nextIdx = (targetIndex + slides.length) % slides.length;
+        if (nextIdx === idx || isAnimating) return;
 
-        if (userAction) restartAuto(false); // user action => resume with normal interval (no FIRST_DELAY)
+        if (userAction) restartAuto();
 
         const prevIdx = idx;
         const prevEl = slidesDom[prevIdx];
-        const nextEl = slidesDom[next];
+        const nextEl = slidesDom[nextIdx];
 
         isAnimating = true;
 
         nextEl.classList.remove("wipe","play","reset","fadeout");
         nextEl.classList.add("active","wipe","reset");
-        nextEl.getBoundingClientRect();
+        nextEl.getBoundingClientRect();      // force style flush
         nextEl.classList.remove("reset");
-        nextEl.classList.add("play");
+        nextEl.classList.add("play");        // start wipe
 
-        idx = next;
+        idx = nextIdx;
         renderDots();
         applyCaption();
 
-        // finish wipe
+        // end wipe -> fade old out -> finalize
         setTimeout(() => {
           requestAnimationFrame(() => {
             nextEl.classList.remove("wipe", "play");
           });
 
           prevEl.classList.add("fadeout");
+
           setTimeout(() => {
             prevEl.classList.remove("active", "fadeout");
             isAnimating = false;
             if (typeof onDone === "function") onDone();
-          }, TAIL_FADE_MS);
+          }, TAIL_FADE_MS + 10);
+
         }, WIPE_MS + 40);
       }
 
       function next(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); }
-      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep same direction loop
+      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep same direction
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
-
-      // ===== autoplay: schedule next ONLY after previous is fully done =====
-      function clearAuto(){
-        if (autoTimer) clearTimeout(autoTimer);
-        autoTimer = null;
-      }
-
-      function scheduleAfter(pauseMs){
-        clearAuto();
-        autoTimer = setTimeout(() => {
-          // start wipe, then when done, wait AUTO_INTERVAL and go again
-          next(false, () => scheduleAfter(AUTO_INTERVAL));
-        }, pauseMs);
-      }
-
-      function startAuto(){
-        if (!AUTO_PLAY) return;
-        // ✅ first time only: 1s; after that always AUTO_INTERVAL
-        const pause = firstAuto ? FIRST_DELAY : AUTO_INTERVAL;
-        firstAuto = false;
-        scheduleAfter(pause);
-      }
-
-      function stopAuto(){
-        clearAuto();
-      }
-
-      function restartAuto(useFirstDelay=true){
-        if (!AUTO_PLAY) return;
-        // if you want FIRST_DELAY again (e.g. after album switch), set useFirstDelay=true
-        if (useFirstDelay) firstAuto = true;
-        startAuto();
-      }
 
       mountEl.addEventListener("mouseenter", stopAuto);
       mountEl.addEventListener("mouseleave", startAuto);
@@ -692,7 +685,7 @@
           albumKey = key;
           idx = 0;
           renderSlides();
-          restartAuto(true); // ✅ after album switch: show first slide 1s then start
+          restartAuto(); // ✅ first pause = 2s (same as others)
         },
         getState(){ return { albumKey, idx }; },
         go: (i)=>go(i,true),
@@ -700,9 +693,7 @@
         prev: ()=>prev(true),
         render(){
           renderSlides();
-          // ✅ entering page: show first slide 1s then start, and later cycles will NOT repeat 1s
-          firstAuto = true;
-          startAuto();
+          startAuto(); // ✅ first pause = 2s (same as others)
         },
         startAuto, stopAuto, restartAuto
       };
