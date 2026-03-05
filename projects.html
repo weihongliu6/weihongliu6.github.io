@@ -621,60 +621,63 @@
       function restartAuto(){ startAuto(); }
 
       // ===== core wipe (wrap-safe) =====
-      function go(targetIndex, userAction=false, onDone=null){
-        const slides = ALBUMS[albumKey].slides;
-        const nextIdx = (targetIndex + slides.length) % slides.length;
-        if (nextIdx === idx || isAnimating) return;
+    function go(targetIndex, userAction=false, onDone=null){
+  const slides = ALBUMS[albumKey].slides;
+  const nextIdx = (targetIndex + slides.length) % slides.length;
+  if (nextIdx === idx || isAnimating) return;
 
-        if (userAction) restartAuto();
+  if (userAction) restartAuto();
 
-        const prevIdx = idx;
-        const prevEl = slidesDom[prevIdx];
-        const nextEl = slidesDom[nextIdx];
+  const prevIdx = idx;
+  const prevEl = slidesDom[prevIdx];
+  const nextEl = slidesDom[nextIdx];
 
-        isAnimating = true;
+  isAnimating = true;
 
-        // ensure next is on top and visible
-        nextEl.classList.add("active", "wiping");
-        nextEl.classList.remove("fadeout");
+  // --- PREP next slide: keep it hidden to avoid 1-frame flash (wrap-around fix) ---
+  nextEl.classList.remove("fadeout");
+  nextEl.classList.add("active", "wiping");
 
-        // IMPORTANT: force wipe from fully-clipped every time (including last -> first)
-        nextEl.style.transition = "none";
-        nextEl.style.clipPath = "inset(0 0 0 100%)"; // fully hidden
+  // hide it first (prevents the sudden pop of slide 1 when cycling)
+  nextEl.style.visibility = "hidden";
+  nextEl.style.transition = "none";
+  nextEl.style.clipPath = "inset(0 0 0 100%)";
 
-        // flush layout so the browser commits the clipped state
-        nextEl.getBoundingClientRect();
+  // force layout so the hidden+clipped state is committed
+  nextEl.getBoundingClientRect();
 
-        // then animate to fully visible, linear & slow
-        requestAnimationFrame(() => {
-          nextEl.style.transition = `clip-path ${WIPE_MS}ms linear`;
-          nextEl.style.clipPath = "inset(0 0 0 0)";
-        });
+  // now reveal and animate (linear slow)
+  requestAnimationFrame(() => {
+    nextEl.style.visibility = "visible";
+    nextEl.style.transition = `clip-path ${WIPE_MS}ms linear`;
+    nextEl.style.clipPath = "inset(0 0 0 0)";
+  });
 
-        idx = nextIdx;
-        renderDots();
-        applyCaption();
+  idx = nextIdx;
+  renderDots();
+  applyCaption();
 
-        // after wipe finishes, cleanup + fade old slide out softly
-        setTimeout(() => {
-          // cleanup next inline style so future wipes always re-init cleanly
-          nextEl.classList.remove("wiping");
-          nextEl.style.transition = "";
-          nextEl.style.clipPath = "";
+  // finish wipe + soft fade old slide
+  setTimeout(() => {
+    nextEl.classList.remove("wiping");
+    nextEl.style.transition = "";
+    nextEl.style.clipPath = "";
+    nextEl.style.visibility = "";
 
-          prevEl.classList.add("fadeout");
-          setTimeout(() => {
-            prevEl.classList.remove("active", "fadeout");
-            // also clear any stray inline state on prev (safety)
-            prevEl.style.transition = "";
-            prevEl.style.clipPath = "";
+    prevEl.classList.add("fadeout");
+    setTimeout(() => {
+      prevEl.classList.remove("active", "fadeout");
+      prevEl.style.transition = "";
+      prevEl.style.clipPath = "";
+      prevEl.style.visibility = "";
 
-            isAnimating = false;
-            if (typeof onDone === "function") onDone();
-          }, TAIL_FADE_MS + 10);
+      isAnimating = false;
+      if (typeof onDone === "function") onDone();
+    }, TAIL_FADE_MS + 10);
 
-        }, WIPE_MS + 40);
-      }
+  }, WIPE_MS + 40);
+}
+      
 
       function next(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); }
       function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep direction
