@@ -153,17 +153,15 @@
     }
 
     /* ===== Wipe overlay (Safari-safe) ===== */
-    .wipe-layer{
-      z-index:3;
-      -webkit-clip-path: inset(0 0 0 100%);
-      clip-path: inset(0 0 0 100%);
-      will-change: clip-path, -webkit-clip-path;
-      transform: translateZ(0);
-    }
-    .wipe-layer.play{
-      -webkit-clip-path: inset(0 0 0 0);
-      clip-path: inset(0 0 0 0);
-    }
+    /* ===== Slide-in overlay (stable) ===== */
+.wipe-layer{
+  z-index:3;
+  transform: translateX(100%);   /* start off-screen to the right */
+  will-change: transform;
+}
+.wipe-layer.play{
+  transform: translateX(0);      /* slide in */
+}
 
     /* placeholder when missing */
     .placeholder{
@@ -652,27 +650,20 @@
       }
 
       function makeWipeLayer(src, alt){
-        const wipe = document.createElement("div");
-        wipe.className = "layer wipe-layer";
-        wipe.innerHTML = `
-          <img alt="${alt}">
-          <div class="overlay"></div>
-        `;
-        const img = wipe.querySelector("img");
+  const wipe = document.createElement("div");
+  wipe.className = "layer wipe-layer";
+  wipe.innerHTML = `
+    <img alt="${alt}">
+    <div class="overlay"></div>
+  `;
+  const img = wipe.querySelector("img");
+  img.src = src;
 
-        // load image
-        img.onload = () => {};
-        img.onerror = () => {};
-        img.src = src;
-
-        // start clipped
-        wipe.style.transition = "none";
-        wipe.style.webkitClipPath = "inset(0 0 0 100%)";
-        wipe.style.clipPath = "inset(0 0 0 100%)";
-
-        return wipe;
-      }
-
+  // start position (no transition yet)
+  wipe.style.transition = "none";
+  wipe.style.transform = "translateX(100%)";
+  return wipe;
+}
       async function go(targetIndex, userAction=false){
         const n = slides().length;
         if (!n) return false;
@@ -697,13 +688,12 @@
         renderDots();
 
         // animate clip-path
-        requestAnimationFrame(() => {
-          wipe.style.transition = `-webkit-clip-path ${WIPE_MS}ms ${EASE}, clip-path ${WIPE_MS}ms ${EASE}`;
-          wipe.classList.add("play");
-        });
+       requestAnimationFrame(() => {
+  wipe.style.transition = `transform ${WIPE_MS}ms ${EASE}`;
+  wipe.classList.add("play");
+});
 
-        await sleep(WIPE_MS + 80);
-
+await sleep(WIPE_MS + 80);
         // finalize base
         safeSetImg(baseImgEl, nextSlide.src, `${ALBUMS[albumKey].nameZh} ${idx+1}`);
         wipe.remove();
