@@ -15,7 +15,6 @@
       --line:rgba(20,21,24,.10);
       --radius:20px;
       --shadow:0 18px 50px rgba(0,0,0,.10);
-      --wipeDuration: 1800ms;
     }
 
     *, *::before, *::after{ box-sizing:border-box; }
@@ -128,31 +127,25 @@
       .frame{ min-height: 520px; }
     }
 
-    /* ===== Slides ===== */
+    /* ===== Slides =====
+       IMPORTANT: no clip-path here (prevents wrap-around “jump”).
+       Wipe is controlled via inline styles in JS for guaranteed continuity.
+    */
     .slide{
       position:absolute;
       inset:0;
       z-index:1;
       opacity:0;
       pointer-events:none;
-      clip-path: inset(0 0 0 0);
     }
     .slide.active{
       opacity:1;
       z-index:2;
-      clip-path: inset(0 0 0 0);
     }
-    .slide.wipe{
+    .slide.wiping{
       opacity:1;
       z-index:3;
-      clip-path: inset(0 0 0 100%);
-      transition: clip-path 5000ms linear;
       will-change: clip-path;
-    }
-    .slide.wipe.play{ clip-path: inset(0 0 0 0); }
-    .slide.wipe.reset{
-      transition: none !important;
-      clip-path: inset(0 0 0 100%);
     }
     .slide.fadeout{
       transition: opacity 260ms linear;
@@ -524,7 +517,7 @@
   </div>
 
   <script>
-    // ===== 1) albums =====
+    // ===== albums =====
     const ALBUMS = {
       albumA: {
         nameZh: "慢门影像专辑",
@@ -546,11 +539,11 @@
       }
     };
 
-    // ===== 2) timing (ALL pauses = 2 seconds) =====
+    // ===== timing =====
     const AUTO_PLAY = true;
-    const PAUSE_MS = 2000;      // ✅ first pause = between pauses = 2s
-    const WIPE_MS = 5000;       // ✅ must match CSS transition: clip-path 5000ms
-    const TAIL_FADE_MS = 260;   // ✅ same as CSS fadeout
+    const PAUSE_MS = 2000;      // all pauses (including first) = 2s
+    const WIPE_MS  = 5000;      // wipe duration
+    const TAIL_FADE_MS = 260;
 
     function makeSlideshow(opts){
       const { mountEl, capTitleEl, capSubEl, dotsEl, prevBtn, nextBtn } = opts;
@@ -560,7 +553,6 @@
       let slidesDom = [];
       let isAnimating = false;
 
-      // one-shot scheduler (no interval drift, no double pause)
       let autoTimer = null;
 
       function clearAuto(){
@@ -584,6 +576,9 @@
             <img src="${s.src}" alt="${ALBUMS[albumKey].nameZh} ${i+1}">
             <div class="overlay"></div>
           `;
+          // clean any inline wipe state (important after album switches)
+          wrap.style.clipPath = "";
+          wrap.style.transition = "";
           mountEl.appendChild(wrap);
           slidesDom.push(wrap);
         });
@@ -617,19 +612,15 @@
         }, PAUSE_MS);
       }
 
-      function stopAuto(){ clearAuto(); }
-
       function startAuto(){
         if (!AUTO_PLAY) return;
-        // ✅ always wait PAUSE_MS before each wipe (including the first one)
-        scheduleNext();
+        scheduleNext(); // always wait 2s before each wipe, including first
       }
 
-      function restartAuto(){
-        if (!AUTO_PLAY) return;
-        startAuto();
-      }
+      function stopAuto(){ clearAuto(); }
+      function restartAuto(){ startAuto(); }
 
+      // ===== core wipe (wrap-safe) =====
       function go(targetIndex, userAction=false, onDone=null){
         const slides = ALBUMS[albumKey].slides;
         const nextIdx = (targetIndex + slides.length) % slides.length;
@@ -643,26 +634,41 @@
 
         isAnimating = true;
 
-        nextEl.classList.remove("wipe","play","reset","fadeout");
-        nextEl.classList.add("active","wipe","reset");
-        nextEl.getBoundingClientRect();      // force style flush
-        nextEl.classList.remove("reset");
-        nextEl.classList.add("play");        // start wipe
+        // ensure next is on top and visible
+        nextEl.classList.add("active", "wiping");
+        nextEl.classList.remove("fadeout");
+
+        // IMPORTANT: force wipe from fully-clipped every time (including last -> first)
+        nextEl.style.transition = "none";
+        nextEl.style.clipPath = "inset(0 0 0 100%)"; // fully hidden
+
+        // flush layout so the browser commits the clipped state
+        nextEl.getBoundingClientRect();
+
+        // then animate to fully visible, linear & slow
+        requestAnimationFrame(() => {
+          nextEl.style.transition = `clip-path ${WIPE_MS}ms linear`;
+          nextEl.style.clipPath = "inset(0 0 0 0)";
+        });
 
         idx = nextIdx;
         renderDots();
         applyCaption();
 
-        // end wipe -> fade old out -> finalize
+        // after wipe finishes, cleanup + fade old slide out softly
         setTimeout(() => {
-          requestAnimationFrame(() => {
-            nextEl.classList.remove("wipe", "play");
-          });
+          // cleanup next inline style so future wipes always re-init cleanly
+          nextEl.classList.remove("wiping");
+          nextEl.style.transition = "";
+          nextEl.style.clipPath = "";
 
           prevEl.classList.add("fadeout");
-
           setTimeout(() => {
             prevEl.classList.remove("active", "fadeout");
+            // also clear any stray inline state on prev (safety)
+            prevEl.style.transition = "";
+            prevEl.style.clipPath = "";
+
             isAnimating = false;
             if (typeof onDone === "function") onDone();
           }, TAIL_FADE_MS + 10);
@@ -671,7 +677,7 @@
       }
 
       function next(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); }
-      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep same direction
+      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep direction
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
@@ -685,7 +691,7 @@
           albumKey = key;
           idx = 0;
           renderSlides();
-          restartAuto(); // ✅ first pause = 2s (same as others)
+          restartAuto();
         },
         getState(){ return { albumKey, idx }; },
         go: (i)=>go(i,true),
@@ -693,7 +699,7 @@
         prev: ()=>prev(true),
         render(){
           renderSlides();
-          startAuto(); // ✅ first pause = 2s (same as others)
+          startAuto();
         },
         startAuto, stopAuto, restartAuto
       };
