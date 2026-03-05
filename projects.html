@@ -127,20 +127,23 @@
       .frame{ min-height: 520px; }
     }
 
-    /* ===== Stage layers (base + temporary wipe overlay) ===== */
+    /* ===== Stage layers ===== */
     .stage{
       position:absolute;
       inset:0;
+      transform: translateZ(0); /* helps Safari composite */
     }
     .layer{
       position:absolute;
       inset:0;
+      transform: translateZ(0);
     }
     .layer img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
+      transform: translateZ(0);
     }
     .overlay{
       position:absolute;
@@ -149,13 +152,17 @@
       pointer-events:none;
     }
 
-    /* wipe overlay: starts hidden from right, reveals leftwards */
+    /* ===== Wipe overlay (Safari-safe) ===== */
     .wipe-layer{
       z-index:3;
+      /* start hidden from right */
+      -webkit-clip-path: inset(0 0 0 100%);
       clip-path: inset(0 0 0 100%);
-      will-change: clip-path;
+      will-change: clip-path, -webkit-clip-path;
+      transform: translateZ(0);
     }
     .wipe-layer.play{
+      -webkit-clip-path: inset(0 0 0 0);
       clip-path: inset(0 0 0 0);
     }
 
@@ -552,9 +559,11 @@
 
     // ===== timing (your request) =====
     const AUTO_PLAY = true;
-    const PAUSE_MS = 2000; // ✅ all pauses are 2 seconds (including the very first)
-    const WIPE_MS  = 5000; // ✅ always slow wipe
+    const PAUSE_MS = 2000; // all pauses (including first) = 2s
+    const WIPE_MS  = 5000; // wipe duration
     const EASE     = "linear";
+
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
     function makeSlideshow(opts){
       const {
@@ -566,7 +575,9 @@
       let albumKey = "albumA";
       let idx = 0;
       let isAnimating = false;
-      let autoTimer = null;
+
+      // ✅ cancels old autoplay loops instantly
+      let runId = 0;
 
       function slides(){ return ALBUMS[albumKey].slides; }
 
@@ -594,25 +605,9 @@
         renderDots();
       }
 
-      function clearAuto(){
-        if (autoTimer) clearTimeout(autoTimer);
-        autoTimer = null;
+      function clearWipes(){
+        stageEl.querySelectorAll(".wipe-layer").forEach(n => n.remove());
       }
-
-      function scheduleNext(){
-        if (!AUTO_PLAY) return;
-        clearAuto();
-        autoTimer = setTimeout(() => {
-          next(false, () => scheduleNext());
-        }, PAUSE_MS);
-      }
-
-      function startAuto(){
-        if (!AUTO_PLAY) return;
-        scheduleNext(); // ✅ first pause = 2s as well
-      }
-      function stopAuto(){ clearAuto(); }
-      function restartAuto(){ startAuto(); }
 
       function makeWipeLayer(src, alt){
         const wipe = document.createElement("div");
@@ -621,20 +616,14 @@
           <img alt="${alt}">
           <div class="overlay"></div>
         `;
-        const img = wipe.querySelector("img");
-        img.src = src;
+        wipe.querySelector("img").src = src;
         return wipe;
       }
 
-      // core transition:
-      // - create wipe layer with clip-path fully hidden
-      // - append it (still hidden)
-      // - next frame: animate to fully revealed
-      // - on finish: swap base src and remove wipe layer
-      function go(targetIndex, userAction=false, onDone=null){
+      async function go(targetIndex, userAction=false){
         const n = slides().length;
         const nextIdx = (targetIndex + n) % n;
-        if (nextIdx === idx || isAnimating) return;
+        if (nextIdx === idx || isAnimating) return false;
 
         if (userAction) restartAuto();
 
@@ -643,44 +632,61 @@
         const nextSlide = slides()[nextIdx];
         const wipe = makeWipeLayer(nextSlide.src, `${ALBUMS[albumKey].nameZh} ${nextIdx+1}`);
 
-        // ensure initial state is committed BEFORE showing animation
+        // start fully clipped (Safari needs BOTH props)
         wipe.style.transition = "none";
+        wipe.style.webkitClipPath = "inset(0 0 0 100%)";
         wipe.style.clipPath = "inset(0 0 0 100%)";
 
         stageEl.appendChild(wipe);
 
-        // force reflow
+        // force layout
         wipe.getBoundingClientRect();
 
-        // animate (always slow & linear)
-        requestAnimationFrame(() => {
-          wipe.style.transition = `clip-path ${WIPE_MS}ms ${EASE}`;
-          wipe.classList.add("play");
-        });
-
-        // update caption/dots at the START so it matches incoming image
+        // update caption/dots immediately (incoming slide)
         idx = nextIdx;
         applyCaption();
         renderDots();
 
-        setTimeout(() => {
-          // finalize: base becomes the new slide
-          baseImgEl.src = nextSlide.src;
-          baseImgEl.alt = `${ALBUMS[albumKey].nameZh} ${idx+1}`;
+        // animate BOTH clip-path properties
+        requestAnimationFrame(() => {
+          wipe.style.transition = `-webkit-clip-path ${WIPE_MS}ms ${EASE}, clip-path ${WIPE_MS}ms ${EASE}`;
+          wipe.classList.add("play");
+        });
 
-          // remove overlay layer
-          wipe.remove();
+        // wait for wipe to finish
+        await sleep(WIPE_MS + 70);
 
-          isAnimating = false;
-          if (typeof onDone === "function") onDone();
-        }, WIPE_MS + 60);
+        // finalize base
+        baseImgEl.src = nextSlide.src;
+        baseImgEl.alt = `${ALBUMS[albumKey].nameZh} ${idx+1}`;
+        wipe.remove();
+
+        isAnimating = false;
+        return true;
       }
 
-      function next(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); }
-      function prev(userAction=false, onDone=null){ go(idx + 1, userAction, onDone); } // keep direction consistent
+      function next(userAction=false){ return go(idx + 1, userAction); }
+      function prev(userAction=false){ return go(idx + 1, userAction); } // keep direction
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
+
+      async function autoplayLoop(myId){
+        while (AUTO_PLAY && myId === runId){
+          await sleep(PAUSE_MS);
+          if (myId !== runId) break;
+          await next(false);
+          if (myId !== runId) break;
+        }
+      }
+
+      function startAuto(){
+        if (!AUTO_PLAY) return;
+        runId++;
+        autoplayLoop(runId);
+      }
+      function stopAuto(){ runId++; }
+      function restartAuto(){ stopAuto(); startAuto(); }
 
       stageEl.addEventListener("mouseenter", stopAuto);
       stageEl.addEventListener("mouseleave", startAuto);
@@ -689,11 +695,9 @@
         setAlbum(key){
           if (!ALBUMS[key]) return;
           albumKey = key;
-          // reset
+          stopAuto();
           isAnimating = false;
-          clearAuto();
-          // clear any leftover wipe layers
-          stageEl.querySelectorAll(".wipe-layer").forEach(n => n.remove());
+          clearWipes();
           setBase(0);
           startAuto();
         },
@@ -702,6 +706,7 @@
         next: ()=>next(true),
         prev: ()=>prev(true),
         render(){
+          clearWipes();
           setBase(0);
           startAuto();
         },
@@ -748,22 +753,10 @@
     });
 
     function openModal(){
-      const { albumKey, idx } = mainShow.getState();
+      const { albumKey } = mainShow.getState();
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
-
       modalShow.setAlbum(albumKey);
-      // jump to current slide (no wipe)
-      modalShow.stopAuto();
-      // we can “fast set” by calling internal go? simplest: repeatedly setAlbum already sets slide 0.
-      // so just click forward idx times without animation? instead: re-render by setting base quickly:
-      // We'll just call go with user action false? That would animate. So do a quick set using next 0ms wipe: not ideal.
-      // Easiest: temporarily disable animation by directly calling setAlbum then do idx manual next with 0 duration is not built.
-      // So we keep modal starting from first slide of the album, which is acceptable, OR
-      // we can sync via a tiny wipe; user typically doesn't mind in fullscreen.
-      // We'll sync with a wipe after 0ms pause:
-      setTimeout(() => modalShow.go(idx), 0);
-
       mainShow.stopAuto();
       modalShow.startAuto();
     }
