@@ -15,6 +15,7 @@
       --line:rgba(20,21,24,.10);
       --radius:20px;
       --shadow:0 18px 50px rgba(0,0,0,.10);
+      --wipe-ms: 5000ms;
     }
 
     *, *::before, *::after{ box-sizing:border-box; }
@@ -153,13 +154,21 @@
 
     /* ===== Wipe overlay (Safari-safe) ===== */
     /* ===== Slide-in overlay (stable) ===== */
+/* ===== Slide-in overlay (KEYFRAMES, most stable) ===== */
+@keyframes slideInFromRight {
+  from { transform: translate3d(100%,0,0); }
+  to   { transform: translate3d(0,0,0); }
+}
+
 .wipe-layer{
   z-index:3;
-  transform: translateX(100%);   /* start off-screen to the right */
+  transform: translate3d(100%,0,0);
   will-change: transform;
+  backface-visibility: hidden;
 }
+
 .wipe-layer.play{
-  transform: translateX(0);      /* slide in */
+  animation: slideInFromRight var(--wipe-ms) linear forwards;
 }
 
     /* placeholder when missing */
@@ -440,6 +449,7 @@
       line-height:1.8;
       margin:8px 0;
     }
+   
   </style>
 </head>
 
