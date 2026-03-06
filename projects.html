@@ -195,6 +195,9 @@
       z-index:5;
       pointer-events:none;
     }
+    .caption.hidden{
+  opacity:0;
+}
     .cap-title{ display:none; }
     .cap-line{ display:none; }
     .cap-sub{
@@ -818,42 +821,49 @@
   return wipe;
 }
 
-      async function go(targetIndex, userAction = false){
-        const list = slides();
-        const n = list.length;
-        if (!n) return false;
+     async function go(targetIndex, userAction = false){
+  const list = slides();
+  const n = list.length;
+  if (!n) return false;
 
-        const nextIdx = (targetIndex + n) % n;
-        if (nextIdx === idx || isAnimating) return false;
+  const nextIdx = (targetIndex + n) % n;
+  if (nextIdx === idx || isAnimating) return false;
 
-        if (userAction) restartAuto();
-        isAnimating = true;
+  if (userAction) restartAuto();
+  isAnimating = true;
 
-        const nextSlide = list[nextIdx];
-        const alt = `${ALBUMS[albumKey].nameZh} ${nextIdx + 1}`;
-        const wipe = makeWipeLayer(nextSlide, alt);
-        stageEl.appendChild(wipe);
+  const nextSlide = list[nextIdx];
+  const alt = `${ALBUMS[albumKey].nameZh} ${nextIdx + 1}`;
 
-        wipe.getBoundingClientRect();
+  // 动画开始前，先隐藏原来的固定 caption
+  const staticCaption = stageEl.parentElement.querySelector(".caption");
+  if (staticCaption) staticCaption.classList.add("hidden");
 
-        idx = nextIdx;
-        applyCaption();
-        renderDots();
+  const wipe = makeWipeLayer(nextSlide, alt);
+  stageEl.appendChild(wipe);
 
-        requestAnimationFrame(() => {
-          wipe.style.transition = `transform ${WIPE_MS}ms ${EASE}`;
-          wipe.classList.add("play");
-        });
+  wipe.getBoundingClientRect();
 
-        await sleep(WIPE_MS + 80);
+  requestAnimationFrame(() => {
+    wipe.style.transition = `transform ${WIPE_MS}ms ${EASE}`;
+    wipe.classList.add("play");
+  });
 
-        safeSetImg(baseImgEl, nextSlide.src, `${ALBUMS[albumKey].nameZh} ${idx + 1}`);
-        wipe.remove();
+  await sleep(WIPE_MS + 80);
 
-        isAnimating = false;
-        return true;
-      }
+  idx = nextIdx;
+  safeSetImg(baseImgEl, nextSlide.src, `${ALBUMS[albumKey].nameZh} ${idx + 1}`);
+  applyCaption();
+  renderDots();
 
+  wipe.remove();
+
+  // 动画结束后，再恢复原来的固定 caption
+  if (staticCaption) staticCaption.classList.remove("hidden");
+
+  isAnimating = false;
+  return true;
+}
       function next(userAction = false){ return go(idx + 1, userAction); }
       function prev(userAction = false){ return go(idx - 1, userAction); }
 
