@@ -210,7 +210,20 @@
       .caption{ left:14px; right:14px; bottom:14px; }
       .cap-sub{ font-size:15px; max-width:100%; }
     }
+.wipe-caption{
+  z-index:5;
+  pointer-events:none;
+}
 
+.wipe-caption .cap-sub{
+  margin:0;
+  color:rgba(255,255,255,.90);
+  font-size:16px;
+  line-height:1.55;
+  text-shadow: 0 8px 22px rgba(0,0,0,.45);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+  max-width:78%;
+}
     .ctrl{
       position:absolute;
       inset:0;
@@ -785,19 +798,25 @@
         renderDots();
       }
 
-      function makeWipeLayer(src, alt){
-        const wipe = document.createElement("div");
-        wipe.className = "layer wipe-layer";
-        wipe.innerHTML = `
-          <img alt="${alt}">
-          <div class="overlay"></div>
-        `;
-        const img = wipe.querySelector("img");
-        img.src = src;
-        wipe.style.transition = "none";
-        wipe.style.transform = "translateX(100%)";
-        return wipe;
-      }
+     function makeWipeLayer(slide, alt){
+  const wipe = document.createElement("div");
+  wipe.className = "layer wipe-layer";
+  wipe.innerHTML = `
+    <img alt="${alt}">
+    <div class="overlay"></div>
+    <div class="caption wipe-caption">
+      <div class="cap-title"></div>
+      <div class="cap-line"></div>
+      <p class="cap-sub">${slide.sub || ""}</p>
+    </div>
+  `;
+  const img = wipe.querySelector("img");
+  img.src = slide.src;
+
+  wipe.style.transition = "none";
+  wipe.style.transform = "translateX(100%)";
+  return wipe;
+}
 
       async function go(targetIndex, userAction = false){
         const list = slides();
@@ -812,7 +831,7 @@
 
         const nextSlide = list[nextIdx];
         const alt = `${ALBUMS[albumKey].nameZh} ${nextIdx + 1}`;
-        const wipe = makeWipeLayer(nextSlide.src, alt);
+        const wipe = makeWipeLayer(nextSlide, alt);
         stageEl.appendChild(wipe);
 
         wipe.getBoundingClientRect();
