@@ -74,15 +74,12 @@
     }
 
     .layout{
-  display:grid;
-  grid-template-columns: 1fr 320px; /* 右侧从270加宽到320 */
-  gap:44px;                         /* 间距略缩小，整体更紧凑 */
-  align-items:start;
-  margin-top:40px;
-}
-@media (max-width: 980px){
-  .layout{ grid-template-columns: 1fr; gap:18px; }
-}
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:44px;
+      align-items:start;
+      margin-top:40px;
+    }
     @media (max-width: 980px){
       .layout{ grid-template-columns: 1fr; gap:18px; }
     }
@@ -131,16 +128,15 @@
       .frame{ min-height: 520px; }
     }
 
-    /* ===== Stage layers ===== */
     .stage{
       position:absolute;
       inset:0;
       transform: translateZ(0);
     }
     .layer{
-  position:absolute;
-  inset:0;
-}
+      position:absolute;
+      inset:0;
+    }
     .layer img{
       width:100%;
       height:100%;
@@ -155,26 +151,22 @@
       pointer-events:none;
     }
 
-    /* ===== Wipe overlay (Safari-safe) ===== */
-    /* ===== Slide-in overlay (stable) ===== */
-/* ===== Slide-in overlay (KEYFRAMES, most stable) ===== */
-@keyframes slideInFromRight {
-  from { transform: translate3d(100%,0,0); }
-  to   { transform: translate3d(0,0,0); }
-}
+    @keyframes slideInFromRight {
+      from { transform: translate3d(100%,0,0); }
+      to   { transform: translate3d(0,0,0); }
+    }
 
-.wipe-layer{
-  z-index:3;
-  transform: translate3d(100%,0,0);
-  will-change: transform;
-  backface-visibility: hidden;
-}
+    .wipe-layer{
+      z-index:3;
+      transform: translate3d(100%,0,0);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
 
-.wipe-layer.play{
-  animation: slideInFromRight var(--wipe-ms) linear forwards;
-}
+    .wipe-layer.play{
+      animation: slideInFromRight var(--wipe-ms) linear forwards;
+    }
 
-    /* placeholder when missing */
     .placeholder{
       position:absolute;
       inset:0;
@@ -195,7 +187,6 @@
     }
     .placeholder.hide{ display:none; }
 
-    /* caption */
     .caption{
       position:absolute;
       left:22px;
@@ -220,7 +211,6 @@
       .cap-sub{ font-size:15px; max-width:100%; }
     }
 
-    /* prev/next */
     .ctrl{
       position:absolute;
       inset:0;
@@ -307,8 +297,8 @@
       backdrop-filter: blur(10px);
     }
     @media (min-width: 981px){
-  .side{ margin-top: 300px; }
-}
+      .side{ margin-top: 300px; }
+    }
     @media (max-width: 980px){
       .side{ width:100%; }
     }
@@ -319,14 +309,16 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
       letter-spacing:.2px;
     }
+
     .albums{
-  display:grid;
-  grid-template-columns: 1fr 1fr;  /* 两列更对称 */
-  gap:12px;
-}
-@media (max-width: 980px){
-  .albums{ grid-template-columns: 1fr; }
-}
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .albums{ grid-template-columns: 1fr; }
+    }
+
     .album-btn{
       display:flex;
       align-items:center;
@@ -338,6 +330,8 @@
       background:rgba(255,255,255,.75);
       transition: transform .12s ease, background .12s ease, border .12s ease;
       user-select:none;
+      text-decoration:none;
+      color:inherit;
     }
     .album-btn:hover{
       transform: translateY(-1px);
@@ -386,7 +380,6 @@
       text-overflow:ellipsis;
     }
 
-    /* modal */
     .modal{
       position:fixed;
       inset:0;
@@ -458,7 +451,6 @@
       line-height:1.8;
       margin:8px 0;
     }
-   
   </style>
 </head>
 
@@ -506,14 +498,14 @@
         <div class="slow-desc">
           <h3>慢门摄影 · Slow Shutter Photography</h3>
           <p>
-            慢门摄影并不是简单地延长曝光时间，而是一种重新理解时间与光线的方式。
-            当快门变慢，水流变得柔软，云层开始移动，城市的灯光被时间拉长。
-            在这种影像之中，瞬间不再只是一个瞬间，而成为时间缓慢展开的痕迹。
+            慢门摄影并不是简单地延长曝光时间，而是一种重新理解时间与光线的方式。<br>
+            当快门变慢，水流变得柔软，云层开始移动，城市的灯光被时间拉长。<br>
+            在这种影像之中，瞬间不再只是一个瞬间，而成为时间缓慢展开的痕迹。<br>
           </p>
           <p>
-            Slow shutter photography is not merely about using a longer exposure.
-            It is a way of observing how time and light interact within a scene.
-            When the shutter slows down, water becomes fluid, clouds begin to drift,
+            Slow shutter photography is not merely about using a longer exposure.<br>
+            It is a way of observing how time and light interact within a scene.<br>
+            When the shutter slows down, water becomes fluid, clouds begin to drift,<br>
             and city lights stretch across the frame.
           </p>
         </div>
@@ -524,82 +516,83 @@
       <!-- RIGHT -->
       <aside class="side">
         <h3>切换专辑</h3>
-       <div class="albums" id="albumList">
 
-  <div class="album-btn active" data-album="albumA">
-    <div class="ico">A</div>
-    <div class="album-text">
-      <b>慢门影像</b>
-      <span>Slow Shutter</span>
+        <div class="albums" id="albumList">
+          <div class="album-btn active" data-album="albumA">
+            <div class="ico">A</div>
+            <div class="album-text">
+              <b>慢门影像</b>
+              <span>Slow Shutter</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumB">
+            <div class="ico">B</div>
+            <div class="album-text">
+              <b>专辑 B</b>
+              <span>Album B</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumC">
+            <div class="ico">C</div>
+            <div class="album-text">
+              <b>专辑 C</b>
+              <span>Album C</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumD">
+            <div class="ico">D</div>
+            <div class="album-text">
+              <b>专辑 D</b>
+              <span>Album D</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumE">
+            <div class="ico">E</div>
+            <div class="album-text">
+              <b>专辑 E</b>
+              <span>Album E</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumF">
+            <div class="ico">F</div>
+            <div class="album-text">
+              <b>专辑 F</b>
+              <span>Album F</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumG">
+            <div class="ico">G</div>
+            <div class="album-text">
+              <b>专辑 G</b>
+              <span>Album G</span>
+            </div>
+          </div>
+
+          <div class="album-btn" data-album="albumH">
+            <div class="ico">H</div>
+            <div class="album-text">
+              <b>专辑 H</b>
+              <span>Album H</span>
+            </div>
+          </div>
+
+          <a class="album-btn more-link" href="albums.html">
+            <div class="ico">＋</div>
+            <div class="album-text">
+              <b>更多专辑</b>
+              <span>All albums</span>
+            </div>
+          </a>
+        </div>
+      </aside>
     </div>
   </div>
-
-  <div class="album-btn" data-album="albumB">
-    <div class="ico">B</div>
-    <div class="album-text">
-      <b>专辑 B</b>
-      <span>Album B</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumC">
-    <div class="ico">C</div>
-    <div class="album-text">
-      <b>专辑 C</b>
-      <span>Album C</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumD">
-    <div class="ico">D</div>
-    <div class="album-text">
-      <b>专辑 D</b>
-      <span>Album D</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumE">
-    <div class="ico">E</div>
-    <div class="album-text">
-      <b>专辑 E</b>
-      <span>Album E</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumF">
-    <div class="ico">F</div>
-    <div class="album-text">
-      <b>专辑 F</b>
-      <span>Album F</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumG">
-    <div class="ico">G</div>
-    <div class="album-text">
-      <b>专辑 G</b>
-      <span>Album G</span>
-    </div>
-  </div>
-
-  <div class="album-btn" data-album="albumH">
-    <div class="ico">H</div>
-    <div class="album-text">
-      <b>专辑 H</b>
-      <span>Album H</span>
-    </div>
-  </div>
-
-  <!-- 最后一个：更多专辑（链接到总目录页） -->
-  <a class="album-btn more-link" href="albums.html">
-    <div class="ico">＋</div>
-    <div class="album-text">
-      <b>更多专辑</b>
-      <span>All albums</span>
-    </div>
-  </a>
-
-</div>
 
   <!-- FULLSCREEN MODAL -->
   <div class="modal" id="modal" aria-hidden="true">
@@ -632,18 +625,22 @@
 
   <script>
     // ======================
-    // Albums (edit src paths here)
+    // Albums
     // ======================
     const ALBUMS = {
       albumA: {
         nameZh: "慢门影像专辑",
         nameEn: "Slow Shutter Project",
         slides: [
-          { src: "images/slow/slowshutter1.jpg", title: "Hopeful Water",  sub: "水与光之间，世界在时间中缓缓流动。" },
-          { src: "images/slow/slowshutter2.jpg", title: "Majestic Bird",  sub: "长曝光让海面沉静，结构与光线被拉长。" },
-          { src: "images/slow/slowshutter3.jpg", title: "City in Dusk",    sub: "暮色与灯火交叠，城市在缓慢里呼吸。" }
+          { src: "images/slow/slowshutter1.jpg", title: "Hopeful Water", sub: "水与光之间，世界在时间中缓缓流动。" },
+          { src: "images/slow/slowshutter2.jpg", title: "Majestic Bird", sub: "长曝光让海面沉静，结构与光线被拉长。" },
+          { src: "images/slow/slowshutter3.jpg", title: "City in Dusk", sub: "暮色与灯火交叠，城市在缓慢里呼吸。" },
+          { src: "images/slow/slowshutter4.jpg", title: "Crimson Tracks", sub: "城市轨道与晚霞交织，时间被拉成光的河流。" },
+          { src: "images/slow/slowshutter5.jpg", title: "Silent Drifter", sub: "静水与微光之间，小船停泊在被时间抚平的黄昏里。" },
+          { src: "images/slow/slowshutter6.jpg", title: "Blue Amsterdam", sub: "夜色降临，城与水在长曝光中化为宁静的倒影。" }
         ]
       },
+
       albumB: {
         nameZh: "专辑 B",
         nameEn: "Album B",
@@ -652,6 +649,42 @@
           { src: "images/projects/albumB/02.jpg", title: "Album B — 02", sub: "这里放专辑B的短句。" },
           { src: "images/projects/albumB/03.jpg", title: "Album B — 03", sub: "这里放专辑B的短句。" }
         ]
+      },
+
+      albumC: {
+        nameZh: "专辑 C",
+        nameEn: "Album C",
+        slides: []
+      },
+
+      albumD: {
+        nameZh: "专辑 D",
+        nameEn: "Album D",
+        slides: []
+      },
+
+      albumE: {
+        nameZh: "专辑 E",
+        nameEn: "Album E",
+        slides: []
+      },
+
+      albumF: {
+        nameZh: "专辑 F",
+        nameEn: "Album F",
+        slides: []
+      },
+
+      albumG: {
+        nameZh: "专辑 G",
+        nameEn: "Album G",
+        slides: []
+      },
+
+      albumH: {
+        nameZh: "专辑 H",
+        nameEn: "Album H",
+        slides: []
       }
     };
 
@@ -659,9 +692,11 @@
     // Timing
     // ======================
     const AUTO_PLAY = true;
-    const PAUSE_MS  = 2000;  // 每张之间停留 2 秒（含第一张后）
-    const WIPE_MS   = 5000;  // wipe 动画 5 秒
+    const PAUSE_MS  = 2000;
+    const WIPE_MS   = 5000;
     const EASE      = "linear";
+
+    document.documentElement.style.setProperty("--wipe-ms", `${WIPE_MS}ms`);
 
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -675,20 +710,36 @@
       let albumKey = "albumA";
       let idx = 0;
       let isAnimating = false;
-      let runId = 0; // cancel autoplay loop
+      let runId = 0;
 
-      function slides(){ return ALBUMS[albumKey].slides; }
+      function slides(){
+        return ALBUMS[albumKey]?.slides || [];
+      }
 
       function safeSetImg(imgEl, src, alt){
-        // show placeholder until image loads
+        if (!src){
+          if (phEl){
+            phEl.classList.remove("hide");
+            phEl.innerHTML = "此专辑暂未加入图片<br>This album is empty for now.";
+          }
+          imgEl.removeAttribute("src");
+          imgEl.alt = alt || "";
+          return;
+        }
+
         if (phEl) phEl.classList.remove("hide");
-        imgEl.onload = () => { if (phEl) phEl.classList.add("hide"); };
+
+        imgEl.onload = () => {
+          if (phEl) phEl.classList.add("hide");
+        };
+
         imgEl.onerror = () => {
           if (phEl){
             phEl.classList.remove("hide");
             phEl.innerHTML = "Image not found<br>" + src + "<br>请检查：路径/文件名大小写/是否已上传";
           }
         };
+
         imgEl.src = src;
         imgEl.alt = alt;
       }
@@ -701,7 +752,10 @@
 
       function renderDots(){
         dotsEl.innerHTML = "";
-        slides().forEach((_, i) => {
+        const list = slides();
+        if (!list.length) return;
+
+        list.forEach((_, i) => {
           const d = document.createElement("div");
           d.className = "dot" + (i === idx ? " active" : "");
           d.addEventListener("click", () => go(i, true));
@@ -714,31 +768,40 @@
       }
 
       function setBase(i){
+        const list = slides();
+        if (!list.length){
+          idx = 0;
+          safeSetImg(baseImgEl, "", `${ALBUMS[albumKey].nameZh} empty`);
+          applyCaption();
+          renderDots();
+          return;
+        }
+
         idx = i;
-        const s = slides()[idx];
-        const alt = `${ALBUMS[albumKey].nameZh} ${idx+1}`;
+        const s = list[idx];
+        const alt = `${ALBUMS[albumKey].nameZh} ${idx + 1}`;
         safeSetImg(baseImgEl, s.src, alt);
         applyCaption();
         renderDots();
       }
 
       function makeWipeLayer(src, alt){
-  const wipe = document.createElement("div");
-  wipe.className = "layer wipe-layer";
-  wipe.innerHTML = `
-    <img alt="${alt}">
-    <div class="overlay"></div>
-  `;
-  const img = wipe.querySelector("img");
-  img.src = src;
+        const wipe = document.createElement("div");
+        wipe.className = "layer wipe-layer";
+        wipe.innerHTML = `
+          <img alt="${alt}">
+          <div class="overlay"></div>
+        `;
+        const img = wipe.querySelector("img");
+        img.src = src;
+        wipe.style.transition = "none";
+        wipe.style.transform = "translateX(100%)";
+        return wipe;
+      }
 
-  // start position (no transition yet)
-  wipe.style.transition = "none";
-  wipe.style.transform = "translateX(100%)";
-  return wipe;
-}
-      async function go(targetIndex, userAction=false){
-        const n = slides().length;
+      async function go(targetIndex, userAction = false){
+        const list = slides();
+        const n = list.length;
         if (!n) return false;
 
         const nextIdx = (targetIndex + n) % n;
@@ -747,36 +810,33 @@
         if (userAction) restartAuto();
         isAnimating = true;
 
-        const nextSlide = slides()[nextIdx];
-        const alt = `${ALBUMS[albumKey].nameZh} ${nextIdx+1}`;
+        const nextSlide = list[nextIdx];
+        const alt = `${ALBUMS[albumKey].nameZh} ${nextIdx + 1}`;
         const wipe = makeWipeLayer(nextSlide.src, alt);
         stageEl.appendChild(wipe);
 
-        // force layout (important)
         wipe.getBoundingClientRect();
 
-        // update caption/dots now
         idx = nextIdx;
         applyCaption();
         renderDots();
 
-        // animate clip-path
-       requestAnimationFrame(() => {
-  wipe.style.transition = `transform ${WIPE_MS}ms ${EASE}`;
-  wipe.classList.add("play");
-});
+        requestAnimationFrame(() => {
+          wipe.style.transition = `transform ${WIPE_MS}ms ${EASE}`;
+          wipe.classList.add("play");
+        });
 
-await sleep(WIPE_MS + 80);
-        // finalize base
-        safeSetImg(baseImgEl, nextSlide.src, `${ALBUMS[albumKey].nameZh} ${idx+1}`);
+        await sleep(WIPE_MS + 80);
+
+        safeSetImg(baseImgEl, nextSlide.src, `${ALBUMS[albumKey].nameZh} ${idx + 1}`);
         wipe.remove();
 
         isAnimating = false;
         return true;
       }
 
-      function next(userAction=false){ return go(idx + 1, userAction); }
-      function prev(userAction=false){ return go(idx - 1, userAction); }
+      function next(userAction = false){ return go(idx + 1, userAction); }
+      function prev(userAction = false){ return go(idx - 1, userAction); }
 
       prevBtn.addEventListener("click", () => prev(true));
       nextBtn.addEventListener("click", () => next(true));
@@ -792,11 +852,19 @@ await sleep(WIPE_MS + 80);
 
       function startAuto(){
         if (!AUTO_PLAY) return;
+        if (!slides().length) return;
         runId++;
         autoplayLoop(runId);
       }
-      function stopAuto(){ runId++; }
-      function restartAuto(){ stopAuto(); startAuto(); }
+
+      function stopAuto(){
+        runId++;
+      }
+
+      function restartAuto(){
+        stopAuto();
+        startAuto();
+      }
 
       stageEl.addEventListener("mouseenter", stopAuto);
       stageEl.addEventListener("mouseleave", startAuto);
@@ -811,16 +879,19 @@ await sleep(WIPE_MS + 80);
           setBase(0);
           startAuto();
         },
-        getState(){ return { albumKey, idx }; },
-        next: ()=>next(true),
-        prev: ()=>prev(true),
-        go: (i)=>go(i,true),
+        getState(){
+          return { albumKey, idx };
+        },
+        next: () => next(true),
+        prev: () => prev(true),
+        go: (i) => go(i, true),
         render(){
           clearWipes();
           setBase(0);
           startAuto();
         },
-        startAuto, stopAuto
+        startAuto,
+        stopAuto
       };
     }
 
@@ -838,21 +909,20 @@ await sleep(WIPE_MS + 80);
     mainShow.render();
 
     // ===== album buttons =====
-    const btnA = document.getElementById("btnA");
-    const btnB = document.getElementById("btnB");
+    const albumButtons = document.querySelectorAll(".album-btn[data-album]");
 
     function setActiveBtn(key){
-      [btnA, btnB].forEach(b => b.classList.remove("active"));
-      (key === "albumA" ? btnA : btnB).classList.add("active");
+      albumButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.album === key);
+      });
     }
 
-    btnA.addEventListener("click", () => {
-      setActiveBtn("albumA");
-      mainShow.setAlbum("albumA");
-    });
-    btnB.addEventListener("click", () => {
-      setActiveBtn("albumB");
-      mainShow.setAlbum("albumB");
+    albumButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.album;
+        setActiveBtn(key);
+        mainShow.setAlbum(key);
+      });
     });
 
     // ===== modal slideshow =====
