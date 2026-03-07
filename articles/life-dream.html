@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>人生如梦：当公共知识分子进入算法时代｜Dr Weihong Liu</title>
+  <meta name="description" content="从庄子、佛学与王阳明谈起，讨论“人生如梦”这一隐喻在算法传播时代中的误读，以及公共知识表达如何滑向气氛制造。" />
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --link:#d9d9de;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
+
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+    }
+    .topbar a{
+      color:var(--link);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-right:8px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:24px 18px 80px;
+    }
+
+    header{
+      padding:18px 0 14px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
+    }
+
+    .title-zh{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:.5px;
+      margin:0 0 10px;
+    }
+
+    .title-en{
+      font-size:20px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .title-sub{
+      font-size:16px;
+      color:#9a9aa0;
+      margin:0 0 16px 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .meta span{
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
+
+    .lead{
+      margin:18px 0 18px;
+      padding:16px 18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dcdcdf;
+      font-size:18px;
+    }
+
+    h2{
+      margin:28px 0 10px;
+      font-size:20px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      letter-spacing:.2px;
+    }
+
+    p{
+      margin:12px 0;
+      text-align:justify;
+      text-justify:inter-ideograph;
+    }
+
+    blockquote{
+      margin:18px 0;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-left:4px solid #3a3a44;
+      border-radius:10px;
+      color:#d7d7db;
+    }
+
+    .footer{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .footer a{ color:var(--link); text-decoration:none; }
+
+    @media (max-width:700px){
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <a href="../articles.html">← 返回 Articles</a>
+    <a href="../index.html">返回主页 Home</a>
+  </div>
+
+  <main class="wrap">
+    <header>
+      <h1 class="title-zh">人生如梦：当公共知识分子进入算法时代</h1>
+      <p class="title-en">Life as a Dream: When Public Intellectuals Enter the Algorithmic Age</p>
+      <p class="title-sub">——关于隐喻、结构与算法传播逻辑的一点思考</p>
+
+      <div class="meta">
+        <span>作者：Dr Weihong Liu</span>
+        <span>栏目：思想随笔</span>
+        <span>关键词：人生如梦 / 庄子 / 佛学 / 王阳明 / 算法时代 / 公共知识分子</span>
+      </div>
+    </header>
+
+    <div class="lead">
+      <strong>摘要</strong><br><br>
+      “人生如梦”并不是对现实存在的否定，而是对时间经验流动性的一种隐喻。在中国思想传统中，无论是庄子的梦蝶、佛学中的“如梦幻泡影”，还是王阳明关于心性的讨论，都不是在说人生不存在，更不是在宣告“什么都抓不住”。问题在于，当这类思想进入算法传播时代之后，它们往往被压缩为便于流传的短句，被绝对化、情绪化，并逐渐滑向一种概念偷换。本文试图区分隐喻与本体、主观经验与结构现实，并讨论公共知识表达在算法时代为何容易从思想分析退化为气氛制造。
+    </div>
+
+    <article>
+      <p>“人生如梦”这句话本身并没有错，但关键在于，它是在什么语境里说的？</p>
+
+      <p>在中国哲学里：庄子讲“梦蝶”，讨论的是主体与身份的流动性；佛学讲“如梦幻泡影”，强调的是无常与缘起；王阳明讲“心外无物”，讨论的是心性的结构问题。</p>
+
+      <p>这些思想都不是在说人生什么都不存在，更不是简单地表述为“什么都抓不住”。它们所指出的，是经验结构的流动性与不可执性。</p>
+
+      <h2>一、“人生如梦”本质上是一种隐喻，从来不等于本体</h2>
+
+      <p>睡梦中的梦，是神经系统在特定状态下的内部重组，它缺乏持续的社会结构、因果延续与公共验证。而现实人生，却拥有稳定的结构：身体持续存在，财富可以累积，关系可以延展，制度可以延续，文明可以传承。</p>
+
+      <p>因此，“人生如梦”本质上是一种隐喻。</p>
+
+      <p>它并不是在否认人生的现实性，而是在描述时间经验的流动性。在主观体验层面，人生确实像梦——片段化、不可回溯、无法停留。我们无法抓住已经流逝的当下，就像无法重新进入昨夜的梦境。</p>
+
+      <p>但隐喻从来不等于本体。</p>
+
+      <h2>二、把“人生如梦”直接说成“你抓不住”，实际上是一种概念偷换</h2>
+
+      <p>抓不住的是时间，抓不住的是当下经验，抓不住的是情绪与瞬间。但人所生存的物质世界以及由此建立起来的关系结构，却是跨时间存在的，是可感知的现实，除非一个人失去了全部感知能力。</p>
+
+      <p>如果把“如梦”理解为“虚无”，那就把“时间的流动”误读成“存在的消失”。财富仿佛不存在，关系仿佛不存在，事业仿佛不存在，历史仿佛不存在。</p>
+
+      <p>这是一种常见的概念滑移：</p>
+
+      <p>从“时间不可停留”滑向“存在不可确证”，从“经验流动”滑向“价值否定”。</p>
+
+      <p>梦境与现实的根本差别在于：梦没有稳定结构，也没有物理支撑；而现实具有持续结构，有物理基础与可见的关系网络支撑。一个人拥有的房屋、物质生活、亲情与友情，都是人生的一部分，是实实在在可以“抓住”的内容。</p>
+
+      <p>更重要的是，这些现实中的结构与关系，是可以在时间之上不断累积的。</p>
+
+      <h2>三、人生在主观经验层面像梦，但在结构层面并不是梦</h2>
+
+      <p>真正严肃的说法应该是：人生在主观经验层面像梦，但在结构层面并不是梦。</p>
+
+      <p>这是两种不同的层次：主观时间体验 —— 流动、不可停留；客观结构积累 —— 延续、复制与展开。</p>
+
+      <p>如果把这两个层次混为一谈，哲学就会退化为空洞的玄谈。</p>
+
+      <p>那么，为什么这种近乎“钻牛角尖”的表达却如此流行？</p>
+
+      <p>因为它恰好符合算法传播的逻辑。</p>
+
+      <p>抽象词汇——“梦”“虚无”；绝对判断——“抓不住”；情绪共鸣——一种隐约的无力感。</p>
+
+      <p>这种表达形式极易传播，却缺乏必要的概念区分、逻辑界定与边界意识。</p>
+
+      <p>哲学一旦失去概念边界，就容易滑向表演。</p>
+
+      <p>在算法时代，公共知识分子越来越倾向于把复杂思想压缩成可以迅速传播的短句。深刻感取代了论证，顿悟感取代了思考。哲学不再是对世界结构的分析，而变成了一种气氛的制造。</p>
+
+      <p>作为严格的哲学表达，我们必须清醒地区分：人生的“梦”，与睡眠中的梦，是完全不同的两种现象。</p>
+
+      <p>真正严肃的表达必须承认一种双重现实：在时间维度上，人生不可停留；在结构维度上，人生可以累积。主观经验不断流动，但结构并不会随之消失。</p>
+
+      <p>隐喻可以启发思考，但不能代替思考。否则，哲学就会退化为一种姿态。</p>
+
+      <h2>结语</h2>
+
+      <p>隐喻不是等同。</p>
+
+      <p>梦是神经系统的内部重组；人生“如梦”则只是对时间流逝的一种比喻。隐喻不是等同，如果把隐喻当成本体，就不可避免地走向误导。</p>
+
+      <p>人生在时间维度上呈现出类似梦境的不可停留性，但在人类社会结构中，它却具有持续性与可复制性。把“如梦”理解为人生的“虚无”，本质上是对隐喻的一种误读。</p>
+
+      <blockquote>
+        隐喻可以启发思考，但不能代替思考。否则，哲学就会退化为一种姿态。
+      </blockquote>
+    </article>
+
+    <div class="footer">
+      <div>© Dr Weihong Liu · Digital Studio</div>
+      <div style="margin-top:6px;">
+        <a href="../articles.html">返回 Articles</a> ·
+        <a href="../index.html">返回 Home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
