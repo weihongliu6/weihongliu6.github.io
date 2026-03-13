@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>我二叔和他的老黄牛｜Dr Weihong Liu Digital Studio</title>
+  <meta name="description" content="一篇关于乡村、亲情、老牛、衰老与中国农村记忆的中文随笔。" />
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --link:#d9d9de;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
+
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+    }
+    .topbar a{
+      color:var(--link);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-right:8px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:24px 18px 80px;
+    }
+
+    header{
+      padding:18px 0 14px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
+    }
+
+    .title-zh{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:.5px;
+      margin:0 0 10px;
+    }
+
+    .title-en{
+      font-size:20px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .title-sub{
+      font-size:16px;
+      color:#9a9aa0;
+      margin:0 0 16px 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .meta span{
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
+
+    .lead{
+      margin:18px 0 18px;
+      padding:16px 18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dcdcdf;
+      font-size:18px;
+    }
+
+    p{
+      margin:12px 0;
+      text-align:justify;
+      text-justify:inter-ideograph;
+    }
+
+    blockquote{
+      margin:18px 0;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-left:4px solid #3a3a44;
+      border-radius:10px;
+      color:#d7d7db;
+    }
+
+    .footer{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .footer a{ color:var(--link); text-decoration:none; }
+
+    @media (max-width:700px){
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <a href="../articles.html">← 返回 Articles</a>
+    <a href="../index.html">返回主页 Home</a>
+  </div>
+
+  <main class="wrap">
+    <header>
+      <h1 class="title-zh">我二叔和他的老黄牛</h1>
+      <p class="title-en">My Second Uncle and His Old Yellow Ox</p>
+      <p class="title-sub">——一篇关于乡村、老牛、衰老与陪伴的中文随笔</p>
+
+      <div class="meta">
+        <span>作者：肖忠一</span>
+        <span>栏目：思想随笔</span>
+        <span>关键词：乡村 / 老牛 / 亲情 / 衰老 / 农村记忆</span>
+      </div>
+    </header>
+
+    <div class="lead">
+      <strong>摘要</strong><br><br>
+      这篇文章写的是一头老黄牛，也写的是一个老农民的晚年。牛陪人变老，人为牛送终，彼此相守半生，最终一同归于乡土。文字朴素，却饱含对中国农村、农民与老牛命运共同体的深情凝望。
+    </div>
+
+    <article>
+      <p>我生于湖南，但祖藉在湖北，老家位于江汉大平原最靠西北的位置。虽是平原，但老家附近也有些丘陵，春天，那里尽是雪白的梨花。我的老父亲很小就客居湖南，老家就留了一个二叔供养祖父母。</p>
+
+      <p>上个世纪90年代农场开始包产到户，二叔分了一头黄牛犊子，很是惊喜。慢慢的，牛自然就变成了这个农家最重要的成员。这几十年来小牛陪同我的二叔从犊子变成了壮牛，再后来从一头壮牛慢慢变成了一头老牛。快30年了，黄牛变得越来越衰老，田间的活也基本帮不上忙了，家里有人不免开始嫌弃起来。终于有一天，二叔听烦了嫌弃，便牵这头老牛去了市场。</p>
+
+      <p>这头老牛确实太老了，老的对牛贩子来说确实没什么经济价值了。但有人看着同样老迈的二叔，同情的出了一个800元的价格，已经是看老人的面子了。但老爷子想都没想就拒绝了，反而坐在街边的条石上悠哉游哉的看着这头陪了自己快30年的老伙计，一幅没有5万块不卖的势头。满市场又有谁愿意去花这么大的价钱买一头老的快死去的牛啊，结果是一个不卖、众人也不买，到了傍晚我二叔反而轻松的牵着老黄牛蹣跚信步的走回了家。</p>
+
+      <p>这满世界的人根本就不知道，我二叔压根儿就没想卖这头老黄牛，他只是想走个过场，应付应付家里其他人的意见罢了。没有被交易的老黄牛，沿路双眼都更加湿润起来。夕阳西下，二叔开心的牵着牛回了家，也许老黄牛也很开心，黄牛是二叔数十年的陪伴，它陪他变老，他也想为它送终。</p>
+
+      <p>二叔每天依然悉心的照料老黄牛。它实在太老了，吃什么都慢。老爷子就耐心的守在牛槽边，不停的驱赶另一头正在壮年的母牛。他总是担心老黄牛吃不饱、吃不好。闲不住的老头还经常上后山为这头老牛割嫩草，有时还单独递给老牛一把有盐味的熟黄豆。说实在的，老头的孙子都没这待遇。偶尔二叔也带着老黄牛出门干干活，其实他们俩都老得早就过了干活的年龄了，但他们好像还都不习惯就这样养老送终。年迈的老黄牛早已不堪重负，身后的牛车象征性的放了一把干柴，老爷子自己更不舍得坐在牛车上，也自己背了把柴火，拄着拐杖陪着老牛，慢悠悠的走回家。回家后老头子首先要做的事，是牵老黄牛到槽头喝水，然后再是自己叼一管老叶子的旱烟。在我们看来，他们是一辈子的伙计，是半辈子的朋友和家人，他们谁都离不开谁。我劝我的二位弟妹：随他们去吧！</p>
+
+      <p>终于有一天，老黄牛躺在牛栏里滴水不进。请来兽医，兽医说：牛太老了，已经油尽灯枯了。二叔揩干浑黄的双眼，提起镰刀果断割掉了带在老黄牛身上一辈子的牛绳，还有牛鼻子上的铁环，最后带了一辈子的牛铃也拆了下来，二叔就坐在地上默默的看着这头他一辈子的伙计慢慢死去。老爷子头靠在手臂上，一直驼着背、弓着腰，没有流泪，也没有任何言语。儿女们不敢把死去的黄牛卖了，最后就浅浅的埋在屋后的小山坡上。</p>
+
+      <p>此后几天发现二叔老的厉害，转眼就像是七十八岁突然变成了八十八岁的耄耋老人，老屋堆满了老黄牛留下的几年也烧不完的柴火，却再也没有了半夜老黄牛喝完水安详的哞叫声。虽然老黄牛死了，但二叔也没去城里的孩子家养老，只是时不时的拿着牛铃坐在屋外发呆。</p>
+
+      <p>我一般两三年回一次老家，老黄牛死了，老屋也变得越来越安静、越来越寂寞，二叔也变得越来越老迈。最近一次是去年回老家为二叔送终吊丧，也把二叔埋在了后屋老黄牛坟的附近，只是埋的更深一些。这是我的主意，我二叔其实并没有什么特别的要求，但我知道——那就是他的愿望。</p>
+
+      <blockquote>
+        千年来，我想撑起中国农村经济的是农民，其实也是一代又一代的老牛。
+      </blockquote>
+
+      <p>2021.09.12 于常德</p>
+      <p>肖忠一</p>
+    </article>
+
+    <div class="footer">
+      <div>© Dr Weihong Liu · Digital Studio</div>
+      <div style="margin-top:6px;">
+        <a href="../articles.html">返回 Articles</a> ·
+        <a href="../index.html">返回 Home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
