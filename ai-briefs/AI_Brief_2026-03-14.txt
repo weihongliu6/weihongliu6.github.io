@@ -1,0 +1,78 @@
+AI Daily Intelligence Brief / AI每日智能简报
+2026-03-14
+----------------------------------------
+
+Top Videos / 热门视频
+
+1. googlemaps | america | 3d | artificialintelligence | meta | ai | map | newupdate
+   谷歌地图 |美国 | 3d |人工智能|元|艾|地图 |新更新
+   https://www.youtube.com/watch?v=jI_kE9AmJRM
+
+2. Meredith Whittaker Speaks on Artificial Intelligence, The Battle of Privacy in the Information Age
+   梅雷迪思·惠特克 (Meredith Whittaker) 谈论人工智能和信息时代的隐私之战
+   https://www.youtube.com/watch?v=KRYJDpeSB14
+
+3. Malcolm Byrne Warns About AI Surveillance By Authoritarian Governments
+   马尔科姆·伯恩 (Malcolm Byrne) 对独裁政府的人工智能监控发出警告
+   https://www.youtube.com/watch?v=MoLxLeSwp1I
+
+4. Alabama community pushing back against solar farm to power AI
+   阿拉巴马州社区反对太阳能发电场为人工智能提供动力
+   https://www.youtube.com/watch?v=hzruGMGEFH0
+
+5. Google Maps redesign introduces AI features
+   谷歌地图重新设计引入人工智能功能
+   https://www.youtube.com/watch?v=YoRfONXp0ZU
+
+6. Google overhauls its Maps app
+   谷歌彻底改革其地图应用
+   https://www.youtube.com/watch?v=y3xPld3Gyf8
+
+7. How The Palantir CEO Says Its Impacting Modern Warfare
+   Palantir 首席执行官如何评价其对现代战争的影响
+   https://www.youtube.com/watch?v=duqQhb7iJt8
+
+8. Sam Altman Brutally Mocked For Insane OpenAI &quot;Intelligence... from us on a meter&quot; Plans...
+   Sam Altman 因疯狂的 OpenAI “智能……距离我们一米远”而遭到残酷嘲笑计划...
+   https://www.youtube.com/watch?v=HynRrN1-vy0
+
+9. AI News: They All Launched the Same Thing!
+   AI新闻：他们都推出了同样的东西！
+   https://www.youtube.com/watch?v=syx_8UlEWlA
+
+10. AI Warfare Begins? US Strikes 1,000 Targets in Iran Using Artificial Intelligence?
+   AI战争开始？美国利用人工智能打击伊朗1000个目标？
+   https://www.youtube.com/watch?v=2fasiaSpn9M
+
+11. Russia-Ukraine War: Kyiv Opens Battlefield Drone Data To Train Allied AI Systems In War | WION
+   俄罗斯-乌克兰战争：基辅开放战场无人机数据以在战争中训练盟军人工智能系统威昂
+   https://www.youtube.com/watch?v=eiVP19ps_F4
+
+12. Pentagon CTO Rules Out Negotiations With AI Firm Anthropic | WION
+   五角大楼首席技术官排除与人工智能公司 Anthropic 进行谈判的可能性威昂
+   https://www.youtube.com/watch?v=updAfm8O1Dw
+
+AI Industry Signals / 行业信号
+
+google: 3
+meta: 1
+openai: 1
+anthropic: 1
+
+Key AI Topics / 关键话题
+
+google: 2
+maps: 2
+its: 2
+warfare: 2
+war: 2
+wion: 2
+googlemaps: 1
+america: 1
+artificialintelligence: 1
+meta: 1
+
+AI Trend Summary / AI趋势总结
+
+Today’s signals are concentrated around Google, Meta, and Openai. Major themes include AI infrastructure and computing capacity, competition among major AI labs and platforms, and legal and policy attention around AI. Frequently appearing keywords include google, maps, its, warfare, war.
+今天的AI信号主要集中在 Google、Meta 和 OpenAI。高频关键词包括：google、maps、its、warfare、war。整体来看，今天的重点仍围绕AI产业竞争、技术发展与社会影响。
