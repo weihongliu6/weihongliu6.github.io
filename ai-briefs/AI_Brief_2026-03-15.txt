@@ -4,15 +4,23 @@ AI Daily Intelligence Brief / AI每日智能简报
 
 Top Videos / 热门视频
 
+1. Google Maps redesign introduces AI features
+   谷歌地图重新设计引入人工智能功能
+   https://www.youtube.com/watch?v=YoRfONXp0ZU
+
 AI Industry Signals / 行业信号
 
-No major company signals found.
+google: 1
 
 Key AI Topics / 关键话题
 
-No topic keywords found.
+google: 1
+maps: 1
+redesign: 1
+introduces: 1
+features: 1
 
 AI Trend Summary / AI趋势总结
 
-Today’s AI coverage is mixed, with no single dominant signal, but ongoing movement across industry, technology, and public discussion.
-今天的AI报道较为分散，没有单一主导信号，但产业、技术与公共讨论仍持续活跃。
+Today’s signals are led by Google. A major theme is competition among major AI labs and platforms. Frequently appearing keywords include google, maps, redesign, introduces, features.
+今天的AI信号主要由 Google 主导。高频关键词包括：google、maps、redesign、introduces、features。整体来看，今天的重点仍围绕AI产业竞争、技术发展与社会影响。
