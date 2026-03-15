@@ -63,11 +63,13 @@ box-shadow:0 10px 30px rgba(0,0,0,0.08);
 h1{
 font-size:42px;
 margin-bottom:10px;
+text-align:center;
 }
 
 h2{
 font-size:24px;
 margin-top:0;
+text-align:center;
 }
 
 .archive a{
@@ -92,10 +94,14 @@ font-size:14px;
   position: relative;
 }
 
+.latest-card h2{
+margin-top:40px;
+}
+
 .latest-card::after{
   content:"AI Observer";
   position:absolute;
-  top:50%;
+  top:70%;
   left:50%;
   transform:translate(-50%,-50%);
   font-size:42px;
@@ -104,6 +110,14 @@ font-size:14px;
   opacity:0.15;
   pointer-events:none;
   white-space:nowrap;
+}
+
+.subtitle{
+display:block;
+font-size:0.8em;
+font-weight:normal;
+opacity:0.65;
+margin-top:4px;
 }
 
 @media (max-width: 768px){
@@ -120,6 +134,8 @@ font-size:14px;
     white-space:nowrap !important;
     pointer-events:none !important;
   }
+
+
 @media (max-width: 768px){
 
   .container{
@@ -137,16 +153,19 @@ font-size:14px;
     box-sizing:border-box !important;
   }
 
+
   h1{
     font-size:34px !important;
     line-height:1.08 !important;
     margin-bottom:18px !important;
     word-break:break-word;
+    text-align:center;
   }
 
   h2{
     font-size:20px !important;
     line-height:1.15 !important;
+    text-align:center;
   }
 
   p, li, a{
@@ -165,7 +184,6 @@ font-size:14px;
     text-align:center !important;
     font-size:14px !important;
   }
-}
 
 }
 
@@ -190,8 +208,10 @@ This section gathers daily AI briefs generated from automated monitoring of glob
 </div>
 
 <div class="card latest-card">
-<h2>Latest Edition</h2>
-
+<h2>
+最新一期
+<span class="subtitle">Latest Edition</span>
+</h2>
 <p>
 <a href="AI_Brief_2026-03-15.html">Open Latest Brief</a>
 </p>
@@ -199,9 +219,10 @@ This section gathers daily AI briefs generated from automated monitoring of glob
 </div>
 
 <div class="card archive">
-
-<h2>Brief Archive</h2>
-
+<h2>
+简报归档
+<span class="subtitle">Brief Archive</span>
+</h2>
 <a href="AI_Brief_2026-03-15.html">2026-03-15 Brief</a>
 <a href="AI_Brief_2026-03-14.html">2026-03-14 Brief</a>
 <a href="AI_Brief_2026-03-13.html">2026-03-13 Brief</a>
@@ -210,9 +231,10 @@ This section gathers daily AI briefs generated from automated monitoring of glob
 </div>
 
 <div class="card">
-
-<h2>About this column</h2>
-
+<h2>
+关于本专栏
+<span class="subtitle">About this column</span>
+</h2>
 <p>
 个人 AI 简报项目。每日从全球 AI 视频与资讯中提取重要信号，
 形成简洁的 AI intelligence brief。
