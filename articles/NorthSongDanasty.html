@@ -1,142 +1,223 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>荣耀 一｜Glory I</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
-:root{
-  --bg:#050608;
-  --text:#f3f4f6;
-  --muted:#b8bcc6;
-  --line:#20242d;
-  --pill:#0a0c11;
-  --pill-border:#262b36;
-  --max:900px;
-}
+  <title>荣耀 一｜Dr Weihong Liu Digital Studio</title>
+  <meta name="description" content="一篇关于北宋王朝、制度文明、士大夫政治与历史荣耀的中文随笔。" />
 
-*{box-sizing:border-box;}
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --link:#d9d9de;
+    }
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
-}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
 
-.wrap{
-  width:min(var(--max), calc(100vw - 32px));
-  margin:auto;
-  padding:28px 0 60px;
-}
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+    }
+    .topbar a{
+      color:var(--link);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-right:8px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
 
-.topbar{
-  display:flex;
-  gap:12px;
-  margin-bottom:40px;
-}
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:24px 18px 80px;
+    }
 
-.back-btn{
-  padding:10px 18px;
-  border:1px solid var(--pill-border);
-  border-radius:999px;
-  text-decoration:none;
-  color:#fff;
-}
+    header{
+      padding:18px 0 14px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
+    }
 
-h1{
-  font-size:48px;
-  margin:0;
-}
+    .title-zh{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:.5px;
+      margin:0 0 10px;
+    }
 
-.en{
-  color:var(--muted);
-  margin-top:12px;
-}
+    .title-en{
+      font-size:20px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
 
-.meta{
-  margin:20px 0;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
+    .title-sub{
+      font-size:16px;
+      color:#9a9aa0;
+      margin:0 0 16px 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
 
-.pill{
-  padding:8px 14px;
-  border:1px solid var(--pill-border);
-  border-radius:999px;
-  font-size:14px;
-}
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .meta span{
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
 
-.summary{
-  border:1px solid var(--line);
-  padding:20px;
-  border-radius:16px;
-  margin:30px 0;
-}
+    .lead{
+      margin:18px 0 18px;
+      padding:16px 18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dcdcdf;
+      font-size:18px;
+    }
 
-.article p{
-  line-height:2;
-  font-size:20px;
-  margin-bottom:26px;
-}
-</style>
+    p{
+      margin:12px 0;
+      text-align:justify;
+      text-justify:inter-ideograph;
+    }
+
+    blockquote{
+      margin:18px 0;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-left:4px solid #3a3a44;
+      border-radius:10px;
+      color:#d7d7db;
+    }
+
+    .poem{
+      margin:20px 0;
+      padding:18px 20px;
+      background:rgba(255,255,255,.02);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dddddf;
+    }
+    .poem-title{
+      font-size:18px;
+      margin:0 0 12px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      color:#f0f0f2;
+    }
+    .poem p{
+      margin:6px 0;
+      text-align:left;
+    }
+
+    .footer{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .footer a{ color:var(--link); text-decoration:none; }
+
+    @media (max-width:700px){
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="topbar">
+    <a href="../articles.html">← 返回 Articles</a>
+    <a href="../index.html">返回主页 Home</a>
+  </div>
 
-<div class="topbar">
-  <a class="back-btn" href="articles.html">← 返回 Articles</a>
-  <a class="back-btn" href="index.html">返回主页 Home</a>
-</div>
+  <main class="wrap">
+    <header>
+      <h1 class="title-zh">荣耀 一</h1>
+      <p class="title-en">Glory I</p>
+      <p class="title-sub">——关于北宋王朝、士大夫政治与历史荣耀的一篇文字</p>
 
-<h1>荣耀 一</h1>
-<div class="en">Glory I</div>
+      <div class="meta">
+        <span>作者：肖忠一</span>
+        <span>栏目：思想随笔</span>
+        <span>关键词：北宋 / 制度文明 / 士大夫 / 王朝荣耀 / 中国历史</span>
+      </div>
+    </header>
 
-<div class="meta">
-  <div class="pill">作者：佚名</div>
-  <div class="pill">栏目：思想随笔</div>
-  <div class="pill">关键词：北宋 / 制度 / 士大夫 / 历史</div>
-</div>
+    <div class="lead">
+      <strong>摘要</strong><br><br>
+      本文以高度赞赏的笔调回望北宋，认为它虽非疆域最大、军力最强的王朝，却在制度建设、文官体系、士大夫政治、文化创造与社会风气上达到中国古代历史中的高峰之一。文章强调北宋以文立国、与士大夫共治天下的政治格局，并将其视为中国文明记忆中最荣耀、最值得自豪的时代之一。
+    </div>
 
-<div class="summary">
-<b>摘要</b><br><br>
-本文以赞赏的视角回顾北宋，强调其文官制度、士大夫政治与科举体系，认为其在文化与制度层面代表中国古代文明的高峰之一。
-</div>
+    <article>
+      <p>在中国2000多年来的十四代封建王朝中，大概最让人尊崇的是北宋王朝。继五代十国之后，传九帝，享国167年。在所有的王朝中，它经历的时间不是太长久的，它所辖的地域可能是最小的。</p>
 
-<div class="article">
+      <p>疆域东北以现今海河、河北霸州、山西雁门关为界；西北以陕西横山、甘肃东部、青海湟水为界；西南以岷山、大渡河为界，东和东南则以东海和南海为界。</p>
 
-<p>在中国2000多年来的十四代封建王朝中，大概最让人尊崇的是北宋王朝。继五代十国之后，传九帝，享国167年。在所有的王朝中，它经历的时间不是太长久的，它所辖的地域可能是最小的。</p>
+      <p>在北宋的周边，有比它更为强大的国度比如辽，甚至有历史更加悠远的国度比如大理，当然还有新兴的西夏，和西南遥远的吐蕃诸部，它也绝对不是军力最强横的，与它同时代的大辽、西夏、金都比它更加蛮横、残暴和强大。但它绝对是那个世界最先进、最仁义、最富有、最令人向往的国家。也是我们中国有记载以来最荣耀、最值得自豪的时代。</p>
 
-<p>疆域东北以现今海河、河北霸州、山西雁门关为界；西北以陕西横山、甘肃东部、青海湟水为界；西南以岷山、大渡河为界，东和东南则以东海和南海为界。</p>
+      <p>它立国也许不是最正义的，但绝对是最仁义的。没有人血流杵、百姓流离、饿殍遍野、十里白骨等常见的换国之像。 它很快就结束了军阀割据、战争频仍、政权更迭的五代十国。要说这五代十国，从公元907年朱温灭唐起，至公元960年终，一共才54年不到，就前后建立了后梁、后唐、后晋、后汉、后周五个朝廷，另外还有十个割据军阀政权，尽是昏君和暴君，要是不尽早灭了它们，何以平民心。</p>
 
-<p>在北宋的周边，有比它更为强大的国度比如辽，甚至有历史更加悠远的国度比如大理，当然还有新兴的西夏，和西南遥远的吐蕃诸部，它也绝对不是军力最强横的，与它同时代的大辽、西夏、金都比它更加蛮横、残暴和强大。但它绝对是那个世界最先进、最仁义、最富有、最令人向往的国家。也是我们中国有记载以来最荣耀、最值得自豪的时代。</p>
+      <p>很快北宋建立了完整的中央政权和政治体制，以同中书门下平章事为宰相，又增设参知政事为副相，通称执政，又称“宰执”。再设枢密院，即兵部。中书门下与枢密院统称东西二府，实掌文武大权。另设盐铁、户部、度支三司，主管财政大权，号称计相，且独立于二府之外。这样宰执、枢密使、计相三权相无管辖，互相制衡，使得政府行政更加透明、更有效率、更受监督。</p>
 
-<p>它立国也许不是最正义的，但绝对是最仁义的。没有人血流杵、百姓流离、饿殍遍野、十里白骨等常见的换国之像。它很快就结束了军阀割据、战争频仍、政权更迭的五代十国。要说这五代十国，从公元907年朱温灭唐起，至公元960年终，一共才54年不到，就前后建立了后梁、后唐、后晋、后汉、后周五个朝廷，另外还有十个割据军阀政权，尽是昏君和暴君，要是不尽早灭了它们，何以平民心。</p>
+      <p>另外，宋朝还实行官衔与实际职务分离的官吏任用制度，即“官、职、差遣”制度。官即官名，如尚书，侍郎之类，只是一种虚衔，作为叙级、定薪俸之用；职亦称贴职，是授予一部分文官的荣誉衔，并无实际职掌，如学士、直阁之类；差遣才是官员所担任的实际职务，故亦称职事官，枢密使、三司使等，属于此类。一般官员则在所担任的职务之前，冠以“判、知、权、管勾、提举”等字眼，如判寺事、知州、提举、常平等，以示差遣。据西方人说:北宋的官吏体系是全世界最早产生的、也是最完善的文官责任系统，西方诸国"三权"鼎立，即源于此。</p>
 
-<p>很快北宋建立了完整的中央政权和政治体制，以同中书门下平章事为宰相，又增设参知政事为副相，通称执政，又称“宰执”。再设枢密院，即兵部。中书门下与枢密院统称东西二府，实掌文武大权。另设盐铁、户部、度支三司，主管财政大权，号称计相，且独立于二府之外。这样宰执、枢密使、计相三权相无管辖，互相制衡，使得政府行政更加透明、更有效率、更受监督。</p>
+      <p>"与士大夫共治天下"，这是北宋王安石最早树立的一个政治观点，其实北宋的士大夫们既然承担了"与天下为己任"的权力，也就同时承担起了治国的责任。而在中国各个封建王朝的传统观念则是:普天之下莫非王土，率土之滨莫非王臣。从根本上王权与士大夫就是对立的，这也就是历朝历代常见皇帝屠杀大臣，也常看到奸臣篡取皇权的原因。但北宋历代皇帝却采取了以文立国的国策，实行了与士大夫共治天下。</p>
 
-<p>另外，宋朝还实行官衔与实际职务分离的官吏任用制度，即“官、职、差遣”制度。官即官名，如尚书，侍郎之类，只是一种虚衔，作为叙级、定薪俸之用；职亦称贴职，是授予一部分文官的荣誉衔，并无实际职掌，如学士、直阁之类；差遣才是官员所担任的实际职务，故亦称职事官，枢密使、三司使等，属于此类。一般官员则在所担任的职务之前，冠以“判、知、权、管勾、提举”等字眼，如判寺事、知州、提举、常平等，以示差遣。据西方人说：北宋的官吏体系是全世界最早产生的、也是最完善的文官责任系统，西方诸国“三权”鼎立，即源于此。</p>
+      <p>宋太祖更是把科举制度作为人才选拔的基本制度，无论寒门士子，还是农桑人家，学而优者，均可以出入庙堂。庙堂之上，君臣争论不已；江湖之中，书生指点江山。这种开明的政治气氛，造成知识分子政治上有理想、文化上有创新、道德上有追求、生活上有保障。这种比较开明的政治为他朝罕有，也为宋朝的社会迅速发展提供了有力的保证。</p>
 
-<p>“与士大夫共治天下”，这是北宋王安石最早树立的一个政治观点，其实北宋的士大夫们既然承担了“与天下为己任”的权力，也就同时承担起了治国的责任。而在中国各个封建王朝的传统观念则是：普天之下莫非王土，率土之滨莫非王臣。从根本上王权与士大夫就是对立的，这也就是历朝历代常见皇帝屠杀大臣，也常看到奸臣篡取皇权的原因。但北宋历代皇帝却采取了以文立国的国策，实行了与士大夫共治天下。</p>
+      <p>北宋建国以来，广泛地吸收地主阶级和其他各个阶层的知识分子参加政权，从而使得北宋王朝的官僚阶级队伍得到了壮大，从中出现了一大批优秀的政治家，如欧阳修、范仲淹、司马光、王安石等，还有更加闻名至今的文学家、科学家、史学家，如苏氏三杰、黄庭坚、沈括、苏颂、曾巩等，既巩固了政权，又惠及了社会，扬名了千年。</p>
 
-<p>宋太祖更是把科举制度作为人才选拔的基本制度，无论寒门士子，还是农桑人家，学而优者，均可以出入庙堂。庙堂之上，君臣争论不已；江湖之中，书生指点江山。这种开明的政治气氛，造成知识分子政治上有理想、文化上有创新、道德上有追求、生活上有保障。这种比较开明的政治为他朝罕有，也为宋朝的社会迅速发展提供了有力的保证。</p>
+      <p>提及北宋，就不得不提起北宋诸帝， 他们与诸代王朝的封建皇帝相比，其个人修养、治国水平、文韬武略都属中游，但他们，即使是末帝的宋徽宗、宋钦宗，其个人品德也并不属于颓废终末之流。尤其是其中的宋真宗和宋仁宗二位，他们绝对属于2000多年来四百余位封建皇帝中最优秀、最卓越的俩位君王。他们虽没有汉武帝和唐太宗的雄功伟绩，也没有南唐后主李煜的风流倜傥、才华横溢，但确属中国读书人2000年来所推崇的好皇帝。</p>
 
-<p>北宋建国以来，广泛地吸收地主阶级和其他各个阶层的知识分子参加政权，从而使得北宋王朝的官僚阶级队伍得到了壮大，从中出现了一大批优秀的政治家，如欧阳修、范仲淹、司马光、王安石等，还有更加闻名至今的文学家、科学家、史学家，如苏氏三杰、黄庭坚、沈括、苏颂、曾巩等，既巩固了政权，又惠及了社会，扬名了千年。</p>
+      <p>大家一定还记得“风能进，雨能进，国王不能进”这句名言，它来源于德国普鲁士王国威廉一世和一个磨坊主之间的故事，它感动了全世界那些崇尚西方民主和自由，及基督教文明的人们，一直流传至今，也就发生在差不多150年前。其实在大约1000年前宋仁宗时代，在当时开封的皇宫，由于占地太逼仄拥挤、太寒碜，皇帝和嫔妃们都快要住不下了，就连当时对皇帝最抠门的执政们都认为要适当扩建一下，这必竟也是一国之君的面子嘛。但是拆迁对象居然拒绝了来自皇宫的拆迁协商，无论给多少钱他们都不愿意搬走，因为皇宫撤迁对象的地理位置太优渥了，更宜于经商赚钱，其实就是为了一口甜水井。最后宋仁宗赵祯退步了，于是北宋就有了中国有史以来最小的皇宫，仅仅相当于当时一个北宋节度使的府邸大小。</p>
 
-<p>提及北宋，就不得不提起北宋诸帝，他们与诸代王朝的封建皇帝相比，其个人修养、治国水平、文韬武略都属中游，但他们，即使是末帝的宋徽宗、宋钦宗，其个人品德也并不属于颓废终末之流。尤其是其中的宋真宗和宋仁宗二位，他们绝对属于2000多年来四百余位封建皇帝中最优秀、最卓越的俩位君王。他们虽没有汉武帝和唐太宗的雄功伟绩，也没有南唐后主李煜的风流倜傥、才华横溢，但确属中国读书人2000年来所推崇的好皇帝。</p>
+      <p>最后还告诉大家一个事实，北宋立国167年，竟然没有杀一个文官，大家能想象吗?即使是现代，也是不可想象的。</p>
 
-<p>大家一定还记得“风能进，雨能进，国王不能进”这句名言，它来源于德国普鲁士王国威廉一世和一个磨坊主之间的故事，它感动了全世界那些崇尚西方民主和自由，及基督教文明的人们，一直流传至今，也就发生在差不多150年前。其实在大约1000年前宋仁宗时代，在当时开封的皇宫，由于占地太逼仄拥挤、太寒碜，皇帝和嫔妃们都快要住不下了，就连当时对皇帝最抠门的执政们都认为要适当扩建一下，这必竟也是一国之君的面子嘛。但是拆迁对象居然拒绝了来自皇宫的拆迁协商，无论给多少钱他们都不愿意搬走，因为皇宫撤迁对象的地理位置太优渥了，更宜于经商赚钱，其实就是为了一口甜水井。最后宋仁宗赵祯退步了，于是北宋就有了中国有史以来最小的皇宫，仅仅相当于当时一个北宋节度使的府邸大小。</p>
+      <p>大家别弄混了，被杀的岳飞可是南宋的冤魂，他还是一个武官。</p>
 
-<p>最后还告诉大家一个事实，北宋立国167年，竟然没有杀一个文官，大家能想象吗？即使是现代，也是不可想象的。</p>
+      <p>2021.06.25于湖南常德</p>
+    </article>
 
-<p>大家别弄混了，被杀的岳飞可是南宋的冤魂，他还是一个武官。</p>
-
-<p>2021.06.25 于湖南常德</p>
-
-</div>
-</div>
+    <div class="footer">
+      <div>© Dr Weihong Liu · Digital Studio</div>
+      <div style="margin-top:6px;">
+        <a href="../articles.html">返回 Articles</a> ·
+        <a href="../index.html">返回 Home</a>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
