@@ -4,16 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>荣耀（一）｜思想随笔</title>
+<title>荣耀（一） | Glory I</title>
 
 <style>
 :root{
-  --bg:#0b0b0c;
-  --card:#111114;
-  --text:#e9e9ea;
-  --muted:#b7b7bb;
-  --line:#26262b;
-  --link:#d9d9de;
+  --bg:#07080c;
+  --panel:#0c0d14;
+  --text:#f2f3f7;
+  --muted:#b8bbc7;
+  --line:#242738;
 }
 
 *{box-sizing:border-box}
@@ -22,81 +21,155 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family: Georgia,"Songti SC","Noto Serif SC",serif;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;
   line-height:1.9;
 }
 
-.container{
-  max-width:820px;
+.wrap{
+  max-width:900px;
   margin:auto;
-  padding:40px 20px 80px;
+  padding:28px 20px 80px;
 }
 
+/* 顶部按钮 */
+.nav{
+  display:flex;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 16px;
+  color:var(--text);
+  font-size:14px;
+}
+
+/* 标题 */
 h1{
-  font-size:42px;
-  margin-bottom:10px;
+  font-size:40px;
+  margin:20px 0 10px;
 }
 
-.subtitle{
+.subtitle-en{
+  font-size:22px;
   color:var(--muted);
-  margin-bottom:40px;
 }
 
-p{
-  font-size:19px;
+.subtitle-cn{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:18px;
+}
+
+/* 标签 */
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:25px 0;
+}
+
+.pill{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:14px;
+}
+
+/* 摘要卡片 */
+.card{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  margin:25px 0;
+  background:var(--panel);
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.content p{
+  font-size:18px;
   margin-bottom:1.2em;
 }
 
-.footer{
-  margin-top:60px;
+blockquote{
+  border-left:3px solid #444;
+  padding-left:12px;
+  color:#ccc;
+}
+
+.date{
+  margin-top:20px;
   color:var(--muted);
   font-size:14px;
-  border-top:1px solid var(--line);
-  padding-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrap">
+
+<div class="nav">
+  <div class="btn">← 返回 Articles</div>
+  <div class="btn">返回主页 Home</div>
+</div>
 
 <h1>荣耀（一）</h1>
+<div class="subtitle-en">Glory I</div>
 
-<div class="subtitle">
-一篇关于北宋文明的历史随笔
+<div class="subtitle-cn">
+——一篇关于北宋文明、制度与历史荣耀的中文随笔
 </div>
+
+<div class="meta">
+  <div class="pill">作者：佚名</div>
+  <div class="pill">栏目：思想随笔</div>
+  <div class="pill">关键词：北宋 / 士大夫 / 文治 / 科举</div>
+</div>
+
+<div class="card">
+  <h3>摘要</h3>
+  <p>
+  本文以赞赏的视角回顾北宋，强调其文官制度、士大夫政治与科举体系，
+  认为其在文化与制度层面代表中国古代文明的高峰之一。
+  </p>
+</div>
+
+<div class="content">
 
 <p>在中国2000多年来的十四代封建王朝中，大概最让人尊崇的是北宋王朝。继五代十国之后，传九帝，享国167年。在所有的王朝中，它经历的时间不是太长久的，它所辖的地域可能是最小的。</p>
 
 <p>疆域东北以现今海河、河北霸州、山西雁门关为界；西北以陕西横山、甘肃东部、青海湟水为界；西南以岷山、大渡河为界，东和东南则以东海和南海为界。</p>
 
-<p>在北宋的周边，有比它更为强大的国度比如辽，甚至有历史更加悠远的国度比如大理，当然还有新兴的西夏，和西南遥远的吐蕃诸部，它也绝对不是军力最强横的，与它同时代的大辽、西夏、金都比它更加蛮横、残暴和强大。但它绝对是那个世界最先进、最仁义、最富有、最令人向往的国家。也是我们中国有记载以来最荣耀、最值得自豪的时代。</p>
+<p>在北宋的周边，有比它更为强大的国度比如辽，甚至有历史更加悠远的国度比如大理，当然还有新兴的西夏，和西南遥远的吐蕃诸部，它也绝对不是军力最强横的。</p>
 
-<p>它立国也许不是最正义的，但绝对是最仁义的。没有人血流杵、百姓流离、饿殍遍野、十里白骨等常见的换国之像。它很快就结束了军阀割据、战争频仍、政权更迭的五代十国。</p>
+<p>但它绝对是那个世界最先进、最仁义、最富有、最令人向往的国家，也是中国历史上极具荣耀感的时代之一。</p>
 
-<p>很快北宋建立了完整的中央政权和政治体制，以同中书门下平章事为宰相，又增设参知政事为副相，通称执政，又称“宰执”。再设枢密院，即兵部。中书门下与枢密院统称东西二府，实掌文武大权。</p>
+<p>很快北宋建立了完整的中央政权和政治体制，通过多机构分权制衡，使得行政更透明与高效。</p>
 
-<p>另外，宋朝还实行官衔与实际职务分离的官吏任用制度，即“官、职、差遣”制度。官即官名，如尚书、侍郎之类，只是一种虚衔；职是荣誉衔；差遣才是官员的实际职务。</p>
+<p>宋朝实行“官、职、差遣”制度，使官僚体系更专业化，这是中国古代制度的重要发展。</p>
 
-<p>“与士大夫共治天下”，这是北宋王安石最早树立的政治观点。北宋历代皇帝采取以文立国的国策，使知识分子能够参与国家治理。</p>
+<p>“与士大夫共治天下”，体现出北宋以文治国的政治结构。</p>
 
-<p>宋太祖把科举制度作为人才选拔的基本制度。无论寒门士子，还是农桑人家，学而优者，均可以出入庙堂。庙堂之上，君臣争论不已；江湖之中，书生指点江山。</p>
+<p>科举制度使寒门士子也能进入政权，形成开放的社会流动机制。</p>
 
-<p>北宋建国以来，出现了一大批优秀的政治家，如欧阳修、范仲淹、司马光、王安石等；还有著名的文学家、科学家、史学家，如苏氏三杰、沈括、苏颂等。</p>
+<p>北宋出现了欧阳修、范仲淹、王安石、苏轼等一大批杰出人物。</p>
 
-<p>提及北宋，就不得不提北宋诸帝。尤其宋真宗和宋仁宗，被许多中国读书人视为理想的君主。</p>
+<p>宋仁宗时期甚至出现皇权对民间利益的让步，被视为政治宽容的象征。</p>
 
-<p>大约1000年前宋仁宗时代，在开封皇宫扩建时，一户人家因不愿搬迁而坚持留下。最终皇帝选择退让，因此北宋皇宫规模并不宏大。这一故事也常被视为北宋政治宽容的象征。</p>
+<p>最后还常被提及的一点是：北宋政治环境相对温和，对文官的极端打压较少。</p>
 
-<p>最后还告诉大家一个事实：北宋立国167年，没有大规模屠杀文官的历史记录。</p>
+<blockquote>
+大家别弄混了，被杀的岳飞可是南宋的冤魂，他还是一个武官。
+</blockquote>
 
-<p>大家别弄混了，被杀的岳飞可是南宋的冤魂，他还是一个武官。</p>
+<p class="date">2021.06.25 于湖南常德</p>
 
-<p>2021.06.25 于湖南常德</p>
-
-<div class="footer">
-Dr Weihong Liu · Digital Studio
 </div>
 
 </div>
