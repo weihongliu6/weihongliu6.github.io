@@ -6,9 +6,11 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 
-INDEX_PATH = Path("ai-briefs/index.html")
+REPO_ROOT = Path(__file__).resolve().parent
+INDEX_PATH = REPO_ROOT / "ai-briefs/index.html"
 
 
 def run(cmd: list[str]) -> None:
@@ -18,7 +20,7 @@ def run(cmd: list[str]) -> None:
 def update_archive_index(date_str: str, index_path: Path = INDEX_PATH) -> None:
     html = index_path.read_text(encoding="utf-8")
 
-    latest_href = f'AI_Brief_{date_str}.html'
+    latest_href = f"AI_Brief_{date_str}.html"
     html = re.sub(
         r'(<a href=")AI_Brief_[0-9]{4}-[0-9]{2}-[0-9]{2}\.html("\>Open Latest Brief</a>)',
         rf"\1{latest_href}\2",
@@ -47,7 +49,12 @@ def publish_changes(date_str: str) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Update AI brief archive and publish.")
-    parser.add_argument("date", help="Brief date in YYYY-MM-DD format")
+    parser.add_argument(
+        "date",
+        nargs="?",
+        default=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        help="Brief date in YYYY-MM-DD format (defaults to current UTC date)",
+    )
     parser.add_argument("--publish", action="store_true", help="Run git add/commit/pull --rebase/push")
     return parser.parse_args()
 
