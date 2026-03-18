@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent
 INDEX_PATH = REPO_ROOT / "ai-briefs/index.html"
+BRIEFS_DIR = INDEX_PATH.parent
 
 
 def run(cmd: list[str]) -> None:
@@ -28,6 +29,21 @@ def collect_brief_dates(briefs_dir: Path, include_date: str | None = None) -> li
     if include_date:
         dates.add(include_date)
     return sorted(dates, reverse=True)
+
+
+def ensure_daily_brief(date_str: str, briefs_dir: Path = BRIEFS_DIR) -> None:
+    target_path = briefs_dir / f"AI_Brief_{date_str}.html"
+    if target_path.exists():
+        return
+
+    candidates = sorted(briefs_dir.glob("AI_Brief_*.html"), key=lambda p: p.name, reverse=True)
+    if not candidates:
+        raise FileNotFoundError("No existing AI brief file found to use as a template.")
+
+    source_path = candidates[0]
+    html = source_path.read_text(encoding="utf-8")
+    html = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", date_str, html, count=1)
+    target_path.write_text(html, encoding="utf-8")
 
 
 def update_archive_index(date_str: str, index_path: Path = INDEX_PATH) -> None:
@@ -72,12 +88,19 @@ def parse_args() -> argparse.Namespace:
         default=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
         help="Brief date in YYYY-MM-DD format (defaults to current UTC date)",
     )
+    parser.add_argument(
+        "--ensure-daily",
+        action="store_true",
+        help="Create ai-briefs/AI_Brief_YYYY-MM-DD.html if missing by copying the latest existing brief.",
+    )
     parser.add_argument("--publish", action="store_true", help="Run git add/commit/pull --rebase/push")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    if args.ensure_daily:
+        ensure_daily_brief(args.date)
     update_archive_index(args.date)
     if args.publish:
         publish_changes(args.date)
