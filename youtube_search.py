@@ -18,10 +18,27 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True)
 
 
+def collect_brief_dates(briefs_dir: Path, include_date: str | None = None) -> list[str]:
+    date_pattern = re.compile(r"^AI_Brief_(\d{4}-\d{2}-\d{2})\.html$")
+    dates = {
+        match.group(1)
+        for path in briefs_dir.glob("AI_Brief_*.html")
+        if (match := date_pattern.match(path.name))
+    }
+    if include_date:
+        dates.add(include_date)
+    return sorted(dates, reverse=True)
+
+
 def update_archive_index(date_str: str, index_path: Path = INDEX_PATH) -> None:
     html = index_path.read_text(encoding="utf-8")
+    brief_dates = collect_brief_dates(index_path.parent, include_date=date_str)
+    if not brief_dates:
+        brief_dates = [date_str]
 
-    latest_href = f"AI_Brief_{date_str}.html"
+    latest_href = f"AI_Brief_{brief_dates[0]}.html"
+    archive_lines = "\n".join(f'<a href="AI_Brief_{d}.html">{d} Brief</a>' for d in brief_dates)
+
     html = re.sub(
         r'(<a href=")AI_Brief_[0-9]{4}-[0-9]{2}-[0-9]{2}\.html("\>Open Latest Brief</a>)',
         rf"\1{latest_href}\2",
@@ -29,14 +46,13 @@ def update_archive_index(date_str: str, index_path: Path = INDEX_PATH) -> None:
         count=1,
     )
 
-    new_archive_line = f'<a href="{latest_href}">{date_str} Brief</a>'
-    if new_archive_line not in html:
-        html = re.sub(
-            r'(<span class="subtitle">Brief Archive</span>\s*</h2>\s*)',
-            rf"\1\n{new_archive_line}\n",
-            html,
-            count=1,
-        )
+    html = re.sub(
+        r"(<!-- BRIEF_ARCHIVE_START -->)(.*?)(<!-- BRIEF_ARCHIVE_END -->)",
+        rf"\1\n{archive_lines}\n\3",
+        html,
+        count=1,
+        flags=re.DOTALL,
+    )
 
     index_path.write_text(html, encoding="utf-8")
 
@@ -69,4 +85,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
