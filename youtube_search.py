@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import re
 import subprocess
 import urllib.parse
@@ -80,6 +81,46 @@ def fetch_youtube_search_results(
     return videos
 
 
+def translate_to_chinese(text: str) -> str:
+    """Translate text to Simplified Chinese using a lightweight web endpoint."""
+    cleaned = text.strip()
+    if not cleaned:
+        return ""
+
+    query = urllib.parse.quote_plus(cleaned)
+    url = (
+        "https://translate.googleapis.com/translate_a/single"
+        f"?client=gtx&sl=auto&tl=zh-CN&dt=t&q={query}"
+    )
+    with urllib.request.urlopen(url, timeout=10) as response:
+        payload = response.read().decode("utf-8")
+    data = json.loads(payload)
+    translated_segments = [part[0] for part in data[0] if part and part[0]]
+    return "".join(translated_segments).strip()
+
+
+def add_bilingual_titles(videos: list[dict[str, str]]) -> list[dict[str, str]]:
+    translated_cache: dict[str, str] = {}
+    bilingual_videos: list[dict[str, str]] = []
+
+    for video in videos:
+        english_title = (video.get("title") or "").strip()
+        chinese_title = translated_cache.get(english_title, "")
+        if not chinese_title and english_title:
+            try:
+                chinese_title = translate_to_chinese(english_title)
+            except Exception:  # noqa: BLE001
+                chinese_title = ""
+            translated_cache[english_title] = chinese_title
+
+        bilingual_video = dict(video)
+        bilingual_video["title_en"] = english_title
+        bilingual_video["title_zh"] = chinese_title or english_title
+        bilingual_videos.append(bilingual_video)
+
+    return bilingual_videos
+
+
 def extract_videos_from_existing_briefs(
     briefs_dir: Path,
     limit: int = DEFAULT_RESULT_LIMIT,
@@ -141,24 +182,30 @@ def render_top_videos_html(videos: list[dict[str, str]]) -> str:
         "  <ol>",
     ]
     for video in videos:
-        title = html.escape(video["title"])
+        title_en = html.escape(video.get("title_en") or video["title"])
+        title_zh = html.escape(video.get("title_zh") or video["title"])
         link = html.escape(video["link"], quote=True)
         lines.append("    <li>")
         if video.get("thumbnail"):
             thumbnail = html.escape(video["thumbnail"], quote=True)
             lines.append(
                 f'      <a href="{link}" target="_blank" rel="noopener noreferrer">'
-                f'<img src="{thumbnail}" alt="{title} thumbnail" loading="lazy" '
+                f'<img src="{thumbnail}" alt="{title_en} thumbnail" loading="lazy" '
                 'style="max-width:320px;width:100%;height:auto;display:block;margin:0 0 8px 0;"></a>'
             )
-        lines.append(f'      <a href="{link}" target="_blank" rel="noopener noreferrer">{title}</a>')
+        lines.append(
+            f'      <a href="{link}" target="_blank" rel="noopener noreferrer" class="video-link">'
+            f'<span class="video-title-en">{title_en}</span>'
+            f'<span class="video-title-zh">{title_zh}</span>'
+            "</a>"
+        )
         lines.append("    </li>")
     lines.extend(["  </ol>", "</section>"])
     return "\n".join(lines)
 
 
 def render_daily_brief_html(date_str: str, videos: list[dict[str, str]]) -> str:
-    top_videos_html = render_top_videos_html(videos)
+    top_videos_html = render_top_videos_html(add_bilingual_titles(videos))
     return (
         "<!doctype html>\n"
         '<html lang="zh-CN">\n'
@@ -178,6 +225,9 @@ def render_daily_brief_html(date_str: str, videos: list[dict[str, str]]) -> str:
         "h1{font-size:2em}\n"
         "ol{padding-left:22px;}\n"
         "li{margin-bottom:16px;}\n"
+        ".video-link{display:inline-block;text-decoration:none;color:#1f1f1f;}\n"
+        ".video-title-en{display:block;font-weight:700;line-height:1.45;}\n"
+        ".video-title-zh{display:block;font-size:.92em;color:#6f6f6f;line-height:1.45;margin-top:2px;}\n"
         "</style>\n"
         "</head>\n"
         "<body>\n\n"
