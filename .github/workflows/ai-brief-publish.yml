@@ -1,8 +1,9 @@
 name: Publish AI Brief
 
 on:
+  # GitHub Actions cron uses UTC; 19:35 UTC is about 6:05 AM Adelaide during daylight saving.
   schedule:
-    - cron: '15 1 * * *'
+    - cron: '35 19 * * *'
   workflow_dispatch:
 
 permissions:
