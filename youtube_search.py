@@ -33,17 +33,28 @@ def collect_brief_dates(briefs_dir: Path, include_date: str | None = None) -> li
 
 def ensure_daily_brief(date_str: str, briefs_dir: Path = BRIEFS_DIR) -> None:
     target_path = briefs_dir / f"AI_Brief_{date_str}.html"
-    if target_path.exists():
+    print(f"[ensure_daily_brief] target_date={date_str}")
+    print(f"[ensure_daily_brief] target_path={target_path}")
+    target_exists = target_path.exists()
+    print(f"[ensure_daily_brief] target_exists={target_exists}")
+
+    if target_exists:
+        print("[ensure_daily_brief] File already exists; skipping creation.")
         return
 
     candidates = sorted(briefs_dir.glob("AI_Brief_*.html"), key=lambda p: p.name, reverse=True)
     if not candidates:
+        print("[ensure_daily_brief] No candidate source file found; raising FileNotFoundError.")
         raise FileNotFoundError("No existing AI brief file found to use as a template.")
 
     source_path = candidates[0]
+    print(f"[ensure_daily_brief] source_path={source_path}")
     html = source_path.read_text(encoding="utf-8")
     html = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", date_str, html, count=1)
     target_path.write_text(html, encoding="utf-8")
+    if not target_path.exists():
+        raise RuntimeError(f"Failed to write daily brief file: {target_path}")
+    print(f"[ensure_daily_brief] wrote_file={target_path}")
 
 
 def update_archive_index(date_str: str, index_path: Path = INDEX_PATH) -> None:
