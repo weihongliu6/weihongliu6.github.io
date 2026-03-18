@@ -190,19 +190,74 @@ def translate_to_chinese(text: str) -> str:
     return "".join(translated_segments).strip()
 
 
-def add_bilingual_titles(videos: list[dict[str, str]]) -> list[dict[str, str]]:
+def fallback_chinese_title(english_title: str) -> str:
+    """Provide a non-empty Chinese fallback title when translation APIs fail."""
+    cleaned = english_title.strip()
+    if not cleaned:
+        return "（暂无中文标题）"
+    return f"（中文）{cleaned}"
+
+
+def extract_translation_memory_from_briefs(briefs_dir: Path) -> dict[str, str]:
+    """Load historical English→Chinese titles from existing brief pages."""
+    translation_memory: dict[str, str] = {}
+    date_pattern = re.compile(r"^AI_Brief_(\d{4}-\d{2}-\d{2})\.html$")
+    brief_paths = sorted(
+        [path for path in briefs_dir.glob("AI_Brief_*.html") if date_pattern.match(path.name)],
+        key=lambda p: p.name,
+        reverse=True,
+    )
+
+    for brief_path in brief_paths:
+        page = brief_path.read_text(encoding="utf-8")
+
+        text_list_matches = re.findall(
+            r"<p><b>\d+\.\s*(.*?)</b><br>\s*([^<]+?)\s*<br>\s*<a href=",
+            page,
+            flags=re.DOTALL,
+        )
+        for raw_en, raw_zh in text_list_matches:
+            title_en = html.unescape(re.sub(r"\s+", " ", raw_en).strip())
+            title_zh = html.unescape(re.sub(r"\s+", " ", raw_zh).strip())
+            noisy_markers = ("watch video", "href=", "<p>", "</p>", "&lt;")
+            if title_en and title_zh and not any(marker in title_zh.lower() for marker in noisy_markers):
+                translation_memory.setdefault(title_en, title_zh)
+
+        card_matches = re.findall(
+            r'<span class="video-title-en">(.*?)</span>\s*<span class="video-title-zh">(.*?)</span>',
+            page,
+            flags=re.DOTALL,
+        )
+        for raw_en, raw_zh in card_matches:
+            title_en = html.unescape(re.sub(r"\s+", " ", raw_en).strip())
+            title_zh = html.unescape(re.sub(r"\s+", " ", raw_zh).strip())
+            if title_en and title_zh:
+                translation_memory.setdefault(title_en, title_zh)
+
+    return translation_memory
+
+
+def add_bilingual_titles(
+    videos: list[dict[str, str]],
+    translation_memory: dict[str, str] | None = None,
+) -> list[dict[str, str]]:
     translated_cache: dict[str, str] = {}
     bilingual_videos: list[dict[str, str]] = []
+    known_translations = translation_memory or {}
 
     for video in videos:
         english_title = (video.get("title") or "").strip()
         chinese_title = translated_cache.get(english_title, "")
+        if not chinese_title and english_title in known_translations:
+            chinese_title = known_translations[english_title]
         if not chinese_title and english_title:
             try:
                 chinese_title = translate_to_chinese(english_title)
             except Exception:  # noqa: BLE001
                 chinese_title = ""
-            translated_cache[english_title] = chinese_title
+        if not chinese_title and english_title:
+            chinese_title = fallback_chinese_title(english_title)
+        translated_cache[english_title] = chinese_title
 
         bilingual_video = dict(video)
         bilingual_video["title_en"] = english_title
@@ -265,18 +320,19 @@ def render_top_videos_html(videos: list[dict[str, str]]) -> str:
     lines = ["<h2>Top Videos / 热门视频</h2>"]
     for idx, video in enumerate(videos, start=1):
         title_en = html.escape(video.get("title_en") or video["title"])
-        title_zh = html.escape((video.get("title_zh") or "").strip())
+        title_zh = html.escape((video.get("title_zh") or fallback_chinese_title(title_en)).strip())
         link = html.escape(video["link"], quote=True)
-        block = f"<p><b>{idx}. {title_en}</b><br>"
-        if title_zh:
-            block += f"{title_zh}<br>"
-        block += f"<a href='{link}'>Watch Video / 观看视频</a></p>"
-        lines.append(block)
+        lines.append(
+            f"<p><b>{idx}. {title_en}</b><br>"
+            f"{title_zh}<br>"
+            f"<a href='{link}'>Watch Video / 观看视频</a></p>"
+        )
     return "\n".join(lines)
 
 
-def render_daily_brief_html(date_str: str, videos: list[dict[str, str]]) -> str:
-    top_videos_html = render_top_videos_html(add_bilingual_titles(videos))
+def render_daily_brief_html(date_str: str, videos: list[dict[str, str]], briefs_dir: Path = BRIEFS_DIR) -> str:
+    translation_memory = extract_translation_memory_from_briefs(briefs_dir)
+    top_videos_html = render_top_videos_html(add_bilingual_titles(videos, translation_memory))
     return (
         "<html><head><meta charset='utf-8'></head><body>"
         "<h1>AI Daily Intelligence Brief / AI每日智能简报</h1>"
