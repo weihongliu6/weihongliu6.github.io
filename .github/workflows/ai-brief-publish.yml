@@ -32,7 +32,10 @@ jobs:
             echo "No requirements.txt found; skipping dependency installation."
           fi
 
-      - name: Generate today's brief archive updates
+      - name: Ensure today's daily brief file exists
+        run: python youtube_search.py --ensure-daily
+
+      - name: Rebuild brief archive index
         run: python youtube_search.py
 
       - name: Commit and push generated files
