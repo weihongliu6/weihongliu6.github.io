@@ -201,12 +201,12 @@ def add_bilingual_titles(videos: list[dict[str, str]]) -> list[dict[str, str]]:
             try:
                 chinese_title = translate_to_chinese(english_title)
             except Exception:  # noqa: BLE001
-                chinese_title = f"（中文翻译暂不可用）{english_title}"
+                chinese_title = ""
             translated_cache[english_title] = chinese_title
 
         bilingual_video = dict(video)
         bilingual_video["title_en"] = english_title
-        bilingual_video["title_zh"] = chinese_title or english_title
+        bilingual_video["title_zh"] = chinese_title
         bilingual_videos.append(bilingual_video)
 
     return bilingual_videos
@@ -265,13 +265,13 @@ def render_top_videos_html(videos: list[dict[str, str]]) -> str:
     lines = ["<h2>Top Videos / 热门视频</h2>"]
     for idx, video in enumerate(videos, start=1):
         title_en = html.escape(video.get("title_en") or video["title"])
-        title_zh = html.escape(video.get("title_zh") or video["title"])
+        title_zh = html.escape((video.get("title_zh") or "").strip())
         link = html.escape(video["link"], quote=True)
-        lines.append(
-            f"<p><b>{idx}. {title_en}</b><br>"
-            f"{title_zh}<br>"
-            f"<a href='{link}'>Watch Video / 观看视频</a></p>"
-        )
+        block = f"<p><b>{idx}. {title_en}</b><br>"
+        if title_zh:
+            block += f"{title_zh}<br>"
+        block += f"<a href='{link}'>Watch Video / 观看视频</a></p>"
+        lines.append(block)
     return "\n".join(lines)
 
 
