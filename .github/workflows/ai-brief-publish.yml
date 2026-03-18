@@ -32,11 +32,35 @@ jobs:
             echo "No requirements.txt found; skipping dependency installation."
           fi
 
+      - name: Capture workflow date (UTC)
+        run: echo "BRIEF_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
+
+      - name: Debug workflow context and pre-run file state
+        run: |
+          echo "GITHUB_REF=$GITHUB_REF"
+          echo "GITHUB_REF_NAME=$GITHUB_REF_NAME"
+          echo "GITHUB_SHA=$GITHUB_SHA"
+          echo "BRIEF_DATE=$BRIEF_DATE"
+          if [ -f "ai-briefs/AI_Brief_${BRIEF_DATE}.html" ]; then
+            echo "Before run: ai-briefs/AI_Brief_${BRIEF_DATE}.html exists"
+          else
+            echo "Before run: ai-briefs/AI_Brief_${BRIEF_DATE}.html is missing"
+          fi
+
       - name: Ensure today's daily brief file exists
-        run: python youtube_search.py --ensure-daily
+        run: python youtube_search.py "$BRIEF_DATE" --ensure-daily
+
+      - name: Debug post-ensure file state
+        run: |
+          if [ -f "ai-briefs/AI_Brief_${BRIEF_DATE}.html" ]; then
+            echo "After --ensure-daily: ai-briefs/AI_Brief_${BRIEF_DATE}.html exists"
+          else
+            echo "After --ensure-daily: ai-briefs/AI_Brief_${BRIEF_DATE}.html is missing"
+          fi
+          ls -la ai-briefs/
 
       - name: Rebuild brief archive index
-        run: python youtube_search.py
+        run: python youtube_search.py "$BRIEF_DATE"
 
       - name: Commit and push generated files
         run: |
