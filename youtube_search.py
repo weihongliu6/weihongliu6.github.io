@@ -20,6 +20,47 @@ BRIEFS_DIR = INDEX_PATH.parent
 YOUTUBE_SEARCH_QUERY = "artificial intelligence news"
 YOUTUBE_FEED_URL = "https://www.youtube.com/feeds/videos.xml?search_query={query}"
 DEFAULT_RESULT_LIMIT = 12
+STRICT_AI_INCLUDE_KEYWORDS = (
+    "ai",
+    "artificial intelligence",
+    "chatgpt",
+    "openai",
+    "sora",
+    "gemini",
+    "claude",
+    "machine learning",
+    "deep learning",
+    "robotics",
+    "automation",
+)
+STRICT_AI_EXCLUDE_KEYWORDS = (
+    "netanyahu",
+    "israel conflict",
+    "celebrity gossip",
+    "tewas",
+    "heboh",
+    "kejanggalan",
+    "brutally mocked",
+    "insane",
+    "warfare begins",
+    "strikes",
+    "iran",
+)
+PREFERRED_CHANNEL_KEYWORDS = (
+    "openai",
+    "google",
+    "deepmind",
+    "anthropic",
+    "nvidia",
+    "microsoft",
+    "bloomberg",
+    "bbc",
+    "reuters",
+    "wsj",
+    "financial times",
+    "mit",
+    "stanford",
+)
 
 
 def run(cmd: list[str]) -> None:
@@ -73,12 +114,62 @@ def fetch_youtube_search_results(
         if not thumbnail and video_id:
             thumbnail = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
 
-        if title and link:
-            videos.append({"title": title, "link": link, "thumbnail": thumbnail})
-        if len(videos) >= limit:
-            break
+        author = (
+            entry.findtext("atom:author/atom:name", default="", namespaces=ns) or ""
+        ).strip()
 
-    return videos
+        if title and link:
+            videos.append(
+                {"title": title, "link": link, "thumbnail": thumbnail, "channel": author}
+            )
+
+    return select_strict_ai_videos(videos, limit=limit)
+
+
+def is_strict_ai_video(title: str) -> bool:
+    normalized_title = title.strip().lower()
+    if not normalized_title:
+        return False
+    if any(keyword in normalized_title for keyword in STRICT_AI_EXCLUDE_KEYWORDS):
+        return False
+    return any(keyword in normalized_title for keyword in STRICT_AI_INCLUDE_KEYWORDS)
+
+
+def score_video_relevance(video: dict[str, str]) -> int:
+    title = (video.get("title") or "").lower()
+    channel = (video.get("channel") or "").lower()
+    score = 0
+
+    for keyword in STRICT_AI_INCLUDE_KEYWORDS:
+        if keyword in title:
+            score += 3
+
+    for preferred in PREFERRED_CHANNEL_KEYWORDS:
+        if preferred in channel:
+            score += 5
+
+    if "news" in title:
+        score += 1
+    if "update" in title:
+        score += 1
+    return score
+
+
+def select_strict_ai_videos(videos: list[dict[str, str]], limit: int) -> list[dict[str, str]]:
+    filtered = [video for video in videos if is_strict_ai_video(video.get("title", ""))]
+    ranked = sorted(filtered, key=score_video_relevance, reverse=True)
+
+    selected: list[dict[str, str]] = []
+    seen_links: set[str] = set()
+    for video in ranked:
+        link = (video.get("link") or "").strip()
+        if not link or link in seen_links:
+            continue
+        seen_links.add(link)
+        selected.append(video)
+        if len(selected) >= limit:
+            break
+    return selected
 
 
 def translate_to_chinese(text: str) -> str:
@@ -110,7 +201,7 @@ def add_bilingual_titles(videos: list[dict[str, str]]) -> list[dict[str, str]]:
             try:
                 chinese_title = translate_to_chinese(english_title)
             except Exception:  # noqa: BLE001
-                chinese_title = ""
+                chinese_title = f"（中文翻译暂不可用）{english_title}"
             translated_cache[english_title] = chinese_title
 
         bilingual_video = dict(video)
@@ -169,74 +260,29 @@ def extract_videos_from_existing_briefs(
 
 def render_top_videos_html(videos: list[dict[str, str]]) -> str:
     if not videos:
-        return (
-            '<section class="top-videos">\n'
-            "  <h2>Top Videos / 热门视频</h2>\n"
-            "  <p>No videos available for this search window.</p>\n"
-            "</section>"
-        )
+        return "<h2>Top Videos / 热门视频</h2><p>No videos available for this search window.</p>"
 
-    lines = [
-        '<section class="top-videos">',
-        "  <h2>Top Videos / 热门视频</h2>",
-        "  <ol>",
-    ]
-    for video in videos:
+    lines = ["<h2>Top Videos / 热门视频</h2>"]
+    for idx, video in enumerate(videos, start=1):
         title_en = html.escape(video.get("title_en") or video["title"])
         title_zh = html.escape(video.get("title_zh") or video["title"])
         link = html.escape(video["link"], quote=True)
-        lines.append("    <li>")
-        if video.get("thumbnail"):
-            thumbnail = html.escape(video["thumbnail"], quote=True)
-            lines.append(
-                f'      <a href="{link}" target="_blank" rel="noopener noreferrer">'
-                f'<img src="{thumbnail}" alt="{title_en} thumbnail" loading="lazy" '
-                'style="max-width:320px;width:100%;height:auto;display:block;margin:0 0 8px 0;"></a>'
-            )
         lines.append(
-            f'      <a href="{link}" target="_blank" rel="noopener noreferrer" class="video-link">'
-            f'<span class="video-title-en">{title_en}</span>'
-            f'<span class="video-title-zh">{title_zh}</span>'
-            "</a>"
+            f"<p><b>{idx}. {title_en}</b><br>"
+            f"{title_zh}<br>"
+            f"<a href='{link}'>Watch Video / 观看视频</a></p>"
         )
-        lines.append("    </li>")
-    lines.extend(["  </ol>", "</section>"])
     return "\n".join(lines)
 
 
 def render_daily_brief_html(date_str: str, videos: list[dict[str, str]]) -> str:
     top_videos_html = render_top_videos_html(add_bilingual_titles(videos))
     return (
-        "<!doctype html>\n"
-        '<html lang="zh-CN">\n'
-        "<head>\n"
-        '<meta charset="utf-8">\n'
-        "<title>AI Brief</title>\n"
-        "<style>\n"
-        "body{\n"
-        "font-family: Georgia, serif;\n"
-        "max-width:900px;\n"
-        "margin:40px auto;\n"
-        "line-height:1.7;\n"
-        "padding:0 20px;\n"
-        "background:#fdfdfc;\n"
-        "color:#222;\n"
-        "}\n"
-        "h1{font-size:2em}\n"
-        "ol{padding-left:22px;}\n"
-        "li{margin-bottom:16px;}\n"
-        ".video-link{display:inline-block;text-decoration:none;color:#1f1f1f;}\n"
-        ".video-title-en{display:block;font-weight:700;line-height:1.45;}\n"
-        ".video-title-zh{display:block;font-size:.92em;color:#6f6f6f;line-height:1.45;margin-top:2px;}\n"
-        "</style>\n"
-        "</head>\n"
-        "<body>\n\n"
-        '<p><a href="index.html">← Back to Archive</a></p>\n'
-        "<h1>AI Daily Intelligence Brief / AI每日智能简报</h1>\n"
-        f"<p>{date_str}</p>\n"
-        f"{top_videos_html}\n"
-        "</body>\n"
-        "</html>\n"
+        "<html><head><meta charset='utf-8'></head><body>"
+        "<h1>AI Daily Intelligence Brief / AI每日智能简报</h1>"
+        f"<p>{date_str}</p>"
+        f"{top_videos_html}"
+        "</body></html>"
     )
 
 
@@ -268,6 +314,7 @@ def ensure_daily_brief(date_str: str, briefs_dir: Path = BRIEFS_DIR) -> None:
     except Exception as exc:  # noqa: BLE001
         print(f"[ensure_daily_brief] feed_fetch_failed={exc!r}; falling back to existing brief extraction")
         videos = extract_videos_from_existing_briefs(briefs_dir)
+        videos = select_strict_ai_videos(videos, limit=DEFAULT_RESULT_LIMIT)
 
     html_content = render_daily_brief_html(date_str, videos)
     target_path.write_text(html_content, encoding="utf-8")
