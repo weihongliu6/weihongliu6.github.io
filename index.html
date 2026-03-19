@@ -151,6 +151,64 @@
       font-weight:300;
     }
 
+    .featured-medical{
+      max-width:720px;
+      margin:0 auto 20px;
+    }
+
+    .featured-medical-card{
+      display:block;
+      text-decoration:none;
+      background:rgba(255,255,255,0.86);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      padding:14px 16px;
+      color:inherit;
+      transition: background .15s ease, border .15s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .featured-medical-card:hover{
+      background:rgba(255,255,255,0.94);
+      border-color:rgba(0,0,0,0.12);
+    }
+
+    .featured-medical-label{
+      display:block;
+      font-size:12px;
+      color:#666;
+      line-height:1.35;
+      margin-bottom:8px;
+      letter-spacing:0.2px;
+    }
+
+    .featured-medical-title{
+      display:block;
+      margin:0;
+      font-size:19px;
+      font-weight:500;
+      line-height:1.45;
+      color:#222;
+    }
+
+    .featured-medical-subtitle{
+      display:block;
+      margin-top:6px;
+      font-size:12px;
+      color:#777;
+      letter-spacing:0.2px;
+      line-height:1.35;
+    }
+
+    .featured-medical-note{
+      display:block;
+      margin-top:6px;
+      font-size:12px;
+      color:#8a8a8a;
+      line-height:1.35;
+    }
+
     .nav-row{
       margin-top: 22px;
       margin-bottom: 14px;
@@ -281,6 +339,23 @@
         Shadow Observer Digital Studio explores photography and ideas, observing the world slowly in an age of acceleration.
       </div>
     </div>
+
+    <section class="featured-medical" aria-label="医学栏目精选 Featured Medical Article">
+      <a class="featured-medical-card" href="medical/osa-hidden-killer.html">
+        <span class="featured-medical-label">
+          医学栏目精选
+          <br>
+          Featured Medical Article
+        </span>
+        <span class="featured-medical-title">睡梦中的“隐形杀手”：你可能对阻塞性睡眠呼吸暂停的认知已经过时了</span>
+        <span class="featured-medical-subtitle">Outdated Understanding of OSA: A Clinical Insight</span>
+        <span class="featured-medical-note">
+          来自“临床思考”栏目
+          <br>
+          From Clinical Insights
+        </span>
+      </a>
+    </section>
 
     <div class="nav-row">
       <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span></a>
