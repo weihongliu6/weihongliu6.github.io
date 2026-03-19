@@ -152,6 +152,66 @@
       line-height:1.5;
     }
 
+    .article-list{
+      margin-top:20px;
+      background:rgba(255,255,255,.78);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 18px 14px;
+    }
+
+    .article-list h2{
+      margin:0;
+      font-size:22px;
+      font-weight:500;
+      line-height:1.3;
+      color:#1f1f1f;
+    }
+
+    .article-list .subtitle{
+      margin:4px 0 12px;
+      color:#6b6b6b;
+      font-size:14px;
+    }
+
+    .article-list ul{
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+    .article-list li{
+      margin:0;
+      padding:10px 0;
+      border-top:1px solid rgba(0,0,0,.06);
+    }
+
+    .article-list a{
+      text-decoration:none;
+      color:inherit;
+      display:block;
+      line-height:1.55;
+    }
+
+    .article-list .zh{
+      display:block;
+      font-size:17px;
+      color:#1f1f1f;
+    }
+
+    .article-list .en{
+      display:block;
+      margin-top:2px;
+      font-size:14px;
+      color:#666;
+    }
+
+    .article-list a:hover .zh{
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+
     footer{
       margin-top:26px;
       text-align:center;
@@ -192,6 +252,19 @@
         <p class="desc">来自实践的观察与理解</p>
       </a>
     </div>
+
+    <section class="article-list">
+      <h2>最新文章</h2>
+      <p class="subtitle">Latest Articles</p>
+      <ul>
+        <li>
+          <a href="medical/reading-the-code-of-life.html">
+            <span class="zh">读懂生命的密码</span>
+            <span class="en">——DeepMind如何用人工智能破译人类基因组</span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
     <footer>© Dr Weihong Liu · Digital Studio</footer>
   </div>
