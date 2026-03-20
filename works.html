@@ -49,6 +49,37 @@
       max-width: 680px;
     }
 
+    .featured-section{
+      margin: 22px 0 28px;
+      text-align: left;
+    }
+    .section-title-zh{
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+    .section-title-en{
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .section-intro{
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0 auto 14px;
+      max-width: 680px;
+      text-align: center;
+    }
+    .featured-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+
     /* Back link */
     .topbar{
       display:flex;
@@ -78,9 +109,11 @@
     }
     @media (max-width: 900px){
       .grid{ grid-template-columns: repeat(2, 1fr); }
+      .featured-grid{ grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 560px){
       .grid{ grid-template-columns: 1fr; }
+      .featured-grid{ grid-template-columns: 1fr; }
     }
 
     .card{
@@ -170,6 +203,38 @@
       A curated gallery of selected works — focused on single images and their mood.
 These images emerge from Dr Weihong Liu’s real presence in the world — not constructed, but quietly witnessed and captured in the flow of time.
     </p>
+
+    <section class="featured-section" aria-label="Most Viewed Works">
+      <div class="section-title-zh">被看见的作品</div>
+      <div class="section-title-en">Most Viewed Works</div>
+      <p class="section-intro">这些作品，正在被更多人看见。<br/>These works are being seen by more viewers.</p>
+
+      <div class="featured-grid">
+        <a class="card" href="works/castle.html">
+          <img class="thumb" src="images/works/PhotographyWorks-1.jpg" alt="Castle on the Danube River, Germany" />
+          <div class="meta">
+            <p class="name-zh">多瑙河畔 · 古堡与光</p>
+            <p class="name-en">Danube Castle — Light in the Mist</p>
+          </div>
+        </a>
+
+        <a class="card" href="works/dunes.html">
+          <img class="thumb" src="images/works/PhotographyWorks-2.jpg" alt="Sand dunes, South Australia" />
+          <div class="meta">
+            <p class="name-zh">南澳沙丘 · 光影的纹理</p>
+            <p class="name-en">South Australian Dunes — Texture of Light</p>
+          </div>
+        </a>
+
+        <a class="card" href="works/sydney.html">
+          <img class="thumb" src="images/works/PhotographyWorks-6.jpg" alt="Sydney Harbour Bridge" />
+          <div class="meta">
+            <p class="name-zh">悉尼 · 港湾的时间痕</p>
+            <p class="name-en">Sydney — Traces of Time</p>
+          </div>
+        </a>
+      </div>
+    </section>
 
     <div class="grid">
 
