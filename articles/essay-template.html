@@ -47,7 +47,7 @@
     .wrap{
       max-width:780px;
       margin:0 auto;
-      padding:24px 18px 80px;
+      padding:24px 18px 120px;
     }
 
     header{
@@ -146,7 +146,83 @@
     }
     .footer a{ color:var(--link); text-decoration:none; }
 
+    .article-action-bar{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      color: #222;
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1200;
+    }
+    .action-btn{
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .action-btn:hover{
+      background: rgba(0,0,0,0.06);
+    }
+    .action-divider{
+      width: 1px;
+      height: 14px;
+      background: rgba(0,0,0,0.15);
+    }
+    .copy-toast{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f5f5f5;
+      background: rgba(17,17,20,0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+      z-index: 1201;
+    }
+    .copy-toast.show{
+      opacity: 1;
+    }
+
     @media (max-width:700px){
+
+      .article-action-bar{
+        bottom: 14px;
+        padding: 7px 10px;
+        gap: 8px;
+      }
+      .action-btn{
+        font-size: 13px;
+        padding: 6px 9px;
+      }
+      .action-divider{
+        height: 12px;
+      }
+      .copy-toast{
+        bottom: 64px;
+      }
+
       .title-zh{
         font-size:32px;
         line-height:1.2;
@@ -189,6 +265,8 @@
       <p>{{DATE_LOCATION}}</p>
     </article>
 
+    <div id="comments"></div>
+
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
       <div style="margin-top:6px;">
@@ -197,5 +275,89 @@
       </div>
     </div>
   </main>
+
+  <div class="article-action-bar">
+    <button class="action-btn comment-btn" type="button" aria-label="留言">留言</button>
+    <div class="action-divider" aria-hidden="true"></div>
+    <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
+  </div>
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
+
+  <script>
+    (() => {
+      const ensureCommentAnchor = () => {
+        let anchor = document.getElementById('comments');
+        if (!anchor) {
+          const article = document.querySelector('article');
+          anchor = document.createElement('div');
+          anchor.id = 'comments';
+          if (article) {
+            article.insertAdjacentElement('afterend', anchor);
+          } else {
+            document.body.appendChild(anchor);
+          }
+        }
+        return anchor;
+      };
+
+      const showCopyToast = () => {
+        const toast = document.querySelector('.copy-toast');
+        if (!toast) return;
+        toast.classList.add('show');
+        window.clearTimeout(showCopyToast.timer);
+        showCopyToast.timer = window.setTimeout(() => {
+          toast.classList.remove('show');
+        }, 1500);
+      };
+
+      const copyCurrentUrl = async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          showCopyToast();
+        } catch (error) {
+          const input = document.createElement('input');
+          input.value = window.location.href;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          showCopyToast();
+        }
+      };
+
+      const setupActionBar = () => {
+        const commentBtn = document.querySelector('.comment-btn');
+        const shareBtn = document.querySelector('.share-btn');
+        if (!commentBtn || !shareBtn) return;
+
+        commentBtn.addEventListener('click', () => {
+          const anchor = ensureCommentAnchor();
+          anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        shareBtn.addEventListener('click', async () => {
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: document.title,
+                text: document.title,
+                url: window.location.href
+              });
+              return;
+            } catch (error) {
+              if (error && error.name === 'AbortError') return;
+            }
+          }
+          await copyCurrentUrl();
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupActionBar, { once: true });
+      } else {
+        setupActionBar();
+      }
+    })();
+  </script>
 </body>
 </html>
