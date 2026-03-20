@@ -83,7 +83,13 @@
   display:flex;
   justify-content:center;
 }
-    .page-visit-count{margin:14px auto 0;text-align:center;font-size:12px;color:#888;opacity:.7;}
+    .visit-badge{
+      display:block;
+      margin:10px auto 0;
+      height:16px;
+      opacity:.35;
+      filter:grayscale(1);
+    }
   </style>
 
   <script data-goatcounter="https://weihongliu.goatcounter.com/count"
@@ -131,10 +137,11 @@
         </div>
       </div>
     </div>
-
-    <div class="page-visit-count"></div>
-
     <footer>© 影子观察 | Shadow Observer</footer>
+
+    <img class="visit-badge"
+         src="https://hits.sh/weihongliu6.github.io/works/moraine.svg?label=views&color=777777&labelColor=eeeeee"
+         alt="view counter">
   </div>
 
   <div class="lb" id="lb">
@@ -150,22 +157,6 @@
     lbClose.addEventListener('click', () => lb.classList.remove('open'));
     lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('open'); });
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') lb.classList.remove('open'); });
-  </script>
-  <script>
-    const initPageVisitCounter = () => {
-      if (!window.goatcounter || !window.goatcounter.visit_count) return;
-      window.goatcounter.visit_count({
-        append: '.page-visit-count',
-        path: location.pathname,
-        no_branding: true
-      });
-    };
-
-    if (window.goatcounter && window.goatcounter.visit_count) {
-      initPageVisitCounter();
-    } else {
-      window.addEventListener('load', initPageVisitCounter, { once: true });
-    }
   </script>
 </body>
 </html>
