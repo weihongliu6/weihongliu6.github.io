@@ -124,7 +124,11 @@ font-size:16px;
 }
 
 }
+    .page-visit-count{margin:14px auto 0;text-align:center;font-size:12px;color:#888;opacity:.7;}
   </style>
+
+  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </head>
 
 <body>
@@ -183,6 +187,8 @@ font-size:16px;
       <p>今天的隐士不是远离世界，而是让思想在喧嚣里沉淀深刻，让思想不被世界淹没。</p>
     </article>
 
+    <div class="page-visit-count"></div>
+
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
       <div style="margin-top:6px;">
@@ -191,5 +197,21 @@ font-size:16px;
       </div>
     </div>
   </main>
+  <script>
+    const initPageVisitCounter = () => {
+      if (!window.goatcounter || !window.goatcounter.visit_count) return;
+      window.goatcounter.visit_count({
+        append: '.page-visit-count',
+        path: location.pathname,
+        no_branding: true
+      });
+    };
+
+    if (window.goatcounter && window.goatcounter.visit_count) {
+      initPageVisitCounter();
+    } else {
+      window.addEventListener('load', initPageVisitCounter, { once: true });
+    }
+  </script>
 </body>
 </html>

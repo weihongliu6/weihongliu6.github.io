@@ -129,7 +129,11 @@ font-family: ui-sans-serif, system-ui, -apple-system,
         font-size:16px;
       }
     }
+    .page-visit-count{margin:14px auto 0;text-align:center;font-size:12px;color:#888;opacity:.7;}
   </style>
+
+  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </head>
 
 <body>
@@ -202,6 +206,8 @@ Humans May Be a Transitional Species of Civilization
       <p>这也许就是我们所能做到的全部。</p>
     </article>
 
+    <div class="page-visit-count"></div>
+
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
       <div style="margin-top:6px;">
@@ -210,5 +216,21 @@ Humans May Be a Transitional Species of Civilization
       </div>
     </div>
   </main>
+  <script>
+    const initPageVisitCounter = () => {
+      if (!window.goatcounter || !window.goatcounter.visit_count) return;
+      window.goatcounter.visit_count({
+        append: '.page-visit-count',
+        path: location.pathname,
+        no_branding: true
+      });
+    };
+
+    if (window.goatcounter && window.goatcounter.visit_count) {
+      initPageVisitCounter();
+    } else {
+      window.addEventListener('load', initPageVisitCounter, { once: true });
+    }
+  </script>
 </body>
 </html>
