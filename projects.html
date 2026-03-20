@@ -441,6 +441,71 @@
       border-color:rgba(255,255,255,.30);
     }
 
+
+    /* lightbox / modal navigation buttons */
+    .lightbox .prev,
+    .lightbox .next,
+    .modal .prev,
+    .modal .next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(255,255,255,0.78);
+      color: #222;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .lightbox .prev,
+    .modal .prev {
+      left: 18px;
+    }
+
+    .lightbox .next,
+    .modal .next {
+      right: 18px;
+    }
+
+    .lightbox .prev:hover,
+    .lightbox .next:hover,
+    .modal .prev:hover,
+    .modal .next:hover {
+      background: rgba(255,255,255,0.92);
+    }
+
+    @media (max-width: 768px) {
+      .lightbox .prev,
+      .lightbox .next,
+      .modal .prev,
+      .modal .next {
+        width: 44px;
+        height: 44px;
+      }
+
+      .lightbox .prev,
+      .modal .prev {
+        left: 10px;
+      }
+
+      .lightbox .next,
+      .modal .next {
+        right: 10px;
+      }
+    }
+
     footer{
       margin-top:22px;
       padding-top:14px;
@@ -630,8 +695,8 @@
         </div>
 
         <div class="ctrl">
-          <div class="btn" id="mPrevBtn" aria-label="Previous slide">‹</div>
-          <div class="btn" id="mNextBtn" aria-label="Next slide">›</div>
+          <div class="btn prev" id="mPrevBtn" aria-label="Previous slide">‹</div>
+          <div class="btn next" id="mNextBtn" aria-label="Next slide">›</div>
         </div>
 
         <div class="dots" id="mDots" aria-label="Slide dots"></div>
