@@ -236,6 +236,88 @@
       opacity: 1;
     }
 
+    .share-panel{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 1300;
+    }
+    .share-panel.show{
+      display: flex;
+    }
+    .share-option-btn,
+    .share-wechat-btn{
+      border: none;
+      background: rgba(0,0,0,0.04);
+      color: #222;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .share-option-btn:hover,
+    .share-wechat-btn:hover{
+      background: rgba(0,0,0,0.08);
+    }
+
+    .wechat-modal{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .wechat-modal.show{
+      display: flex;
+    }
+
+    .wechat-modal-content{
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 280px;
+      box-sizing: border-box;
+    }
+
+    .wechat-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    #closeWechatModal{
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      color: #555;
+    }
+
+    #qrcode{
+      margin-top: 10px;
+      display: inline-block;
+    }
 
     .comment-panel{
       position: fixed;
@@ -443,6 +525,10 @@
     <div class="action-divider" aria-hidden="true"></div>
     <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
   </div>
+  <div class="share-panel" id="sharePanel">
+    <button class="share-option-btn" id="copyShareBtn" type="button">复制链接</button>
+    <button class="share-wechat-btn" id="wechatShareBtn" type="button">WeChat / 微信</button>
+  </div>
   <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
 
   <div class="comment-panel" id="commentPanel">
@@ -464,6 +550,19 @@
     </div>
   </div>
   <div class="comment-overlay" id="commentOverlay"></div>
+
+  <div class="wechat-modal" id="wechatModal">
+    <div class="wechat-modal-content">
+      <div class="wechat-header">
+        <span>微信分享</span>
+        <button id="closeWechatModal" type="button" aria-label="关闭微信分享">✕</button>
+      </div>
+      <div class="wechat-body">
+        <p>用微信扫一扫分享这篇文章</p>
+        <div id="qrcode"></div>
+      </div>
+    </div>
+  </div>
   <script>
     const initPageVisitCounter = () => {
       if (!window.goatcounter || !window.goatcounter.visit_count) return;
@@ -480,6 +579,8 @@
       window.addEventListener('load', initPageVisitCounter, { once: true });
     }
   </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
     (() => {
@@ -511,6 +612,12 @@
       const setupActionBar = () => {
         const commentBtn = document.querySelector('.comment-btn');
         const shareBtn = document.querySelector('.share-btn');
+        const sharePanel = document.getElementById('sharePanel');
+        const copyShareBtn = document.getElementById('copyShareBtn');
+        const wechatBtn = document.getElementById('wechatShareBtn');
+        const modal = document.getElementById('wechatModal');
+        const closeBtn = document.getElementById('closeWechatModal');
+        const qrContainer = document.getElementById('qrcode');
         const commentPanel = document.getElementById('commentPanel');
         const commentOverlay = document.getElementById('commentOverlay');
         const closeCommentBtn = document.getElementById('closeCommentBtn');
@@ -519,7 +626,7 @@
         const commentInput = document.getElementById('commentInput');
         const cancelCommentBtn = document.getElementById('cancelCommentBtn');
         const submitCommentBtn = document.getElementById('submitCommentBtn');
-        if (!commentBtn || !shareBtn || !commentPanel || !commentOverlay || !closeCommentBtn || !commentList || !commentComposeWrap || !commentInput || !cancelCommentBtn || !submitCommentBtn) return;
+        if (!commentBtn || !shareBtn || !sharePanel || !copyShareBtn || !wechatBtn || !modal || !closeBtn || !qrContainer || !commentPanel || !commentOverlay || !closeCommentBtn || !commentList || !commentComposeWrap || !commentInput || !cancelCommentBtn || !submitCommentBtn) return;
 
         const commentsStorageKey = `comments:${window.location.pathname}`;
 
@@ -609,26 +716,61 @@
         cancelCommentBtn.addEventListener('click', cancelComment);
         submitCommentBtn.addEventListener('click', submitComment);
 
-        shareBtn.addEventListener('click', async () => {
-          if (navigator.share) {
-            try {
-              await navigator.share({
-                title: document.title,
-                text: document.title,
-                url: window.location.href
-              });
-              return;
-            } catch (error) {
-              if (error && error.name === 'AbortError') return;
-            }
-          }
+        const closeSharePanel = () => {
+          sharePanel.classList.remove('show');
+        };
+
+        shareBtn.addEventListener('click', () => {
+          sharePanel.classList.toggle('show');
+        });
+
+        copyShareBtn.addEventListener('click', async () => {
+          closeSharePanel();
           await copyCurrentUrl();
+        });
+
+        wechatBtn.onclick = () => {
+          closeSharePanel();
+          modal.classList.add('show');
+          qrContainer.innerHTML = '';
+          if (typeof QRCode === 'function') {
+            new QRCode(qrContainer, {
+              text: window.location.href,
+              width: 180,
+              height: 180
+            });
+          }
+        };
+
+        closeBtn.onclick = () => {
+          modal.classList.remove('show');
+        };
+
+        modal.onclick = (event) => {
+          if (event.target === modal) {
+            modal.classList.remove('show');
+          }
+        };
+
+        document.addEventListener('click', (event) => {
+          if (!sharePanel.contains(event.target) && !shareBtn.contains(event.target)) {
+            closeSharePanel();
+          }
         });
       };
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
           const commentPanel = document.getElementById('commentPanel');
+          const modal = document.getElementById('wechatModal');
+          if (modal) {
+            modal.classList.remove('show');
+          }
+          const sharePanel = document.getElementById('sharePanel');
+          if (sharePanel) {
+            sharePanel.classList.remove('show');
+          }
+
           if (commentPanel && commentPanel.classList.contains('open')) {
             commentPanel.classList.remove('open');
             const commentOverlay = document.getElementById('commentOverlay');
