@@ -266,10 +266,33 @@
       color: #3b3b40;
       padding: 2px;
     }
-    .comment-body{
+    .comment-list{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 2px;
+      margin-bottom: 14px;
+    }
+    .comment-item{
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.88);
+      padding: 10px 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 14px;
+    }
+    .comment-compose-wrap{
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: auto;
+    }
+    .comment-compose-wrap.hidden{
+      display: none;
     }
     .comment-input{
       width: 100%;
@@ -283,16 +306,27 @@
       background: rgba(255,255,255,0.92);
       color: #222;
     }
+    .comment-actions{
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .cancel-comment,
     .submit-comment{
-      align-self: flex-end;
       padding: 6px 14px;
       border-radius: 999px;
       border: none;
-      background: rgba(0,0,0,0.8);
-      color: white;
       cursor: pointer;
       font: inherit;
       font-size: 14px;
+    }
+    .cancel-comment{
+      background: rgba(0,0,0,0.08);
+      color: #333;
+    }
+    .submit-comment{
+      background: rgba(0,0,0,0.8);
+      color: white;
     }
     .comment-overlay{
       position: fixed;
@@ -426,9 +460,14 @@
         <button class="close-comment" id="closeCommentBtn" type="button" aria-label="关闭留言面板">✕</button>
       </div>
 
-      <div class="comment-body">
-        <textarea placeholder="写下你的想法…" class="comment-input"></textarea>
-        <button class="submit-comment" type="button">提交</button>
+      <div class="comment-list" id="commentList"></div>
+
+      <div class="comment-compose-wrap hidden" id="commentComposeWrap">
+        <textarea placeholder="写下你的想法…" class="comment-input" id="commentInput"></textarea>
+        <div class="comment-actions">
+          <button class="cancel-comment" id="cancelCommentBtn" type="button">取消</button>
+          <button class="submit-comment" id="submitCommentBtn" type="button">提交</button>
+        </div>
       </div>
     </div>
   </div>
@@ -483,7 +522,47 @@
         const commentPanel = document.getElementById('commentPanel');
         const commentOverlay = document.getElementById('commentOverlay');
         const closeCommentBtn = document.getElementById('closeCommentBtn');
-        if (!commentBtn || !shareBtn || !commentPanel || !commentOverlay || !closeCommentBtn) return;
+        const commentList = document.getElementById('commentList');
+        const commentComposeWrap = document.getElementById('commentComposeWrap');
+        const commentInput = document.getElementById('commentInput');
+        const cancelCommentBtn = document.getElementById('cancelCommentBtn');
+        const submitCommentBtn = document.getElementById('submitCommentBtn');
+        if (!commentBtn || !shareBtn || !commentPanel || !commentOverlay || !closeCommentBtn || !commentList || !commentComposeWrap || !commentInput || !cancelCommentBtn || !submitCommentBtn) return;
+
+        const commentsStorageKey = `comments:${window.location.pathname}`;
+
+        const loadComments = () => {
+          try {
+            const cached = localStorage.getItem(commentsStorageKey);
+            return cached ? JSON.parse(cached) : [];
+          } catch (error) {
+            return [];
+          }
+        };
+
+        const saveComments = (comments) => {
+          try {
+            localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
+          } catch (error) {
+            // Ignore storage errors to keep interaction smooth.
+          }
+        };
+
+        const renderComments = (comments) => {
+          commentList.innerHTML = '';
+          comments.forEach((content) => {
+            const item = document.createElement('div');
+            item.className = 'comment-item';
+            item.textContent = content;
+            commentList.appendChild(item);
+          });
+          commentList.scrollTop = commentList.scrollHeight;
+        };
+
+        const clearComposeInput = () => {
+          commentInput.value = '';
+          commentInput.blur();
+        };
 
         const openCommentPanel = () => {
           commentPanel.classList.add('open');
@@ -497,9 +576,46 @@
           document.body.style.overflow = '';
         };
 
-        commentBtn.addEventListener('click', openCommentPanel);
-        closeCommentBtn.addEventListener('click', closeCommentPanel);
-        commentOverlay.addEventListener('click', closeCommentPanel);
+        const openNewCommentSession = () => {
+          openCommentPanel();
+          commentComposeWrap.classList.remove('hidden');
+          clearComposeInput();
+          commentInput.focus();
+        };
+
+        const exitComposeState = () => {
+          clearComposeInput();
+          commentComposeWrap.classList.add('hidden');
+        };
+
+        const submitComment = () => {
+          const value = commentInput.value.trim();
+          if (!value) return;
+
+          comments.push(value);
+          saveComments(comments);
+          renderComments(comments);
+          exitComposeState();
+        };
+
+        const cancelComment = () => {
+          exitComposeState();
+        };
+
+        const comments = loadComments();
+        renderComments(comments);
+
+        commentBtn.addEventListener('click', openNewCommentSession);
+        closeCommentBtn.addEventListener('click', () => {
+          closeCommentPanel();
+          exitComposeState();
+        });
+        commentOverlay.addEventListener('click', () => {
+          closeCommentPanel();
+          exitComposeState();
+        });
+        cancelCommentBtn.addEventListener('click', cancelComment);
+        submitCommentBtn.addEventListener('click', submitComment);
 
         shareBtn.addEventListener('click', async () => {
           if (navigator.share) {
@@ -526,6 +642,15 @@
             const commentOverlay = document.getElementById('commentOverlay');
             if (commentOverlay) {
               commentOverlay.classList.remove('show');
+            }
+            const commentComposeWrap = document.getElementById('commentComposeWrap');
+            const commentInput = document.getElementById('commentInput');
+            if (commentComposeWrap) {
+              commentComposeWrap.classList.add('hidden');
+            }
+            if (commentInput) {
+              commentInput.value = '';
+              commentInput.blur();
             }
             document.body.style.overflow = '';
           }
