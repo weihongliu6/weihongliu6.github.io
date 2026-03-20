@@ -179,6 +179,20 @@
     .action-btn:hover{
       background: rgba(0,0,0,0.06);
     }
+    body.light-theme .article-action-bar{
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(0,0,0,0.12);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    body.light-theme .article-action-bar .action-btn{
+      color: rgba(0,0,0,0.8);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
+    }
+    body.light-theme .article-action-bar .action-btn:hover{
+      background: rgba(0,0,0,0.12);
+    }
     .action-divider{
       width: 1px;
       height: 14px;
@@ -432,7 +446,7 @@
 
   </style>
 </head>
-<body>
+<body class="light-theme">
   <div class="top-links">
     <a href="../index.html">← 返回主页</a>
     <a href="../medical.html">← 返回医学栏目</a>
@@ -503,9 +517,9 @@
   </main>
 
   <div class="article-action-bar">
-    <button class="action-btn comment-btn" type="button" aria-label="留言">留言</button>
+    <button class="action-btn comment-btn" type="button" aria-label="留言">💬 留言</button>
     <div class="action-divider" aria-hidden="true"></div>
-    <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
+    <button class="action-btn share-btn" type="button" aria-label="分享">↗ 分享</button>
   </div>
   <div class="share-panel" id="sharePanel">
     <button class="share-option-btn" id="copyShareBtn" type="button">复制链接</button>
