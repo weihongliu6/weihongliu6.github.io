@@ -163,7 +163,7 @@
       .lead{ font-size:16px; }
       h2{ font-size:24px; }
     }
-    .page-visit-count{margin:14px auto 0;text-align:center;font-size:12px;color:#888;opacity:.7;}
+    .visit-badge{display:block;margin:10px auto 0;height:16px;opacity:.35;filter:grayscale(1);}
 
     .article-action-bar{
       position: fixed;
@@ -517,7 +517,6 @@
 
     <div id="comments"></div>
 
-    <div class="page-visit-count"></div>
 
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
@@ -526,6 +525,10 @@
         <a href="../index.html">返回 Home</a>
       </div>
     </div>
+
+    <img class="visit-badge"
+         src="https://hits.sh/weihongliu6.github.io/articles/beijing.svg?label=views&color=777777&labelColor=eeeeee"
+         alt="Page visit count" />
   </main>
 
   <div class="article-action-bar">
@@ -571,23 +574,6 @@
       </div>
     </div>
   </div>
-  <script>
-    const initPageVisitCounter = () => {
-      if (!window.goatcounter || !window.goatcounter.visit_count) return;
-      window.goatcounter.visit_count({
-        append: '.page-visit-count',
-        path: location.pathname,
-        no_branding: true
-      });
-    };
-
-    if (window.goatcounter && window.goatcounter.visit_count) {
-      initPageVisitCounter();
-    } else {
-      window.addEventListener('load', initPageVisitCounter, { once: true });
-    }
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
