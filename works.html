@@ -240,32 +240,9 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
         <h2 class="section-title-zh">Top 3 热门作品</h2>
         <h2 class="section-title-en">Top 3 Most Viewed Works</h2>
         <p class="section-intro">这些作品，正在被更多人看见。<br/>These works are being seen by more viewers.</p>
+        <p class="section-intro">基于页面浏览量自动更新<br/>Automatically updated based on page views</p>
 
-        <div class="featured-grid">
-          <a class="card" href="works/castle.html">
-            <img class="thumb" src="images/works/PhotographyWorks-1.jpg" alt="Castle on the Danube River, Germany" />
-            <div class="meta">
-              <p class="name-zh">多瑙河畔 · 古堡与光</p>
-              <p class="name-en">Danube Castle — Light in the Mist</p>
-            </div>
-          </a>
-
-          <a class="card" href="works/dunes.html">
-            <img class="thumb" src="images/works/PhotographyWorks-2.jpg" alt="Sand dunes, South Australia" />
-            <div class="meta">
-              <p class="name-zh">南澳沙丘 · 光影的纹理</p>
-              <p class="name-en">South Australian Dunes — Texture of Light</p>
-            </div>
-          </a>
-
-          <a class="card" href="works/sydney.html">
-            <img class="thumb" src="images/works/PhotographyWorks-6.jpg" alt="Sydney Harbour Bridge" />
-            <div class="meta">
-              <p class="name-zh">悉尼 · 港湾的时间痕</p>
-              <p class="name-en">Sydney — Traces of Time</p>
-            </div>
-          </a>
-        </div>
+        <div class="featured-grid" id="top-works-grid"></div>
       </div>
     </section>
 
@@ -384,5 +361,65 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
      alt="visits">
 
   </div>
+
+  <script>
+    const topWorksCandidates = [
+      { path: "/works/castle.html", href: "works/castle.html", image: "images/works/PhotographyWorks-1.jpg", titleZh: "多瑙河畔 · 古堡与光", titleEn: "Danube Castle — Light in the Mist", alt: "Castle on the Danube River, Germany" },
+      { path: "/works/dunes.html", href: "works/dunes.html", image: "images/works/PhotographyWorks-2.jpg", titleZh: "南澳沙丘 · 光影的纹理", titleEn: "South Australian Dunes — Texture of Light", alt: "Sand dunes, South Australia" },
+      { path: "/works/moraine.html", href: "works/moraine.html", image: "images/works/PhotographyWorks-3.jpg", titleZh: "梦莲湖 · 静水与群峰", titleEn: "Lake Moraine — Peaks and Still Water", alt: "Lake Moraine, Canada" },
+      { path: "/works/goldcoast.html", href: "works/goldcoast.html", image: "images/works/PhotographyWorks-4.jpg", titleZh: "黄金海岸 · 城市的慢门", titleEn: "Gold Coast — A Slow City", alt: "Gold Coast cityscape, Australia" },
+      { path: "/works/singapore.html", href: "works/singapore.html", image: "images/works/PhotographyWorks-5.jpg", titleZh: "新加坡 · 光束与海湾", titleEn: "Singapore — Beams over the Bay", alt: "Singapore Marina Bay" },
+      { path: "/works/sydney.html", href: "works/sydney.html", image: "images/works/PhotographyWorks-6.jpg", titleZh: "悉尼 · 港湾的时间痕", titleEn: "Sydney — Traces of Time", alt: "Sydney Harbour Bridge" },
+      { path: "/works/brighton.html", href: "works/brighton.html", image: "images/works/PhotographyWorks-7.jpg", titleZh: "阿德莱德布莱顿栈桥 · 紫色晨光", titleEn: "Brighton Jetty — Violet Dawn", alt: "Brighton Jetty at dawn, Adelaide" },
+      { path: "/works/lake-bonney.html", href: "works/lake-bonney.html", image: "images/works/PhotographyWorks-8.jpg", titleZh: "邦尼湖 · 枯树与晨曦", titleEn: "Lake Bonney — Tree in First Light", alt: "Lake Bonney tree in first light" },
+      { path: "/works/edithburgh.html", href: "works/edithburgh.html", image: "images/works/PhotographyWorks-9.jpg", titleZh: "伊迪斯堡 · 日出与小船", titleEn: "Edithburgh — Boat at Sunrise", alt: "Edithburgh boat at sunrise" }
+    ];
+
+    const topWorksFallback = ["/works/castle.html", "/works/dunes.html", "/works/sydney.html"];
+
+    function renderTopWorks(works) {
+      const topWorksGrid = document.getElementById("top-works-grid");
+      if (!topWorksGrid) return;
+
+      topWorksGrid.innerHTML = works.map((work) => `
+        <a class="card" href="${work.href}">
+          <img class="thumb" src="${work.image}" alt="${work.alt}" />
+          <div class="meta">
+            <p class="name-zh">${work.titleZh}</p>
+            <p class="name-en">${work.titleEn}</p>
+          </div>
+        </a>
+      `).join("");
+    }
+
+    async function loadTopWorks() {
+      try {
+        const rankedWorks = await Promise.all(
+          topWorksCandidates.map(async (work) => {
+            const encodedPath = encodeURIComponent(work.path);
+            const counterUrl = `https://weihongliu.goatcounter.com/counter/${encodedPath}.json`;
+            const response = await fetch(counterUrl);
+            if (!response.ok) {
+              throw new Error(`GoatCounter request failed for ${work.path}`);
+            }
+            const data = await response.json();
+            const rawCount = String(data.count ?? "0");
+            const count = Number(rawCount.replace(/,/g, ""));
+            return { ...work, count: Number.isFinite(count) ? count : 0 };
+          })
+        );
+
+        rankedWorks.sort((a, b) => b.count - a.count);
+        renderTopWorks(rankedWorks.slice(0, 3));
+      } catch (error) {
+        const fallbackWorks = topWorksFallback
+          .map((path) => topWorksCandidates.find((work) => work.path === path))
+          .filter(Boolean);
+        renderTopWorks(fallbackWorks);
+      }
+    }
+
+    loadTopWorks();
+  </script>
 </body>
 </html>
