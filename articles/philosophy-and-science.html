@@ -151,6 +151,10 @@
       .copy-toast{
         bottom: 64px;
       }
+      .comment-panel{
+        width: 100%;
+        right: -100%;
+      }
 
       .title-zh{
         font-size:32px;
@@ -219,6 +223,94 @@
     .copy-toast.show{
       opacity: 1;
     }
+
+
+    .comment-panel{
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      max-width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+      transition: right 0.35s ease;
+      z-index: 1300;
+    }
+    .comment-panel.open{
+      right: 0;
+    }
+    .comment-panel-inner{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #1f1f24;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .comment-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .close-comment{
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      cursor: pointer;
+      color: #3b3b40;
+      padding: 2px;
+    }
+    .comment-body{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .comment-input{
+      width: 100%;
+      height: 120px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      resize: none;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.92);
+      color: #222;
+    }
+    .submit-comment{
+      align-self: flex-end;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+    }
+    .comment-overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1200;
+    }
+    .comment-overlay.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
   </style>
 
   <script data-goatcounter="https://weihongliu.goatcounter.com/count"
@@ -325,6 +417,21 @@
     <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
   </div>
   <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
+
+  <div class="comment-panel" id="commentPanel">
+    <div class="comment-panel-inner">
+      <div class="comment-header">
+        <span>留言 / Comment</span>
+        <button class="close-comment" id="closeCommentBtn" type="button" aria-label="关闭留言面板">✕</button>
+      </div>
+
+      <div class="comment-body">
+        <textarea placeholder="写下你的想法…" class="comment-input"></textarea>
+        <button class="submit-comment" type="button">提交</button>
+      </div>
+    </div>
+  </div>
+  <div class="comment-overlay" id="commentOverlay"></div>
   <script>
     const initPageVisitCounter = () => {
       if (!window.goatcounter || !window.goatcounter.visit_count) return;
@@ -344,21 +451,6 @@
 
   <script>
     (() => {
-      const ensureCommentAnchor = () => {
-        let anchor = document.getElementById('comments');
-        if (!anchor) {
-          const article = document.querySelector('article');
-          anchor = document.createElement('div');
-          anchor.id = 'comments';
-          if (article) {
-            article.insertAdjacentElement('afterend', anchor);
-          } else {
-            document.body.appendChild(anchor);
-          }
-        }
-        return anchor;
-      };
-
       const showCopyToast = () => {
         const toast = document.querySelector('.copy-toast');
         if (!toast) return;
@@ -387,12 +479,26 @@
       const setupActionBar = () => {
         const commentBtn = document.querySelector('.comment-btn');
         const shareBtn = document.querySelector('.share-btn');
-        if (!commentBtn || !shareBtn) return;
+        const commentPanel = document.getElementById('commentPanel');
+        const commentOverlay = document.getElementById('commentOverlay');
+        const closeCommentBtn = document.getElementById('closeCommentBtn');
+        if (!commentBtn || !shareBtn || !commentPanel || !commentOverlay || !closeCommentBtn) return;
 
-        commentBtn.addEventListener('click', () => {
-          const anchor = ensureCommentAnchor();
-          anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+        const openCommentPanel = () => {
+          commentPanel.classList.add('open');
+          commentOverlay.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        };
+
+        const closeCommentPanel = () => {
+          commentPanel.classList.remove('open');
+          commentOverlay.classList.remove('show');
+          document.body.style.overflow = '';
+        };
+
+        commentBtn.addEventListener('click', openCommentPanel);
+        closeCommentBtn.addEventListener('click', closeCommentPanel);
+        commentOverlay.addEventListener('click', closeCommentPanel);
 
         shareBtn.addEventListener('click', async () => {
           if (navigator.share) {
@@ -410,6 +516,20 @@
           await copyCurrentUrl();
         });
       };
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          const commentPanel = document.getElementById('commentPanel');
+          if (commentPanel && commentPanel.classList.contains('open')) {
+            commentPanel.classList.remove('open');
+            const commentOverlay = document.getElementById('commentOverlay');
+            if (commentOverlay) {
+              commentOverlay.classList.remove('show');
+            }
+            document.body.style.overflow = '';
+          }
+        }
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setupActionBar, { once: true });
