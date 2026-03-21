@@ -118,7 +118,101 @@
     }
     .footer a{ color:var(--link); text-decoration:none; }
 
+    .comments-section{
+      margin-top: 42px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+    }
+    .comments-title{
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+    .comments-subtitle{
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .article-action-bar{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(17,17,20,0.72);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1200;
+    }
+    .action-btn{
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background .2s ease;
+    }
+    .action-btn:hover{
+      background: rgba(255,255,255,0.10);
+    }
+    .action-divider{
+      width: 1px;
+      height: 14px;
+      background: rgba(255,255,255,0.28);
+    }
+    .copy-toast{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f5f5f5;
+      background: rgba(17,17,20,0.84);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+      z-index: 1201;
+    }
+    .copy-toast.show{
+      opacity: 1;
+    }
+
     @media (max-width:700px){
+      .article-action-bar{
+        bottom: 14px;
+        padding: 7px 10px;
+        gap: 8px;
+      }
+      .action-btn{
+        font-size: 13px;
+        padding: 6px 9px;
+      }
+      .action-divider{
+        height: 12px;
+      }
+      .copy-toast{
+        bottom: 64px;
+      }
       .title-zh{
         font-size:32px;
         line-height:1.2;
@@ -181,6 +275,11 @@
       <p>2020.10.08于湖南常德</p>
     </article>
 
+    <section class="comments-section" id="comments">
+      <h2 class="comments-title">留言区</h2>
+      <p class="comments-subtitle">Comments</p>
+    </section>
+
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
       <div style="margin-top:6px;">
@@ -189,5 +288,74 @@
       </div>
     </div>
   </main>
+
+  <div class="article-action-bar">
+    <button class="action-btn comment-btn" type="button" aria-label="留言">留言</button>
+    <div class="action-divider" aria-hidden="true"></div>
+    <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
+  </div>
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
+
+  <script>
+    (() => {
+      const showCopyToast = () => {
+        const toast = document.querySelector('.copy-toast');
+        if (!toast) return;
+        toast.classList.add('show');
+        window.clearTimeout(showCopyToast.timer);
+        showCopyToast.timer = window.setTimeout(() => {
+          toast.classList.remove('show');
+        }, 1500);
+      };
+
+      const copyCurrentUrl = async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          showCopyToast();
+        } catch (error) {
+          const input = document.createElement('input');
+          input.value = window.location.href;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          showCopyToast();
+        }
+      };
+
+      const setupActionBar = () => {
+        const commentBtn = document.querySelector('.comment-btn');
+        const shareBtn = document.querySelector('.share-btn');
+        const commentsSection = document.getElementById('comments');
+        if (!commentBtn || !shareBtn || !commentsSection) return;
+
+        commentBtn.addEventListener('click', () => {
+          commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        shareBtn.addEventListener('click', async () => {
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: document.title,
+                text: '食肥猪肉和猪油者说',
+                url: window.location.href
+              });
+              return;
+            } catch (error) {
+              if (error && error.name === 'AbortError') return;
+            }
+          }
+          await copyCurrentUrl();
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupActionBar, { once: true });
+      } else {
+        setupActionBar();
+      }
+    })();
+  </script>
 </body>
 </html>
