@@ -280,30 +280,30 @@
 
     .follow-entry{
       position:fixed;
-      top:24px;
+      top:38px;
       right:16px;
       z-index:1200;
     }
 
     .follow-btn{
-      border:1px solid rgba(17,17,17,0.16);
+      border:1px solid rgba(0,0,0,0.14);
       border-radius:999px;
-      background:rgba(255,255,255,0.88);
+      background:rgba(255,255,255,0.92);
       backdrop-filter:blur(8px);
       color:#1e1e1e;
       font:inherit;
       line-height:1.2;
-      padding:10px 14px;
+      padding:10px 16px;
       cursor:pointer;
-      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      box-shadow:0 5px 16px rgba(0,0,0,0.07);
       transition:background .15s ease, border-color .15s ease, transform .15s ease;
       text-align:center;
-      min-width:132px;
+      min-width:136px;
     }
 
     .follow-btn:hover{
-      background:rgba(255,255,255,0.96);
-      border-color:rgba(17,17,17,0.24);
+      background:rgba(252,252,252,0.98);
+      border-color:rgba(0,0,0,0.2);
       transform:translateY(-1px);
     }
 
@@ -328,7 +328,7 @@
       display:none;
       align-items:center;
       justify-content:center;
-      background:rgba(8,12,20,0.22);
+      background:rgba(8,12,20,0.2);
       z-index:1300;
       padding:16px;
       box-sizing:border-box;
@@ -340,11 +340,11 @@
 
     .follow-card{
       width:min(92vw, 360px);
-      background:rgba(255,255,255,0.97);
-      border:1px solid rgba(0,0,0,0.10);
-      border-radius:16px;
-      box-shadow:0 14px 38px rgba(0,0,0,0.16);
-      padding:18px 18px 16px;
+      background:rgba(255,255,255,0.98);
+      border:1px solid rgba(0,0,0,0.09);
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.12);
+      padding:20px 18px 18px;
       line-height:1.6;
     }
 
@@ -357,39 +357,47 @@
     }
 
     .follow-text{
-      margin:0 0 8px;
-      color:#444;
-      font-size:15px;
-    }
-
-    .follow-list{
-      margin:0;
-      padding-left:18px;
-      color:#333;
+      margin:0 0 14px;
+      color:#555;
       font-size:14px;
     }
 
-    .follow-list li{
-      margin:5px 0;
+    .follow-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
 
-    .follow-list a{
-      color:#1a5fb4;
+    .platform-link{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      box-sizing:border-box;
+      min-height:42px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.13);
+      background:rgba(249,250,251,0.96);
+      color:#2a2a2a;
       text-decoration:none;
-      border-bottom:1px solid rgba(26,95,180,0.22);
-      transition:color .15s ease, border-color .15s ease;
+      font-size:15px;
+      font-weight:500;
+      letter-spacing:0.1px;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
     }
 
-    .follow-list a:hover,
-    .follow-list a:focus-visible{
-      color:#0f4588;
-      border-bottom-color:rgba(15,69,136,0.5);
+    .platform-link:hover,
+    .platform-link:focus-visible{
+      background:rgba(243,246,250,0.98);
+      border-color:rgba(0,0,0,0.2);
+      transform:translateY(-1px);
       outline:none;
     }
 
     @media (max-width: 700px){
       .follow-entry{
-        top:16px;
+        top:22px;
         right:12px;
       }
 
@@ -412,19 +420,19 @@
 <body>
   <div class="follow-entry">
     <button class="follow-btn" id="followTrigger" type="button" aria-haspopup="dialog" aria-controls="followPopup" aria-expanded="false">
-      <span class="zh">关注更新</span>
-      <span class="en">Subscribe</span>
+      <span class="zh">关注平台</span>
+      <span class="en">Follow</span>
     </button>
   </div>
 
   <div class="follow-overlay" id="followPopup" role="dialog" aria-modal="true" aria-labelledby="followPopupTitle">
     <div class="follow-card">
-      <h2 class="follow-title" id="followPopupTitle">关注更新<br><span class="en">Follow Updates</span></h2>
-      <p class="follow-text">获取新作品通知：</p>
-      <ul class="follow-list">
-        <li><a href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer">小红书关注</a></li>
-        <li><a href="https://www.youtube.com/@weihongliu9" target="_blank" rel="noopener noreferrer">YouTube 订阅</a></li>
-      </ul>
+      <h2 class="follow-title" id="followPopupTitle">关注平台<br><span class="en">Follow on Platforms</span></h2>
+      <p class="follow-text">在这些平台查看我的最新作品<br><span class="en">View my latest works on these platforms</span></p>
+      <div class="follow-actions">
+        <a class="platform-link" href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer">小红书</a>
+        <a class="platform-link" href="https://www.youtube.com/@weihongliu9" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
     </div>
   </div>
 
