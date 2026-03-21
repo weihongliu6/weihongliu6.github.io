@@ -201,62 +201,68 @@
       margin-top:16px;
       width:100%;
       max-width:100%;
-      border-radius:12px;
-      overflow:hidden;
-      display:flex;
-      justify-content:center;
     }
 
     .video-embed{
-      position:relative;
       width:100%;
-      aspect-ratio:16 / 9;
-      border-radius:12px;
-      overflow:hidden;
-    }
-
-    .video-embed iframe{
-      width:100%;
-      height:100%;
-      display:block;
-      border:0;
-      border-radius:12px;
-      margin:0 auto;
     }
 
     .video-card-link{
-      position:relative;
       display:block;
-      width:100%;
-      height:100%;
-      border-radius:12px;
-      overflow:hidden;
       text-decoration:none;
+      color:inherit;
     }
 
-    .video-card-thumb{
+    .video-card-preview{
+      position:relative;
+      aspect-ratio:16 / 9;
+      border-radius:14px;
+      overflow:hidden;
+      background:linear-gradient(140deg, #ece8e2 0%, #e3ddd5 50%, #d6cec2 100%);
+      box-shadow:0 10px 30px rgba(24,28,35,.10);
+      display:flex;
+      align-items:flex-end;
+      padding:22px;
+    }
+
+    .video-card-overlay{
       width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      border-radius:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+    }
+
+    .video-card-title-wrap{
+      max-width:78%;
+    }
+
+    .video-card-title{
+      margin:0 0 6px;
+      font-size:1.18rem;
+      letter-spacing:-.01em;
+      color:#1d232b;
+    }
+
+    .video-card-note{
+      margin:0;
+      font-size:.94rem;
+      line-height:1.65;
+      color:rgba(29,35,43,.78);
     }
 
     .video-card-play{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      width:72px;
-      height:72px;
+      width:62px;
+      height:62px;
       border-radius:50%;
-      background:rgba(0,0,0,.62);
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(4px);
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:0 8px 24px rgba(0,0,0,.28);
+      box-shadow:0 8px 24px rgba(29,35,43,.16);
       transition:transform .2s ease, background .2s ease;
-      pointer-events:none;
+      flex-shrink:0;
     }
 
     .video-card-play::before{
@@ -265,14 +271,40 @@
       margin-left:4px;
       width:0;
       height:0;
-      border-top:12px solid transparent;
-      border-bottom:12px solid transparent;
-      border-left:18px solid #fff;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      border-left:16px solid #1d232b;
     }
 
     .video-card-link:hover .video-card-play{
-      transform:translate(-50%, -50%) scale(1.06);
-      background:rgba(0,0,0,.72);
+      transform:scale(1.05);
+      background:rgba(255,255,255,.92);
+    }
+
+    .video-card-desc{
+      margin:14px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:.96rem;
+    }
+
+    .video-card-cta{
+      display:inline-flex;
+      margin-top:12px;
+      padding:9px 15px;
+      border-radius:999px;
+      border:1px solid rgba(20,24,32,.12);
+      color:#1d232b;
+      background:rgba(255,255,255,.7);
+      text-decoration:none;
+      font-size:.9rem;
+      letter-spacing:.01em;
+      transition:background .2s ease, border-color .2s ease;
+    }
+
+    .video-card-cta:hover{
+      background:rgba(255,255,255,.95);
+      border-color:rgba(20,24,32,.2);
     }
 
     .mini-section{
@@ -402,19 +434,28 @@
             <div class="video-embed">
               <a
                 class="video-card-link"
-                href="https://youtu.be/kISt0k7x-K0"
+                href="http://xhslink.com/o/b0YOf3ZKQL"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open video 光影之美 on YouTube"
+                aria-label="在小红书观看光影之美 / Watch 光影之美 on Xiaohongshu"
               >
-                <img
-                  class="video-card-thumb"
-                  src="https://img.youtube.com/vi/kISt0k7x-K0/maxresdefault.jpg"
-                  alt="Video thumbnail for 光影之美"
-                  loading="lazy"
-                >
-                <span class="video-card-play" aria-hidden="true"></span>
+                <div class="video-card-preview">
+                  <div class="video-card-overlay">
+                    <div class="video-card-title-wrap">
+                      <h4 class="video-card-title">光影之美</h4>
+                      <p class="video-card-note">点击前往小红书观看 · Open on Xiaohongshu</p>
+                    </div>
+                    <span class="video-card-play" aria-hidden="true"></span>
+                  </div>
+                </div>
               </a>
+              <p class="video-card-desc">这一组作品，跨越山川、河流、沙漠与城市，展示不同地域中的光影、时间与情绪变化。</p>
+              <a
+                class="video-card-cta"
+                href="http://xhslink.com/o/b0YOf3ZKQL"
+                target="_blank"
+                rel="noopener noreferrer"
+              >在小红书观看 / Watch on Xiaohongshu</a>
             </div>
           </div>
         </div>
