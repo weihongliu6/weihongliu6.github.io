@@ -215,6 +215,15 @@
       overflow:hidden;
     }
 
+    .video-embed iframe{
+      width:100%;
+      height:100%;
+      display:block;
+      border:0;
+      border-radius:12px;
+      margin:0 auto;
+    }
+
     .video-card-link{
       position:relative;
       display:block;
@@ -391,10 +400,13 @@
           </ul>
           <div class="video-embed-wrap">
             <div class="video-embed">
-              <a class="video-card-link" href="https://youtu.be/kISt0k7x-K0" target="_blank" rel="noopener noreferrer" aria-label="Watch 光影之美 on YouTube">
-                <img class="video-card-thumb" src="https://img.youtube.com/vi/kISt0k7x-K0/maxresdefault.jpg" alt="光影之美 video thumbnail">
-                <span class="video-card-play" aria-hidden="true"></span>
-              </a>
+              <iframe 
+              src="https://www.youtube.com/embed/kISt0k7x-K0"
+              title="光影之美"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+              </iframe>
             </div>
           </div>
         </div>
