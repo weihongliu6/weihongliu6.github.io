@@ -215,12 +215,55 @@
       overflow:hidden;
     }
 
-    .video-embed iframe{
+    .video-card-link{
+      position:relative;
+      display:block;
       width:100%;
       height:100%;
-      border:0;
+      border-radius:12px;
+      overflow:hidden;
+      text-decoration:none;
+    }
+
+    .video-card-thumb{
+      width:100%;
+      height:100%;
+      object-fit:cover;
       display:block;
       border-radius:12px;
+    }
+
+    .video-card-play{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      background:rgba(0,0,0,.62);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 8px 24px rgba(0,0,0,.28);
+      transition:transform .2s ease, background .2s ease;
+      pointer-events:none;
+    }
+
+    .video-card-play::before{
+      content:"";
+      display:block;
+      margin-left:4px;
+      width:0;
+      height:0;
+      border-top:12px solid transparent;
+      border-bottom:12px solid transparent;
+      border-left:18px solid #fff;
+    }
+
+    .video-card-link:hover .video-card-play{
+      transform:translate(-50%, -50%) scale(1.06);
+      background:rgba(0,0,0,.72);
     }
 
     .mini-section{
@@ -348,13 +391,10 @@
           </ul>
           <div class="video-embed-wrap">
             <div class="video-embed">
-              <iframe 
-              src="https://www.youtube.com/embed/kISt0k7x-K0"
-              title="光影之美"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-              </iframe>
+              <a class="video-card-link" href="https://youtu.be/kISt0k7x-K0" target="_blank" rel="noopener noreferrer" aria-label="Watch 光影之美 on YouTube">
+                <img class="video-card-thumb" src="https://img.youtube.com/vi/kISt0k7x-K0/maxresdefault.jpg" alt="光影之美 video thumbnail">
+                <span class="video-card-play" aria-hidden="true"></span>
+              </a>
             </div>
           </div>
         </div>
