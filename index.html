@@ -277,6 +277,117 @@
       opacity:.35;
       filter:grayscale(1);
     }
+
+    .follow-entry{
+      position:fixed;
+      top:16px;
+      right:16px;
+      z-index:1200;
+    }
+
+    .follow-btn{
+      border:1px solid rgba(17,17,17,0.16);
+      border-radius:999px;
+      background:rgba(255,255,255,0.88);
+      backdrop-filter:blur(8px);
+      color:#1e1e1e;
+      font:inherit;
+      line-height:1.2;
+      padding:10px 14px;
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      transition:background .15s ease, border-color .15s ease, transform .15s ease;
+      text-align:center;
+      min-width:132px;
+    }
+
+    .follow-btn:hover{
+      background:rgba(255,255,255,0.96);
+      border-color:rgba(17,17,17,0.24);
+      transform:translateY(-1px);
+    }
+
+    .follow-btn .zh{
+      display:block;
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+
+    .follow-btn .en{
+      display:block;
+      margin-top:2px;
+      font-size:11px;
+      letter-spacing:.4px;
+      color:#666;
+    }
+
+    .follow-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(8,12,20,0.22);
+      z-index:1300;
+      padding:16px;
+      box-sizing:border-box;
+    }
+
+    .follow-overlay.show{
+      display:flex;
+    }
+
+    .follow-card{
+      width:min(92vw, 360px);
+      background:rgba(255,255,255,0.97);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:16px;
+      box-shadow:0 14px 38px rgba(0,0,0,0.16);
+      padding:18px 18px 16px;
+      line-height:1.6;
+    }
+
+    .follow-title{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:550;
+      color:#222;
+      line-height:1.35;
+    }
+
+    .follow-text{
+      margin:0 0 8px;
+      color:#444;
+      font-size:15px;
+    }
+
+    .follow-list{
+      margin:0;
+      padding-left:18px;
+      color:#333;
+      font-size:14px;
+    }
+
+    .follow-list li{
+      margin:5px 0;
+    }
+
+    @media (max-width: 700px){
+      .follow-entry{
+        top:12px;
+        right:12px;
+      }
+
+      .follow-btn{
+        min-width:118px;
+        padding:9px 12px;
+      }
+
+      .follow-btn .zh{
+        font-size:13px;
+      }
+    }
   </style>
 
   <!-- GoatCounter 后台统计 -->
@@ -285,6 +396,25 @@
 </head>
 
 <body>
+  <div class="follow-entry">
+    <button class="follow-btn" id="followTrigger" type="button" aria-haspopup="dialog" aria-controls="followPopup" aria-expanded="false">
+      <span class="zh">关注更新</span>
+      <span class="en">Subscribe</span>
+    </button>
+  </div>
+
+  <div class="follow-overlay" id="followPopup" role="dialog" aria-modal="true" aria-labelledby="followPopupTitle">
+    <div class="follow-card">
+      <h2 class="follow-title" id="followPopupTitle">关注更新<br><span class="en">Follow Updates</span></h2>
+      <p class="follow-text">获取新作品通知：</p>
+      <ul class="follow-list">
+        <li>邮件订阅（coming soon）</li>
+        <li>小红书关注</li>
+        <li>YouTube 订阅</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="wrap">
 
     <h1>
@@ -378,5 +508,24 @@
      alt="visits">
 
   </div>
+
+  <script>
+    const followTrigger = document.getElementById('followTrigger');
+    const followPopup = document.getElementById('followPopup');
+
+    if (followTrigger && followPopup) {
+      followTrigger.addEventListener('click', () => {
+        followPopup.classList.add('show');
+        followTrigger.setAttribute('aria-expanded', 'true');
+      });
+
+      followPopup.addEventListener('click', (event) => {
+        if (event.target === followPopup) {
+          followPopup.classList.remove('show');
+          followTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
 </body>
 </html>
