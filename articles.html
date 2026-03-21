@@ -81,24 +81,37 @@ body{
 /* 目录 */
 
 .articlelist{
-  width:600px;
+  max-width:1200px;
   margin:40px auto;
+  padding:0 24px;
   text-align:left;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:22px;
 }
 
 .section{
-  margin-top:28px;
-}
-
-.section:first-child{
-  margin-top:0;
+  margin:0;
+  padding:20px 22px 24px;
+  background:rgba(0, 0, 0, 0.28);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:16px;
+  backdrop-filter: blur(2px);
 }
 
 .section-title{
-  font-size:28px;
-  margin:0 0 8px 0;
+  font-size:30px;
+  margin:0;
   color:#f3f7ff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.75);
+}
+
+.section-subtitle{
+  margin:6px 0 14px;
+  font-size:16px;
+  color:#dae4f6;
+  letter-spacing:1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 
 .articlelist a{
@@ -121,8 +134,16 @@ body{
 
 /* 更多文章 */
 
-.more{
-  font-size:20px !important;
+.more,
+.placeholder{
+  font-size:20px;
+}
+
+.placeholder{
+  margin:14px 0 0;
+  color:#d4dbe6;
+  line-height:1.8;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 
 /* 返回主页 */
@@ -150,6 +171,12 @@ text-decoration:none;
 
 /* 手机适配 */
 
+@media (max-width:1100px){
+.articlelist{
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+}
+
 @media (max-width:700px){
 
 .title{
@@ -170,12 +197,22 @@ padding:0 20px;
 }
 
 .articlelist{
-width:90%;
-font-size:20px;
+  grid-template-columns:1fr;
+  width:90%;
+  padding:0;
+  font-size:20px;
 }
 
 .section-title{
-font-size:23px;
+font-size:24px;
+}
+
+.section-subtitle{
+font-size:14px;
+}
+
+.articlelist a{
+font-size:22px;
 }
 
 }
@@ -223,7 +260,8 @@ Reflections and Essays
 <div class="articlelist">
 
   <div class="section">
-    <div class="section-title">影子观察 · 随笔</div>
+    <div class="section-title">影子观察</div>
+    <div class="section-subtitle">Shadow Observer</div>
 
     <a href="articles/hermit.html">
     01 现代世界还有隐士吗？
@@ -255,7 +293,8 @@ Reflections and Essays
   </div>
 
   <div class="section">
-    <div class="section-title">肖忠一医生 · 随笔</div>
+    <div class="section-title">肖忠一医生</div>
+    <div class="section-subtitle">Dr Xiao Zhongyi</div>
 
     <a href="articles/chinese-newyear.html">
     01 年过完了
@@ -272,10 +311,12 @@ Reflections and Essays
 
   <div class="section">
     <div class="section-title">其他随笔</div>
+    <div class="section-subtitle">Other Essays</div>
 
-    <a href="articles/articles-list.html" class="more">
-    更多文章…
-    </a>
+    <div class="placeholder">
+      内容整理中<br>
+      More essays coming soon
+    </div>
   </div>
 
 </div>
