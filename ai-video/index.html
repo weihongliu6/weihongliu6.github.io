@@ -197,20 +197,30 @@
       line-height:1.7;
     }
 
-    .placeholder-stage{
+    .video-embed-wrap{
       margin-top:16px;
-      border:1px dashed rgba(22,22,22,.25);
+      width:100%;
+      max-width:100%;
       border-radius:12px;
-      min-height:180px;
+      overflow:hidden;
       display:flex;
-      align-items:center;
       justify-content:center;
-      text-align:center;
-      padding:18px;
-      color:var(--muted);
-      font-size:.95rem;
-      line-height:1.8;
-      background:rgba(255,255,255,.4);
+    }
+
+    .video-embed{
+      position:relative;
+      width:100%;
+      aspect-ratio:16 / 9;
+      border-radius:12px;
+      overflow:hidden;
+    }
+
+    .video-embed iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      border-radius:12px;
     }
 
     .mini-section{
@@ -336,8 +346,16 @@
               <span class="meta">Each piece serves as a fragment of time, expression, and evolving digital language.</span>
             </li>
           </ul>
-          <div class="placeholder-stage">
-            预留视频嵌入区域 · Reserved for future video embedding
+          <div class="video-embed-wrap">
+            <div class="video-embed">
+              <iframe 
+              src="https://www.youtube.com/embed/kISt0k7x-K0"
+              title="光影之美"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
       </article>
