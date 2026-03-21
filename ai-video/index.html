@@ -1,10 +1,10 @@
-to be written<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI 视频观察 | AI Video Brief | Dr Weihong Liu</title>
-  <meta name="description" content="AI 视频观察归档｜Curated AI video briefs with Chinese summaries and commentary." />
+  <title>AI 音乐视频 | AI Music Videos | Dr Weihong Liu</title>
+  <meta name="description" content="AI 音乐视频作品页｜Music-based video works combining sound, imagery, and AI-assisted creation." />
   <style>
     :root{
       --bg:#f7f5f1;
@@ -108,6 +108,11 @@ to be written<!doctype html>
       line-height:1.8;
     }
 
+    .subtitle .lang{
+      display:block;
+      margin-bottom:14px;
+    }
+
     .hero-side{
       padding:28px 26px;
       display:flex;
@@ -122,33 +127,11 @@ to be written<!doctype html>
       margin-bottom:14px;
     }
 
-    .latest-date{
-      font-size:2rem;
-      line-height:1.15;
-      margin:0 0 10px;
-      font-weight:700;
-    }
-
     .latest-copy{
-      margin:0 0 22px;
+      margin:0;
       color:var(--muted);
       line-height:1.8;
       font-size:1rem;
-    }
-
-    .button{
-      display:inline-block;
-      padding:12px 18px;
-      border:1px solid #111;
-      border-radius:999px;
-      font-size:15px;
-      line-height:1;
-      transition:.2s ease;
-    }
-
-    .button:hover{
-      background:#111;
-      color:#fff;
     }
 
     .grid{
@@ -212,6 +195,22 @@ to be written<!doctype html>
       color:var(--muted);
       font-size:.95rem;
       line-height:1.7;
+    }
+
+    .placeholder-stage{
+      margin-top:16px;
+      border:1px dashed rgba(22,22,22,.25);
+      border-radius:12px;
+      min-height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.8;
+      background:rgba(255,255,255,.4);
     }
 
     .mini-section{
@@ -300,25 +299,23 @@ to be written<!doctype html>
 
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">人工精选 · Curated AI Video Notes</div>
-        <h1>AI 视频观察<br>AI Video Brief</h1>
+        <div class="eyebrow">人工创作与AI辅助<br>Music, Image, and AI</div>
+        <h1>AI 音乐视频<br>AI Music Videos</h1>
         <p class="subtitle">
-          这里收录我挑选的 AI 视频内容，并配以中文摘要与简短说明，帮助中文读者更容易理解全球 AI 动态。<br>
-          This section collects selected AI videos, accompanied by Chinese summaries and short commentary, making global AI developments more accessible to Chinese readers.
+          <span class="lang">这里收录以音乐、影像与AI生成相结合的视频作品。它们并非资讯简报，而更偏向情绪、节奏与画面之间的关系探索，是一种在数字时代中对“观看”与“聆听”的再组织。</span>
+          <span class="lang">This section presents music-based video works that combine sound, imagery, and AI-assisted creation. Rather than commentary or briefing, it explores the relationship between rhythm, mood, and visual expression—reframing how we see and listen in a digital context.</span>
         </p>
       </div>
 
       <div class="hero-side">
         <div>
-          <div class="side-label">最新一期 · Latest Edition</div>
-          <h2 class="latest-date">2026-03-13</h2>
+          <div class="side-label">最新作品 · Latest Work</div>
           <p class="latest-copy">
-            本期视频聚焦 Anthropic 关于 AI 与就业影响的研究，并附一段中文摘要。<br>
-            This edition focuses on Anthropic’s study on AI and jobs, with a short Chinese summary.
+            当前作品正在整理中。<br>
+            第一期视频将很快发布。<br><br>
+            Works are currently in preparation.<br>
+            The first featured piece will be available soon.
           </p>
-        </div>
-        <div>
-          <a class="button" href="video_2026-03-13.html">打开最新视频页 · Open Latest Video Brief</a>
         </div>
       </div>
     </section>
@@ -326,49 +323,43 @@ to be written<!doctype html>
     <section class="grid">
       <article class="panel">
         <div class="panel-head">
-          <h3 class="panel-title">视频归档 · Video Archive</h3>
+          <h3 class="panel-title">作品归档<br>Video Archive</h3>
         </div>
         <div class="panel-body">
           <ul class="archive-list">
-            <li>
-              <a class="archive-link" href="video_2026-03-13.html">
-                <strong>2026-03-13 · Anthropic study on AI and jobs</strong>
-                <span class="meta">中文摘要 · Chinese summary · 最新 · Latest</span>
-              </a>
+            <li class="archive-link">
+              <strong>该栏目将逐步收录不同阶段的AI音乐视频创作。</strong>
+              <span class="meta">每一段影像都将作为时间与表达的一个片段被保留下来。</span>
+            </li>
+            <li class="archive-link">
+              <strong>This archive will gradually collect works from different stages of AI music video creation.</strong>
+              <span class="meta">Each piece serves as a fragment of time, expression, and evolving digital language.</span>
             </li>
           </ul>
+          <div class="placeholder-stage">
+            预留视频嵌入区域 · Reserved for future video embedding
+          </div>
         </div>
       </article>
 
       <aside class="panel">
         <div class="panel-head">
-          <h3 class="panel-title">关于本栏 · About This Section</h3>
+          <h3 class="panel-title">关于本栏<br>About This Section</h3>
         </div>
         <div class="panel-body">
           <div class="mini-section">
-            <p class="mini-kicker">定位 · Purpose</p>
-            <h4 class="mini-title">视频与文字相结合 · Combining video and text</h4>
+            <p class="mini-kicker">创作空间 · Creative Space</p>
             <p class="mini-copy">
-              这个栏目把精选 AI 视频与中文摘要结合起来，作为 AI 简报系统的延伸。<br>
-              This section extends the AI brief system by combining selected AI videos with Chinese summaries.
+              本栏目并不以“信息传递”为主要目的，而更接近于一种视觉与听觉的创作空间。音乐不只是背景，影像也不仅是说明，它们在时间中彼此作用，构成一种新的表达方式。<br><br>
+              This section is not intended as an informational channel, but as a creative audiovisual space. Music is not merely background, and images are not just illustration—they interact through time to form a new mode of expression.
             </p>
           </div>
 
           <div class="mini-section">
-            <p class="mini-kicker">特色 · Feature</p>
-            <h4 class="mini-title">人工挑选，而非纯自动生成 · Human-curated, not purely automated</h4>
+            <p class="mini-kicker">创作说明 · Creative Notes</p>
             <p class="mini-copy">
-              与每日自动生成的 AI 简报不同，这里的视频内容由人工挑选，因此更带有观察、判断与分享的意味。<br>
-              Unlike the automated daily AI briefs, the videos here are manually selected, giving this section a more reflective and curated character.
-            </p>
-          </div>
-
-          <div class="mini-section">
-            <p class="mini-kicker">后续 · Next Step</p>
-            <h4 class="mini-title">未来可加入视频嵌入与中文配音 · Ready for future upgrades</h4>
-            <p class="mini-copy">
-              以后可以继续加入 YouTube 嵌入、中文配音版、每周精选和专题分类。<br>
-              Later you can add embedded YouTube videos, Chinese voice-over versions, weekly picks, and thematic categories.
+              这些作品通常从一个声音或一段节奏开始，通过影像与时间的重组逐步展开。AI在其中并不是替代创作，而是作为一种工具参与到视觉生成与结构构建之中。<br><br>
+              These works often begin with a sound or rhythm, gradually unfolding through visual sequencing and temporal structure. AI does not replace creation, but participates as a tool in generating imagery and shaping composition.
             </p>
           </div>
         </div>
