@@ -207,12 +207,14 @@
       width:100%;
     }
 
+    .video-card,
     .video-card-link{
       display:block;
       text-decoration:none;
       color:inherit;
     }
 
+    .video-thumb,
     .video-card-preview{
       position:relative;
       aspect-ratio:16 / 9;
@@ -220,55 +222,37 @@
       overflow:hidden;
       background:linear-gradient(140deg, #ece8e2 0%, #e3ddd5 50%, #d6cec2 100%);
       box-shadow:0 10px 30px rgba(24,28,35,.10);
-      display:flex;
-      align-items:flex-end;
-      padding:22px;
     }
 
-    .video-card-overlay{
+    .video-thumb img{
+      display:block;
       width:100%;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:18px;
+      height:100%;
+      object-fit:cover;
     }
 
-    .video-card-title-wrap{
-      max-width:78%;
-    }
-
-    .video-card-title{
-      margin:0 0 6px;
-      font-size:1.18rem;
-      letter-spacing:-.01em;
-      color:#1d232b;
-    }
-
-    .video-card-note{
-      margin:0;
-      font-size:.94rem;
-      line-height:1.65;
-      color:rgba(29,35,43,.78);
-    }
-
+    .play-button,
     .video-card-play{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
       width:62px;
       height:62px;
       border-radius:50%;
-      background:rgba(255,255,255,.78);
+      background:rgba(255,255,255,.82);
       backdrop-filter:blur(4px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
       box-shadow:0 8px 24px rgba(29,35,43,.16);
       transition:transform .2s ease, background .2s ease;
-      flex-shrink:0;
     }
 
+    .play-button::before,
     .video-card-play::before{
       content:"";
-      display:block;
-      margin-left:4px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-36%, -50%);
       width:0;
       height:0;
       border-top:10px solid transparent;
@@ -276,35 +260,29 @@
       border-left:16px solid #1d232b;
     }
 
+    .video-card:hover .play-button,
     .video-card-link:hover .video-card-play{
-      transform:scale(1.05);
-      background:rgba(255,255,255,.92);
+      transform:translate(-50%, -50%) scale(1.05);
+      background:rgba(255,255,255,.94);
     }
 
-    .video-card-desc{
-      margin:14px 0 0;
-      color:var(--muted);
-      line-height:1.75;
-      font-size:.96rem;
-    }
-
-    .video-card-cta{
-      display:inline-flex;
-      margin-top:12px;
-      padding:9px 15px;
-      border-radius:999px;
-      border:1px solid rgba(20,24,32,.12);
+    .video-title,
+    .video-card-title{
+      margin:12px 0 2px;
+      font-size:1.05rem;
+      text-align:center;
+      letter-spacing:-.01em;
       color:#1d232b;
-      background:rgba(255,255,255,.7);
-      text-decoration:none;
-      font-size:.9rem;
-      letter-spacing:.01em;
-      transition:background .2s ease, border-color .2s ease;
+      font-weight:700;
     }
 
-    .video-card-cta:hover{
-      background:rgba(255,255,255,.95);
-      border-color:rgba(20,24,32,.2);
+    .video-link,
+    .video-card-note{
+      margin:0;
+      text-align:center;
+      font-size:.94rem;
+      line-height:1.65;
+      color:rgba(29,35,43,.78);
     }
 
     .mini-section{
@@ -432,30 +410,14 @@
           </ul>
           <div class="video-embed-wrap">
             <div class="video-embed">
-              <a
-                class="video-card-link"
-                href="http://xhslink.com/o/b0YOf3ZKQL"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="在小红书观看光影之美 / Watch 光影之美 on Xiaohongshu"
-              >
-                <div class="video-card-preview">
-                  <div class="video-card-overlay">
-                    <div class="video-card-title-wrap">
-                      <h4 class="video-card-title">光影之美</h4>
-                      <p class="video-card-note">点击前往小红书观看 · Open on Xiaohongshu</p>
-                    </div>
-                    <span class="video-card-play" aria-hidden="true"></span>
-                  </div>
+              <a href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer" class="video-card">
+                <div class="video-thumb">
+                  <img src="/images/ai-video/light-and-shadow.jpg" alt="光影之美">
+                  <div class="play-button" aria-hidden="true"></div>
                 </div>
               </a>
-              <p class="video-card-desc">这一组作品，跨越山川、河流、沙漠与城市，展示不同地域中的光影、时间与情绪变化。</p>
-              <a
-                class="video-card-cta"
-                href="http://xhslink.com/o/b0YOf3ZKQL"
-                target="_blank"
-                rel="noopener noreferrer"
-              >在小红书观看 / Watch on Xiaohongshu</a>
+              <p class="video-title">光影之美</p>
+              <p class="video-link">在小红书观看</p>
             </div>
           </div>
         </div>
