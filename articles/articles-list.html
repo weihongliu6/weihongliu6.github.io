@@ -57,64 +57,84 @@ text-decoration:underline;
 
 .wechat-card{
 display:flex;
-align-items:stretch;
+align-items:flex-start;
 gap:14px;
 padding:14px;
-margin:22px 0;
+margin:16px 0;
 border-radius:12px;
-background:#151922;
+background:#111114;
 text-decoration:none;
-transition:transform .2s ease, box-shadow .2s ease;
-box-shadow:0 8px 18px rgba(0,0,0,.14);
+color:#fff;
+transition:0.25s ease;
 }
 
 .wechat-card:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 24px rgba(0,0,0,.2);
+background:#18181c;
 }
 
 .card-cover{
-width:150px;
-height:110px;
+width:90px;
+height:90px;
 object-fit:cover;
-border-radius:10px;
+border-radius:8px;
 flex-shrink:0;
 }
 
 .card-text{
 display:flex;
 flex-direction:column;
-justify-content:space-between;
+justify-content:center;
 min-width:0;
 }
 
 .card-title{
-font-size:24px;
-line-height:1.25;
+font-size:16px;
+font-weight:600;
+line-height:1.45;
 color:#fff;
-margin-bottom:8px;
+margin-bottom:6px;
+}
+
+.card-author{
+font-size:13px;
+color:#b8bfd4;
+margin-bottom:6px;
 }
 
 .card-desc{
-font-size:16px;
-line-height:1.5;
-color:#b8c0ce;
-margin-bottom:10px;
+font-size:13px;
+line-height:1.55;
+color:#a6a6ad;
+margin-bottom:8px;
 }
 
 .card-source{
-font-size:14px;
-color:#8f98a8;
+font-size:12px;
+color:#8f93a3;
 }
 
 @media (max-width:640px){
 .wechat-card{
-flex-direction:column;
+gap:12px;
+padding:12px;
 }
 
 .card-cover{
-width:100%;
-height:180px;
+width:84px;
+height:84px;
+}
+
+.card-title{
+font-size:15px;
+}
+
+.card-author,
+.card-desc{
+font-size:12px;
+}
+
+.card-source{
+font-size:11px;
 }
 }
 
@@ -166,6 +186,7 @@ text-decoration:underline;
   <img src="../images/shadow-observer-cover.jpg" class="card-cover" alt="AI 时代，摄影将走向何处？">
   <div class="card-text">
     <div class="card-title">AI 时代，摄影将走向何处？</div>
+    <div class="card-author">文：影子观察</div>
     <div class="card-desc">AI 并未终结摄影，而是促使摄影回归其本质：在场经验、现实指向与作者责任。</div>
     <div class="card-source">影子观察数字工作室</div>
   </div>
