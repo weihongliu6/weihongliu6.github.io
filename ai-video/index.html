@@ -286,6 +286,24 @@
       font-size:.93rem;
     }
 
+    .music-player-link{
+      display:inline-block;
+      margin-top:14px;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:.92rem;
+      line-height:1.4;
+      background:rgba(255,255,255,.6);
+      color:var(--text);
+      transition:background .2s ease, border-color .2s ease;
+    }
+
+    .music-player-link:hover{
+      background:rgba(255,255,255,.95);
+      border-color:rgba(22,22,22,.25);
+    }
+
     footer{
       text-align:center;
       color:var(--muted);
@@ -390,6 +408,19 @@
               <p class="latest-title">光影之美</p>
               <p class="latest-meta">点击观看最新精选作品 · View the latest featured video on Xiaohongshu.</p>
             </a>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">音乐播放器<br>Music Player</h2>
+          </div>
+          <div class="panel-body">
+            <p class="mini-copy">
+              在这里进入独立音乐播放器页面，集中播放与整理原创作品。<br><br>
+              Enter the standalone music player page for original songs and listening sessions.
+            </p>
+            <a class="music-player-link" href="../music-player.html">打开音乐播放器 · Open Music Player</a>
           </div>
         </article>
       </div>
