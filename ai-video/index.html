@@ -98,6 +98,13 @@
       min-width:0;
     }
 
+    .right-stack{
+      display:grid;
+      grid-template-rows:auto auto;
+      gap:28px;
+      min-width:0;
+    }
+
     .panel{
       background:var(--paper);
       border:1px solid var(--line);
@@ -319,6 +326,10 @@
       .left-stack{
         grid-template-rows:auto;
       }
+
+      .right-stack{
+        grid-template-rows:auto;
+      }
     }
 
     @media (max-width:640px){
@@ -411,6 +422,31 @@
           </div>
         </article>
 
+      </div>
+
+      <div class="right-stack">
+        <aside class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">作品列表<br>Works List</h2>
+          </div>
+          <div class="panel-body">
+            <ul class="works-list">
+              <li class="work-item">
+                <div class="work-thumb">
+                  <img src="/images/ai-video/light-and-shadow.jpg" alt="光影之美 缩略图">
+                </div>
+                <div class="work-content">
+                  <h4>光影之美</h4>
+                  <p>这一组作品，跨越山川、河流、沙漠与城市，展示不同地域中的光影、时间与情绪变化。</p>
+                  <a class="work-link" href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer">在小红书观看 · View on Xiaohongshu</a>
+                </div>
+              </li>
+              <li class="work-item placeholder-item">下一部作品将显示在这里<br>Next work item will appear here.</li>
+              <li class="work-item placeholder-item">可继续添加更多条目，支持未来 5+ 作品扩展<br>Ready for future 5+ works expansion.</li>
+            </ul>
+          </div>
+        </aside>
+
         <article class="panel">
           <div class="panel-head">
             <h2 class="panel-title">音乐播放器<br>Music Player</h2>
@@ -424,28 +460,6 @@
           </div>
         </article>
       </div>
-
-      <aside class="panel">
-        <div class="panel-head">
-          <h2 class="panel-title">作品列表<br>Works List</h2>
-        </div>
-        <div class="panel-body">
-          <ul class="works-list">
-            <li class="work-item">
-              <div class="work-thumb">
-                <img src="/images/ai-video/light-and-shadow.jpg" alt="光影之美 缩略图">
-              </div>
-              <div class="work-content">
-                <h4>光影之美</h4>
-                <p>这一组作品，跨越山川、河流、沙漠与城市，展示不同地域中的光影、时间与情绪变化。</p>
-                <a class="work-link" href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer">在小红书观看 · View on Xiaohongshu</a>
-              </div>
-            </li>
-            <li class="work-item placeholder-item">下一部作品将显示在这里<br>Next work item will appear here.</li>
-            <li class="work-item placeholder-item">可继续添加更多条目，支持未来 5+ 作品扩展<br>Ready for future 5+ works expansion.</li>
-          </ul>
-        </div>
-      </aside>
     </section>
 
     <footer>
