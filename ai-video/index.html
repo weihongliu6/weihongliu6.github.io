@@ -311,20 +311,55 @@
       border-color:rgba(22,22,22,.25);
     }
 
-    .music-logo{
-      display:flex;
-      justify-content:center;
-      margin:14px 0 12px 0;
-      opacity:.85;
+    .music-feature-link{
+      display:block;
+      margin:2px 0 14px;
+      color:inherit;
     }
 
-    .music-logo svg{
-      transition:all .25s ease;
+    .music-feature-thumb{
+      position:relative;
+      aspect-ratio:16 / 9;
+      border-radius:14px;
+      overflow:hidden;
+      background:linear-gradient(140deg, #ece8e2 0%, #e3ddd5 50%, #d6cec2 100%);
+      box-shadow:0 10px 30px rgba(24,28,35,.10);
+      transition:transform .24s ease, box-shadow .24s ease;
     }
 
-    .music-logo:hover svg{
-      transform:scale(1.05);
-      opacity:1;
+    .music-feature-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .28s ease;
+    }
+
+    .music-feature-link:hover .music-feature-thumb{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(24,28,35,.14);
+    }
+
+    .music-feature-link:hover .music-feature-thumb img{
+      transform:scale(1.02);
+    }
+
+    .music-feature-link .play-button{
+      width:58px;
+      height:58px;
+      transition:transform .24s ease, background .24s ease, box-shadow .24s ease;
+    }
+
+    .music-feature-link .play-button::before{
+      border-top:9px solid transparent;
+      border-bottom:9px solid transparent;
+      border-left:14px solid #1d232b;
+    }
+
+    .music-feature-link:hover .play-button{
+      transform:translate(-50%, -50%) scale(1.08);
+      background:rgba(255,255,255,.95);
+      box-shadow:0 12px 24px rgba(29,35,43,.2);
     }
 
     footer{
@@ -468,12 +503,12 @@
             <h2 class="panel-title">音乐播放器<br>Music Player</h2>
           </div>
           <div class="panel-body">
-            <div class="music-logo">
-              <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.4">
-                <circle cx="12" cy="12" r="9"></circle>
-                <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"></polygon>
-              </svg>
-            </div>
+            <a class="music-feature-link" href="../music-player.html" aria-label="打开音乐播放器 · Open Music Player">
+              <div class="music-feature-thumb">
+                <img src="../music/cover-adelaide.jpg" alt="音乐播放器封面 Music Player Cover">
+                <div class="play-button" aria-hidden="true"></div>
+              </div>
+            </a>
             <p class="mini-copy">
               在这里进入独立音乐播放器页面，集中播放与整理原创作品。<br><br>
               Enter the standalone music player page for original songs and listening sessions.
