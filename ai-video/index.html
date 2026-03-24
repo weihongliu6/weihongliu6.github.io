@@ -311,6 +311,22 @@
       border-color:rgba(22,22,22,.25);
     }
 
+    .music-logo{
+      display:flex;
+      justify-content:center;
+      margin:14px 0 12px 0;
+      opacity:.85;
+    }
+
+    .music-logo svg{
+      transition:all .25s ease;
+    }
+
+    .music-logo:hover svg{
+      transform:scale(1.05);
+      opacity:1;
+    }
+
     footer{
       text-align:center;
       color:var(--muted);
@@ -452,6 +468,12 @@
             <h2 class="panel-title">音乐播放器<br>Music Player</h2>
           </div>
           <div class="panel-body">
+            <div class="music-logo">
+              <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"></polygon>
+              </svg>
+            </div>
             <p class="mini-copy">
               在这里进入独立音乐播放器页面，集中播放与整理原创作品。<br><br>
               Enter the standalone music player page for original songs and listening sessions.
