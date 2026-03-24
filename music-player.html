@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>影子观察 · 音乐播放器</title>
+  <style>
+    :root {
+      --bg: #090705;
+      --card: rgba(35, 26, 20, 0.58);
+      --card-stroke: rgba(255, 210, 170, 0.2);
+      --text: #f8efe7;
+      --muted: #ccb8a6;
+      --accent: #f3a15f;
+      --accent-soft: rgba(243, 161, 95, 0.3);
+      --track: rgba(255, 255, 255, 0.14);
+      --danger: #ff826e;
+      --shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      background-image: url('music/cover-adelaide.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(48px) saturate(1.25) brightness(0.7);
+      transform: scale(1.14);
+      z-index: -3;
+      transition: background-image 0.5s ease;
+    }
+
+    .bg-vignette {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(250, 154, 71, 0.24), transparent 45%),
+        linear-gradient(to bottom, rgba(8, 6, 5, 0.25), rgba(8, 6, 5, 0.86));
+      z-index: -2;
+    }
+
+    .page {
+      width: min(100%, 420px);
+      margin: 0 auto;
+      padding: clamp(14px, 4vw, 20px) clamp(16px, 4.5vw, 24px) calc(28px + env(safe-area-inset-bottom));
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #f4dcc7;
+      text-decoration: none;
+      font-size: 0.92rem;
+      opacity: 0.92;
+      margin: 8px 0 14px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      opacity: 1;
+      transform: translateX(-1px);
+    }
+
+    .player-card {
+      background: var(--card);
+      border: 1px solid var(--card-stroke);
+      border-radius: var(--radius-lg);
+      padding: clamp(16px, 4.2vw, 24px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 16px;
+    }
+
+    .brand small {
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      font-size: 0.76rem;
+    }
+
+    .brand strong {
+      font-size: 1.02rem;
+      font-weight: 600;
+    }
+
+    .cover-wrap {
+      width: min(100%, 340px);
+      margin: 0 auto;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
+      aspect-ratio: 1 / 1;
+      background: #2f241c;
+    }
+
+    .cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .cover-wrap:hover .cover {
+      transform: scale(1.02);
+    }
+
+    .meta {
+      text-align: center;
+      margin: 18px auto 12px;
+      max-width: 320px;
+    }
+
+    .song-title-cn {
+      margin: 0;
+      font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+      line-height: 1.32;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .song-title-en {
+      margin: 7px 0 0;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .artist {
+      margin: 9px 0 0;
+      color: #f2c89f;
+      font-size: 0.94rem;
+      letter-spacing: 0.08em;
+    }
+
+    .progress-wrap {
+      margin-top: 16px;
+    }
+
+    .progress {
+      width: 100%;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent) var(--progress, 0%), var(--track) var(--progress, 0%));
+      outline: none;
+      cursor: pointer;
+    }
+
+    .progress::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffd8b8;
+      border: 2px solid rgba(70, 42, 24, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    }
+
+    .progress::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border: none;
+      border-radius: 50%;
+      background: #ffd8b8;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 7vw, 28px);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    .control-btn {
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-size: 1.24rem;
+    }
+
+    .control-btn:hover,
+    .control-btn:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .control-btn:active {
+      transform: scale(0.97);
+    }
+
+    .control-btn.play {
+      width: 62px;
+      height: 62px;
+      background: linear-gradient(145deg, #ffd5aa, #e88c4c);
+      color: #2f1b0d;
+      box-shadow: 0 10px 20px rgba(232, 140, 76, 0.34);
+      font-size: 1.34rem;
+    }
+
+    .error {
+      min-height: 20px;
+      text-align: center;
+      color: var(--danger);
+      font-size: 0.82rem;
+      margin-top: 10px;
+    }
+
+    .playlist {
+      margin-top: 16px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .playlist-item {
+      display: grid;
+      gap: 3px;
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .playlist-item:hover,
+    .playlist-item:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .playlist-item.active {
+      background: rgba(243, 161, 95, 0.2);
+      border-color: rgba(243, 161, 95, 0.48);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+    }
+
+    .playlist-cn {
+      font-size: 0.94rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .playlist-en {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    @media (min-width: 760px) {
+      .page {
+        width: min(100%, 1000px);
+        padding-top: 28px;
+      }
+
+      .player-card {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 26px;
+        align-items: center;
+      }
+
+      .left-col {
+        order: 1;
+      }
+
+      .right-col {
+        order: 2;
+      }
+
+      .brand {
+        margin-bottom: 18px;
+      }
+
+      .cover-wrap {
+        width: min(100%, 410px);
+      }
+
+      .playlist {
+        max-height: 280px;
+        overflow: auto;
+        padding-right: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-layer" id="bgLayer"></div>
+  <div class="bg-vignette"></div>
+
+  <main class="page">
+    <a class="back-link" href="index.html" aria-label="返回主页 Home">← 返回主页 Home</a>
+
+    <section class="player-card" aria-label="音乐播放器">
+      <div class="left-col">
+        <div class="brand">
+          <small>Dr Weihong Liu Digital Studio / 影子观察数字工作室</small>
+          <strong>影院级音乐空间</strong>
+        </div>
+
+        <div class="cover-wrap">
+          <!-- 替换封面图片：修改 songs 数组里的 cover 字段 -->
+          <img id="coverImage" class="cover" src="music/cover-adelaide.jpg" alt="专辑封面" />
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="meta">
+          <!-- 替换歌曲标题：修改 songs 数组里的 titleCn / titleEn 字段 -->
+          <h1 id="titleCn" class="song-title-cn">阿德莱德，一个我称之为家的地方</h1>
+          <p id="titleEn" class="song-title-en">ADELAIDE A PLACE WE CALL HOME</p>
+          <p class="artist">影子观察</p>
+        </div>
+
+        <div class="progress-wrap">
+          <input id="progress" class="progress" type="range" min="0" max="100" value="0" aria-label="播放进度" />
+          <div class="time-row">
+            <span id="currentTime">00:00</span>
+            <span id="duration">--:--</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="prevBtn" class="control-btn" type="button" aria-label="上一首">⏮</button>
+          <button id="playBtn" class="control-btn play" type="button" aria-label="播放或暂停">▶</button>
+          <button id="nextBtn" class="control-btn" type="button" aria-label="下一首">⏭</button>
+        </div>
+
+        <p id="errorMessage" class="error" role="status" aria-live="polite"></p>
+
+        <div id="playlist" class="playlist" aria-label="播放列表"></div>
+      </div>
+    </section>
+
+    <audio id="audio" preload="metadata"></audio>
+  </main>
+
+  <script>
+    // 在这里维护歌曲清单（文件名、封面图、标题）
+    const songs = [
+      {
+        titleCn: '阿德莱德，一个我称之为家的地方',
+        titleEn: 'ADELAIDE A PLACE WE CALL HOME',
+        artist: '影子观察',
+        // 替换音频文件：把 src 改为你的文件路径
+        src: 'music/song1.mp3',
+        // 替换封面图片：每首歌可使用不同封面
+        cover: 'music/cover-adelaide.jpg'
+      },
+      {
+        titleCn: '跨越万水千山',
+        titleEn: 'ACROSS MOUNTAINS AND OCEANS',
+        artist: '影子观察',
+        src: 'music/song2.mp3',
+        cover: 'music/cover-adelaide.jpg'
+      },
+      {
+        titleCn: '南半球的天空',
+        titleEn: 'THE SOUTHERN SKY',
+        artist: '影子观察',
+        src: 'music/song3.mp3',
+        cover: 'music/cover-adelaide.jpg'
+      }
+    ];
+
+    const audio = document.getElementById('audio');
+    const bgLayer = document.getElementById('bgLayer');
+    const coverImage = document.getElementById('coverImage');
+    const titleCnEl = document.getElementById('titleCn');
+    const titleEnEl = document.getElementById('titleEn');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const playBtn = document.getElementById('playBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const playlist = document.getElementById('playlist');
+
+    let currentIndex = 0;
+    let userIsSeeking = false;
+
+    function formatTime(timeInSeconds) {
+      if (!Number.isFinite(timeInSeconds)) return '--:--';
+      const total = Math.max(0, Math.floor(timeInSeconds));
+      const minutes = String(Math.floor(total / 60)).padStart(2, '0');
+      const seconds = String(total % 60).padStart(2, '0');
+      return `${minutes}:${seconds}`;
+    }
+
+    function renderPlaylist() {
+      playlist.innerHTML = songs
+        .map((song, index) => `
+          <button
+            class="playlist-item ${index === currentIndex ? 'active' : ''}"
+            type="button"
+            data-index="${index}"
+            aria-label="切换到 ${song.titleCn}"
+          >
+            <span class="playlist-cn">${song.titleCn}</span>
+            <span class="playlist-en">${song.titleEn}</span>
+          </button>
+        `)
+        .join('');
+    }
+
+    function syncProgressUI() {
+      const ratio = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      progress.value = Number.isFinite(ratio) ? ratio : 0;
+      progress.style.setProperty('--progress', `${progress.value}%`);
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    }
+
+    function setTrack(index, shouldAutoplay = false) {
+      currentIndex = (index + songs.length) % songs.length;
+      const song = songs[currentIndex];
+
+      titleCnEl.textContent = song.titleCn;
+      titleEnEl.textContent = song.titleEn;
+      coverImage.src = song.cover;
+      bgLayer.style.backgroundImage = `url('${song.cover}')`;
+
+      audio.src = song.src;
+      audio.load();
+
+      currentTimeEl.textContent = '00:00';
+      durationEl.textContent = '--:--';
+      progress.value = 0;
+      progress.style.setProperty('--progress', '0%');
+      errorMessage.textContent = '';
+
+      renderPlaylist();
+
+      if (shouldAutoplay) {
+        audio.play().then(() => {
+          playBtn.textContent = '⏸';
+        }).catch(() => {
+          playBtn.textContent = '▶';
+        });
+      } else {
+        playBtn.textContent = '▶';
+      }
+    }
+
+    playBtn.addEventListener('click', async () => {
+      if (!audio.src) return;
+      if (audio.paused) {
+        try {
+          await audio.play();
+          playBtn.textContent = '⏸';
+          errorMessage.textContent = '';
+        } catch {
+          errorMessage.textContent = '无法自动播放，请再次点击播放。';
+        }
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      setTrack(currentIndex - 1, !audio.paused);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      setTrack(currentIndex + 1, !audio.paused);
+    });
+
+    progress.addEventListener('input', () => {
+      userIsSeeking = true;
+      progress.style.setProperty('--progress', `${progress.value}%`);
+      if (audio.duration) {
+        currentTimeEl.textContent = formatTime((progress.value / 100) * audio.duration);
+      }
+    });
+
+    progress.addEventListener('change', () => {
+      if (audio.duration) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      }
+      userIsSeeking = false;
+    });
+
+    playlist.addEventListener('click', (event) => {
+      const target = event.target.closest('.playlist-item');
+      if (!target) return;
+      const nextIndex = Number(target.dataset.index);
+      if (!Number.isInteger(nextIndex)) return;
+      setTrack(nextIndex, true);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationEl.textContent = formatTime(audio.duration);
+      syncProgressUI();
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!userIsSeeking) {
+        syncProgressUI();
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      setTrack(currentIndex + 1, true);
+    });
+
+    audio.addEventListener('play', () => {
+      playBtn.textContent = '⏸';
+    });
+
+    audio.addEventListener('pause', () => {
+      playBtn.textContent = '▶';
+    });
+
+    audio.addEventListener('error', () => {
+      errorMessage.textContent = '音频文件未找到或无法加载，请检查 /music/ 文件夹中的文件。';
+      playBtn.textContent = '▶';
+      durationEl.textContent = '--:--';
+    });
+
+    setTrack(0, false);
+  </script>
+</body>
+</html>
