@@ -252,6 +252,51 @@
       margin-top: 10px;
     }
 
+    .lyrics-panel {
+      margin-top: 14px;
+      height: 200px;
+      overflow-y: auto;
+      text-align: center;
+      padding: 70px 10px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+      scroll-behavior: smooth;
+    }
+
+    .lyrics-panel::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .lyrics-line {
+      margin: 8px 0;
+      color: rgba(248, 239, 231, 0.5);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      transition: color 0.38s ease, transform 0.38s ease, opacity 0.38s ease, filter 0.38s ease;
+      opacity: 0.72;
+      transform: scale(0.98);
+      filter: blur(0.6px);
+      will-change: transform, opacity, color;
+    }
+
+    .lyrics-line.active {
+      color: #ffe9d3;
+      opacity: 1;
+      transform: scale(1.04);
+      filter: blur(0);
+      text-shadow: 0 0 14px rgba(255, 205, 160, 0.38);
+      font-weight: 600;
+    }
+
+    .lyrics-empty {
+      color: var(--muted);
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin: 0;
+      padding-top: 4px;
+    }
+
     .playlist {
       margin-top: 16px;
       display: grid;
@@ -378,6 +423,8 @@
 
         <p id="errorMessage" class="error" role="status" aria-live="polite"></p>
 
+        <div id="lyricsPanel" class="lyrics-panel" aria-live="polite" aria-label="歌词区域"></div>
+
         <div id="playlist" class="playlist" aria-label="播放列表"></div>
       </div>
     </section>
@@ -394,6 +441,7 @@
         artist: '影子观察',
         // 替换音频文件：把 src 改为你的文件路径
         src: 'music/song1.mp3',
+        lrc: 'music/song1.lrc',
         // 替换封面图片：每首歌可使用不同封面
         cover: 'music/cover-adelaide.jpg'
       },
@@ -402,6 +450,7 @@
         titleEn: 'ACROSS MOUNTAINS AND OCEANS',
         artist: '影子观察',
         src: 'music/song2.mp3',
+        lrc: '',
         cover: 'music/cover-adelaide.jpg'
       },
       {
@@ -409,6 +458,7 @@
         titleEn: 'THE SOUTHERN SKY',
         artist: '影子观察',
         src: 'music/song3.mp3',
+        lrc: '',
         cover: 'music/cover-adelaide.jpg'
       }
     ];
@@ -426,9 +476,93 @@
     const nextBtn = document.getElementById('nextBtn');
     const errorMessage = document.getElementById('errorMessage');
     const playlist = document.getElementById('playlist');
+    const lyricsPanel = document.getElementById('lyricsPanel');
 
     let currentIndex = 0;
     let userIsSeeking = false;
+    let lyrics = [];
+    let activeLyricIndex = -1;
+    let lyricNodes = [];
+
+    function parseLrc(content) {
+      return content
+        .split('\n')
+        .flatMap((line) => {
+          const text = line.replace(/\[[^\]]+\]/g, '').trim();
+          if (!text) return [];
+          const times = [...line.matchAll(/\[(\d{2}):(\d{2}(?:\.\d{1,3})?)\]/g)];
+          return times.map((match) => ({
+            time: Number(match[1]) * 60 + Number(match[2]),
+            text
+          }));
+        })
+        .sort((a, b) => a.time - b.time);
+    }
+
+    function renderLyrics() {
+      if (!lyrics.length) {
+        lyricsPanel.innerHTML = '<p class="lyrics-empty">暂无歌词</p>';
+        lyricNodes = [];
+        activeLyricIndex = -1;
+        return;
+      }
+
+      lyricsPanel.innerHTML = lyrics
+        .map((line, index) => `<p class="lyrics-line" data-lyric-index="${index}">${line.text}</p>`)
+        .join('');
+      lyricNodes = Array.from(lyricsPanel.querySelectorAll('.lyrics-line'));
+      activeLyricIndex = -1;
+      lyricsPanel.scrollTop = 0;
+    }
+
+    function updateActiveLyric(timeInSeconds) {
+      if (!lyrics.length || !lyricNodes.length) return;
+
+      let nextActiveIndex = -1;
+      for (let i = 0; i < lyrics.length; i += 1) {
+        if (timeInSeconds >= lyrics[i].time) {
+          nextActiveIndex = i;
+        } else {
+          break;
+        }
+      }
+
+      if (nextActiveIndex === activeLyricIndex || nextActiveIndex < 0) return;
+
+      if (activeLyricIndex >= 0) {
+        lyricNodes[activeLyricIndex].classList.remove('active');
+      }
+
+      activeLyricIndex = nextActiveIndex;
+      const activeNode = lyricNodes[activeLyricIndex];
+      activeNode.classList.add('active');
+
+      const panelCenter = lyricsPanel.clientHeight / 2;
+      const targetTop = activeNode.offsetTop - panelCenter + (activeNode.clientHeight / 2);
+      lyricsPanel.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: 'smooth'
+      });
+    }
+
+    async function loadLyrics(song) {
+      if (!song.lrc) {
+        lyrics = [];
+        renderLyrics();
+        return;
+      }
+
+      try {
+        const response = await fetch(song.lrc);
+        if (!response.ok) throw new Error('LRC_NOT_FOUND');
+        const text = await response.text();
+        lyrics = parseLrc(text);
+      } catch {
+        lyrics = [];
+      }
+
+      renderLyrics();
+    }
 
     function formatTime(timeInSeconds) {
       if (!Number.isFinite(timeInSeconds)) return '--:--';
@@ -478,6 +612,9 @@
       progress.value = 0;
       progress.style.setProperty('--progress', '0%');
       errorMessage.textContent = '';
+      lyrics = [];
+      renderLyrics();
+      loadLyrics(song);
 
       renderPlaylist();
 
@@ -527,6 +664,7 @@
     progress.addEventListener('change', () => {
       if (audio.duration) {
         audio.currentTime = (progress.value / 100) * audio.duration;
+        updateActiveLyric(audio.currentTime);
       }
       userIsSeeking = false;
     });
@@ -548,6 +686,7 @@
       if (!userIsSeeking) {
         syncProgressUI();
       }
+      updateActiveLyric(audio.currentTime);
     });
 
     audio.addEventListener('ended', () => {
