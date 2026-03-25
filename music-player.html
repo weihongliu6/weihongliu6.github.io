@@ -314,10 +314,24 @@
       padding-top: 4px;
     }
 
-    .playlist {
+    .playlist-viewport {
+      --queue-visible: 4;
+      --queue-gap: 9px;
+      --queue-item-height: 58px;
       margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+      height: calc((var(--queue-item-height) * var(--queue-visible)) + (var(--queue-gap) * (var(--queue-visible) - 1)));
+      mask-image: linear-gradient(to bottom, black 0%, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 88%, transparent 100%);
+    }
+
+    .playlist {
       display: grid;
-      gap: 9px;
+      gap: var(--queue-gap);
+      transform: translateY(0);
+      transition: transform 0.46s cubic-bezier(0.22, 0.61, 0.36, 1);
+      will-change: transform;
     }
 
     .playlist-item {
@@ -330,6 +344,7 @@
       color: var(--text);
       border-radius: var(--radius-sm);
       padding: 10px 12px;
+      min-height: var(--queue-item-height);
       cursor: pointer;
       transition: background 0.2s ease, border-color 0.2s ease;
     }
@@ -450,12 +465,12 @@
         line-height: var(--lyric-line-height-mobile, 30px);
       }
 
-      .playlist {
+      .playlist-viewport {
+        --queue-visible: 3;
+        --queue-gap: 7px;
+        --queue-item-height: 52px;
         margin-top: 8px;
-        max-height: 122px;
-        overflow: auto;
         padding-right: 2px;
-        overscroll-behavior: contain;
       }
 
       .playlist-item {
@@ -501,9 +516,8 @@
         width: min(100%, 410px);
       }
 
-      .playlist {
-        max-height: 280px;
-        overflow: auto;
+      .playlist-viewport {
+        --queue-visible: 4;
         padding-right: 2px;
       }
     }
@@ -555,7 +569,9 @@
 
         <div id="lyricsPanel" class="lyrics-panel" aria-live="polite" aria-label="歌词区域"><div id="lyricsViewport" class="lyrics-viewport"></div></div>
 
-        <div id="playlist" class="playlist" aria-label="播放列表"></div>
+        <div class="playlist-viewport" aria-label="播放列表">
+          <div id="playlist" class="playlist"></div>
+        </div>
       </div>
     </section>
 
@@ -615,6 +631,9 @@
     let activeLyricIndex = -1;
     let lyricNodes = [];
     let lyricsTrack = null;
+    let queueAnimationFrame = null;
+    let isQueueAnimating = false;
+    let queueTransitionHandler = null;
 
     function parseLrc(content) {
       return content
@@ -726,12 +745,18 @@
     }
 
     function renderPlaylist() {
-      playlist.innerHTML = songs
-        .map((song, index) => `
+      const queueSongs = songs.map((_, offset) => {
+        const songIndex = (currentIndex + offset) % songs.length;
+        return { song: songs[songIndex], songIndex };
+      });
+
+      playlist.innerHTML = queueSongs
+        .map(({ song, songIndex }, queueIndex) => `
           <button
-            class="playlist-item ${index === currentIndex ? 'active' : ''}"
+            class="playlist-item ${queueIndex === 0 ? 'active' : ''}"
             type="button"
-            data-index="${index}"
+            data-index="${songIndex}"
+            data-queue-index="${queueIndex}"
             aria-label="切换到 ${song.titleCn}"
           >
             <span class="playlist-cn">${song.titleCn}</span>
@@ -739,6 +764,53 @@
           </button>
         `)
         .join('');
+      playlist.style.transform = 'translateY(0px)';
+    }
+
+    function getQueueStep() {
+      const firstItem = playlist.querySelector('.playlist-item');
+      if (!firstItem) return 0;
+      const styles = getComputedStyle(playlist);
+      const gap = Number.parseFloat(styles.rowGap || styles.gap || '0') || 0;
+      return firstItem.offsetHeight + gap;
+    }
+
+    function clearQueueAnimation() {
+      if (queueAnimationFrame !== null) {
+        cancelAnimationFrame(queueAnimationFrame);
+        queueAnimationFrame = null;
+      }
+      if (queueTransitionHandler) {
+        playlist.removeEventListener('transitionend', queueTransitionHandler);
+        queueTransitionHandler = null;
+      }
+      isQueueAnimating = false;
+      playlist.style.transform = 'translateY(0px)';
+    }
+
+    function animateQueueAdvance(nextIndex, shouldAutoplay) {
+      if (isQueueAnimating) return;
+      const step = getQueueStep();
+      if (!step) {
+        setTrack(nextIndex, shouldAutoplay);
+        return;
+      }
+
+      isQueueAnimating = true;
+      playlist.style.transform = 'translateY(0px)';
+      queueAnimationFrame = requestAnimationFrame(() => {
+        playlist.style.transform = `translateY(-${step}px)`;
+      });
+
+      queueTransitionHandler = (event) => {
+        if (event.propertyName !== 'transform') return;
+        playlist.removeEventListener('transitionend', queueTransitionHandler);
+        queueTransitionHandler = null;
+        queueAnimationFrame = null;
+        isQueueAnimating = false;
+        setTrack(nextIndex, shouldAutoplay);
+      };
+      playlist.addEventListener('transitionend', queueTransitionHandler);
     }
 
     function syncProgressUI() {
@@ -749,6 +821,7 @@
     }
 
     function setTrack(index, shouldAutoplay = false) {
+      clearQueueAnimation();
       currentIndex = (index + songs.length) % songs.length;
       const song = songs[currentIndex];
 
@@ -803,7 +876,7 @@
     });
 
     nextBtn.addEventListener('click', () => {
-      setTrack(currentIndex + 1, !audio.paused);
+      animateQueueAdvance(currentIndex + 1, !audio.paused);
     });
 
     progress.addEventListener('input', () => {
@@ -826,7 +899,12 @@
       const target = event.target.closest('.playlist-item');
       if (!target) return;
       const nextIndex = Number(target.dataset.index);
+      const queueIndex = Number(target.dataset.queueIndex);
       if (!Number.isInteger(nextIndex)) return;
+      if (queueIndex === 1) {
+        animateQueueAdvance(nextIndex, true);
+        return;
+      }
       setTrack(nextIndex, true);
     });
 
@@ -843,7 +921,7 @@
     });
 
     audio.addEventListener('ended', () => {
-      setTrack(currentIndex + 1, true);
+      animateQueueAdvance(currentIndex + 1, true);
     });
 
     audio.addEventListener('play', () => {
