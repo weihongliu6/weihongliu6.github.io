@@ -253,6 +253,7 @@
     }
 
     .lyrics-panel {
+      --lyrics-focus-bias: 0px;
       margin-top: 12px;
       height: 184px;
       position: relative;
@@ -410,7 +411,8 @@
 
       .controls {
         gap: 14px;
-        margin-top: 11px;
+        margin-top: 10px;
+        margin-bottom: 2px;
       }
 
       .control-btn {
@@ -424,13 +426,16 @@
       }
 
       .error {
-        margin-top: 8px;
-        min-height: 18px;
+        margin-top: 6px;
+        min-height: 16px;
       }
 
       .lyrics-panel {
-        margin-top: 8px;
-        height: 154px;
+        --lyrics-focus-bias: -14px;
+        margin-top: 4px;
+        height: 142px;
+        mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
       }
 
       .lyrics-line {
@@ -603,9 +608,16 @@
         .sort((a, b) => a.time - b.time);
     }
 
+    function getLyricsFocusBias() {
+      const value = getComputedStyle(lyricsPanel).getPropertyValue('--lyrics-focus-bias').trim();
+      const parsed = Number.parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
     function updateLyricsSpacer() {
       const lineHeight = lyricNodes[0]?.offsetHeight || 34;
-      const spacerHeight = Math.max(24, (lyricsPanel.clientHeight / 2) - (lineHeight / 2));
+      const focusBias = getLyricsFocusBias();
+      const spacerHeight = Math.max(14, ((lyricsPanel.clientHeight / 2) - (lineHeight / 2)) + focusBias);
       lyricsPanel.style.setProperty('--lyrics-spacer', `${spacerHeight}px`);
     }
 
@@ -657,7 +669,7 @@
       const activeNode = lyricNodes[activeLyricIndex];
       activeNode.classList.add('active');
 
-      const panelCenter = lyricsPanel.clientHeight / 2;
+      const panelCenter = (lyricsPanel.clientHeight / 2) + getLyricsFocusBias();
       const activeCenter = activeNode.offsetTop + (activeNode.offsetHeight / 2);
       const targetTranslate = panelCenter - activeCenter;
       lyricsTrack.style.transform = `translateY(${targetTranslate}px)`;
