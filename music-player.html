@@ -596,7 +596,7 @@
         titleEn: 'ACROSS MOUNTAINS AND OCEANS',
         artist: '影子观察',
         src: 'music/song2.mp3',
-        lrc: '',
+        lrc: 'music/song2.lrc',
         cover: 'music/cover-adelaide.jpg'
       },
       {
@@ -604,7 +604,7 @@
         titleEn: 'THE SOUTHERN SKY',
         artist: '影子观察',
         src: 'music/song3.mp3',
-        lrc: '',
+        lrc: 'music/song3.lrc',
         cover: 'music/cover-adelaide.jpg'
       }
     ];
@@ -717,15 +717,17 @@
       lyricsTrack.style.transform = `translateY(${targetTranslate}px)`;
     }
 
+    function getLrcPath(song) {
+      if (song.lrc) return song.lrc;
+      const cleanSrc = song.src.split('?')[0].split('#')[0];
+      return cleanSrc.replace(/\.[^.]+$/, '.lrc');
+    }
+
     async function loadLyrics(song) {
-      if (!song.lrc) {
-        lyrics = [];
-        renderLyrics();
-        return;
-      }
+      const lrcPath = getLrcPath(song);
 
       try {
-        const response = await fetch(song.lrc);
+        const response = await fetch(lrcPath);
         if (!response.ok) throw new Error('LRC_NOT_FOUND');
         const text = await response.text();
         lyrics = parseLrc(text);
