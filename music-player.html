@@ -412,7 +412,7 @@
       .controls {
         gap: 14px;
         margin-top: 10px;
-        margin-bottom: 2px;
+        margin-bottom: 0;
       }
 
       .control-btn {
@@ -426,16 +426,22 @@
       }
 
       .error {
-        margin-top: 6px;
-        min-height: 16px;
+        margin-top: 4px;
+        min-height: 10px;
+        line-height: 1.2;
       }
 
       .lyrics-panel {
-        --lyrics-focus-bias: -14px;
-        margin-top: 4px;
-        height: 142px;
+        --lyrics-focus-bias: -30px;
+        margin-top: 0;
+        height: 124px;
+        padding-top: 0;
         mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+      }
+
+      .lyrics-viewport {
+        padding-top: 0;
       }
 
       .lyrics-line {
@@ -445,7 +451,24 @@
       }
 
       .playlist {
-        margin-top: 12px;
+        margin-top: 8px;
+        max-height: 122px;
+        overflow: auto;
+        padding-right: 2px;
+        overscroll-behavior: contain;
+      }
+
+      .playlist-item {
+        gap: 2px;
+        padding: 8px 10px;
+      }
+
+      .playlist-cn {
+        font-size: 0.9rem;
+      }
+
+      .playlist-en {
+        font-size: 0.68rem;
       }
     }
 
