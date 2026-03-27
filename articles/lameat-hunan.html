@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>腌熏的腊肉</title>
-  <meta name="description" content="一篇关于湖南腊肉、乡情、饮食文化与记忆的中文随笔。" />
-  <meta property="og:description" content="文：肖忠一医生｜一篇关于湖南腊肉与乡愁记忆的随笔。">
+  <meta name="description" content="一篇关于湖南腊味、乡情、饮食文化与记忆的中文随笔。" />
+  <meta property="og:description" content="文：肖忠一医生｜一篇关于湖南腊味、乡情、饮食文化与记忆的中文随笔。">
   <meta property="og:type" content="article">
 
   <style>
@@ -136,8 +136,303 @@
     }
     .footer a{ color:var(--link); text-decoration:none; }
 
+    @media (max-width:700px){
+
+      .article-action-bar{
+        bottom: 14px;
+        padding: 7px 10px;
+        gap: 8px;
+      }
+      .action-btn{
+        font-size: 13px;
+        padding: 6px 9px;
+      }
+      .action-divider{
+        height: 12px;
+      }
+      .copy-toast{
+        bottom: 64px;
+      }
+      .comment-panel{
+        width: 100%;
+        right: -100%;
+      }
+
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+    .visit-badge{display:block;margin:10px auto 0;height:16px;opacity:.35;filter:grayscale(1);}
+
+    .article-action-bar{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      color: #222;
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1200;
+    }
+    .action-btn{
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .action-btn:hover{
+      background: rgba(0,0,0,0.06);
+    }
+    .action-divider{
+      width: 1px;
+      height: 14px;
+      background: rgba(0,0,0,0.15);
+    }
+    .copy-toast{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f5f5f5;
+      background: rgba(17,17,20,0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+      z-index: 1201;
+    }
+    .copy-toast.show{
+      opacity: 1;
+    }
+
+    .share-panel{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 1300;
+    }
+    .share-panel.show{
+      display: flex;
+    }
+    .share-option-btn,
+    .share-wechat-btn{
+      border: none;
+      background: rgba(0,0,0,0.04);
+      color: #222;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .share-option-btn:hover,
+    .share-wechat-btn:hover{
+      background: rgba(0,0,0,0.08);
+    }
+
+    .wechat-modal{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .wechat-modal.show{
+      display: flex;
+    }
+
+    .wechat-modal-content{
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 280px;
+      box-sizing: border-box;
+    }
+
+    .wechat-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    #closeWechatModal{
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      color: #555;
+    }
+
+    #qrcode{
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .comment-panel{
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      max-width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+      transition: right 0.35s ease;
+      z-index: 1300;
+    }
+    .comment-panel.open{
+      right: 0;
+    }
+    .comment-panel-inner{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #1f1f24;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .comment-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .close-comment{
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      cursor: pointer;
+      color: #3b3b40;
+      padding: 2px;
+    }
+    .comment-list{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 2px;
+      margin-bottom: 14px;
+    }
+    .comment-item{
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.88);
+      padding: 10px 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 14px;
+    }
+    .comment-compose-wrap{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: auto;
+    }
+    .comment-compose-wrap.hidden{
+      display: none;
+    }
+    .comment-input{
+      width: 100%;
+      height: 120px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      resize: none;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.92);
+      color: #222;
+    }
+    .comment-actions{
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .cancel-comment,
+    .submit-comment{
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+    }
+    .cancel-comment{
+      background: rgba(0,0,0,0.08);
+      color: #333;
+    }
+    .submit-comment{
+      background: rgba(0,0,0,0.8);
+      color: white;
+    }
+    .comment-overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1200;
+    }
+    .comment-overlay.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
   </style>
 
+  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
   <meta property="og:image" content="https://weihongliu6.github.io/images/shadow-observer-cover.jpg">
 </head>
 
@@ -152,48 +447,50 @@
       <h1 class="title-zh">腌熏的腊肉</h1>
       <div class="byline">文：肖忠一医生</div>
       <p class="title-en">Cured and Smoked Bacon</p>
-      <p class="title-sub">——一篇关于湖南腊味、乡愁与饮食记忆的随笔</p>
+      <p class="title-sub">——一篇关于湖南腊味、乡情、饮食文化与记忆的中文随笔</p>
 
       <div class="meta">
         <span>作者：肖忠一</span>
         <span>栏目：思想随笔</span>
-        <span>关键词：湖南 / 腊肉 / 乡愁 / 饮食文化</span>
+        <span>关键词：湖南 / 腊肉 / 乡愁 / 饮食文化 / 年味</span>
       </div>
     </header>
 
     <div class="lead">
-      湖南腊肉不仅是一种食物，更是一种文化记忆。烟火缭绕之间，时间被封存，乡愁被唤醒，味道成为人与故乡之间最深的联系。
+      <strong>摘要</strong><br><br>
+      这篇文章从湖南腊肉写起，写到一种地方饮食文化，也写到烟火缭绕中的乡愁与记忆。腌与熏，不仅保存了食物，也保存了时间、亲情与故乡的气息。
     </div>
 
     <article>
+      <p>腌熏腊肉，其实是一件事的两个面，是腊肉制作过程中的两个环节，一是腌，另一是熏，任何动物的肉经过腌熏后就变成了腊肉。腊肉这种东西估计全国各个地方都有，甚至全世界各个种族也有。《舌尖上的中国》曾这样描述过腊肉： “这是盐的味道，山的味道，风的味道，阳光的味道，也是时间的味道，人情的味道”。湖南人腌熏腊肉的品种、数量、风味和普及程度，是别人所难以想象的，尤其是它的某些稀罕性，绝对会让你诧异。</p>
 
-<p>腌熏腊肉，其实是一件事的两个面，是腊肉制作过程中的两个环节，一是腌，另一是熏，任何动物的肉经过腌熏后就变成了腊肉。腊肉这种东西估计全国各个地方都有，甚至全世界各个种族也有。《舌尖上的中国》曾这样描述过腊肉：“这是盐的味道，山的味道，风的味道，阳光的味道，也是时间的味道，人情的味道”。湖南人腌熏腊肉的品种、数量、风味和普及程度，是别人所难以想象的，尤其是它的某些稀罕性，绝对会让你诧异。</p>
+      <p>天下都说广东人会吃、敢吃，不管是天上飞的、还是海里游的、或者说是山里跑的，只要是背朝天的，都在吃的范畴，这也让广东人为此很是自豪。但湖南人的自豪在于，他们看见任何生物的第一反应永远是“搞个腊的”，他们可以腌熏一切，大有腌熏世界之气势，只恨悬挂腌熏腊肉的房梁没有足够长。</p>
 
-<p>天下都说广东人会吃、敢吃，不管是天上飞的、还是海里游的、或者说是山里跑的，只要是背朝天的，都在吃的范畴，这也让广东人为此很是自豪。但湖南人的自豪在于，他们看见任何生物的第一反应永远是“搞个腊的”，他们可以腌熏一切，大有腌熏世界之气势，只恨悬挂腌熏腊肉的房梁没有足够长。</p>
+      <p>湖南以外的人，他们的腌熏常见于：猪肉、牛肉、香肠、鱼、还有鸡鸭鹅，可能还有些我不知道的，但估计品种也不会太多。而湖南人腌熏的内容是你不可想象的，他们除了会腌熏你们常见的各种，还会腌熏各种动物内脏的心、肝、肺、肾、肠，当然还有动物的耳、舌、鼻、嘴，肯定还有脸。如果你仔细访一访，就会发现他们竟然还会腌熏竹鼠、田鸡、鳝鱼、泥鳅、乌龟和脚鱼，甚至还有田螺肉、河蚌肉，那么小的可怜的肉你们腌熏它划得来吗？甚至还丧心病狂的把鳄鱼也纳入腊肉烟熏一类，那玩意儿夜晚挂在你家阳台的挂架上，你就不担心在黑暗和朦胧中吓出尿来？就是在大白天这鳄鱼又如何下嘴？起码我的勇气还不足以支撑我做出如此威猛的尝试。</p>
 
-<p>湖南以外的人，他们的腌熏常见于：猪肉、牛肉、香肠、鱼、还有鸡鸭鹅，可能还有些我不知道的，但估计品种也不会太多。而湖南人腌熏的内容是你不可想象的，他们除了会腌熏你们常见的各种，还会腌熏各种动物内脏的心、肝、肺、肾、肠，当然还有动物的耳、舌、鼻、嘴，肯定还有脸。</p>
+      <p>另外每一个腊味店，都悬挂的特别张扬，也许是如果门口的招牌做的不太显眼，让初来乍到的外地人，很有可能会把湖南街头的腊味店当成我们湘雅医学院哪位解剖学家的在逃标本架：那熏得如同沙皮狗一般乖巧、稍带暗红的乳猪崽；那袒露着完美骨架、熏的深黄的大草鱼；还有能看出些许曲项向天歌、略显苍白的腊鸭腊鹅……我一直不能理解，一个湖南人是如何把一个动物的尸体经过腌腊熏烤制成如此美妙、生动活泼、甚至带有某种美学倾向的。</p>
 
-<p>如果你仔细访一访，就会发现他们竟然还会腌熏竹鼠、田鸡、鳝鱼、泥鳅、乌龟和脚鱼，甚至还有田螺肉、河蚌肉……甚至还丧心病狂的把鳄鱼也纳入腊肉烟熏一类，那玩意儿夜晚挂在你家阳台的挂架上，你就不担心在黑暗和朦胧中吓出尿来？就是在大白天这鳄鱼又如何下嘴？起码我的勇气还不足以支撑我做出如此威猛的尝试。</p>
+      <p>不要以为湖南人只能腌熏各种动物的肉体，他们还可以腌熏邵阳的猪血豆腐、长沙的鹌鹑蛋、更不用说常德满大街的腌熏香干等等，最近还听说出现了熏核桃，简直骇人听闻，总之只要是个能吃进嘴的东西都有可能被湖南人成作腊”的。对于湖南人来讲：“万物皆可腌”，这可不是一种文学揶揄，在湖南却是一种千奇百怪又随处可见的生活态度。但我一直纳闷的是：为什么要腌熏乌龟--也就是我们常说的王八？腌熏的目的本来是什么？一般来讲腊肉的传统源于几千年以前，由于那时没有冰柜，难以保存食材，才被人类无意中开发出的如此美食，可“千年的王八万年的龟”，你连王八都要腌熏，让它好好自己活着、保存的时间不是更长吗？</p>
 
-<p>另外每一个腊味店，都悬挂的特别张扬，也许是如果门口的招牌做的不太显眼，让初来乍到的外地人，很有可能会把湖南街头的腊味店当成解剖学家的在逃标本架……</p>
+      <p>每年冬至以后的湖南，假如你走进每个县城以下的广大乡村，你会陷入广泛的迷茫之中，那是一种真正的迷茫：遮天蔽日，茫茫不见前路；飘渺如幻，世间处处烟熏。每一间灶屋、每一块打谷场，不仅会让你迷眼，还要小心呛喉。如果是没见过这种场面的上海人，初到湖南很有可能会吓得要报火警。</p>
 
-<p>不要以为湖南人只能腌熏各种动物的肉体，他们还可以腌熏邵阳的猪血豆腐、长沙的鹌鹑蛋、更不用说常德满大街的腌熏香干等等，最近还听说出现了熏核桃，简直骇人听闻。总之只要是个能吃进嘴的东西都有可能被湖南人成作“腊”的。</p>
+      <p>腌熏腊肉在湖南之广泛、之深刻，是每一个湖南中年以上的男女都必须要掌握的，在某些地方甚至十几岁的少年也能很熟练的掌握腌熏腊肉的诀窍，我就是从那个时候开始参与这项让全家人都十分虔诚的仪式的。首先切割清条，然后盐腌，讲究的还要拌入炒过的桂皮、花椒、八角，洒入不等的白酒、酱油，腌制四到七天后挂落露天凉晒，让阳光和风洒满并吹拂稍显苍白的腌肉。最迟在过年前的二周开始熏制，熏制分热熏和冷熏，所谓冷熏就是挂在灶房的火盆上，常年累月的熏烤在房梁下；而所谓热熏就是用一个大缸或者是一个木架悬挂各种腊肉，而下面则置放某种特殊的木屑、柚子皮、香叶、松针、当然还要适时浇点水以保持湿润和浓烟，然后外罩各种包裹以免浓烟外泄，最后经历二十四小时方可。</p>
 
-<p>每年冬至以后的湖南，假如你走进每个县城以下的广大乡村，你会陷入广泛的迷茫之中：遮天蔽日，茫茫不见前路；飘渺如幻，世间处处烟熏。</p>
+      <p>我想应该没有什么能够阻挡一个湖南人对腊肉的向往，一年四季在湖南的叫法完全可以改作春、夏、秋、腊。在这个所有人都向往大城市的时代，也许只有在湖南的冬季，所有的城里人都在抓心挠肝的羡慕自己乡下的亲戚，准确的说是羡慕他们拥有一根可以熏挂腊肉的房梁，也许其中的某一条腊肉会寄到自己的餐桌上。有些没有乡下亲戚的城里人就没那么幸福了，但局促的大厦照样阻挡不了他们自己腌熏腊肉的深情，即使在拥有千万人口、繁华无比的都市长沙，每年冬季都会出现多起烟熏腊肉引发的火警。我想红彤彤的辣椒是湖南餐桌上的保护色，而它真正的灵魂其实应该是蒸煮腊肉后切开时那油乎乎、黄灿灿的快乐。在湖南这个地方，所有的肉类都以腊为荣，没点烟熏火燎的痕迹都不配称为压轴的主菜。</p>
 
-<p>腌熏腊肉在湖南之广泛、之深刻，是每一个湖南中年以上的男女都必须要掌握的。我就是从那个时候开始参与这项让全家人都十分虔诚的仪式的。首先切割清条，然后盐腌，讲究的还要拌入炒过的桂皮、花椒、八角，洒入不等的白酒、酱油……</p>
+      <p>小时候觉得腊肉的烟味很重，离开家乡后才懂得腊肉的味道才是故乡的滋味。小时候我看见过一块块腊肉被父辈们在寒冬腊月时高高挂起；我也看见过父母亲常常用腊肉招待家里来的客人，让我们馋涎欲滴；我还看见过故乡的游子出远门时，行囊里塞着的一块又一块熏好的或暗或亮的腊肉；长大后我又看见过在遥远的他乡，朋友和乡亲们聚餐时的餐桌上一定会有的一碗香气飘飘，富有嚼劲，咸香浓郁的腊肉……</p>
 
-<p>我想应该没有什么能够阻挡一个湖南人对腊肉的向往，一年四季在湖南的叫法完全可以改作春、夏、秋、腊。</p>
+      <p>湖南人对腊肉的热爱，早已超越了实用主义的需求，已无限接近某种信仰的存在。这种习惯、这种味道，在中国已持续了数千年之久，而在湖南，腊味就是舌尖上的年味，就是湖南人一种淡淡的乡情。每到冬风起，不管你在哪儿，那腊肉的味道即便要穿过大半个中国也不会迟到。当你看见湖南广大城乡的每条大街小巷，都笼罩在一片飘渺的白烟中的时候，请不要觉得那只是一种平常的人间烟火，其实那是湖南人与生相伴的一种最古老、最普遍的乡愁。</p>
 
-<p>小时候觉得腊肉的烟味很重，离开家乡后才懂得腊肉的味道才是故乡的滋味。</p>
+      <p>前两天我发现我大姐的眼睛红红的，刚说了两句她就走开了，我很担心的问了我的外甥：你妈怎么了？好像哭过，家里出什么事了吗？外甥说：妈妈的眼睛是熏腊肉熏的。我只能向已经奋战在熏腊肉一线的湖南乡亲们表示由衷的佩服和感谢。</p>
 
-<p>湖南人对腊肉的热爱，早已超越了实用主义的需求，已无限接近某种信仰的存在。这种习惯、这种味道，在中国已持续了数千年之久，而在湖南，腊味就是舌尖上的年味，就是湖南人一种淡淡的乡情。</p>
+      <p>腊八节快到了，不腊只王八说得过去吗？</p>
 
-<p>腊八节快到了，不腊只王八说得过去吗？</p>
-
-<p>2022.01.27 于湖南常德</p>
-
+      <p>2022.01.27于湖南常德</p>
     </article>
+
+    <div id="comments"></div>
+
 
     <div class="footer">
       <div>© Dr Weihong Liu · Digital Studio</div>
@@ -203,7 +500,38 @@
       </div>
     </div>
 
+    <img class="visit-badge"
+         src="https://hits.sh/weihongliu6.github.io/articles/lameat-hunan.svg?label=views&color=777777&labelColor=eeeeee"
+         alt="Page visit count" />
   </main>
 
+  <div class="article-action-bar">
+    <button class="action-btn comment-btn" type="button" aria-label="留言">留言</button>
+    <div class="action-divider" aria-hidden="true"></div>
+    <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
+  </div>
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
+
+  <div class="comment-panel" id="commentPanel">
+    <div class="comment-panel-inner">
+      <div class="comment-header">
+        <span>留言 / Comment</span>
+        <button class="close-comment" id="closeCommentBtn" type="button" aria-label="关闭留言面板">✕</button>
+      </div>
+
+      <div class="comment-list" id="commentList"></div>
+
+      <div class="comment-compose-wrap hidden" id="commentComposeWrap">
+        <textarea placeholder="写下你的想法…" class="comment-input" id="commentInput"></textarea>
+        <div class="comment-actions">
+          <button class="cancel-comment" id="cancelCommentBtn" type="button">取消</button>
+          <button class="submit-comment" id="submitCommentBtn" type="button">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-overlay" id="commentOverlay"></div>
+
+  <script src="./essay-actions.js"></script>
 </body>
 </html>
