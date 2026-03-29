@@ -787,8 +787,6 @@
         }
       }
 
-      if (!force && nextActiveIndex === activeLyricIndex) return;
-
       if (nextActiveIndex < 0) {
         if (activeLyricIndex >= 0) {
           lyricNodes[activeLyricIndex].classList.remove('active');
@@ -798,6 +796,8 @@
         lyricsTrack.style.transform = 'translateY(0px)';
         return;
       }
+
+      if (!force && nextActiveIndex === activeLyricIndex) return;
 
       if (activeLyricIndex >= 0) {
         lyricNodes[activeLyricIndex].classList.remove('active');
