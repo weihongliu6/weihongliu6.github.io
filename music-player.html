@@ -330,6 +330,13 @@
       will-change: transform;
     }
 
+    .lyrics-track.pending-start .lyrics-line {
+      opacity: 0;
+      color: transparent;
+      filter: none;
+      text-shadow: none;
+    }
+
     .lyrics-spacer {
       height: var(--lyrics-spacer, 88px);
       flex: 0 0 auto;
@@ -761,6 +768,7 @@
       lyricsTrack = document.getElementById('lyricsTrack');
       lyricNodes = Array.from(lyricsViewport.querySelectorAll('.lyrics-line'));
       activeLyricIndex = -1;
+      lyricsTrack.classList.add('pending-start');
       updateLyricsSpacer();
       if (lyricsTrack) {
         lyricsTrack.style.transform = 'translateY(0px)';
@@ -779,7 +787,17 @@
         }
       }
 
-      if ((!force && nextActiveIndex === activeLyricIndex) || nextActiveIndex < 0) return;
+      if (!force && nextActiveIndex === activeLyricIndex) return;
+
+      if (nextActiveIndex < 0) {
+        if (activeLyricIndex >= 0) {
+          lyricNodes[activeLyricIndex].classList.remove('active');
+        }
+        activeLyricIndex = -1;
+        lyricsTrack.classList.add('pending-start');
+        lyricsTrack.style.transform = 'translateY(0px)';
+        return;
+      }
 
       if (activeLyricIndex >= 0) {
         lyricNodes[activeLyricIndex].classList.remove('active');
@@ -787,6 +805,7 @@
 
       activeLyricIndex = nextActiveIndex;
       const activeNode = lyricNodes[activeLyricIndex];
+      lyricsTrack.classList.remove('pending-start');
       activeNode.classList.add('active');
 
       const panelCenter = (lyricsPanel.clientHeight / 2) + getLyricsFocusBias();
