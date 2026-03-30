@@ -690,6 +690,14 @@
         src: 'music/song3.mp3',
         lrc: 'music/song3.lrc',
         cover: 'music/cover-adelaide.jpg'
+      },
+      {
+        titleCn: '在南澳',
+        titleEn: 'In South Australia',
+        artist: '影子观察',
+        src: 'music/song4.mp3',
+        lrc: null,
+        cover: 'music/cover-adelaide.jpg'
       }
     ];
 
@@ -750,7 +758,7 @@
 
     function renderLyrics() {
       if (!lyrics.length) {
-        lyricsViewport.innerHTML = '<p class="lyrics-empty">暂无歌词</p>';
+        lyricsViewport.innerHTML = '<p class="lyrics-empty">Lyrics coming soon</p>';
         lyricNodes = [];
         lyricsTrack = null;
         activeLyricIndex = -1;
@@ -815,13 +823,18 @@
     }
 
     function getLrcPath(song) {
-      if (song.lrc) return song.lrc;
+      if ('lrc' in song) return song.lrc || null;
       const cleanSrc = song.src.split('?')[0].split('#')[0];
       return cleanSrc.replace(/\.[^.]+$/, '.lrc');
     }
 
     async function loadLyrics(song) {
       const lrcPath = getLrcPath(song);
+      if (!lrcPath) {
+        lyrics = [];
+        renderLyrics();
+        return;
+      }
 
       try {
         const response = await fetch(lrcPath);
