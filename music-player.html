@@ -204,11 +204,16 @@
       text-transform: uppercase;
     }
 
-    .artist {
-      margin: 8px 0 0;
-      color: #f2c89f;
-      font-size: 0.94rem;
-      letter-spacing: 0.08em;
+    .song-credits {
+      margin: 10px 0 0;
+      color: #b8b8b8;
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      line-height: 1.65;
+      text-align: center;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .progress-wrap {
@@ -487,9 +492,10 @@
         font-size: 0.73rem;
       }
 
-      .artist {
-        margin-top: 6px;
-        font-size: 0.88rem;
+      .song-credits {
+        margin-top: 8px;
+        font-size: 0.7rem;
+        line-height: 1.6;
       }
 
       .progress-wrap {
@@ -632,7 +638,10 @@
             <h1 id="titleCn" class="song-title-cn">阿德莱德，一个我称之为家的地方</h1>
             <p id="titleEn" class="song-title-en">ADELAIDE A PLACE WE CALL HOME</p>
           </div>
-          <p class="artist">影子观察</p>
+          <p id="songCredits" class="song-credits">
+            <span>作词 Lyrics：影子观察</span>
+            <span>作曲 Music：影子观察</span>
+          </p>
         </div>
 
         <div class="progress-wrap">
@@ -668,7 +677,8 @@
       {
         titleCn: '阿德莱德，一个我称之为家的地方',
         titleEn: 'ADELAIDE A PLACE WE CALL HOME',
-        artist: '影子观察',
+        lyricist: '影子观察',
+        composer: '影子观察',
         // 替换音频文件：把 src 改为你的文件路径
         src: 'music/song1.mp3',
         lrc: 'music/song1.lrc',
@@ -678,7 +688,8 @@
       {
         titleCn: '跨越万水千山',
         titleEn: 'ACROSS MOUNTAINS AND OCEANS',
-        artist: '影子观察',
+        lyricist: '影子观察',
+        composer: '影子观察',
         src: 'music/song2.mp3',
         lrc: 'music/song2.lrc',
         cover: 'music/cover-adelaide.jpg'
@@ -686,7 +697,8 @@
       {
         titleCn: '阿德莱德的风',
         titleEn: 'THE WIND OF ADELAIDE',
-        artist: '影子观察',
+        lyricist: '影子观察',
+        composer: '影子观察',
         src: 'music/song3.mp3',
         lrc: 'music/song3.lrc',
         cover: 'music/cover-adelaide.jpg'
@@ -694,7 +706,8 @@
       {
         titleCn: '在南澳',
         titleEn: 'In South Australia',
-        artist: '影子观察',
+        lyricist: '郭燕',
+        composer: '影子观察',
         src: 'music/song4.mp3',
         lrc: null,
         cover: 'music/cover-adelaide.jpg'
@@ -707,6 +720,7 @@
     const titleCnEl = document.getElementById('titleCn');
     const titleEnEl = document.getElementById('titleEn');
     const songMetaEl = document.getElementById('songMeta');
+    const songCreditsEl = document.getElementById('songCredits');
     const progress = document.getElementById('progress');
     const currentTimeEl = document.getElementById('currentTime');
     const durationEl = document.getElementById('duration');
@@ -848,6 +862,16 @@
       renderLyrics();
     }
 
+
+    function renderCredits(song) {
+      const lyricist = song.lyricist || '影子观察';
+      const composer = song.composer || '影子观察';
+      songCreditsEl.innerHTML = `
+        <span>作词 Lyrics：${lyricist}</span>
+        <span>作曲 Music：${composer}</span>
+      `;
+    }
+
     function formatTime(timeInSeconds) {
       if (!Number.isFinite(timeInSeconds)) return '--:--';
       const total = Math.max(0, Math.floor(timeInSeconds));
@@ -943,6 +967,7 @@
       }, 180);
       titleCnEl.textContent = song.titleCn;
       titleEnEl.textContent = song.titleEn;
+      renderCredits(song);
       coverImage.src = song.cover;
       bgLayer.style.backgroundImage = `url('${song.cover}')`;
 
