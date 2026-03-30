@@ -709,10 +709,12 @@
         lyricist: '郭燕',
         composer: '影子观察',
         src: 'music/song4.mp3',
-        lrc: null,
+        lrc: 'music/song4.lrc',
         cover: 'music/cover-adelaide.jpg'
       }
     ];
+
+    const song4Index = songs.findIndex((song) => song.src === 'music/song4.mp3');
 
     const audio = document.getElementById('audio');
     const bgLayer = document.getElementById('bgLayer');
@@ -842,8 +844,8 @@
       return cleanSrc.replace(/\.[^.]+$/, '.lrc');
     }
 
-    async function loadLyrics(song) {
-      const lrcPath = getLrcPath(song);
+    async function loadLyrics(song, trackIndex) {
+      const lrcPath = trackIndex === song4Index ? 'music/song4.lrc' : getLrcPath(song);
       if (!lrcPath) {
         lyrics = [];
         renderLyrics();
@@ -981,7 +983,7 @@
       errorMessage.textContent = '';
       lyrics = [];
       renderLyrics();
-      loadLyrics(song);
+      loadLyrics(song, currentIndex);
 
       renderPlaylist();
 
