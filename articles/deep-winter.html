@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>已是深冬｜肖忠一医生｜Reflections and Essays</title>
+  <meta name="description" content="一篇关于湖南常德深冬景象的散文。风雨过后，树木凋零，草木休歇，却仍在寒冷中显出生命的坚韧、坦诚与温馨。" />
+  <meta property="og:title" content="已是深冬｜肖忠一医生">
+  <meta property="og:description" content="一篇关于湖南常德深冬景象的散文。">
+  <meta property="og:type" content="article">
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --line:#26262b;
+      --link:#d9d9de;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      line-height:1.9;
+    }
+
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(11,11,12,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      z-index:10;
+    }
+    .topbar a{
+      color:var(--link);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-right:8px;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:24px 18px 120px;
+    }
+
+    header{
+      padding:18px 0 14px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
+    }
+
+    .title-zh{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:.5px;
+      margin:0 0 10px;
+    }
+
+    .title-en{
+      font-size:20px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .title-sub{
+      font-size:16px;
+      color:#9a9aa0;
+      margin:0 0 16px 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .byline{
+      font-size:16px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .meta span{
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
+
+    .lead{
+      margin:18px 0 18px;
+      padding:16px 18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dcdcdf;
+      font-size:18px;
+    }
+
+    p{
+      margin:12px 0;
+      text-align:justify;
+      text-justify:inter-ideograph;
+    }
+
+    blockquote{
+      margin:18px 0;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-left:4px solid #3a3a44;
+      border-radius:10px;
+      color:#d7d7db;
+    }
+
+    .poem{
+      margin:20px 0;
+      padding:18px 20px;
+      background:rgba(255,255,255,.02);
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:#dddddf;
+    }
+    .poem-title{
+      font-size:18px;
+      margin:0 0 12px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      color:#f0f0f2;
+    }
+    .poem p{
+      margin:6px 0;
+      text-align:left;
+    }
+
+    .footer{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .footer a{ color:var(--link); text-decoration:none; }
+
+    @media (max-width:700px){
+
+      .article-action-bar{
+        bottom: 14px;
+        padding: 7px 10px;
+        gap: 8px;
+      }
+      .action-btn{
+        font-size: 13px;
+        padding: 6px 9px;
+      }
+      .action-divider{
+        height: 12px;
+      }
+      .copy-toast{
+        bottom: 64px;
+      }
+      .comment-panel{
+        width: 100%;
+        right: -100%;
+      }
+
+      .title-zh{
+        font-size:32px;
+        line-height:1.2;
+      }
+      .title-en{ font-size:16px; }
+      .lead{ font-size:16px; }
+    }
+    .visit-badge{display:block;margin:10px auto 0;height:16px;opacity:.35;filter:grayscale(1);}
+
+    .article-action-bar{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      color: #222;
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1200;
+    }
+    .action-btn{
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .action-btn:hover{
+      background: rgba(0,0,0,0.06);
+    }
+    .action-divider{
+      width: 1px;
+      height: 14px;
+      background: rgba(0,0,0,0.15);
+    }
+    .copy-toast{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f5f5f5;
+      background: rgba(17,17,20,0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+      z-index: 1201;
+    }
+    .copy-toast.show{
+      opacity: 1;
+    }
+
+    .share-panel{
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 1300;
+    }
+    .share-panel.show{
+      display: flex;
+    }
+    .share-option-btn,
+    .share-wechat-btn{
+      border: none;
+      background: rgba(0,0,0,0.04);
+      color: #222;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .share-option-btn:hover,
+    .share-wechat-btn:hover{
+      background: rgba(0,0,0,0.08);
+    }
+
+    .wechat-modal{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .wechat-modal.show{
+      display: flex;
+    }
+
+    .wechat-modal-content{
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 280px;
+      box-sizing: border-box;
+    }
+
+    .wechat-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+
+    #closeWechatModal{
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      color: #555;
+    }
+
+    #qrcode{
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .comment-panel{
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      max-width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+      transition: right 0.35s ease;
+      z-index: 1300;
+    }
+    .comment-panel.open{
+      right: 0;
+    }
+    .comment-panel-inner{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #1f1f24;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    }
+    .comment-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .close-comment{
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      cursor: pointer;
+      color: #3b3b40;
+      padding: 2px;
+    }
+    .comment-list{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 2px;
+      margin-bottom: 14px;
+    }
+    .comment-item{
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.88);
+      padding: 10px 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 14px;
+    }
+    .comment-compose-wrap{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: auto;
+    }
+    .comment-compose-wrap.hidden{
+      display: none;
+    }
+    .comment-input{
+      width: 100%;
+      height: 120px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      resize: none;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.92);
+      color: #222;
+    }
+    .comment-actions{
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .cancel-comment,
+    .submit-comment{
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+    }
+    .cancel-comment{
+      background: rgba(0,0,0,0.08);
+      color: #333;
+    }
+    .submit-comment{
+      background: rgba(0,0,0,0.8);
+      color: white;
+    }
+    .comment-overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1200;
+    }
+    .comment-overlay.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+  </style>
+
+  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+  <meta property="og:image" content="https://weihongliu6.github.io/images/shadow-observer-cover.jpg">
+</head>
+
+<body>
+  <div class="topbar">
+    <a href="../articles.html">← 返回 Articles</a>
+    <a href="../index.html">返回主页 Home</a>
+  </div>
+
+  <main class="wrap">
+    <header>
+      <h1 class="title-zh">已是深冬</h1>
+      <div class="byline">文：肖忠一医生</div>
+      <p class="title-en">Deep Winter Has Arrived</p>
+      <p class="title-sub">——一篇关于湖南常德深冬、风雨、树木与生命休歇的散文</p>
+
+      <div class="meta">
+        <span>作者：肖忠一</span>
+        <span>栏目：思想随笔</span>
+        <span>关键词：湖南 / 常德 / 深冬 / 自然 / 乡愁 / 散文</span>
+      </div>
+    </header>
+
+    <div class="lead">
+      <strong>摘要</strong><br><br>
+      这篇文章写湖南常德的深冬。风雨过后，树木凋零，池水干涸，草木进入休歇，却仍在寒冷中显出生命的坚韧、坦诚与温馨。
+    </div>
+
+    <article>
+      <p>昨晚，风推了整夜的门，雨，也敲了整夜的窗。不知道它们是因为怕冷想进房；还是因为狂，想入侵，将一切变凉。反正我是有点慌，感觉，夜有点儿长。</p>
+
+      <p>还好，今早起床后，天空变得晴朗无比，但风和雨在夜里行了不轨之举，一夜之间，就将许多树的衣衫扒了个精光。前几天还满树摇着金色扇子的梧桐，今天就只剩下几根秃秃的枝丫；杨树也褪下了它本身就显单薄的一身衣裳，赤身裸体，轮廓尽展；楝树还算坚强，拥有满树的果，就是不掉下来，黄灿灿的，就像我们童年最朴实的快乐。</p>
+
+      <p>在蔚蓝的背景下，这世界就像一幅画，湛蓝而明媚，遥远而令人向往。天一晴，河边就有很多的人钓鱼，天寒地冻、朔风刺骨的，真没见几个人能钓到多少鱼，但他们就像冬天的凛冽一样顽强。柳树还是顽固地绿着，给沅江两岸平添了些许生机和绿荫；水杉的叶子早已褐红，却依然固执地依恋着枝头，就像那个迟迟不嫁的姑娘，到底是时机不到，还是对迷茫的焦躁；树林里曾经遮天蔽日的浓荫，也曾经让生命力顽强的构树，不得不停止生长，如今重见天日，是可以自由地享受些阳光的照拂了，于是它便不停绿着，在这季节的夹缝里，为来年的生命积攒更多的能量。</p>
+
+      <p>如此想来，为了生存，万物原也不易。池塘小池里的水，已经干涸，进入了休歇期，白鹭在池里拼命寻找着最后的食粮。白云爬上树梢，就像树上长出了我们小时候买的那些棉花糖，浓郁而又飘渺。四下一片寂静，只有茂密的蒿草在被风吹过后，发出叶子相互摩挲的声音。天气越来越冷了，草木凋零，大地一片灰白和枯黄，但还是决定不下雪。冬天有它自己的独特和坦诚、坚韧和顽强，让许多生灵理所当然有休憩的理由，何况跟随它的就是来年的春天。如此想来，冬天便也是温馨的、优雅的、可爱的吧。</p>
+
+      <p>2025.12.15 于湖南常德</p>
+    </article>
+
+    <div id="comments"></div>
+
+
+    <div class="footer">
+      <div>© Dr Weihong Liu · Digital Studio</div>
+      <div style="margin-top:6px;">
+        <a href="../articles.html">返回 Articles</a> ·
+        <a href="../index.html">返回 Home</a>
+      </div>
+    </div>
+
+    <img class="visit-badge"
+         src="https://hits.sh/weihongliu6.github.io/articles/deep-winter.svg?label=views&color=777777&labelColor=eeeeee"
+         alt="Page visit count" />
+  </main>
+
+  <div class="article-action-bar">
+    <button class="action-btn comment-btn" type="button" aria-label="留言">留言</button>
+    <div class="action-divider" aria-hidden="true"></div>
+    <button class="action-btn share-btn" type="button" aria-label="分享">分享</button>
+  </div>
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
+
+  <div class="comment-panel" id="commentPanel">
+    <div class="comment-panel-inner">
+      <div class="comment-header">
+        <span>留言 / Comment</span>
+        <button class="close-comment" id="closeCommentBtn" type="button" aria-label="关闭留言面板">✕</button>
+      </div>
+
+      <div class="comment-list" id="commentList"></div>
+
+      <div class="comment-compose-wrap hidden" id="commentComposeWrap">
+        <textarea placeholder="写下你的想法…" class="comment-input" id="commentInput"></textarea>
+        <div class="comment-actions">
+          <button class="cancel-comment" id="cancelCommentBtn" type="button">取消</button>
+          <button class="submit-comment" id="submitCommentBtn" type="button">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-overlay" id="commentOverlay"></div>
+
+  <script src="./essay-actions.js"></script>
+</body>
+</html>
