@@ -1,0 +1,376 @@
+STANDARD CODEX INSTRUCTION: ADD A NEW ARTICLE TO MY GITHUB PAGES WEBSITE
+
+Repository:
+weihongliu6/weihongliu6.github.io
+
+Purpose:
+This is my standing workflow for adding a new article to my GitHub Pages website. Whenever I ask Codex to add an article, please follow this instruction carefully.
+
+Main principle:
+Create the article page and add the article to the correct visible author section, while preserving the existing website design. Do not redesign anything.
+
+========================
+1. SITE STRUCTURE
+========================
+
+The visible public Reflections and Essays cover page is:
+
+articles.html
+
+This is the main page visitors see. It must always be updated.
+
+There is also a secondary article list file:
+
+articles/articles-list.html
+
+This file should also be updated when adding a new article, if it is still present and relevant.
+
+Article pages are stored in:
+
+articles/
+
+Existing article pages and templates to use as references:
+
+articles/essay-template.html
+articles/xiao-pork-lard.html
+articles/lameat-hunan.html
+articles/uncle-and-cow.html
+articles/chinese-newyear.html
+articles/AIandPhotography.html
+articles/hermit.html
+
+Important fixed rule:
+Always update articles.html as the visible public article cover page.
+Also update articles/articles-list.html if it is still used as a secondary list.
+
+========================
+2. INFORMATION I WILL PROVIDE EACH TIME
+========================
+
+Each time, I may only provide:
+
+Article title:
+Author name:
+Author section:
+Article text:
+
+Sometimes I may also provide:
+Date/place:
+English subtitle:
+Short description:
+Keywords:
+
+If I do not provide English subtitle, short description, or keywords, please generate appropriate ones based on the article content.
+
+If I provide only the article title and author name, infer the correct author section from the existing website where possible.
+
+Known author sections:
+
+1. 影子观察 / Shadow Observer
+2. 肖忠一医生 / Dr Xiao Zhongyi
+3. 其他随笔 / Other Essays
+
+For author 肖忠一, 肖忠一医生, or Dr Xiao Zhongyi:
+Place the article under:
+
+肖忠一医生 / Dr Xiao Zhongyi
+
+For author 影子观察, Dr Weihong Liu, or Weihong Liu:
+Place the article under:
+
+影子观察 / Shadow Observer
+
+If the author section is unclear, make the best reasonable choice based on the author name and existing site structure. Do not create a new section unless explicitly requested.
+
+========================
+3. CREATE THE ARTICLE PAGE
+========================
+
+Create a new HTML article file inside:
+
+articles/
+
+Use a clean English filename based on the article title.
+
+Examples:
+已是深冬 → deep-winter.html
+食肥猪肉和猪油者说 → xiao-pork-lard.html
+人生如梦 → life-dream.html
+
+The filename should be:
+- lowercase
+- English
+- short but meaningful
+- hyphen-separated
+- ending in .html
+
+Use the same dark article page layout and styling as the existing article pages.
+
+The new page should include:
+
+1. Top navigation buttons:
+   返回 Articles
+   返回主页 Home
+
+2. Main Chinese title
+
+3. Author line:
+   文：[author name]
+
+4. English subtitle if provided or reasonably generated
+
+5. Short intro line beginning with:
+   ——
+
+6. Metadata pills:
+   作者：[author]
+   栏目：[section/category]
+   关键词：[keywords]
+
+7. Summary / 摘要 box:
+   Generate a concise summary if I do not provide one.
+
+8. Article body:
+   Format the article into readable paragraphs.
+   Preserve the original Chinese wording as much as possible.
+   Correct only obvious typos or spacing issues if necessary.
+   Do not rewrite the article unless I explicitly ask.
+
+9. Date/place line:
+   Include it near the end if provided in the article text or by me.
+
+10. Footer:
+   © Dr Weihong Liu · Digital Studio
+
+11. Bottom links:
+   返回 Articles · 返回 Home
+
+12. Keep comment/share button behavior consistent with other article pages.
+   If existing article pages use essay-actions.js, preserve that approach.
+
+========================
+4. SEO AND OPEN GRAPH METADATA
+========================
+
+Add suitable metadata in the HTML head.
+
+Include:
+- title
+- description
+- og:title
+- og:description
+- og:type: article
+
+Use the same og:image approach as existing article pages if already present.
+
+Example format:
+
+title:
+[Article Title]｜[Author]｜Reflections and Essays
+
+description:
+A concise Chinese description of the article.
+
+og:title:
+[Article Title]｜[Author]
+
+og:description:
+A concise Chinese description.
+
+og:type:
+article
+
+Do not remove existing metadata patterns used by the website.
+
+========================
+5. UPDATE THE VISIBLE ARTICLE COVER PAGE
+========================
+
+Always update this file:
+
+articles.html
+
+Find the correct author section.
+
+For example:
+
+肖忠一医生
+Dr Xiao Zhongyi
+
+or:
+
+影子观察
+Shadow Observer
+
+Add the new article link under the correct author section.
+
+Number it sequentially according to the existing visible order.
+
+Example:
+If the latest item in that section is:
+
+05 腌熏的腊肉
+
+then the new item should become:
+
+06 [New Article Title]
+
+Use the same link format as the existing section.
+
+Example:
+
+<a href="articles/deep-winter.html">
+06 已是深冬
+</a>
+
+Important:
+Do not place the article under the wrong section.
+Do not add Dr Xiao’s article under Shadow Observer.
+Do not add Shadow Observer’s article under Dr Xiao Zhongyi.
+Do not alter existing article titles or numbering unless needed for sequential consistency.
+
+========================
+6. UPDATE THE SECONDARY ARTICLE LIST
+========================
+
+Also update this file if it exists:
+
+articles/articles-list.html
+
+Add the article to the correct author section there as well.
+
+Use the correct relative link.
+
+Because this file is inside the articles/ folder, links should usually be:
+
+deep-winter.html
+
+not:
+
+articles/deep-winter.html
+
+Preserve existing style and link format.
+
+========================
+7. DO NOT CHANGE UNRELATED DESIGN
+========================
+
+Do not change:
+- CSS
+- fonts
+- background images
+- page layout
+- card layout
+- spacing
+- navigation design
+- homepage design
+- unrelated sections
+- existing article content
+
+Do not remove existing articles.
+
+Do not rename existing files.
+
+Do not create unnecessary new templates.
+
+Do not change unrelated JavaScript.
+
+Only make the minimum required changes.
+
+========================
+8. CHECKLIST BEFORE FINISHING
+========================
+
+Before creating the Pull Request, verify:
+
+1. A new article page was created in:
+   articles/
+
+2. The article page opens correctly using a relative link.
+
+3. The visible public article page was updated:
+   articles.html
+
+4. The secondary list was updated if relevant:
+   articles/articles-list.html
+
+5. The new article is placed under the correct author section.
+
+6. The numbering is correct.
+
+7. The link path is correct:
+   - From articles.html:
+     articles/[filename].html
+
+   - From articles/articles-list.html:
+     [filename].html
+
+8. The article body is present and formatted into readable paragraphs.
+
+9. The metadata is present.
+
+10. Comment/share buttons are preserved if used by similar pages.
+
+11. No unrelated pages or layout files were changed.
+
+========================
+9. DIFF SUMMARY REQUIRED
+========================
+
+Before creating or finalizing the PR, show me a clear diff summary.
+
+The summary should say:
+
+- New article file created:
+  articles/[filename].html
+
+- Visible article cover page updated:
+  articles.html
+
+- Secondary article list updated if applicable:
+  articles/articles-list.html
+
+- Author section used:
+  [section name]
+
+- New article number:
+  [number]
+
+- Confirm:
+  No unrelated layout or design changes were made.
+
+========================
+10. FINAL MESSAGE AFTER PR
+========================
+
+After the PR is created or merged, tell me the exact pages to check:
+
+Visible article cover page:
+https://weihongliu6.github.io/articles.html
+
+New article page:
+https://weihongliu6.github.io/articles/[filename].html
+
+Remind me that GitHub Pages may need 1–3 minutes to refresh.
+
+========================
+11. SHORT USER COMMAND FORMAT
+========================
+
+When I later give a short command such as:
+
+“Please add this article to my website under Dr Xiao’s section.”
+
+or:
+
+“Please use the standard article instruction.”
+
+You should follow this entire standard workflow.
+
+I will usually provide only:
+
+Article title:
+Author:
+Article text:
+
+You should infer the rest from this standing instruction and existing website structure.
