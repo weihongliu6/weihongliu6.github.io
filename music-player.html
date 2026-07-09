@@ -121,6 +121,15 @@
       font-size:17px;
       line-height:1.6;
     }
+    .album-intro{
+      margin:0 0 22px;
+      color:#3f4650;
+      font-size:15px;
+      line-height:1.8;
+    }
+    .album-intro p{
+      margin:0 0 8px;
+    }
 
     .now{
       margin:0 0 14px;
@@ -185,6 +194,41 @@
     .download:hover{
       background:linear-gradient(135deg, #144f99, #2774c4);
     }
+    .streaming{
+      margin:0 0 22px;
+      padding:14px 16px;
+      border:1px solid rgba(20,21,24,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.58);
+    }
+    .streaming h2{
+      margin:0 0 10px;
+      font-size:16px;
+      line-height:1.35;
+      color:#31363e;
+    }
+    .streaming-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .streaming-links a{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:7px 12px;
+      border:1px solid rgba(26,95,180,.18);
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      color:#184f95;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:650;
+    }
+    .streaming-links a:hover{
+      background:#fff;
+      border-color:rgba(26,95,180,.34);
+    }
 
     .tracklist{
       display:grid;
@@ -248,6 +292,10 @@
         <h1 id="album-title">阿德莱德的月光</h1>
         <p class="title-en">Moonlight of Adelaide</p>
         <p class="artist">Artist: 影子观察 / Shadow Observer</p>
+        <div class="album-intro">
+          <p>《阿德莱德的月光》收录十首原创歌曲，以阿德莱德的风景、生活与游子情怀为主题，融合民谣、抒情与现代编曲，献给每一位热爱南澳、思念故乡的人。</p>
+          <p>Moonlight of Adelaide is a collection of ten original songs inspired by the landscapes, people and memories of Adelaide, dedicated to everyone who calls this beautiful place home.</p>
+        </div>
 
         <div class="now" aria-live="polite">
           <span class="now-label">Now Playing</span>
@@ -266,8 +314,19 @@
         </div>
 
         <a class="download" href="assets/music/moonlight-of-adelaide/阿德莱德的月光_Digital_Album_v1.0.zip" download>
-          下载完整数字专辑 Download Full Album
+          ⬇ 下载完整数字专辑（ZIP）<br>Download Complete Album
         </a>
+
+        <section class="streaming" aria-labelledby="streaming-title">
+          <h2 id="streaming-title">Listen on Streaming Platforms</h2>
+          <!-- TODO: Replace with actual streaming links -->
+          <div class="streaming-links">
+            <a href="#">Apple Music</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube Music</a>
+            <a href="#">Amazon Music</a>
+          </div>
+        </section>
 
         <ol class="tracklist" id="trackList"></ol>
       </div>
