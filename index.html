@@ -151,64 +151,6 @@
       font-weight:300;
     }
 
-    .featured-medical{
-      max-width:720px;
-      margin:0 auto 20px;
-    }
-
-    .featured-medical-card{
-      display:block;
-      text-decoration:none;
-      background:rgba(255,255,255,0.86);
-      border:1px solid var(--border);
-      border-radius:14px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.06);
-      padding:14px 16px;
-      color:inherit;
-      transition: background .15s ease, border .15s ease;
-      backdrop-filter: blur(4px);
-    }
-
-    .featured-medical-card:hover{
-      background:rgba(255,255,255,0.94);
-      border-color:rgba(0,0,0,0.12);
-    }
-
-    .featured-medical-label{
-      display:block;
-      font-size:12px;
-      color:#666;
-      line-height:1.35;
-      margin-bottom:8px;
-      letter-spacing:0.2px;
-    }
-
-    .featured-medical-title{
-      display:block;
-      margin:0;
-      font-size:21px;
-      font-weight:550;
-      line-height:1.45;
-      color:#222;
-    }
-
-    .featured-medical-subtitle{
-      display:block;
-      margin-top:6px;
-      font-size:12px;
-      color:#777;
-      letter-spacing:0.2px;
-      line-height:1.35;
-    }
-
-    .featured-medical-note{
-      display:block;
-      margin-top:6px;
-      font-size:12px;
-      color:#8a8a8a;
-      line-height:1.35;
-    }
-
     .nav-row{
       margin-top: 22px;
       margin-bottom: 14px;
@@ -256,12 +198,6 @@
       font-weight:400;
     }
 
-    .latest{
-      font-size:13px;
-      color:#888;
-      margin-top:6px;
-    }
-
     footer{
       margin-top:22px;
       text-align:center;
@@ -277,139 +213,6 @@
       opacity:.35;
       filter:grayscale(1);
     }
-
-    .follow-entry{
-      position:fixed;
-      top:38px;
-      right:16px;
-      z-index:1200;
-    }
-
-    .follow-btn{
-      border:1px solid rgba(0,0,0,0.14);
-      border-radius:999px;
-      background:rgba(255,255,255,0.92);
-      backdrop-filter:blur(8px);
-      color:#1e1e1e;
-      font:inherit;
-      line-height:1.2;
-      padding:10px 16px;
-      cursor:pointer;
-      box-shadow:0 5px 16px rgba(0,0,0,0.07);
-      transition:background .15s ease, border-color .15s ease, transform .15s ease;
-      text-align:center;
-      min-width:136px;
-    }
-
-    .follow-btn:hover{
-      background:rgba(252,252,252,0.98);
-      border-color:rgba(0,0,0,0.2);
-      transform:translateY(-1px);
-    }
-
-    .follow-btn .zh{
-      display:block;
-      font-size:14px;
-      font-weight:600;
-      letter-spacing:.2px;
-    }
-
-    .follow-btn .en{
-      display:block;
-      margin-top:2px;
-      font-size:11px;
-      letter-spacing:.4px;
-      color:#666;
-    }
-
-    .follow-overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(8,12,20,0.2);
-      z-index:1300;
-      padding:16px;
-      box-sizing:border-box;
-    }
-
-    .follow-overlay.show{
-      display:flex;
-    }
-
-    .follow-card{
-      width:min(92vw, 360px);
-      background:rgba(255,255,255,0.98);
-      border:1px solid rgba(0,0,0,0.09);
-      border-radius:18px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.12);
-      padding:20px 18px 18px;
-      line-height:1.6;
-    }
-
-    .follow-title{
-      margin:0 0 10px;
-      font-size:20px;
-      font-weight:550;
-      color:#222;
-      line-height:1.35;
-    }
-
-    .follow-text{
-      margin:0 0 14px;
-      color:#555;
-      font-size:14px;
-    }
-
-    .follow-actions{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .platform-link{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      width:100%;
-      box-sizing:border-box;
-      min-height:42px;
-      padding:0 14px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.13);
-      background:rgba(249,250,251,0.96);
-      color:#2a2a2a;
-      text-decoration:none;
-      font-size:15px;
-      font-weight:500;
-      letter-spacing:0.1px;
-      transition: background .15s ease, border-color .15s ease, transform .15s ease;
-    }
-
-    .platform-link:hover,
-    .platform-link:focus-visible{
-      background:rgba(243,246,250,0.98);
-      border-color:rgba(0,0,0,0.2);
-      transform:translateY(-1px);
-      outline:none;
-    }
-
-    @media (max-width: 700px){
-      .follow-entry{
-        top:22px;
-        right:12px;
-      }
-
-      .follow-btn{
-        min-width:118px;
-        padding:9px 12px;
-      }
-
-      .follow-btn .zh{
-        font-size:13px;
-      }
-    }
   </style>
 
   <!-- GoatCounter 后台统计 -->
@@ -418,24 +221,6 @@
 </head>
 
 <body>
-  <div class="follow-entry">
-    <button class="follow-btn" id="followTrigger" type="button" aria-haspopup="dialog" aria-controls="followPopup" aria-expanded="false">
-      <span class="zh">关注平台</span>
-      <span class="en">Follow</span>
-    </button>
-  </div>
-
-  <div class="follow-overlay" id="followPopup" role="dialog" aria-modal="true" aria-labelledby="followPopupTitle">
-    <div class="follow-card">
-      <h2 class="follow-title" id="followPopupTitle">关注平台<br><span class="en">Follow on Platforms</span></h2>
-      <p class="follow-text">在这些平台查看我的最新作品<br><span class="en">View my latest works on these platforms</span></p>
-      <div class="follow-actions">
-        <a class="platform-link" href="http://xhslink.com/o/b0YOf3ZKQL" target="_blank" rel="noopener noreferrer">小红书</a>
-        <a class="platform-link" href="https://www.youtube.com/@weihongliu9" target="_blank" rel="noopener noreferrer">YouTube</a>
-      </div>
-    </div>
-  </div>
-
   <div class="wrap">
 
     <h1>
@@ -484,40 +269,21 @@
 
     <div class="intro">
       <div class="zh">
-        影子观察数字工作室记录摄影与思想的交汇，也关注医学与技术在现实世界中的演进。
-        在快速变化的时代中，我们尝试以更缓慢、更清晰的方式观察世界，理解人、技术与自然之间的关系。
+        影子观察数字工作室记录摄影与思想的交汇，在快速变化的世界中慢下来观察与理解。
       </div>
       <div class="en">
-        Shadow Observer Digital Studio explores the intersection of photography, reflection, and evolving medical and technological knowledge.
-        In a rapidly changing world, it seeks a slower, clearer way of observing and understanding the relationship between human life, technology, and nature.
+        Shadow Observer Digital Studio explores photography and ideas, observing the world slowly in an age of acceleration.
       </div>
     </div>
 
-    <section class="featured-medical" aria-label="医学栏目精选 Featured Medical Article">
-      <a class="featured-medical-card" href="medical/osa-clinical-insights.html">
-        <span class="featured-medical-label">
-          医学栏目精选
-          <br>
-          Featured Medical Article
-        </span>
-        <span class="featured-medical-title">睡梦中的“隐形杀手”：你可能对阻塞性睡眠呼吸暂停的认知已经过时了</span>
-        <span class="featured-medical-subtitle">Outdated Understanding of OSA: A Clinical Insight</span>
-        <span class="featured-medical-note">
-          来自“临床思考”栏目
-          <br>
-          From Clinical Insights
-        </span>
-      </a>
-    </section>
-
     <div class="nav-row">
-      <a class="nav-pill" href="./my-photography-world.html"><span class="zh">我的摄影世界</span><span class="en">My Photography World</span><div class="latest">Works · Projects · Mobile · Reflections</div></a>
+      <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span></a>
+      <a class="nav-pill" href="projects.html"><span class="zh">摄影专辑</span><span class="en">Projects</span></a>
+      <a class="nav-pill" href="music-player.html"><span class="zh">音乐播放器</span><span class="en">Music Player</span></a>
       <a class="nav-pill" href="ai-video/index.html"><span class="zh">AI 音乐视频</span><span class="en">AI Music Videos</span></a>
-      <a class="nav-pill" href="articles.html"><span class="zh">思想随笔</span><span class="en">Reflections and Essays</span><div class="latest">Latest: 请允许我质疑一位知名科学家 / 科普专家的言论</div></a>
-      <a class="nav-pill" href="books.html"><span class="zh">书籍</span><span class="en">Books</span><div class="latest">Latest: 从慢门摄影到生活哲学</div></a>
-      <a class="nav-pill" href="travels.html"><span class="zh">游走于世界</span><span class="en">Walking Through the World</span><div class="latest">Latest: Travel stories, photos, and notes</div></a>
-      <a class="nav-pill" href="ai-briefs"><span class="zh">AI观察简报</span><span class="en">AI Intelligence Brief</span><div class="latest">Latest: 2026-03-18</div></a>
-      <a class="nav-pill" href="medical.html"><span class="zh">医学科学前沿科普</span><span class="en">Frontiers in Medical Science</span><div class="latest">Latest: 读懂生命的密码</div></a>
+      <a class="nav-pill" href="articles.html"><span class="zh">思想随笔</span><span class="en">Reflections and Essays</span></a>
+      <a class="nav-pill" href="books.html"><span class="zh">书籍</span><span class="en">Books</span></a>
+      <a class="nav-pill" href="ai-briefs"><span class="zh">AI观察简报</span><span class="en">AI Intelligence Brief</span></a>
       <a class="nav-pill" href="about.html"><span class="zh">关于</span><span class="en">About</span></a>
     </div>
 
@@ -529,24 +295,5 @@
      alt="visits">
 
   </div>
-
-  <script>
-    const followTrigger = document.getElementById('followTrigger');
-    const followPopup = document.getElementById('followPopup');
-
-    if (followTrigger && followPopup) {
-      followTrigger.addEventListener('click', () => {
-        followPopup.classList.add('show');
-        followTrigger.setAttribute('aria-expanded', 'true');
-      });
-
-      followPopup.addEventListener('click', (event) => {
-        if (event.target === followPopup) {
-          followPopup.classList.remove('show');
-          followTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-  </script>
 </body>
 </html>
