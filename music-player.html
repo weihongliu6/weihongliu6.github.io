@@ -135,6 +135,17 @@
       display:block;
       color:#30363d;
     }
+    .credit-value.featured{
+      color:#242a31;
+      font-size:15px;
+      font-weight:750;
+    }
+    .credit-note{
+      margin:8px 0 12px;
+      color:#3f4650;
+      font-size:14px;
+      line-height:1.65;
+    }
     .lyric-list{
       margin:8px 0 0;
       padding:0;
@@ -348,6 +359,19 @@
       color:var(--muted);
       font-size:13px;
     }
+    .sharing-note{
+      max-width:720px;
+      margin:26px auto 18px;
+      color:#3f4650;
+      font-size:14px;
+      line-height:1.7;
+    }
+    .sharing-note p{
+      margin:0 0 8px;
+    }
+    .sharing-note p:last-child{
+      margin-bottom:0;
+    }
   </style>
 </head>
 
@@ -365,7 +389,7 @@
           <img class="cover" src="assets/music/moonlight-of-adelaide/Cover.jpg" alt="阿德莱德的月光 album cover" />
 
           <section class="credit-card" aria-labelledby="credits-title">
-            <h2 id="credits-title">Credits</h2>
+            <h2 id="credits-title">Album Credits</h2>
 
             <p class="credit-item">
               <span class="credit-label">Artist / Composer</span>
@@ -384,7 +408,8 @@
 
             <div class="credit-item">
               <span class="credit-label">Featured Lyricist</span>
-              <span class="credit-value">郭燕 (Guo Yan)</span>
+              <span class="credit-value featured">郭燕 (Guo Yan)</span>
+              <p class="credit-note">Three songs in this album feature lyrics kindly authorised by Ms. Guo Yan.</p>
               <span class="credit-label">Lyrics featured in:</span>
               <ul class="lyric-list">
                 <li>在南澳 <span>(In South Australia)</span></li>
@@ -448,6 +473,10 @@
     </section>
 
     <footer>
+      <div class="sharing-note">
+        <p>欢迎免费下载、收藏与分享本专辑。<br>如果您喜欢这些作品，欢迎分享本页面，让更多朋友听见这些音乐。</p>
+        <p>Please enjoy and share this album freely.<br>If you enjoy the music, sharing this page is the greatest support for the creator.</p>
+      </div>
       © 2026 Shadow Observer Digital Studio
     </footer>
   </main>
