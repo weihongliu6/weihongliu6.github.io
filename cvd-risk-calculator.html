@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="依据2023年澳大利亚心血管疾病风险指南制作的中文预评估与资料整理工具。">
+  <title>心血管疾病10年风险计算器｜Framingham 2008中文版</title>
+  <style>
+    :root {
+      --navy: #123b63;
+      --blue: #176fa3;
+      --blue-light: #eaf4fa;
+      --ink: #172635;
+      --muted: #5f6f7d;
+      --line: #d7e2ea;
+      --surface: #ffffff;
+      --canvas: #f3f7fa;
+      --green: #247a52;
+      --green-bg: #e9f6ef;
+      --amber: #9a6200;
+      --amber-bg: #fff5dd;
+      --red: #a63b3b;
+      --red-bg: #fcecec;
+      --radius: 16px;
+      --shadow: 0 12px 32px rgba(18, 59, 99, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    a { color: var(--blue); }
+
+    .site-nav {
+      width: min(980px, calc(100% - 32px));
+      margin: 18px auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav a,
+    .site-nav button {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.13);
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .site-nav button {
+      font-family: inherit;
+    }
+
+    .hero {
+      color: #fff;
+      background:
+        radial-gradient(circle at 86% 12%, rgba(100, 199, 234, .28), transparent 28%),
+        linear-gradient(135deg, #0b2e50, #165f8d);
+      padding: 48px 20px 44px;
+    }
+
+    .hero-inner,
+    .container {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      opacity: .82;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.22;
+      letter-spacing: -.02em;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 18px 0 0;
+      color: rgba(255,255,255,.88);
+      font-size: 1.05rem;
+    }
+
+    .container { padding: 28px 0 56px; }
+
+    .notice,
+    .privacy-note {
+      border: 1px solid #f0d08b;
+      border-left: 5px solid #d99718;
+      border-radius: 12px;
+      background: var(--amber-bg);
+      padding: 16px 18px;
+      margin-bottom: 22px;
+    }
+
+    .notice strong { color: #704700; }
+
+    .risk-standards {
+      margin: 0 0 22px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .risk-standards h2 {
+      margin: 0 0 5px;
+      color: var(--navy);
+      font-size: 1.22rem;
+    }
+
+    .risk-standards > p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .risk-levels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .risk-level {
+      padding: 14px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+    }
+
+    .risk-level strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 1.04rem;
+    }
+
+    .risk-level span {
+      font-size: .88rem;
+      font-weight: 650;
+    }
+
+    .risk-level.low-level {
+      color: var(--green);
+      border-color: #a8d4bc;
+      background: var(--green-bg);
+    }
+
+    .risk-level.mid-level {
+      color: var(--amber);
+      border-color: #e8ca86;
+      background: var(--amber-bg);
+    }
+
+    .risk-level.high-level {
+      color: var(--red);
+      border-color: #dfaaaa;
+      background: var(--red-bg);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 0 0 24px;
+    }
+
+    .step {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      min-height: 64px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 650;
+    }
+
+    .step span {
+      display: grid;
+      place-items: center;
+      flex: 0 0 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 800;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      padding: clamp(20px, 4vw, 32px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.35;
+    }
+
+    .section-intro {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 20px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    fieldset {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    label,
+    legend {
+      display: block;
+      margin-bottom: 7px;
+      color: #21384d;
+      font-weight: 720;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--red);
+    }
+
+    .help {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 450;
+      line-height: 1.5;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid #b9cad6;
+      border-radius: 10px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(23, 111, 163, .25);
+      outline-offset: 2px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      margin: 0;
+      padding: 8px 12px;
+      border: 1px solid #c8d6df;
+      border-radius: 10px;
+      background: #fbfdfe;
+      font-weight: 550;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--blue);
+    }
+
+    /* 独立多选项目采用圆形 radio button 外观，并保留再次点击取消的能力。 */
+    input.circle-toggle {
+      appearance: none;
+      -webkit-appearance: none;
+      flex: 0 0 20px;
+      border: 2px solid #7a7a7a;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    input.circle-toggle:checked {
+      border-color: var(--blue);
+      box-shadow: inset 0 0 0 4px #fff;
+      background: var(--blue);
+    }
+
+    .subpanel {
+      padding: 18px;
+      border: 1px solid #cfe2ee;
+      border-radius: 12px;
+      background: var(--blue-light);
+    }
+
+    .subpanel h3 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 1.08rem;
+    }
+
+    [hidden] { display: none !important; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 0;
+    }
+
+    button,
+    .button-link {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border: 1px solid var(--navy);
+      color: #fff;
+      background: var(--navy);
+    }
+
+    button.secondary {
+      border: 1px solid #aebfca;
+      color: var(--navy);
+      background: #fff;
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: clamp(20px, 4vw, 30px);
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .result.low { border-color: #8fc8aa; background: var(--green-bg); }
+    .result.review { border-color: #e1bb68; background: var(--amber-bg); }
+    .result.high { border-color: #d89a9a; background: var(--red-bg); }
+
+    .result h2 { margin-top: 0; }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.74);
+      color: var(--navy);
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 20px;
+      margin: 16px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .result-grid li {
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgba(71, 94, 110, .18);
+    }
+
+    .official-box {
+      margin-top: 18px;
+      padding: 17px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.75);
+    }
+
+    .button-link {
+      margin-top: 8px;
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .sources {
+      margin-top: 22px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .sources h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    .sources ul { margin: 8px 0 0; padding-left: 1.25rem; }
+
+    .footer {
+      padding: 22px 18px 36px;
+      color: #647482;
+      text-align: center;
+      font-size: .82rem;
+    }
+
+    @media (max-width: 720px) {
+      body { font-size: 16px; }
+      .site-nav { justify-content: flex-start; }
+      .hero { padding-top: 36px; }
+      .steps,
+      .grid,
+      .result-grid,
+      .risk-levels { grid-template-columns: 1fr; }
+      .step { min-height: 54px; }
+      .card { padding: 20px; }
+    }
+
+    @media print {
+      body { background: #fff; font-size: 11pt; }
+      .site-nav { display: none; }
+      .hero { color: var(--ink); background: #fff; padding: 12mm 0 7mm; }
+      .hero p { color: var(--muted); }
+      .container { width: 100%; padding: 0; }
+      .steps, .actions, .official-box .button-link { display: none; }
+      .card, .result, .sources { box-shadow: none; break-inside: avoid; }
+      .notice { break-inside: avoid; }
+      .footer { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="页面导航">
+    <button type="button" id="backButton">← 返回上一页</button>
+    <a href="medical-hypertension.html">返回高血压文章</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">健康教育科普工具｜中文版</p>
+      <h1>心血管疾病10年风险计算器</h1>
+      <p>采用公开发表的Framingham 2008一般心血管疾病风险公式，直接计算未来10年风险。所有输入仅在当前浏览器中处理，不会上传或储存。</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="notice" role="note">
+      <strong>重要说明：</strong>本工具采用Framingham 2008一般心血管疾病10年风险公式，并非澳大利亚新版AUS‑PREDICT模型。结果用于健康教育，不能替代医生诊断、澳大利亚官方风险评估或治疗决定。
+    </div>
+
+    <section class="risk-standards" aria-labelledby="riskStandardsTitle">
+      <h2 id="riskStandardsTitle">未来10年一般心血管疾病风险分级</h2>
+      <p>百分比表示未来10年首次发生一般心血管疾病事件的估计概率。分级仅用于帮助理解结果。</p>
+      <div class="risk-levels">
+        <div class="risk-level low-level">
+          <strong>低风险</strong>
+          <span>10年风险＜10%</span>
+        </div>
+        <div class="risk-level mid-level">
+          <strong>中等风险</strong>
+          <span>10年风险为10%至＜20%</span>
+        </div>
+        <div class="risk-level high-level">
+          <strong>高风险</strong>
+          <span>10年风险≥20%</span>
+        </div>
+      </div>
+    </section>
+
+    <nav class="steps" aria-label="评估步骤">
+      <div class="step"><span>1</span>输入评估资料</div>
+      <div class="step"><span>2</span>检查再分类因素</div>
+      <div class="step"><span>3</span>生成中文摘要</div>
+    </nav>
+
+    <form id="riskForm" novalidate>
+      <section class="card" aria-labelledby="eligibilityTitle">
+        <h2 id="eligibilityTitle">第一步：确认是否适合使用风险方程</h2>
+        <p class="section-intro">已确诊动脉粥样硬化性心血管疾病者不属于一级预防计算对象；中重度慢性肾病或家族性高胆固醇血症可直接判定为临床高风险。</p>
+        <div class="grid">
+          <fieldset class="full">
+            <legend class="required">是否已经确诊动脉粥样硬化性心血管疾病？</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="knownCvd" value="no" required>没有</label>
+              <label class="option"><input type="radio" name="knownCvd" value="yes">有</label>
+              <label class="option"><input type="radio" name="knownCvd" value="unsure">不确定</label>
+            </div>
+            <span class="help">例如既往心肌梗死、冠状动脉疾病、缺血性或出血性卒中、短暂性脑缺血发作、外周动脉疾病等。</span>
+          </fieldset>
+
+          <fieldset class="full">
+            <legend>临床直接高风险情况（如果没有则不选择）</legend>
+            <div class="options">
+              <label class="option"><input type="checkbox" class="circle-toggle" id="ckdHigh">中度至重度慢性肾病</label>
+              <label class="option"><input type="checkbox" class="circle-toggle" id="fh">家族性高胆固醇血症</label>
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="age" class="required">年龄</label>
+            <input id="age" type="number" min="18" max="100" inputmode="numeric" placeholder="例如：58" required>
+            <span class="help">Framingham 2008一般心血管疾病风险公式的研究适用年龄为30–74岁。</span>
+          </div>
+
+          <fieldset>
+            <legend class="required">出生时性别</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="sex" value="female" required>女性</label>
+              <label class="option"><input type="radio" name="sex" value="male">男性</label>
+            </div>
+            <span class="help">目前公开模型资料不足以按非二元性别或间性特征单独估算。</span>
+          </fieldset>
+
+          <fieldset class="full">
+            <legend>是否为澳大利亚原住民或托雷斯海峡岛民？</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="firstNations" value="no">否</label>
+              <label class="option"><input type="radio" name="firstNations" value="yes">是</label>
+              <label class="option"><input type="radio" name="firstNations" value="preferNot">不愿回答</label>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="variablesTitle">
+        <h2 id="variablesTitle">第二步：输入主要风险因素</h2>
+        <p class="section-intro">请尽量使用最近一次可靠的检查结果。血压应使用规范坐位测量中最后两次读数的平均值。</p>
+        <div class="grid">
+          <fieldset class="full">
+            <legend class="required">吸烟状况</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="smoking" value="never" required>从未吸烟</label>
+              <label class="option"><input type="radio" name="smoking" value="former">已经戒烟</label>
+              <label class="option"><input type="radio" name="smoking" value="current">目前吸烟</label>
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="sbp" class="required">收缩压（mmHg）</label>
+            <input id="sbp" type="number" min="70" max="260" inputmode="decimal" placeholder="例如：138" required>
+          </div>
+
+          <div>
+            <label for="ratio">总胆固醇／HDL胆固醇比值</label>
+            <input id="ratio" type="number" min="1" max="15" step="0.1" inputmode="decimal" placeholder="自动计算" readonly>
+            <span class="help">输入下方两个胆固醇数值后自动计算；风险公式使用两个原始数值。</span>
+          </div>
+
+          <div>
+            <label for="tc" class="required">总胆固醇 TC（mmol/L）</label>
+            <input id="tc" type="number" min="1" max="20" step="0.1" inputmode="decimal" placeholder="例如：5.4" required>
+          </div>
+
+          <div>
+            <label for="hdl" class="required">HDL胆固醇（mmol/L）</label>
+            <input id="hdl" type="number" min="0.2" max="5" step="0.1" inputmode="decimal" placeholder="例如：1.3" required>
+          </div>
+
+          <fieldset class="full">
+            <legend>过去6个月使用的心血管药物</legend>
+            <div class="options">
+              <label class="option"><input type="checkbox" id="bpMeds">降血压药</label>
+              <label class="option"><input type="checkbox" id="lipidMeds">调脂药</label>
+              <label class="option"><input type="checkbox" id="antithrombotic">抗血小板或抗凝药</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>有无心房颤动病史？</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="af" value="no">没有</label>
+              <label class="option"><input type="radio" name="af" value="yes">有</label>
+              <label class="option"><input type="radio" name="af" value="unsure">不确定</label>
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="postcode">澳大利亚邮政编码</label>
+            <input id="postcode" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="例如：5000">
+            <span class="help">官方计算器使用邮编推算地区社会经济指数。本中文工具只记录邮编，不自行推算SEIFA。</span>
+          </div>
+
+          <fieldset class="full">
+            <legend class="required">是否患有糖尿病？</legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="diabetes" value="no" required>没有</label>
+              <label class="option"><input type="radio" name="diabetes" value="yes">有</label>
+              <label class="option"><input type="radio" name="diabetes" value="unsure">不确定</label>
+            </div>
+          </fieldset>
+
+          <div id="diabetesPanel" class="subpanel full" hidden>
+            <h3>糖尿病专用补充资料</h3>
+            <div class="grid">
+              <div>
+                <label for="diabetesYears">确诊糖尿病年数</label>
+                <input id="diabetesYears" type="number" min="0" max="70" step="0.5" inputmode="decimal" placeholder="例如：6">
+              </div>
+              <div>
+                <label for="hba1c">HbA1c（mmol/mol）</label>
+                <input id="hba1c" type="number" min="20" max="200" step="1" inputmode="decimal" placeholder="例如：53">
+              </div>
+              <div>
+                <label for="uacr">尿白蛋白／肌酐比 uACR（mg/mmol）</label>
+                <input id="uacr" type="number" min="0" max="1000" step="0.1" inputmode="decimal" placeholder="例如：2.5">
+              </div>
+              <div>
+                <label for="egfr">eGFR（mL/min/1.73m²）</label>
+                <input id="egfr" type="number" min="1" max="200" step="1" inputmode="decimal" placeholder="例如：82">
+              </div>
+              <div>
+                <label for="bmi">BMI（kg/m²）</label>
+                <input id="bmi" type="number" min="10" max="80" step="0.1" inputmode="decimal" placeholder="例如：27.4">
+              </div>
+              <fieldset>
+                <legend>过去6个月是否使用胰岛素？</legend>
+                <div class="options">
+                  <label class="option"><input type="radio" name="insulin" value="no">否</label>
+                  <label class="option"><input type="radio" name="insulin" value="yes">是</label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="reclassTitle">
+        <h2 id="reclassTitle">第三步：记录可能影响风险分层的因素</h2>
+        <p class="section-intro">这些因素不会在本工具中自动改变风险等级，但可能帮助医生在接近分界值时作进一步判断。</p>
+        <div class="options">
+          <label class="option"><input type="checkbox" id="familyHistory">早发冠心病或卒中家族史</label>
+          <label class="option"><input type="checkbox" id="cac">已有冠状动脉钙化评分</label>
+          <label class="option"><input type="checkbox" id="kidneyReclass">eGFR或uACR异常</label>
+          <label class="option"><input type="checkbox" id="mentalIllness">近5年严重精神疾病</label>
+          <label class="option"><input type="checkbox" id="ethnicityReview">族裔背景可能影响风险</label>
+        </div>
+        <span class="help">早发家族史通常指一级女性亲属在65岁前，或一级男性亲属在55岁前发生冠心病、卒中或短暂性脑缺血发作。</span>
+
+        <div class="actions">
+          <button type="submit" class="primary">计算10年风险</button>
+          <button type="reset" class="secondary">清除全部资料</button>
+        </div>
+      </section>
+    </form>
+
+    <section id="result" class="result" aria-live="polite" tabindex="-1" hidden></section>
+
+    <section class="sources" aria-labelledby="sourcesTitle">
+      <h2 id="sourcesTitle">依据与版本说明</h2>
+      <ul>
+        <li><a href="https://www.framinghamheartstudy.org/fhs-risk-functions/cardiovascular-disease-10-year-risk/" target="_blank" rel="noopener">Framingham Heart Study：一般心血管疾病10年风险公式及系数</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/18212285/" target="_blank" rel="noopener">D’Agostino等，Circulation 2008原始论文</a></li>
+        <li><a href="https://www.cvdcheck.org.au/calculator" target="_blank" rel="noopener">澳大利亚官方AUS‑PREDICT计算器（用于正式澳大利亚评估）</a></li>
+      </ul>
+      <p>页面版本：2.0（2026年7月19日）。本工具为独立中文健康教育工具，与Framingham Heart Study、澳大利亚政府、Heart Foundation或cvdcheck.org.au没有隶属或授权关系。</p>
+    </section>
+  </main>
+
+  <footer class="footer">本工具不能替代医生诊断、正式风险评估或个体化治疗建议。</footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("riskForm");
+      const result = document.getElementById("result");
+      const diabetesPanel = document.getElementById("diabetesPanel");
+      const ratio = document.getElementById("ratio");
+      const tc = document.getElementById("tc");
+      const hdl = document.getElementById("hdl");
+      const backButton = document.getElementById("backButton");
+
+      const selected = (name) => form.querySelector(`input[name="${name}"]:checked`)?.value || "";
+      const checked = (id) => document.getElementById(id).checked;
+      const value = (id) => document.getElementById(id).value.trim();
+      const yesNo = (v) => v === "yes" ? "是" : v === "no" ? "否" : "不确定";
+      const sexText = (v) => v === "female" ? "女性" : v === "male" ? "男性" : "未填写";
+      const smokingText = (v) => ({never:"从未吸烟", former:"已经戒烟", current:"目前吸烟"}[v] || "未填写");
+
+      const medicinesText = () => {
+        const list = [];
+        if (checked("bpMeds")) list.push("降血压药");
+        if (checked("lipidMeds")) list.push("调脂药");
+        if (checked("antithrombotic")) list.push("抗血小板或抗凝药");
+        return list.length ? list.join("、") : "未勾选相关药物";
+      };
+
+      const reclassText = () => {
+        const list = [];
+        if (checked("familyHistory")) list.push("早发心血管病家族史");
+        if (checked("cac")) list.push("已有冠状动脉钙化评分");
+        if (checked("kidneyReclass")) list.push("肾功能或尿白蛋白异常");
+        if (checked("mentalIllness")) list.push("近5年严重精神疾病");
+        if (checked("ethnicityReview")) list.push("需考虑族裔背景");
+        return list.length ? list.join("、") : "未勾选再分类因素";
+      };
+
+      function updateRatio() {
+        const total = Number(tc.value);
+        const good = Number(hdl.value);
+        if (total > 0 && good > 0) ratio.value = (total / good).toFixed(1);
+      }
+
+      tc.addEventListener("input", updateRatio);
+      hdl.addEventListener("input", updateRatio);
+
+      backButton.addEventListener("click", () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = "medical-hypertension.html";
+        }
+      });
+
+      function framinghamRisk(sex, age, totalMmol, hdlMmol, sbp, treated, smoker, diabetes) {
+        const totalMg = totalMmol * 38.67;
+        const hdlMg = hdlMmol * 38.67;
+        const male = sex === "male";
+        const coefficients = male
+          ? {age:3.06117, tc:1.12370, hdl:-0.93263, sbpUntreated:1.93303, sbpTreated:1.99881, smoking:0.65451, diabetes:0.57367, baseline:0.88936, mean:23.9802}
+          : {age:2.32888, tc:1.20904, hdl:-0.70833, sbpUntreated:2.76157, sbpTreated:2.82263, smoking:0.52873, diabetes:0.69154, baseline:0.95012, mean:26.1931};
+        const sum = coefficients.age * Math.log(age)
+          + coefficients.tc * Math.log(totalMg)
+          + coefficients.hdl * Math.log(hdlMg)
+          + (treated ? coefficients.sbpTreated : coefficients.sbpUntreated) * Math.log(sbp)
+          + coefficients.smoking * (smoker ? 1 : 0)
+          + coefficients.diabetes * (diabetes ? 1 : 0);
+        return 100 * (1 - Math.pow(coefficients.baseline, Math.exp(sum - coefficients.mean)));
+      }
+
+      form.addEventListener("change", (event) => {
+        if (event.target.name === "diabetes") {
+          diabetesPanel.hidden = selected("diabetes") !== "yes";
+        }
+      });
+
+      form.addEventListener("reset", () => {
+        window.setTimeout(() => {
+          diabetesPanel.hidden = true;
+          result.hidden = true;
+          result.innerHTML = "";
+        }, 0);
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const age = Number(value("age"));
+        const knownCvd = selected("knownCvd");
+        const diabetes = selected("diabetes");
+        const directHighRisk = checked("ckdHigh") || checked("fh");
+
+        let eligibilityMessage = "已使用Framingham 2008一般心血管疾病公式完成计算。";
+        let status = "已完成计算";
+        let resultClass = "review";
+        let headline = "10年风险计算结果";
+        let riskDisplay = "—";
+
+        if (knownCvd === "yes") {
+          status = "不适用一级预防风险方程";
+          resultClass = "high";
+          headline = "已经确诊心血管疾病，应直接进行临床管理";
+          eligibilityMessage = "本风险方程用于尚未确诊动脉粥样硬化性心血管疾病的人。请与医生讨论二级预防和治疗计划。";
+        } else if (directHighRisk) {
+          status = "临床直接高风险";
+          resultClass = "high";
+          headline = "存在可直接判定为高风险的临床情况";
+          eligibilityMessage = "中重度慢性肾病或家族性高胆固醇血症需要医生进行高风险管理评估；此处不以普通一级预防风险公式取代临床判断。";
+        } else if (age < 30 || age > 74) {
+          status = "超出模型验证年龄范围";
+          resultClass = "review";
+          headline = "不宜使用该方程计算风险百分比";
+          eligibilityMessage = "Framingham 2008一般心血管疾病公式的研究适用年龄为30–74岁，请由医护人员进行个体化评估。";
+        } else {
+          const risk = framinghamRisk(
+            selected("sex"), age, Number(value("tc")), Number(value("hdl")),
+            Number(value("sbp")), checked("bpMeds"), selected("smoking") === "current", diabetes === "yes"
+          );
+          riskDisplay = `${risk.toFixed(1)}%`;
+          if (risk >= 20) {
+            status = "高风险";
+            resultClass = "high";
+          } else if (risk >= 10) {
+            status = "中等风险";
+            resultClass = "review";
+          } else {
+            status = "低风险";
+            resultClass = "low";
+          }
+          headline = `未来10年一般心血管疾病风险约为 ${riskDisplay}`;
+        }
+
+        const diabetesDetails = diabetes === "yes"
+          ? `<li><strong>糖尿病补充资料：</strong>病程 ${value("diabetesYears") || "未填写"} 年；HbA1c ${value("hba1c") || "未填写"} mmol/mol；uACR ${value("uacr") || "未填写"} mg/mmol；eGFR ${value("egfr") || "未填写"}；BMI ${value("bmi") || "未填写"}；胰岛素 ${yesNo(selected("insulin"))}</li>`
+          : "";
+
+        result.className = `result ${resultClass}`;
+        result.innerHTML = `
+          <span class="status">${status}</span>
+          <h2>${headline}</h2>
+          <p>${eligibilityMessage}</p>
+          <ul class="result-grid">
+            <li><strong>年龄：</strong>${age}岁</li>
+            <li><strong>出生时性别：</strong>${sexText(selected("sex"))}</li>
+            <li><strong>吸烟：</strong>${smokingText(selected("smoking"))}</li>
+            <li><strong>收缩压：</strong>${value("sbp")} mmHg</li>
+            <li><strong>TC/HDL比值：</strong>${value("ratio")}</li>
+            <li><strong>计算模型：</strong>Framingham 2008一般CVD 10年风险</li>
+            <li><strong>糖尿病：</strong>${yesNo(diabetes)}</li>
+            <li><strong>房颤病史：</strong>${yesNo(selected("af"))}</li>
+            <li><strong>邮政编码：</strong>${value("postcode") || "未填写"}</li>
+            <li><strong>相关药物：</strong>${medicinesText()}</li>
+            <li><strong>再分类因素：</strong>${reclassText()}</li>
+            ${diabetesDetails}
+          </ul>
+          <div class="official-box">
+            <strong>怎样理解这个结果？</strong>
+            <p>这是基于美国Framingham队列的10年一般心血管疾病风险估计，并非澳大利亚AUS‑PREDICT的5年风险。不同模型的预测年限、事件定义和分级标准不同，结果不能直接互换；正式治疗决定请咨询医生。</p>
+            <a class="button-link" href="https://www.framinghamheartstudy.org/fhs-risk-functions/cardiovascular-disease-10-year-risk/" target="_blank" rel="noopener">查看公式来源</a>
+          </div>`;
+
+        result.hidden = false;
+        result.focus();
+        result.scrollIntoView({behavior: "smooth", block: "start"});
+      });
+    })();
+  </script>
+</body>
+</html>
