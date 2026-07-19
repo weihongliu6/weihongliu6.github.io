@@ -6,235 +6,476 @@
 <title>高血压：没有感觉，不等于没有风险 | 医学科普</title>
 
 <style>
+:root{
+  --ink:#22313d;
+  --muted:#566979;
+  --navy:#173f67;
+  --blue:#2d74a8;
+  --blue-soft:#eaf4fb;
+  --blue-line:#bfd9ec;
+  --paper:rgba(255,255,255,0.92);
+  --paper-strong:rgba(255,255,255,0.97);
+  --warning:#a94442;
+  --warning-bg:#fff1f1;
+  --gold:#8a620f;
+  --gold-bg:#fff7df;
+  --green:#276749;
+  --green-bg:#edf8f1;
+}
+
+*{ box-sizing:border-box; }
+
 body{
   margin:0;
-  font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Songti SC", "SimSun", sans-serif;
+  color:var(--ink);
   background-image:url("medical-education-assets/medical-education-hero.png");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
-  color:white;
 }
 
-.overlay{
-  min-height:100vh;
-  position:relative;
-  padding:78px 0 46px;
-}
-
-.overlay:before{
+body:before{
   content:"";
-  position:absolute;
-  left:0; top:0; right:0; bottom:0;
+  position:fixed;
+  inset:0;
   background:
-    linear-gradient(to bottom,
-      rgba(18,32,42,0.62) 0%,
-      rgba(18,32,42,0.38) 36%,
-      rgba(18,32,42,0.26) 100%);
+    linear-gradient(to bottom, rgba(241,247,251,0.86), rgba(238,244,248,0.72)),
+    rgba(255,255,255,0.18);
   pointer-events:none;
 }
 
-.content{
+a{ color:var(--blue); }
+
+.page{
   position:relative;
   z-index:1;
-  width:min(900px, calc(100% - 34px));
-  margin:0 auto;
+  min-height:100vh;
+  padding:34px 0 54px;
 }
 
-.article-card{
-  background:rgba(20, 38, 48, 0.38);
-  border:1px solid rgba(255,255,255,0.18);
+.nav{
+  width:min(980px, calc(100% - 32px));
+  margin:0 auto 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.nav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:42px;
+  padding:9px 15px;
+  border:1px solid rgba(23,63,103,0.18);
+  border-radius:999px;
+  background:rgba(255,255,255,0.78);
+  color:var(--navy);
+  font-size:15px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 22px rgba(20,54,82,0.08);
+}
+
+.article{
+  width:min(980px, calc(100% - 32px));
+  margin:0 auto;
+  padding:clamp(28px, 5vw, 58px);
+  border:1px solid rgba(255,255,255,0.78);
   border-radius:18px;
-  backdrop-filter:blur(3px);
-  box-shadow:0 12px 34px rgba(0,0,0,0.20);
-  padding:42px 48px;
+  background:var(--paper);
+  box-shadow:0 18px 48px rgba(20,54,82,0.14);
+  backdrop-filter:blur(4px);
 }
 
 .kicker{
   margin:0 0 12px;
-  color:#dceeff;
+  color:var(--blue);
   font-size:17px;
-  letter-spacing:1.4px;
-  text-shadow:0 2px 8px rgba(0,0,0,0.72);
+  font-weight:800;
+  letter-spacing:0.08em;
 }
 
 h1{
-  margin:0 0 28px;
-  color:#fff;
-  font-size:44px;
-  line-height:1.25;
-  font-weight:600;
-  letter-spacing:1px;
-  text-shadow:0 3px 14px rgba(0,0,0,0.8);
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:clamp(32px, 5vw, 46px);
+  line-height:1.22;
+  font-weight:800;
+}
+
+.byline{
+  margin:0 0 34px;
+  color:var(--muted);
+  font-size:16px;
 }
 
 h2{
-  margin:34px 0 14px;
-  color:#f3f8ff;
-  font-size:29px;
+  margin:42px 0 16px;
+  color:var(--navy);
+  font-size:clamp(24px, 3.2vw, 30px);
   line-height:1.35;
-  text-shadow:0 2px 10px rgba(0,0,0,0.72);
 }
 
 p{
   margin:0 0 18px;
-  color:#f1f5f7;
+  color:var(--ink);
+  font-size:19px;
+  line-height:1.9;
+}
+
+.lead p{
   font-size:20px;
-  line-height:1.95;
-  text-shadow:0 2px 9px rgba(0,0,0,0.70);
 }
 
 .quote{
   margin:24px 0;
-  padding:16px 20px;
-  border-left:4px solid rgba(220,238,255,0.85);
-  background:rgba(255,255,255,0.10);
-  border-radius:0 10px 10px 0;
-  font-size:20px;
-}
-
-.note{
-  margin-top:34px;
-  padding:20px 22px;
-  background:rgba(255,255,255,0.13);
-  border:1px solid rgba(255,255,255,0.22);
-  border-left:4px solid rgba(220,238,255,0.9);
+  padding:18px 22px;
+  border-left:5px solid var(--blue);
   border-radius:0 12px 12px 0;
-}
-
-.note p{
-  margin:0;
-  font-size:18px;
+  background:var(--blue-soft);
+  color:#193c57;
+  font-size:20px;
   line-height:1.85;
 }
 
-.calculatorCallout{
-  margin:30px 0 6px;
-  padding:20px 22px;
-  background:rgba(220,238,255,0.14);
-  border:1px solid rgba(255,255,255,0.24);
-  border-left:4px solid rgba(190,225,255,0.95);
-  border-radius:0 12px 12px 0;
+.tool-callout,
+.note-box,
+.warning-box,
+.points-box,
+.questions-box,
+.disclaimer{
+  margin:30px 0;
+  padding:22px 24px;
+  border-radius:14px;
+  border:1px solid var(--blue-line);
+  background:var(--paper-strong);
 }
 
-.calculatorCallout p{
-  margin:0 0 14px;
-  font-size:18px;
-  line-height:1.8;
+.tool-callout{
+  border-left:5px solid var(--blue);
+  background:var(--blue-soft);
 }
 
-.calculatorCallout a{
-  display:inline-block;
-  color:white;
-  text-decoration:none;
-  padding:10px 16px;
-  border:1px solid rgba(255,255,255,0.28);
+.tool-callout a{
+  display:inline-flex;
+  align-items:center;
+  min-height:46px;
+  margin-top:4px;
+  padding:10px 18px;
   border-radius:999px;
-  background:rgba(0,0,0,0.24);
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
 }
 
-.backHome{
-  position:fixed;
-  left:22px;
-  bottom:18px;
-  z-index:2;
+.warning-box{
+  border-color:#efc4c4;
+  border-left:6px solid var(--warning);
+  background:var(--warning-bg);
+}
+
+.points-box{
+  border-color:#cfe6d6;
+  border-left:6px solid var(--green);
+  background:var(--green-bg);
+}
+
+.questions-box{
+  border-color:#ead49a;
+  border-left:6px solid var(--gold);
+  background:var(--gold-bg);
+}
+
+.note-box,
+.disclaimer{
+  border-left:5px solid var(--blue);
+  background:#f6fbff;
+}
+
+.box-title{
+  margin:0 0 12px;
+  color:var(--navy);
+  font-size:22px;
+  line-height:1.35;
+  font-weight:800;
+}
+
+.warning-box .box-title{ color:#8e2f2f; }
+.points-box .box-title{ color:var(--green); }
+.questions-box .box-title{ color:var(--gold); }
+
+ol,
+ul{
+  margin:0 0 18px;
+  padding-left:1.35em;
+  color:var(--ink);
+  font-size:19px;
+  line-height:1.85;
+}
+
+li{ margin:0 0 9px; }
+
+.bp-table-wrap{
+  overflow-x:auto;
+  margin:18px 0 4px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
   font-size:16px;
-  padding:10px 14px;
-  background:rgba(0,0,0,0.38);
-  border-radius:999px;
+  line-height:1.55;
 }
 
-.backHome a{
-  color:white;
-  text-decoration:none;
+th,
+td{
+  padding:12px 10px;
+  border:1px solid #d7e4ec;
+  text-align:left;
+  vertical-align:top;
 }
 
-.backSection{
-  margin-top:28px;
-  text-align:center;
+th{
+  color:var(--navy);
+  background:#edf6fb;
 }
 
-.backSection a{
-  display:inline-block;
-  color:white;
-  text-decoration:none;
-  padding:10px 16px;
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:999px;
-  background:rgba(0,0,0,0.25);
+.sources{
+  margin-top:42px;
+  padding-top:24px;
+  border-top:1px solid rgba(23,63,103,0.18);
+}
+
+.sources p,
+.sources li{
+  color:#3d4e5b;
+  font-size:15px;
+  line-height:1.7;
 }
 
 .footer{
-  margin-top:26px;
+  width:min(980px, calc(100% - 32px));
+  margin:22px auto 0;
+  color:#526575;
   text-align:center;
-  color:#d7dde2;
   font-size:13px;
-  text-shadow:0 2px 8px rgba(0,0,0,0.65);
 }
 
-@media (max-width:820px){
+@media (max-width:720px){
   body{ background-attachment:scroll; }
-  .overlay{ padding-top:58px; }
-  .article-card{ padding:28px 22px; }
-  h1{ font-size:32px; }
-  h2{ font-size:24px; }
-  p, .quote{ font-size:18px; line-height:1.85; }
-  .note p{ font-size:17px; }
+  .page{ padding-top:18px; }
+  .nav{ justify-content:flex-start; }
+  .article{ padding:24px 20px; border-radius:14px; }
+  p, ol, ul{ font-size:18px; line-height:1.85; }
+  .lead p, .quote{ font-size:18px; }
+  h2{ margin-top:34px; }
+  table{ min-width:680px; }
 }
 </style>
 </head>
 
 <body>
-<div class="overlay">
-  <div class="content">
-    <div class="article-card">
-      <div class="kicker">医学科普 · 心血管健康</div>
-      <h1>高血压：没有感觉，不等于没有风险</h1>
+<div class="page">
+  <nav class="nav" aria-label="页面导航">
+    <a href="medical-education.html">← 返回医学科普</a>
+    <a href="index.html">返回首页</a>
+  </nav>
 
-      <p>高血压是一种十分常见的慢性疾病。过去，人们常把它看作老年人的问题；如今，越来越多中青年人在体检或日常测量中发现血压升高。一方面，人们更重视血压健康，较早接受测量；另一方面，生活方式的改变也可能让血压问题更早出现。</p>
+  <article class="article">
+    <p class="kicker">医学科普 · 心血管健康</p>
+    <h1>高血压：没有感觉，不等于没有风险</h1>
+    <p class="byline">作者：影子观察／Dr Weihong Liu</p>
 
-      <p>高血压在早期通常没有明显症状，因此很容易被忽视。</p>
+    <section class="lead">
+      <p>高血压是一种十分常见的慢性疾病。过去，人们常常认为高血压主要是老年人的问题。事实上，如今高血压被发现的年龄正在逐渐提前。一方面，人们对血压健康越来越重视，更多年轻人开始主动测量血压；另一方面，生活方式的改变，也使一些中青年人较早出现血压升高。</p>
+      <p>然而，高血压在早期通常没有明显症状，因此很容易被忽视。</p>
+      <p>门诊中经常遇到这样的情况：一位50岁左右，甚至更年轻的人，平时工作忙碌、精力充沛，做家务、照顾家人都没有任何问题。一次偶然的体检中，护士测量血压后告诉他：“您今天的血压有点高。”</p>
+      <p>回到家后，他又用家里的血压计测量了几次，结果仍然偏高。于是，他感到十分困惑：</p>
+      <p class="quote">“我没有头痛，也没有头晕，身体没有任何不舒服，怎么会有高血压呢？”</p>
+      <p>这是门诊中非常常见的疑问。许多人以为，血压升高一定会带来头痛、头晕或其他明显的不适。事实上，高血压最容易被忽视的原因，恰恰在于它常常悄无声息——即使血压已经升高，身体也可能没有任何明显感觉。</p>
+    </section>
 
-      <p>门诊中常见这样的情形：一位50岁左右、甚至更年轻的人，平时工作忙碌、精力充沛，做家务、照顾家人都没有问题。一次偶然体检，护士测量后说：“您今天的血压有点高。”回到家后，他又用家里的血压计量了几次，结果仍然偏高。</p>
+    <h2>高血压到底是什么？</h2>
+    <p>可以肯定，大多数人对高血压并不陌生。我们日常所说的“三高”，通常就是指高血压、高血糖和高血脂。</p>
+    <p>绝大多数人的高血压并不是与生俱来的，而是在多种因素长期作用下逐渐形成的。其中，年龄增长是高血压发生率上升的重要因素之一。血压高低与血管壁的弹性、体内血容量、神经和激素调节、心脏功能以及肾脏状况等多种因素有关。随着年龄增长，血管弹性可能逐渐减弱，血管壁也会变得僵硬，血液流动时遇到的阻力随之增加，血压便可能逐渐升高。</p>
+    <p>测量血压时，我们通常会看到两个数值：前面的较高数值叫作“收缩压”，代表心脏收缩、将血液泵出时产生的压力；后面的较低数值叫作“舒张压”，代表心脏舒张、重新充盈血液时血管内保持的压力。</p>
+    <p>经过规范、反复测量后，如果收缩压或舒张压中的任何一个持续超过正常范围，或者两者都超过正常范围，就可能被诊断为高血压。</p>
+    <p>如果血管长期承受过高的压力，血管内壁可能逐渐受损，动脉硬化的进程也会加快。同时，心脏负荷随之增加，久而久之会增加心脏、脑、肾脏和眼睛等重要器官受损的风险。</p>
+    <p>不过，偶尔一次测得血压偏高，并不一定意味着患有高血压。刚刚赶路或运动、情绪紧张、睡眠不足、饮用咖啡、身体疼痛，甚至在测量时说话，都可能使血压暂时升高。</p>
+    <p>因此，医生通常不会仅凭一次测量结果作出诊断，而会结合诊室内的多次规范测量、家庭血压记录，必要时安排24小时动态血压监测，再判断是否确实存在高血压，以及是否需要生活方式干预或药物治疗。</p>
+    <p>只有在不同时间、不同场合进行多次规范测量，血压均持续超过正常范围时，才能确认存在高血压。严格来说，这种持续性的血压升高才属于高血压病。</p>
 
-      <p class="quote">于是他感到困惑：“我没有头痛，也没有头晕，身体没有任何不舒服，怎么会有高血压呢？”</p>
+    <h2>高血压对身体的影响</h2>
+    <p>高血压往往不会带来明显不适，因此容易在早期被忽视；也正因为“没有感觉”，有些人会低估治疗的重要性。随着健康教育的普及，越来越多人开始认识到：控制血压，并不只是为了改善眼前的感觉，更重要的是为未来建立一道保护屏障。</p>
+    <p>长期的高血压或控制不当的高血压可以造成多器官的损伤，尤其是心，脑，肾，大动脉等重要脏器。规范治疗高血压，是为了降低日后发生严重并发症的风险，例如脑卒中、心肌梗死、心力衰竭和肾功能衰竭等。</p>
+    <p>心脑血管急性事件，通常包括心肌梗死和脑卒中（俗称脑中风，如急性脑梗死）。医生在决定是否需要开始或加强降压治疗时，除了看血压数值，也会综合年龄、性别、吸烟情况、胆固醇、糖尿病、肾功能及既往病史等因素，评估未来5-10年发生这类事件的总体风险。</p>
+    <p>文章附有一个简易的“10年心脑血管风险评估”小工具链接，读者可输入相关健康资料，初步了解自己的风险水平。不过，评估结果仅供健康教育和与医生讨论时参考，不能代替正式诊断或个体化治疗建议。</p>
 
-      <p>这是非常常见的疑问。许多人以为，血压升高一定会带来头痛、头晕或其他明显不适。事实上，高血压最容易被忽视的原因，恰恰在于它常常悄无声息——即使血压已经升高，身体也可能没有任何明显感觉。</p>
+    <div class="tool-callout">
+      <p class="box-title">10年心脑血管风险评估</p>
+      <p>这个工具可帮助整理血压、胆固醇、吸烟、糖尿病等资料，作为健康教育和就诊前准备。</p>
+      <a href="cvd-risk-calculator.html">打开中文风险评估工具</a>
+    </div>
 
-      <h2>高血压到底是什么？</h2>
+    <h2>为什么高血压的人似乎越来越年轻？</h2>
+    <p>过去，很多人把高血压看成“老年病”。现在，临床上三四十岁、甚至更年轻的成年人发现血压偏高，并不少见。</p>
+    <p>这不是某一个原因造成的。现代生活里，久坐时间增加，体重更容易上升；外卖、加工食品和调味料可能让盐摄入不知不觉增加；饮酒、压力、睡眠不足，也会影响血压。有些人工作忙，运动少，白天靠咖啡提神，晚上又睡不好，身体长期处在“绷紧”的状态。</p>
+    <p>这些因素不是每一个都会单独导致高血压，也不是说只要生活方式不好就一定会高血压。它们更像一组长期叠加的力量，让原本有遗传或年龄倾向的人，更早显现出血压问题。</p>
 
-      <p>大多数人对高血压并不陌生。日常所说的“三高”，通常包括高血压、高血糖和高血脂。绝大多数人的高血压并不是与生俱来的，而是在多种因素长期作用下逐渐形成。年龄增长是其中的重要因素之一；血管弹性、体内血容量、神经和激素调节、心脏功能以及肾脏状况，也都会影响血压。</p>
+    <h2>多数人没有一个单独的“病因”</h2>
+    <p>大多数成年人属于原发性高血压。这个词听起来专业，意思其实很简单：即找不到一个单一、明确、可以单独指出或治疗的病因。</p>
+    <p>遗传、年龄、体重、饮食、盐摄入、饮酒、运动不足、压力、睡眠、其他慢性病，都可能共同参与。有人会问：“是不是因为我爱吃咸？”也许有关，但通常不是唯一的原因。也有人会内疚：“是不是我自己没管好？”，也并非如此。</p>
+    <p class="quote">高血压常不是某一天突然得来的病，而是多种因素多年累积的结果。</p>
 
-      <p>随着年龄增长，血管弹性可能逐渐减弱，血管壁也可能变得僵硬；血液流动时遇到的阻力增加，血压便可能逐渐升高。</p>
+    <h2>两个特别值得重视、而且可以改变的因素</h2>
+    <p>第一，是体重和腰围。体重增加，尤其是腹部脂肪增加，会让身体更容易出现胰岛素抵抗、血脂异常、脂肪肝、睡眠呼吸暂停和血压升高。</p>
+    <p>对50岁以后的人来说，目标不一定是“瘦很多”。更现实的目标，是慢慢减少腰围，增加肌肉力量，改善睡眠和活动能力。哪怕体重下降不多，只要饮食、活动和睡眠改善，血压管理也可能受益。</p>
+    <p>第二，是阻塞性睡眠呼吸暂停。简单说，就是睡觉时上气道反复变窄或堵住，导致呼吸暂停或变浅，身体缺氧、睡眠被打断。人可能并不知道自己夜里醒过很多次，但早上仍觉得累，白天容易困。</p>
+    <p>由于颅面结构和上气道解剖特点，亚洲人群较容易发生阻塞性睡眠呼吸暂停。无论男性或女性，即使年纪较轻、体重并不超标，也可能出现这种问题。有关阻塞性睡眠呼吸暂停的更多介绍，请参考笔者的科普文章：<a href="https://mp.weixin.qq.com/s/qlkvBTuvTqCdD5UDDEY8Zg" target="_blank" rel="noopener">阻塞性睡眠呼吸暂停科普文章</a>。</p>
+    <p>常见线索包括：鼾声很响；家人观察到睡眠中呼吸暂停；白天容易犯困，尤其开车途中；晨起头痛；夜间频繁起床上厕所；夜间磨牙等；早晨口干；血压尤其难控制。肥胖、颈围较粗、饮酒、某些镇静药物和年龄增长，都可能增加风险。</p>
+    <p>如果有这些表现，不要自行诊断，也不要随便购买设备。请和相关医生讨论，医生可以根据情况安排睡眠评估，并讨论减重、睡姿、减少酒精、持续正压呼吸机（CPAP）治疗或其他方案。</p>
 
-      <p>血压是血液在血管中流动时，对血管壁产生的压力。心脏每跳动一次，就像水泵一样把血液输送到全身。测量血压时会得到两个数值：心脏收缩时的收缩压，以及心脏舒张时的舒张压。两个数值中任何一个持续超出正常范围，或两者都超出正常范围，都可能提示高血压。</p>
+    <h2>家庭测血压：怎样测才更可靠？</h2>
+    <p>家庭血压很有价值，因为它比门诊一次测量更接近日常生活。但前提是方法要尽量标准。</p>
+    <ol>
+      <li>选择经过验证的上臂式电子血压计，袖带大小要适合手臂。手腕式血压计较容易受姿势影响。</li>
+      <li>测量前30分钟，尽量不吸烟、不喝咖啡、不剧烈运动。先上厕所，避免憋尿。</li>
+      <li>坐下安静休息5分钟。背部有支撑，双脚平放，不翘腿。</li>
+      <li>袖带绑在裸露上臂，位置不要隔着厚衣服。手臂放在桌上，大约与心脏同高。</li>
+      <li>测量时不要说话，不要看紧张的信息。</li>
+      <li>通常可早晚各测，连续记录几天。很多澳大利亚资料建议在医生指导下，早晚测量、每次两遍，记录5到7天。</li>
+      <li>不要只看最高的一次，也不要因为一次正常就自行停药。把记录带给医生，让医生结合年龄、糖尿病、肾病、心血管风险和用药情况判断。</li>
+      <li>家庭血压和诊室血压的参考值不完全一样。例如澳大利亚资料常提到诊室和家庭平均血压有不同判断标准，但具体诊断和治疗目标应由医生结合个人情况决定。</li>
+    </ol>
 
-      <h2>一次血压高，是否就是高血压？</h2>
+    <h2>管理高血压，不只是“少吃盐”</h2>
+    <p>少吃盐很重要，但高血压管理不是一句“清淡点”就能解决。更实际的方法，是从每天能做的小事开始。</p>
+    <p>饮食上，先从减少加工食品、咸菜、酱料、汤底、香肠火腿、即食面和外卖重口味开始。不是所有食物都要无味，而是慢慢让舌头适应少一点咸。多吃蔬菜、豆类、全谷物、鱼、坚果和低脂乳制品，对心血管健康通常有益。</p>
+    <p>活动上，不一定一开始就去健身房。可以从饭后散步10分钟开始，逐渐增加到每周大多数日子都有中等强度活动。中老年人还应重视力量训练和平衡训练，例如在专业指导下做弹力带、靠墙深蹲、抬腿或轻重量练习。</p>
+    <p>酒精要限制。很多人以为少量酒能“活血”，但从血压角度，饮酒可能让血压更难控制。吸烟则会伤害血管，戒烟是保护心脑血管最重要的行动之一。</p>
+    <p>睡眠也要纳入管理。长期睡不好、打鼾严重、白天困，不只是“年纪大了”。必要时应评估睡眠呼吸暂停。</p>
+    <p>必须强调，高血压没有治愈，只有长期药物维持正常水平。所以，要把降压药看成长期保护血管的工具，而不是“身体失败”的象征。有些人通过生活方式改善可以减少药物需求；也有些人即使很努力，仍需要规律服药。请不要自行停药，也不要根据一次血压读数自行加减药。真正好的治疗，是医生和患者一起调整到合适、能长期坚持的方案。</p>
 
-      <p>不一定。刚赶路、紧张、睡眠不足、喝咖啡、疼痛，甚至测量时说话，都可能让血压暂时升高。医生通常会结合不同场合、不同时间的多次测量，以及家庭血压或24小时动态血压结果，再判断是否真正存在高血压。</p>
+    <h2>什么时候不能等待？</h2>
+    <div class="warning-box">
+      <p class="box-title">警告提示</p>
+      <ul>
+        <li>严重胸痛、突然一侧脸或手脚无力、说话含糊、突然视物不清。</li>
+        <li>明显气促、昏厥、意识混乱、剧烈头痛。</li>
+        <li>极度不适并伴很高血压时，不要在家反复量、反复等。</li>
+        <li>如怀疑急症，应立即联系急救服务或就近急诊。在澳大利亚，请拨打000。</li>
+      </ul>
+    </div>
+    <p>如有上述症状出现，尤其是在20分钟内仍未缓解，一定要争取在一小时之内到达医院急诊室，千万勿掉以轻心，侥幸等待症状自行缓解。</p>
 
-      <p>只有在不同场合和时机反复测量，血压均持续超出正常范围，才更符合真正的高血压；严格地说，即高血压病。</p>
+    <h2>结语</h2>
+    <p>高血压并不可怕到无法面对。真正值得担心的，是多年不知道、知道后不复查、吃药断断续续，或只凭感觉判断风险。</p>
+    <p>血压是可以被记录和被管理的。50岁以后，我们的目标不是和身体较劲，而是更早了解它、照顾它。和医生一起，把血压、体重、睡眠、饮食、运动和用药共同管理好。</p>
 
-      <div class="calculatorCallout">
-        <p><strong>相关工具：</strong>如果想整理自己的心血管风险资料，可使用中文预评估工具。它用于健康教育和就诊前准备，不能替代医生评估。</p>
-        <a href="cvd-risk-calculator.html">打开心血管风险计算器</a>
-      </div>
+    <div class="points-box">
+      <p class="box-title">本文重点，记住这6句话</p>
+      <ol>
+        <li>高血压常常没有感觉，没有头晕头痛也可能有风险。</li>
+        <li>多数高血压没有单一病因，是遗传、年龄、体重、饮食、睡眠等多因素累积。</li>
+        <li>肥胖、腰围增加和睡眠呼吸暂停，是特别值得主动处理的因素。</li>
+        <li>年轻、突然、严重或难控制的高血压，需要医生评估继发性原因。</li>
+        <li>家庭血压要按方法测，记录趋势，不要只看一次数字。</li>
+        <li>生活方式很重要，但需要药物时，规律服药是在保护心、脑、肾和血管。</li>
+      </ol>
+    </div>
 
-      <div class="note">
-        <p><strong>阅读提示：</strong>本文用于医学健康教育，不能替代诊断或治疗建议。如果血压显著升高，或伴随胸痛、呼吸困难、剧烈头痛、突发肢体无力、言语不清等症状，请及时寻求医疗帮助。</p>
-      </div>
+    <div class="questions-box">
+      <p class="box-title">下一次看医生时，可以问的5个问题</p>
+      <ol>
+        <li>我的血压记录是否足够判断？还需要24小时动态血压吗？</li>
+        <li>我的整体心血管风险如何？需要同时检查胆固醇、血糖、肾功能和尿蛋白吗？</li>
+        <li>我是否有睡眠呼吸暂停的线索，需要做睡眠评估吗？</li>
+        <li>我现在的药物、止痛药、保健品或饮酒习惯，会不会影响血压？</li>
+        <li>我的血压目标应该是多少？如果家庭血压偏高，我应该什么时候联系诊所？</li>
+      </ol>
+    </div>
 
-      <div class="backSection">
-        <a href="medical-education.html">← 返回医学科普</a>
+    <div class="note-box">
+      <p class="box-title">家庭血压记录表</p>
+      <p>建议连续记录几天，并带给医生一起判断趋势。</p>
+      <div class="bp-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>时间</th>
+              <th>第1次血压</th>
+              <th>第2次血压</th>
+              <th>心率</th>
+              <th>测量前情况/备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>例：18/07/2026</td>
+              <td>早晨</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>服药前、已休息5分钟</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>晚上</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>饭后至少1小时</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>早晨</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>晚上</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="footer">© Dr Weihong Liu · Digital Studio</div>
-  </div>
-</div>
+    <div class="disclaimer">
+      <p class="box-title">笔者声明</p>
+      <p>本文用于健康科普，不能替代个别医疗建议。</p>
+      <p>每个人的年龄、既往病史、用药、肾功能、糖尿病情况和心血管风险不同。</p>
+      <p>若你已经被诊断为高血压，或正在服用降压药，请与自己的家庭医生或专科医生讨论最适合你的测量方式、治疗目标和复诊计划。</p>
+    </div>
 
-<div class="backHome">
-  <a href="index.html">← Back to Home</a>
+    <section class="sources">
+      <h2>参考资料</h2>
+      <p>以下资料为本章写作依据。不同机构对诊室血压、家庭血压、治疗目标和个体化风险管理的建议可能存在差异，临床判断应结合患者个人情况和最新本地指南。</p>
+      <ul>
+        <li>Australian Institute of Health and Welfare. Hypertension in Australia. <a href="https://www.aihw.gov.au/reports/risk-factors/hypertension/contents/summary" target="_blank" rel="noopener">https://www.aihw.gov.au/reports/risk-factors/hypertension/contents/summary</a></li>
+        <li>Heart Foundation Australia. Hypertension clinical resources and related cardiovascular risk guidance. <a href="https://www.heartfoundation.org.au/for-professionals/hypertension" target="_blank" rel="noopener">https://www.heartfoundation.org.au/for-professionals/hypertension</a></li>
+        <li>healthdirect Australia. Blood pressure monitoring at home. <a href="https://www.healthdirect.gov.au/blood-pressure-monitoring-at-home" target="_blank" rel="noopener">https://www.healthdirect.gov.au/blood-pressure-monitoring-at-home</a></li>
+        <li>RACGP. How to measure home blood pressure: Recommendations for healthcare professionals and patients. <a href="https://www.racgp.org.au/afp/2016/january-february/how-to-measure-home-blood-pressure-recommendations" target="_blank" rel="noopener">https://www.racgp.org.au/afp/2016/january-february/how-to-measure-home-blood-pressure-recommendations</a></li>
+        <li>Australian Prescriber. Approach to the diagnosis of secondary hypertension in adults. <a href="https://australianprescriber.tg.org.au/articles/approach-to-the-diagnosis-of-secondary-hypertension-in-adults.html" target="_blank" rel="noopener">https://australianprescriber.tg.org.au/articles/approach-to-the-diagnosis-of-secondary-hypertension-in-adults.html</a></li>
+        <li>Australian Prescriber / PubMed. Management of obstructive sleep apnoea in adults. <a href="https://pubmed.ncbi.nlm.nih.gov/38737371/" target="_blank" rel="noopener">https://pubmed.ncbi.nlm.nih.gov/38737371/</a></li>
+        <li>Medical Journal of Australia. Guideline for the diagnosis and management of hypertension in adults - 2016. <a href="https://www.mja.com.au/journal/2016/205/2/guideline-diagnosis-and-management-hypertension-adults-2016" target="_blank" rel="noopener">https://www.mja.com.au/journal/2016/205/2/guideline-diagnosis-and-management-hypertension-adults-2016</a></li>
+      </ul>
+    </section>
+  </article>
+
+  <div class="footer">© Dr Weihong Liu · Digital Studio</div>
 </div>
 </body>
 </html>
