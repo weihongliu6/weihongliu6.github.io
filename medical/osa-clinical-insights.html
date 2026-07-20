@@ -1,779 +1,363 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>睡梦中的“隐形杀手”｜Dr Weihong Liu</title>
-  <meta name="description" content="你可能对阻塞性睡眠呼吸暂停（OSA）的认知已经过时了。" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>睡梦中的“隐形杀手”：阻塞性睡眠呼吸暂停 | 医学科普</title>
+<meta name="description" content="阻塞性睡眠呼吸暂停（OSA）的风险、症状、亚洲人群特点、心脑血管影响、夜尿、认知风险与治疗选择。" />
 
-  <style>
-    :root{
-      --text:#171717;
-      --muted:#616161;
-      --card:#ffffff;
-      --line:rgba(0,0,0,.1);
-      --bg:#f8f8f7;
-      --wrap:820px;
-      --radius:14px;
-    }
+<style>
+:root{
+  --ink:#22313d;
+  --muted:#566979;
+  --navy:#173f67;
+  --blue:#2d74a8;
+  --blue-soft:#eaf4fb;
+  --blue-line:#bfd9ec;
+  --paper:rgba(255,255,255,0.92);
+  --paper-strong:rgba(255,255,255,0.97);
+  --warning:#a94442;
+  --warning-bg:#fff1f1;
+  --gold:#8a620f;
+  --gold-bg:#fff7df;
+  --green:#276749;
+  --green-bg:#edf8f1;
+}
 
-    *{ box-sizing:border-box; }
+*{ box-sizing:border-box; }
 
-    body{
-      margin:0;
-      font-family: ui-serif, Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
-      color:var(--text);
-      background:
-        linear-gradient(rgba(248,248,247,.92), rgba(248,248,247,.96)),
-        url("../images/background.jpg");
-      background-size:cover;
-      background-position:center;
-      background-attachment:fixed;
-      line-height:1.95;
-    }
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Songti SC", "SimSun", sans-serif;
+  color:var(--ink);
+  background-image:url("../medical-education-assets/medical-education-hero.png");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
 
-    @media (max-width: 820px){
-      body{ background-attachment:scroll; }
-    }
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(to bottom, rgba(241,247,251,0.86), rgba(238,244,248,0.72)),
+    rgba(255,255,255,0.18);
+  pointer-events:none;
+}
 
-    .top-links{
-      max-width:var(--wrap);
-      margin:0 auto;
-      padding:18px 16px 0;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
+a{ color:var(--blue); }
 
-    .top-links a{
-      display:inline-block;
-      text-decoration:none;
-      color:#2e2e2e;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.86);
-      border-radius:999px;
-      padding:8px 14px;
-      font-size:14px;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
+.page{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  padding:34px 0 54px;
+}
 
-    .top-links a:hover{ background:#fff; }
+.nav{
+  width:min(980px, calc(100% - 32px));
+  margin:0 auto 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    .wrap{
-      max-width:var(--wrap);
-      margin:0 auto;
-      padding:12px 16px 128px;
-    }
+.nav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:42px;
+  padding:9px 15px;
+  border:1px solid rgba(23,63,103,0.18);
+  border-radius:999px;
+  background:rgba(255,255,255,0.78);
+  color:var(--navy);
+  font-size:15px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 22px rgba(20,54,82,0.08);
+}
 
-    header{
-      background:rgba(255,255,255,.8);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:22px 18px;
-      margin-bottom:18px;
-    }
+.article{
+  width:min(980px, calc(100% - 32px));
+  margin:0 auto;
+  padding:clamp(28px, 5vw, 58px);
+  border:1px solid rgba(255,255,255,0.78);
+  border-radius:18px;
+  background:var(--paper);
+  box-shadow:0 18px 48px rgba(20,54,82,0.14);
+  backdrop-filter:blur(4px);
+}
 
-    h1{
-      margin:0;
-      font-size:clamp(30px,4.8vw,42px);
-      line-height:1.3;
-      letter-spacing:.4px;
-    }
+.kicker{
+  margin:0 0 12px;
+  color:var(--blue);
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:0.08em;
+}
 
-    .author{
-      margin:14px 0 0;
-      color:var(--muted);
-      font-size:15px;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
+h1{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:clamp(32px, 5vw, 46px);
+  line-height:1.22;
+  font-weight:800;
+}
 
-    article{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:24px 18px 26px;
-    }
+.byline{
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:16px;
+}
 
-    h2{
-      margin:26px 0 8px;
-      font-size:clamp(20px,3vw,24px);
-      line-height:1.45;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
+.visit-badge{
+  display:block;
+  width:max-content;
+  margin:0 0 34px;
+  height:18px;
+  opacity:.55;
+  filter:grayscale(1);
+  border-radius:999px;
+}
 
-    p{
-      margin:10px 0;
-      font-size:18px;
-      text-align:justify;
-      text-justify:inter-ideograph;
-    }
+h2{
+  margin:42px 0 16px;
+  color:var(--navy);
+  font-size:clamp(24px, 3.2vw, 30px);
+  line-height:1.35;
+}
 
-    .lead{
-      margin-top:0;
-    }
+h3{
+  margin:24px 0 12px;
+  color:var(--blue);
+  font-size:22px;
+  line-height:1.4;
+}
 
-    ul{
-      margin:10px 0 0;
-      padding-left:22px;
-    }
+p{
+  margin:0 0 18px;
+  color:var(--ink);
+  font-size:19px;
+  line-height:1.9;
+}
 
-    li{
-      margin:8px 0;
-      font-size:17px;
-    }
+.lead p{
+  font-size:20px;
+}
 
-    footer{
-      margin-top:20px;
-      text-align:center;
-      color:#777;
-      font-size:13px;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
+.quote{
+  margin:24px 0;
+  padding:18px 22px;
+  border-left:5px solid var(--blue);
+  border-radius:0 12px 12px 0;
+  background:var(--blue-soft);
+  color:#193c57;
+  font-size:20px;
+  line-height:1.85;
+}
 
-    @media (max-width: 700px){
-      header{ padding:18px 14px; }
-      article{ padding:20px 14px 22px; }
-      p{ font-size:17px; }
-      li{ font-size:16px; }
-    }
+.note-box,
+.warning-box,
+.points-box,
+.questions-box,
+.disclaimer{
+  margin:30px 0;
+  padding:22px 24px;
+  border-radius:14px;
+  border:1px solid var(--blue-line);
+  background:var(--paper-strong);
+}
 
+.warning-box{
+  border-color:#efc4c4;
+  border-left:6px solid var(--warning);
+  background:var(--warning-bg);
+}
 
-    .article-action-bar{
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.65);
-      color: #222;
-      border: 1px solid rgba(0,0,0,0.10);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 1200;
-    }
-    .action-btn{
-      border: none;
-      background: transparent;
-      color: inherit;
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 999px;
-      transition: background .2s ease, transform .2s ease;
-    }
-    .action-btn:hover{
-      background: rgba(0,0,0,0.06);
-    }
-    body.light-theme .article-action-bar{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(0,0,0,0.12);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-    }
-    body.light-theme .article-action-bar .action-btn{
-      color: rgba(0,0,0,0.8);
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.05);
-    }
-    body.light-theme .article-action-bar .action-btn:hover{
-      background: rgba(0,0,0,0.12);
-    }
-    .action-divider{
-      width: 1px;
-      height: 14px;
-      background: rgba(0,0,0,0.15);
-    }
-    .copy-toast{
-      position: fixed;
-      left: 50%;
-      bottom: 78px;
-      transform: translateX(-50%);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: #f5f5f5;
-      background: rgba(17,17,20,0.78);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
-      opacity: 0;
-      transition: opacity .2s ease;
-      pointer-events: none;
-      z-index: 1201;
-    }
-    .copy-toast.show{
-      opacity: 1;
-    }
+.points-box{
+  border-color:#cfe6d6;
+  border-left:6px solid var(--green);
+  background:var(--green-bg);
+}
 
-    .share-panel{
-      position: fixed;
-      left: 50%;
-      bottom: 78px;
-      transform: translateX(-50%);
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      padding: 10px;
-      min-width: 180px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.94);
-      border: 1px solid rgba(0,0,0,0.10);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      z-index: 1300;
-    }
-    .share-panel.show{
-      display: flex;
-    }
-    .share-option-btn,
-    .share-wechat-btn{
-      border: none;
-      background: rgba(0,0,0,0.04);
-      color: #222;
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 8px 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
-    .share-option-btn:hover,
-    .share-wechat-btn:hover{
-      background: rgba(0,0,0,0.08);
-    }
+.questions-box{
+  border-color:#ead49a;
+  border-left:6px solid var(--gold);
+  background:var(--gold-bg);
+}
 
-    .wechat-modal{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
+.note-box,
+.disclaimer{
+  border-left:5px solid var(--blue);
+  background:#f6fbff;
+}
 
-    .wechat-modal.show{
-      display: flex;
-    }
+.box-title{
+  margin:0 0 12px;
+  color:var(--navy);
+  font-size:22px;
+  line-height:1.35;
+  font-weight:800;
+}
 
-    .wechat-modal-content{
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      width: 280px;
-      box-sizing: border-box;
-    }
+.warning-box .box-title{ color:#8e2f2f; }
+.points-box .box-title{ color:var(--green); }
+.questions-box .box-title{ color:var(--gold); }
 
-    .wechat-header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
+ol,
+ul{
+  margin:0 0 18px;
+  padding-left:1.35em;
+  color:var(--ink);
+  font-size:19px;
+  line-height:1.85;
+}
 
-    #closeWechatModal{
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font-size: 16px;
-      color: #555;
-    }
+li{ margin:0 0 9px; }
 
-    #qrcode{
-      margin-top: 10px;
-      display: inline-block;
-    }
+.footer{
+  width:min(980px, calc(100% - 32px));
+  margin:22px auto 0;
+  color:#526575;
+  text-align:center;
+  font-size:13px;
+}
 
-    .comment-panel{
-      position: fixed;
-      top: 0;
-      right: -420px;
-      width: 380px;
-      max-width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
-      transition: right 0.35s ease;
-      z-index: 1300;
-    }
-    .comment-panel.open{
-      right: 0;
-    }
-    .comment-panel-inner{
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      color: #1f1f24;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    }
-    .comment-header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-    .close-comment{
-      border: none;
-      background: transparent;
-      font-size: 18px;
-      cursor: pointer;
-      color: #3b3b40;
-      padding: 2px;
-    }
-    .comment-list{
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 2px;
-      margin-bottom: 14px;
-    }
-    .comment-item{
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 10px;
-      background: rgba(255,255,255,0.88);
-      padding: 10px 12px;
-      line-height: 1.55;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 14px;
-    }
-    .comment-compose-wrap{
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: auto;
-    }
-    .comment-compose-wrap.hidden{
-      display: none;
-    }
-    .comment-input{
-      width: 100%;
-      height: 120px;
-      border: 1px solid rgba(0,0,0,0.15);
-      border-radius: 8px;
-      padding: 10px;
-      font: inherit;
-      resize: none;
-      box-sizing: border-box;
-      background: rgba(255,255,255,0.92);
-      color: #222;
-    }
-    .comment-actions{
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-    .cancel-comment,
-    .submit-comment{
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font: inherit;
-      font-size: 14px;
-    }
-    .cancel-comment{
-      background: rgba(0,0,0,0.08);
-      color: #333;
-    }
-    .submit-comment{
-      background: rgba(0,0,0,0.8);
-      color: white;
-    }
-    .comment-overlay{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.15);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 1200;
-    }
-    .comment-overlay.show{
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    @media (max-width:700px){
-      .article-action-bar{
-        bottom: 14px;
-        padding: 7px 10px;
-        gap: 8px;
-      }
-      .action-btn{
-        font-size: 13px;
-        padding: 6px 9px;
-      }
-      .action-divider{
-        height: 12px;
-      }
-      .copy-toast{
-        bottom: 64px;
-      }
-      .comment-panel{
-        width: 100%;
-        right: -100%;
-      }
-    }
-
-  </style>
+@media (max-width:720px){
+  body{ background-attachment:scroll; }
+  .page{ padding-top:18px; }
+  .nav{ justify-content:flex-start; }
+  .article{ padding:24px 20px; border-radius:14px; }
+  p, ol, ul{ font-size:18px; line-height:1.85; }
+  .lead p, .quote{ font-size:18px; }
+  h2{ margin-top:34px; }
+}
+</style>
+<script data-goatcounter="https://weihongliu.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
 </head>
-<body class="light-theme">
-  <div class="top-links">
-    <a href="../index.html">← 返回主页</a>
-    <a href="../medical.html">← 返回医学栏目</a>
-  </div>
 
-  <main class="wrap">
-    <header>
-      <h1>睡梦中的“隐形杀手”：你可能对阻塞性睡眠呼吸暂停的认知已经过时了</h1>
-      <p class="author">Dr. Weihong Liu</p>
-    </header>
+<body>
+<div class="page">
+  <nav class="nav" aria-label="页面导航">
+    <a href="../medical-education.html">← 返回医学科普</a>
+    <a href="../index.html">返回首页</a>
+  </nav>
 
-    <article>
-      <h2>引言部分</h2>
-      <p class="lead">你是否发现身边的家人睡觉时鼾声如雷，却又突然“断气”几秒？或者你自己明明睡够了时间，白天却依然疲惫不堪，半夜还要频繁起来上厕所？这些症状，可能都指向同一个“幕后黑手”——阻塞性睡眠呼吸暂停（OSA）。</p>
+  <article class="article">
+    <p class="kicker">医学科普 · 睡眠与呼吸</p>
+    <h1>睡梦中的“隐形杀手”：你可能对阻塞性睡眠呼吸暂停的认知已经过时了</h1>
+    <p class="byline">作者：影子观察／Dr Weihong Liu</p>
+    <img class="visit-badge"
+         src="https://hits.sh/weihongliu6.github.io/medical/osa-clinical-insights.svg?label=views&color=777777&labelColor=eeeeee"
+         alt="Article view count">
 
-      <h2>一、什么是 OSA？它为什么会发生？</h2>
-      <p>简单来说，OSA 是指睡眠过程中，上呼吸道（咽喉部）反复塌陷或阻塞，导致呼吸暂时停止的疾病。每次暂停可持续数秒乃至数十秒，每晚可发生数十乃至数百次，当事人往往浑然不觉。</p>
-      <p>其发病机制涉及两大维度：</p>
-      <p>解剖因素：颈部脂肪堆积、扁桃体肥大、舌体过大或颅面骨骼结构狭窄（下颌短小、颅底发育不足），都会令呼吸道空间受限。</p>
-      <p>功能因素：OSA 不仅仅是解剖结构问题，还涉及多种个体化的病理生理表型——包括上气道扩张肌功能低下、呼吸控制环路不稳定（高环路增益），以及觉醒阈值过低（轻微缺氧即唤醒）等非解剖因素。这些认识正在推动 OSA 从“一刀切”治疗走向精准化、表型驱动的管理模式。</p>
+    <section class="lead">
+      <p>你是否发现身边的家人睡觉时鼾声如雷，却又突然“断气”几秒？或者你自己明明睡够了时间，白天却依然疲惫不堪，半夜还要频繁起来上厕所？这些症状，可能都指向同一个“幕后黑手”——阻塞性睡眠呼吸暂停（OSA）。</p>
+    </section>
 
-      <h2>二、谁更容易被“盯上”？亚洲人，请格外注意</h2>
-      <p>长期以来，OSA 被视为“欧美胖子的病”。这是一个危险的误区，尤其对于亚裔人群而言。</p>
-      <p>全球流行现状：</p>
-      <p>一项涵盖2000至2024年中国人群的多层次荟萃分析显示，中国OSA总体患病率为11.8%，且呈显著上升趋势——从2000至2005年间的8.1%，急剧攀升至2021至2024年间的26.9%，中国已成为全球OSA疾病负担最重的国家。</p>
-      <p>亚洲人：即使不胖，也是高风险人群。</p>
-      <p>这是最容易被忽视、却有着充分证据支持的一点。跨越28个国家的跨文化研究显示，在西方人群中，肥胖约导致60%的OSA病例；而在亚洲人群中，颅面结构因素对发病的贡献则显著更大。</p>
-      <p>具体而言，直接的跨族裔对照研究发现，在相同OSA严重程度下，中国患者比白人患者更瘦（BMI更低），但病情更重（呼吸暂停低通气指数AHI更高）。中国OSA患者普遍存在更严重的颅面骨骼受限，表现为更短的颅底、上颌骨及下颌骨长度。换言之，亚裔人的面部骨骼天然更为紧凑，这使得咽喉气道的可用空间本就偏窄。</p>
-      <p>与高加索人不同，许多亚洲OSA患者并不肥胖，其致病主因正是这种先天性的颅面骨骼结构特征。亚裔及亚裔美国人与白人的OSA患病率相当，但肥胖率却远低于后者——颅面结构对亚裔的OSA风险贡献已获充分文献支持。</p>
-      <p>此外，亚洲人群更易在较低的整体BMI下出现中心性（腹型）肥胖——而正是这种脂肪分布模式，而非整体体重，对OSA的诱发作用尤为关键。</p>
-      <p>实践意义：体重正常的亚洲人，若有打鼾、白天嗜睡、夜间多尿等症状，绝不能因为“我又不胖”而排除OSA的可能，应积极寻求专科评估。</p>
-      <p>其他高风险人群：男性患病率传统上高于女性，但最新研究特别提醒，女性患者——尤其是围绝经期及绝经后女性——常因症状不典型（更多表现为失眠、疲劳、情绪低落，而非经典鼾声）而被漏诊。肥胖、高血压、2型糖尿病患者均属高危人群。</p>
+    <h2>一、什么是 OSA？它为什么会发生？</h2>
+    <p>简单来说，OSA 是指睡眠过程中，上呼吸道（咽喉部）反复塌陷或阻塞，导致呼吸暂时停止的疾病。每次暂停可持续数秒乃至数十秒，每晚可发生数十乃至数百次，当事人往往浑然不觉。</p>
+    <p>其发病机制涉及两大维度。</p>
 
-      <h2>三、OSA 的危害，远比你想象的严重</h2>
-      <p>心脑血管与代谢风险：</p>
-      <p>反复的夜间缺氧与睡眠碎片化，是高血压、心房颤动、心肌梗死和脑卒中的重要诱因。与此同时，OSA 与糖尿病及代谢综合征存在密切的双向关联。白天极度嗜睡还会大幅增加交通事故与工伤的风险。</p>
-      <p>新证据一：夜尿频繁——被忽视的 OSA 预警信号。</p>
+    <div class="note-box">
+      <p class="box-title">解剖因素</p>
+      <p>颈部脂肪堆积、扁桃体肥大、舌体过大或颅面骨骼结构狭窄（下颌短小、颅底发育不足），都会令呼吸道空间受限。</p>
+    </div>
+
+    <div class="note-box">
+      <p class="box-title">功能因素</p>
+      <p>OSA 不仅仅是解剖结构问题，还涉及多种个体化的病理生理表型——包括上气道扩张肌功能低下、呼吸控制环路不稳定（高环路增益），以及觉醒阈值过低（轻微缺氧即唤醒）等非解剖因素。这些认识正在推动 OSA 从“一刀切”治疗走向精准化、表型驱动的管理模式。</p>
+    </div>
+
+    <h2>二、谁更容易被“盯上”？亚洲人，请格外注意</h2>
+    <p>长期以来，OSA 被视为“欧美胖子的病”。这是一个危险的误区，尤其对于亚裔人群而言。</p>
+
+    <h3>全球流行现状</h3>
+    <p>一项涵盖2000至2024年中国人群的多层次荟萃分析显示，中国OSA总体患病率为11.8%，且呈显著上升趋势——从2000至2005年间的8.1%，急剧攀升至2021至2024年间的26.9%，中国已成为全球OSA疾病负担最重的国家。</p>
+
+    <h3>亚洲人：即使不胖，也是高风险人群</h3>
+    <p>这是最容易被忽视、却有着充分证据支持的一点。跨越28个国家的跨文化研究显示，在西方人群中，肥胖约导致60%的OSA病例；而在亚洲人群中，颅面结构因素对发病的贡献则显著更大。</p>
+    <p>具体而言，直接的跨族裔对照研究发现，在相同OSA严重程度下，中国患者比白人患者更瘦（BMI更低），但病情更重（呼吸暂停低通气指数AHI更高）。中国OSA患者普遍存在更严重的颅面骨骼受限，表现为更短的颅底、上颌骨及下颌骨长度。换言之，亚裔人的面部骨骼天然更为紧凑，这使得咽喉气道的可用空间本就偏窄。</p>
+    <p>与高加索人不同，许多亚洲OSA患者并不肥胖，其致病主因正是这种先天性的颅面骨骼结构特征。亚裔及亚裔美国人与白人的OSA患病率相当，但肥胖率却远低于后者——颅面结构对亚裔的OSA风险贡献已获充分文献支持。</p>
+    <p>此外，亚洲人群更易在较低的整体BMI下出现中心性（腹型）肥胖——而正是这种脂肪分布模式，而非整体体重，对OSA的诱发作用尤为关键。</p>
+
+    <p class="quote">体重正常的亚洲人，若有打鼾、白天嗜睡、夜间多尿等症状，绝不能因为“我又不胖”而排除OSA的可能，应积极寻求专科评估。</p>
+
+    <h3>其他高风险人群</h3>
+    <p>男性患病率传统上高于女性，但最新研究特别提醒，女性患者——尤其是围绝经期及绝经后女性——常因症状不典型（更多表现为失眠、疲劳、情绪低落，而非经典鼾声）而被漏诊。肥胖、高血压、2型糖尿病患者均属高危人群。</p>
+
+    <h2>三、OSA 的危害，远比你想象的严重</h2>
+    <h3>心脑血管与代谢风险</h3>
+    <p>反复的夜间缺氧与睡眠碎片化，是高血压、心房颤动、心肌梗死和脑卒中的重要诱因。与此同时，OSA 与糖尿病及代谢综合征存在密切的双向关联。白天极度嗜睡还会大幅增加交通事故与工伤的风险。</p>
+
+    <div class="warning-box">
+      <p class="box-title">新证据一：夜尿频繁，可能是被忽视的 OSA 预警信号</p>
       <p>很多中老年人深受夜尿困扰，常将其归咎于前列腺问题或膀胱老化——却不知道，OSA 才可能是真正的幕后推手。</p>
       <p>2024年发表于《自然·泌尿科学综述》的系统综述确认，夜尿是OSA患者的常见症状，CPAP治疗可在部分患者中显著减少夜间排尿次数，但其背后的机制复杂，尚未完全阐明——OSA 会影响自主神经系统、加剧氧化应激并损伤内皮功能。</p>
       <p>其主要机制被认为与激素紊乱有关：当OSA患者睡眠时，反复的气道阻塞导致血氧下降，机体随即释放心房钠尿肽（ANP）。这一激素原本是心脏应对容量超负荷的信号，呼吸暂停所产生的胸腔负压使心脏误以为处于容量过载状态，触发ANP大量分泌，进而促进夜间多尿。</p>
       <p>多项研究报告显示，OSA患者中夜尿的患病率介于47%至75%之间。更值得关注的是，对已接受CPAP或手术治疗的OSA患者的数据分析显示，治疗后夜尿频率约减少一半，夜间尿量平均减少约166毫升。</p>
       <p>临床启示：如果你或家人有不明原因的夜间频繁排尿，尤其伴有打鼾或白天疲倦，请将OSA纳入考量，向医生提出。</p>
-      <p>新证据二：OSA 与早发痴呆——一个让人警醒的关联。</p>
+    </div>
+
+    <div class="warning-box">
+      <p class="box-title">新证据二：OSA 与早发痴呆，是一个让人警醒的关联</p>
       <p>近年来积累的证据已将未经治疗的OSA列为认知功能下降和老年痴呆的潜在可干预危险因素。</p>
       <p>一项纳入39项队列研究的大型荟萃分析发现，OSA与全因痴呆风险增加33%相关，与阿尔茨海默病风险增加45%相关（风险比1.45，95%置信区间1.24–1.69）。</p>
       <p>尤其令人担忧的是发病年龄的影响。一项基于英国生物银行大型前瞻性队列的研究发现，与无OSA者相比，OSA患者发生全因痴呆、阿尔茨海默病及血管性痴呆的风险均大幅升高；经倾向评分匹配校正后，52岁前被诊断OSA的患者，全因痴呆的风险增加高达2.26倍，且这一趋势在早发性阿尔茨海默病和血管性痴呆中同样成立。</p>
       <p>目前的综述认为，OSA 导致认知损害的机制是多途径的，包括间歇性缺氧、睡眠结构破坏、氧化应激、胸腔内压力剧变以及心血管合并症的协同作用。这些因素共同作用于大脑，可导致小血管病变、微梗死、突触可塑性下降及脑白质改变，并与阿尔茨海默病生物标志物异常密切相关。</p>
       <p>还有一条重要通路：夜间睡眠中，大脑依赖“类淋巴系统”冲刷代谢废物（包括β-淀粉样蛋白）——OSA 所导致的睡眠碎片化，正是对这一清除机制的持续干扰。</p>
       <p>核心信息：如果中年时期的OSA长期未被诊断和治疗，大脑已在无声中承受着累积损伤。这不是遥远的老年问题，而是当下就需要正视的健康议题。</p>
+    </div>
 
-      <h2>四、如何应对？</h2>
-      <p>金标准：持续气道正压通气（CPAP）。</p>
-      <p>通过面罩输送轻微正压气流，撑开睡眠中塌陷的气道。最新临床数据再次确认，坚持使用CPAP能显著降低死亡率，并在部分患者中改善夜尿症状和认知功能。其局限在于长期依从性：相当比例的患者因不适应面罩而放弃。</p>
-      <p>药物治疗的新突破。</p>
-      <p>2025年的重大进展之一是替泽帕肽（Tirzepatide）等GLP-1类药物的临床研究数据。对于肥胖合并OSA患者，这类药物通过显著减重，已被证明能有效缓解甚至逆转OSA症状。</p>
-      <p>其他选择。</p>
-      <p>口腔矫治器（下颌前移装置）适用于轻中度患者，尤其适合不耐受CPAP者。神经刺激疗法——通过植入装置刺激舌下神经、维持气道开放——已获FDA批准，为重度患者提供了外科微创选项。减重5%至10%可带来有临床意义的改善；侧睡体位对部分患者（尤其仰卧位加重者）亦有明确效果。</p>
+    <h2>四、如何应对？</h2>
+    <h3>治疗金标准：持续气道正压通气（CPAP）</h3>
+    <p>通过面罩输送轻微正压气流，撑开睡眠中塌陷的气道。最新临床数据再次确认，坚持使用CPAP能显著降低死亡率，并在部分患者中改善夜尿症状和认知功能。其局限在于长期依从性：相当比例的患者因不适应面罩而放弃。</p>
 
-      <h2>五、小结：亚洲人需要更主动的筛查意识</h2>
-      <p>OSA 的传统风险画像（中年、男性、肥胖、颈部粗短）在亚洲人群中存在严重的误导性。体型正常的亚洲人，由于颅面骨骼结构的先天特点，同样面临不容忽视的患病风险。加之中国等亚洲国家OSA患病率正以惊人速度上升，其与高血压、糖尿病、夜尿症及痴呆的多重关联日趋明确，OSA 的早期筛查与干预已成为亚洲公共卫生的重要议题。</p>
-      <p>如果你或家人有以下情况，请认真考虑进行睡眠评估：</p>
+    <h3>药物治疗的新突破</h3>
+    <p>2025年的重大进展之一是替泽帕肽（Tirzepatide）等GLP-1类药物的临床研究数据。对于肥胖合并OSA患者，这类药物通过显著减重，已被证明能有效缓解甚至逆转OSA症状。</p>
+
+    <h3>其他选择</h3>
+    <p>口腔矫治器（下颌前移装置）适用于轻中度患者，尤其适合不耐受CPAP者。神经刺激疗法——通过植入装置刺激舌下神经、维持气道开放——已获FDA批准，为重度患者提供了外科微创选项。减重5%至10%可带来有临床意义的改善；侧睡体位对部分患者（尤其仰卧位加重者）亦有明确效果。</p>
+
+    <h2>五、小结：亚洲人需要更主动的筛查意识</h2>
+    <p>OSA 的传统风险画像（中年、男性、肥胖、颈部粗短）在亚洲人群中存在严重的误导性。体型正常的亚洲人，由于颅面骨骼结构的先天特点，同样面临不容忽视的患病风险。加之中国等亚洲国家OSA患病率正以惊人速度上升，其与高血压、糖尿病、夜尿症及痴呆的多重关联日趋明确，OSA 的早期筛查与干预已成为亚洲公共卫生的重要议题。</p>
+
+    <div class="points-box">
+      <p class="box-title">如果你或家人有以下情况，请认真考虑进行睡眠评估</p>
       <ul>
-        <li>习惯性打鼾，尤其伴有目击的呼吸暂停</li>
-        <li>白天过度嗜睡，晨起头痛，注意力下降</li>
-        <li>不明原因的夜间频繁排尿（排除泌尿系统疾病后）</li>
-        <li>难以控制的高血压或血糖</li>
-        <li>中年（尤其50岁前后）出现记忆力减退</li>
+        <li>习惯性打鼾，尤其伴有目击的呼吸暂停。</li>
+        <li>白天过度嗜睡、晨起头痛、注意力下降。</li>
+        <li>不明原因的夜间频繁排尿，尤其在排除泌尿系统疾病后仍明显存在。</li>
+        <li>难以控制的高血压或血糖。</li>
+        <li>中年，尤其50岁前后，出现记忆力减退。</li>
       </ul>
-      <p>睡眠多导图（PSG）或便携式睡眠监测是确诊的标准手段。OSA 是可以诊断、可以治疗的疾病——而拖延诊治，可能正在悄悄给你添上一笔你毫不知情的“健康债”。</p>
-    </article>
-
-    <footer>© Dr Weihong Liu · Digital Studio</footer>
-  </main>
-
-  <div class="article-action-bar">
-    <button class="action-btn comment-btn" type="button" aria-label="留言">💬 留言</button>
-    <div class="action-divider" aria-hidden="true"></div>
-    <button class="action-btn share-btn" type="button" aria-label="分享">↗ 分享</button>
-  </div>
-  <div class="share-panel" id="sharePanel">
-    <button class="share-option-btn" id="copyShareBtn" type="button">复制链接</button>
-    <button class="share-wechat-btn" id="wechatShareBtn" type="button">WeChat / 微信</button>
-  </div>
-  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">链接已复制</div>
-
-  <div class="comment-panel" id="commentPanel">
-    <div class="comment-panel-inner">
-      <div class="comment-header">
-        <span>留言 / Comment</span>
-        <button class="close-comment" id="closeCommentBtn" type="button" aria-label="关闭留言面板">✕</button>
-      </div>
-
-      <div class="comment-list" id="commentList"></div>
-
-      <div class="comment-compose-wrap hidden" id="commentComposeWrap">
-        <textarea placeholder="写下你的想法…" class="comment-input" id="commentInput"></textarea>
-        <div class="comment-actions">
-          <button class="cancel-comment" id="cancelCommentBtn" type="button">取消</button>
-          <button class="submit-comment" id="submitCommentBtn" type="button">提交</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="comment-overlay" id="commentOverlay"></div>
 
-  <div class="wechat-modal" id="wechatModal">
-    <div class="wechat-modal-content">
-      <div class="wechat-header">
-        <span>微信分享</span>
-        <button id="closeWechatModal" type="button" aria-label="关闭微信分享">✕</button>
-      </div>
-      <div class="wechat-body">
-        <p>用微信扫一扫分享这篇文章</p>
-        <div id="qrcode"></div>
-      </div>
+    <p>睡眠多导图（PSG）或便携式睡眠监测是确诊的标准手段。OSA 是可以诊断、可以治疗的疾病——而拖延诊治，可能正在悄悄给你添上一笔你毫不知情的“健康债”。</p>
+
+    <div class="questions-box">
+      <p class="box-title">下一次看医生时，可以问的5个问题</p>
+      <ol>
+        <li>我的打鼾、白天困倦或夜尿情况是否提示需要睡眠评估？</li>
+        <li>我适合做睡眠多导图，还是便携式睡眠监测？</li>
+        <li>如果确诊OSA，我的严重程度和主要风险是什么？</li>
+        <li>CPAP、口腔矫治器、减重、体位治疗或其他治疗，哪一种更适合我？</li>
+        <li>治疗后如何判断是否有效，是否需要复查睡眠监测？</li>
+      </ol>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <script>
-    (() => {
-      const showCopyToast = () => {
-        const toast = document.querySelector('.copy-toast');
-        if (!toast) return;
-        toast.classList.add('show');
-        window.clearTimeout(showCopyToast.timer);
-        showCopyToast.timer = window.setTimeout(() => {
-          toast.classList.remove('show');
-        }, 1500);
-      };
+    <div class="disclaimer">
+      <p class="box-title">笔者声明</p>
+      <p>本文用于健康科普，不能替代个别医疗建议。</p>
+      <p>阻塞性睡眠呼吸暂停的诊断与治疗需要结合症状、睡眠监测结果、合并疾病、用药情况和个人偏好。若你或家人存在明显打鼾、目击呼吸暂停、白天嗜睡、难以控制的血压或夜间频繁排尿，请与家庭医生或相关专科医生讨论。</p>
+    </div>
+  </article>
 
-      const copyCurrentUrl = async () => {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          showCopyToast();
-        } catch (error) {
-          const input = document.createElement('input');
-          input.value = window.location.href;
-          document.body.appendChild(input);
-          input.select();
-          document.execCommand('copy');
-          document.body.removeChild(input);
-          showCopyToast();
-        }
-      };
-
-      const setupActionBar = () => {
-        const commentBtn = document.querySelector('.comment-btn');
-        const shareBtn = document.querySelector('.share-btn');
-        const sharePanel = document.getElementById('sharePanel');
-        const copyShareBtn = document.getElementById('copyShareBtn');
-        const wechatBtn = document.getElementById('wechatShareBtn');
-        const modal = document.getElementById('wechatModal');
-        const closeBtn = document.getElementById('closeWechatModal');
-        const qrContainer = document.getElementById('qrcode');
-        const commentPanel = document.getElementById('commentPanel');
-        const commentOverlay = document.getElementById('commentOverlay');
-        const closeCommentBtn = document.getElementById('closeCommentBtn');
-        const commentList = document.getElementById('commentList');
-        const commentComposeWrap = document.getElementById('commentComposeWrap');
-        const commentInput = document.getElementById('commentInput');
-        const cancelCommentBtn = document.getElementById('cancelCommentBtn');
-        const submitCommentBtn = document.getElementById('submitCommentBtn');
-        if (!commentBtn || !shareBtn || !sharePanel || !copyShareBtn || !wechatBtn || !modal || !closeBtn || !qrContainer || !commentPanel || !commentOverlay || !closeCommentBtn || !commentList || !commentComposeWrap || !commentInput || !cancelCommentBtn || !submitCommentBtn) return;
-
-        const commentsStorageKey = `comments:${window.location.pathname}`;
-
-        const loadComments = () => {
-          try {
-            const cached = localStorage.getItem(commentsStorageKey);
-            return cached ? JSON.parse(cached) : [];
-          } catch (error) {
-            return [];
-          }
-        };
-
-        const saveComments = (comments) => {
-          try {
-            localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
-          } catch (error) {
-            // Ignore storage errors to keep interaction smooth.
-          }
-        };
-
-        const renderComments = (comments) => {
-          commentList.innerHTML = '';
-          comments.forEach((content) => {
-            const item = document.createElement('div');
-            item.className = 'comment-item';
-            item.textContent = content;
-            commentList.appendChild(item);
-          });
-          commentList.scrollTop = commentList.scrollHeight;
-        };
-
-        const clearComposeInput = () => {
-          commentInput.value = '';
-          commentInput.blur();
-        };
-
-        const openCommentPanel = () => {
-          commentPanel.classList.add('open');
-          commentOverlay.classList.add('show');
-          document.body.style.overflow = 'hidden';
-        };
-
-        const closeCommentPanel = () => {
-          commentPanel.classList.remove('open');
-          commentOverlay.classList.remove('show');
-          document.body.style.overflow = '';
-        };
-
-        const openNewCommentSession = () => {
-          openCommentPanel();
-          commentComposeWrap.classList.remove('hidden');
-          clearComposeInput();
-          commentInput.focus();
-        };
-
-        const exitComposeState = () => {
-          clearComposeInput();
-          commentComposeWrap.classList.add('hidden');
-        };
-
-        const submitComment = () => {
-          const value = commentInput.value.trim();
-          if (!value) return;
-
-          comments.push(value);
-          saveComments(comments);
-          renderComments(comments);
-          exitComposeState();
-        };
-
-        const cancelComment = () => {
-          exitComposeState();
-        };
-
-        const comments = loadComments();
-        renderComments(comments);
-
-        commentBtn.addEventListener('click', openNewCommentSession);
-        closeCommentBtn.addEventListener('click', () => {
-          closeCommentPanel();
-          exitComposeState();
-        });
-        commentOverlay.addEventListener('click', () => {
-          closeCommentPanel();
-          exitComposeState();
-        });
-        cancelCommentBtn.addEventListener('click', cancelComment);
-        submitCommentBtn.addEventListener('click', submitComment);
-
-        const closeSharePanel = () => {
-          sharePanel.classList.remove('show');
-        };
-
-        shareBtn.addEventListener('click', () => {
-          sharePanel.classList.toggle('show');
-        });
-
-        copyShareBtn.addEventListener('click', async () => {
-          closeSharePanel();
-          await copyCurrentUrl();
-        });
-
-        wechatBtn.onclick = () => {
-          closeSharePanel();
-          modal.classList.add('show');
-          qrContainer.innerHTML = '';
-          if (typeof QRCode === 'function') {
-            new QRCode(qrContainer, {
-              text: window.location.href,
-              width: 180,
-              height: 180
-            });
-          }
-        };
-
-        closeBtn.onclick = () => {
-          modal.classList.remove('show');
-        };
-
-        modal.onclick = (event) => {
-          if (event.target === modal) {
-            modal.classList.remove('show');
-          }
-        };
-
-        document.addEventListener('click', (event) => {
-          if (!sharePanel.contains(event.target) && !shareBtn.contains(event.target)) {
-            closeSharePanel();
-          }
-        });
-      };
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          const commentPanel = document.getElementById('commentPanel');
-          const modal = document.getElementById('wechatModal');
-          if (modal) {
-            modal.classList.remove('show');
-          }
-          const sharePanel = document.getElementById('sharePanel');
-          if (sharePanel) {
-            sharePanel.classList.remove('show');
-          }
-
-          if (commentPanel && commentPanel.classList.contains('open')) {
-            commentPanel.classList.remove('open');
-            const commentOverlay = document.getElementById('commentOverlay');
-            if (commentOverlay) {
-              commentOverlay.classList.remove('show');
-            }
-            const commentComposeWrap = document.getElementById('commentComposeWrap');
-            const commentInput = document.getElementById('commentInput');
-            if (commentComposeWrap) {
-              commentComposeWrap.classList.add('hidden');
-            }
-            if (commentInput) {
-              commentInput.value = '';
-              commentInput.blur();
-            }
-            document.body.style.overflow = '';
-          }
-        }
-      });
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupActionBar, { once: true });
-      } else {
-        setupActionBar();
-      }
-    })();
-  </script>
-
+  <div class="footer">© Dr Weihong Liu · Digital Studio</div>
+</div>
 </body>
 </html>

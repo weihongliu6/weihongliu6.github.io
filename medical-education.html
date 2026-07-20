@@ -131,13 +131,17 @@ body{
 }
 
 .article-count{
-  display:block;
+  display:inline-flex;
   width:max-content;
   margin:0 0 14px;
-  height:18px;
-  opacity:.78;
-  filter:grayscale(1);
+  padding:3px 8px;
   border-radius:999px;
+  border:1px solid rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.12);
+  color:#eef4f7;
+  font-size:12px;
+  line-height:1.2;
+  text-shadow:0 2px 8px rgba(0,0,0,0.65);
 }
 
 .status{
@@ -214,17 +218,15 @@ body{
       <div class="section">
         <div class="section-title">01 · 心血管健康</div>
         <a class="article-title" href="medical-hypertension.html">高血压：没有感觉，不等于没有风险</a>
-        <img class="article-count"
-             src="https://hits.sh/weihongliu6.github.io/medical-hypertension.svg?label=views&color=777777&labelColor=eeeeee"
-             alt="Article view count">
+        <span class="article-count" data-count-paths="/medical-hypertension.html,/medical-hypertension">views --</span>
         <p class="summary">很多人工作、家务和照顾家人都不受影响，却在一次体检后发现血压偏高。高血压最容易被忽视的地方，恰恰是它常常没有明显感觉。</p>
       </div>
 
       <div class="section">
         <div class="section-title">02 · 睡眠与呼吸</div>
-        <div class="article-title">CPAP呼吸机：睡眠中持续的支持</div>
-        <div class="status">文章筹备中</div>
-        <p class="summary">这一篇文章正在整理中。未来将以日常语言介绍 CPAP 治疗、睡眠呼吸暂停，以及如何与医生讨论睡眠相关问题。</p>
+        <a class="article-title" href="medical/osa-clinical-insights.html">睡梦中的“隐形杀手”：你可能对阻塞性睡眠呼吸暂停的认知已经过时了</a>
+        <span class="article-count" data-count-paths="/medical/osa-clinical-insights.html,/medical/osa-clinical-insights">views --</span>
+        <p class="summary">从打鼾、夜尿、白天疲倦到心脑血管和认知风险，重新理解阻塞性睡眠呼吸暂停（OSA）及其治疗选择。</p>
       </div>
     </div>
 
@@ -235,5 +237,31 @@ body{
 <div class="backHome">
   <a href="index.html">← Back to Home</a>
 </div>
+<script>
+async function fetchVisitCount(path) {
+  const response = await fetch(`https://weihongliu.goatcounter.com/counter/${encodeURIComponent(path)}.json`);
+  if (!response.ok) throw new Error(`Counter unavailable for ${path}`);
+  const data = await response.json();
+  const rawCount = String(data.count || "0");
+  const count = Number(rawCount.replace(/,/g, ""));
+  return Number.isFinite(count) ? count : 0;
+}
+
+async function loadArticleCounts() {
+  const badges = document.querySelectorAll("[data-count-paths]");
+  await Promise.all([...badges].map(async (badge) => {
+    const paths = badge.dataset.countPaths.split(",").map((path) => path.trim()).filter(Boolean);
+    try {
+      const counts = await Promise.all(paths.map(fetchVisitCount));
+      const count = Math.max(...counts);
+      badge.textContent = `views ${count.toLocaleString()}`;
+    } catch (error) {
+      badge.textContent = "views --";
+    }
+  }));
+}
+
+loadArticleCounts();
+</script>
 </body>
 </html>
