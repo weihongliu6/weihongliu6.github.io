@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="影子观察数字工作室的旅行与探索项目。Travel and exploration projects from Shadow Observer Digital Studio.">
+  <title>旅行与探索 | Travel &amp; Exploration · 影子观察数字工作室</title>
+  <style>
+    :root{--ink:#1e2721;--muted:#667068;--paper:#f4f1e9;--green:#26362e;--sand:#d9bc91;--line:rgba(38,54,46,.16)}
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(rgba(244,241,233,.9),rgba(244,241,233,.96)),url("../images/background.jpg") center/cover fixed;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    a{color:inherit}
+    .wrap{width:min(1080px,calc(100% - 32px));margin:auto;padding:28px 0 64px}
+    .back{display:inline-flex;min-height:44px;align-items:center;text-decoration:none;color:#566159;font-size:13px}
+    .back:hover{color:#8d5e35}
+    header{max-width:760px;margin:55px auto 38px;text-align:center}
+    .eyebrow{margin:0 0 14px;color:#8a6846;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    h1{margin:0;font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:clamp(36px,6vw,62px);font-weight:500;line-height:1.08;color:var(--green)}
+    h1 span{display:block;margin-top:10px;color:#6b756e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.3em;font-weight:500;letter-spacing:1.2px}
+    .intro{margin:22px auto 0;max-width:650px;color:var(--muted);font-size:15px;line-height:1.8}
+    .project{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);min-height:440px;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 20px 56px rgba(38,54,46,.14);text-decoration:none;transition:transform .22s ease,box-shadow .22s ease}
+    .project:hover{transform:translateY(-4px);box-shadow:0 26px 66px rgba(38,54,46,.18)}
+    .image{position:relative;min-height:390px;background:url("../images/travel/southern-africa-2027-hero.png") center/cover}
+    .image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 55%,rgba(0,0,0,.16))}
+    .content{display:flex;flex-direction:column;justify-content:center;padding:38px}
+    .tag{margin:0 0 16px;color:#9a6a3d;font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase}
+    h2{margin:0;color:var(--green);font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:clamp(30px,4vw,43px);font-weight:500;line-height:1.16}
+    .english{margin:14px 0 0;color:#647168;font-size:14px;line-height:1.5}
+    .meta{margin:25px 0 0;padding-top:20px;border-top:1px solid var(--line);color:#59635b;font-size:13px;line-height:1.85}
+    .countries{margin-top:10px;color:#767e78;font-size:11px;line-height:1.7}
+    .cta{margin-top:24px;color:#995f31;font-size:13px;font-weight:700}
+    footer{margin-top:34px;text-align:center;color:#7b827d;font-size:12px}
+    @media(max-width:760px){body{background-attachment:scroll}.wrap{width:min(100% - 24px,1080px);padding-top:14px}header{margin:34px auto 28px}.project{grid-template-columns:1fr}.image{min-height:260px}.image::after{background:linear-gradient(0deg,rgba(0,0,0,.14),transparent 55%)}.content{padding:27px}}
+  </style>
+  <script data-goatcounter="https://weihongliu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="../">← 返回影子观察数字工作室 · Back to Shadow Observer Digital Studio</a>
+    <header>
+      <p class="eyebrow">Shadow Observer Digital Studio</p>
+      <h1>旅行与探索<span>Travel &amp; Exploration</span></h1>
+      <p class="intro">以摄影者的目光记录远方，也将路线、自然、文化与旅途中的实用信息整理成可随身使用的数字旅程。<br>Journeys observed through photography, landscape, culture and thoughtful practical planning.</p>
+    </header>
+    <a class="project" href="southern-africa-2027/" aria-label="打开2027非洲南部五国自然探索之旅">
+      <div class="image" role="img" aria-label="非洲南部沙漠、湿地与象群"></div>
+      <div class="content">
+        <p class="tag">Featured Expedition · 重点旅程</p>
+        <h2>2027 非洲南部<br>五国自然探索之旅</h2>
+        <p class="english">2027 Southern Africa<br>Five-Country Nature Exploration Journey</p>
+        <p class="meta">2027年6月3–22日 · 20天<br>3–22 June 2027 · 20 days</p>
+        <p class="countries">South Africa · Namibia · Botswana · Zimbabwe · Zambia</p>
+        <span class="cta">进入完整旅行网站 · Open the travel companion →</span>
+      </div>
+    </a>
+    <footer>© Dr Weihong Liu · Shadow Observer Digital Studio</footer>
+  </main>
+</body>
+</html>
