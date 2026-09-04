@@ -18,9 +18,12 @@
     h1{margin:0;font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:clamp(36px,6vw,62px);font-weight:500;line-height:1.08;color:var(--green)}
     h1 span{display:block;margin-top:10px;color:#6b756e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.3em;font-weight:500;letter-spacing:1.2px}
     .intro{margin:22px auto 0;max-width:650px;color:var(--muted);font-size:15px;line-height:1.8}
+    .projects{display:grid;gap:30px}
     .project{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);min-height:440px;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 20px 56px rgba(38,54,46,.14);text-decoration:none;transition:transform .22s ease,box-shadow .22s ease}
     .project:hover{transform:translateY(-4px);box-shadow:0 26px 66px rgba(38,54,46,.18)}
-    .image{position:relative;min-height:390px;background:url("../images/travel/southern-africa-2027-hero.png") center/cover}
+    .image{position:relative;min-height:390px;background-position:center;background-size:cover}
+    .image.kumano{background-image:url("kumano-kodo-2026/hero-kumano.png")}
+    .image.africa{background-image:url("../images/travel/southern-africa-2027-hero.png")}
     .image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 55%,rgba(0,0,0,.16))}
     .content{display:flex;flex-direction:column;justify-content:center;padding:38px}
     .tag{margin:0 0 16px;color:#9a6a3d;font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase}
@@ -42,17 +45,30 @@
       <h1>旅行与探索<span>Travel &amp; Exploration</span></h1>
       <p class="intro">以摄影者的目光记录远方，也将路线、自然、文化与旅途中的实用信息整理成可随身使用的数字旅程。<br>Journeys observed through photography, landscape, culture and thoughtful practical planning.</p>
     </header>
-    <a class="project" href="southern-africa-2027/" aria-label="打开2027非洲南部五国自然探索之旅">
-      <div class="image" role="img" aria-label="非洲南部沙漠、湿地与象群"></div>
-      <div class="content">
-        <p class="tag">Featured Expedition · 重点旅程</p>
-        <h2>2027 非洲南部<br>五国自然探索之旅</h2>
-        <p class="english">2027 Southern Africa<br>Five-Country Nature Exploration Journey</p>
-        <p class="meta">2027年6月3–22日 · 20天<br>3–22 June 2027 · 20 days</p>
-        <p class="countries">South Africa · Namibia · Botswana · Zimbabwe · Zambia</p>
-        <span class="cta">进入完整旅行网站 · Open the travel companion →</span>
-      </div>
-    </a>
+    <section class="projects" aria-label="旅行项目 · Travel projects">
+      <a class="project" href="kumano-kodo-2026/" aria-label="打开2026熊野古道与和歌山海岸之旅">
+        <div class="image kumano" role="img" aria-label="熊野古道森林石阶"></div>
+        <div class="content">
+          <p class="tag">Walking Journey · 徒步旅程</p>
+          <h2>2026 熊野古道与<br>和歌山海岸之旅</h2>
+          <p class="english">Kumano Kodo &amp; Wakayama Coast 2026</p>
+          <p class="meta">2026年10月23日–11月8日<br>23 October – 8 November 2026</p>
+          <p class="countries">Kii-Tanabe · Kumano Kodo · Nachikatsuura · Kushimoto · Shirahama</p>
+          <span class="cta">进入完整旅行网站 · Open the travel companion →</span>
+        </div>
+      </a>
+      <a class="project" href="southern-africa-2027/" aria-label="打开2027非洲南部五国自然探索之旅">
+        <div class="image africa" role="img" aria-label="非洲南部沙漠、湿地与象群"></div>
+        <div class="content">
+          <p class="tag">Featured Expedition · 重点旅程</p>
+          <h2>2027 非洲南部<br>五国自然探索之旅</h2>
+          <p class="english">2027 Southern Africa<br>Five-Country Nature Exploration Journey</p>
+          <p class="meta">2027年6月3–22日 · 20天<br>3–22 June 2027 · 20 days</p>
+          <p class="countries">South Africa · Namibia · Botswana · Zimbabwe · Zambia</p>
+          <span class="cta">进入完整旅行网站 · Open the travel companion →</span>
+        </div>
+      </a>
+    </section>
     <footer>© Dr Weihong Liu · Shadow Observer Digital Studio</footer>
   </main>
 </body>
