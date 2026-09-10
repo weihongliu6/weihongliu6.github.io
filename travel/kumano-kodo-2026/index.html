@@ -14,6 +14,10 @@
       h1 { margin: 0 0 12px; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(32px, 7vw, 46px); font-weight: 500; }
       .en { margin: 0 0 24px; color: #e8c47e; font-size: 15px; letter-spacing: .16em; text-transform: uppercase; }
       p { margin: 10px 0; color: #d8ded9; line-height: 1.75; }
+      .access-button { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 10px; max-width: 100%; min-height: 52px; margin-top: 22px; padding: 16px 22px; border: 1px solid #e8c47e; border-radius: 12px; background: #e8c47e; color: #102a24; font-size: 16px; font-weight: 700; line-height: 1.5; text-decoration: none; }
+      .access-button:hover { background: #f3d79f; border-color: #f3d79f; }
+      .access-button:focus-visible { outline: 3px solid #f6f1e7; outline-offset: 5px; }
+      .access-button [lang="en"] { font-size: 14px; letter-spacing: .04em; }
       footer { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); color: #9fb0aa; font-size: 13px; }
     </style>
   </head>
@@ -24,6 +28,7 @@
       <div class="en">Private itinerary</div>
       <p>旅行资料已移至受保护的网站，仅获准成员可通过邀请邮箱登录查看。</p>
       <p>This itinerary has moved to a protected site. Approved members can sign in using their invited email address.</p>
+      <a class="access-button" href="https://kumano-kodo-2026-private.weihongliu.chatgpt.site"><span>进入私人行程</span><span aria-hidden="true">/</span><span lang="en">ACCESS PRIVATE ITINERARY</span></a>
       <footer>Access is limited to the travel group · 仅限同行成员访问</footer>
     </main>
   </body>
