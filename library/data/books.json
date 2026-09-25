@@ -804,8 +804,8 @@
       },
       {
         "id": "chapter-05",
-        "title": "第五辑｜关于生活的慢态度",
-        "file": "data/chapters/slow-shutter-full/chapter-05.json"
+        "title": "第五章｜关于生活的慢态度",
+        "file": "data/chapters/slow-shutter-full/chapter-05.json?v=chapter-title-20260925"
       },
       {
         "id": "afterword",
@@ -940,7 +940,7 @@
       },
       {
         "id": "chapter-05",
-        "title": "第五辑｜关于生活的慢态度",
+        "title": "第五章｜关于生活的慢态度",
         "sections": [
           {
             "title": "引言｜慢，不是一种退让",

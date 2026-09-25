@@ -77,7 +77,7 @@ async function render(){
   if(hash.endsWith('#toc')) document.querySelector('#toc')?.scrollIntoView();
 }
 try{
-  const response=await fetch('data/books.json?v=phase3-20260925');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=phase3-20260925-r2');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();await render();
   window.addEventListener('hashchange',render);
 }catch(error){main.innerHTML='<section class="empty-state"><h1>书房还没有打开</h1><p>书架资料暂时无法载入。</p><p>请刷新页面重试。</p></section>';}
