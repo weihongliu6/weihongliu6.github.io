@@ -1,0 +1,187 @@
+{
+  "id": "front-matter",
+  "title": "书名与版权",
+  "source": {
+    "file": "从慢门摄影到生活哲学  (Book).epub",
+    "format": "epub",
+    "label": "正文与图片依据作者确认的 EPUB 版本收录。",
+    "sha256": "da12ef30d19c07a0464e179657ee3cacbbb5bc362d24af4e61937bfec821a045",
+    "pages": [
+      0,
+      1,
+      4,
+      5
+    ]
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "src": "assets/books/slow-shutter-epub/cover.png",
+      "fullSrc": "assets/books/slow-shutter-epub/cover.png",
+      "width": 595,
+      "height": 842,
+      "alt": "从慢门摄影到生活哲学 · Weihong Liu · 原书封面",
+      "caption": "",
+      "sourcePage": "cover.xhtml",
+      "sourceImage": "cover-image.png",
+      "role": "cover"
+    },
+    {
+      "type": "paragraph",
+      "text": "从慢门摄影到生活哲学",
+      "sourceFragments": [
+        "page-1.xhtml:p0"
+      ],
+      "sourcePage": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "From Long Exposure Photography to a Philosophy of Life",
+      "sourceFragments": [
+        "page-1.xhtml:p1"
+      ],
+      "sourcePage": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "——在时间的延展中，重新理解观看与存在",
+      "sourceFragments": [
+        "page-1.xhtml:p2"
+      ],
+      "sourcePage": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "Relearning Seeing and Being Through the Extension of Time",
+      "sourceFragments": [
+        "page-1.xhtml:p3"
+      ],
+      "sourcePage": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "Weihong Liu",
+      "sourceFragments": [
+        "page-1.xhtml:p5"
+      ],
+      "sourcePage": 1
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-shutter-epub/photo-01-reading.jpg",
+      "fullSrc": "assets/books/slow-shutter-epub/photo-01-original.jpg",
+      "width": 1413,
+      "height": 2000,
+      "alt": "HongkongNightLightModified.jpg",
+      "caption": "",
+      "sourcePage": 4,
+      "sourceImage": "OPS/images/HongkongNightLightModified.jpg",
+      "role": "photograph"
+    },
+    {
+      "type": "paragraph",
+      "text": "书名：从慢门摄影到生活哲学副标题：在时间的延展中，重新理解观看与存在",
+      "sourceFragments": [
+        "page-5.xhtml:p0",
+        "page-5.xhtml:p1"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "作者：Weihong Liu",
+      "sourceFragments": [
+        "page-5.xhtml:p2"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "© 2026 Weihong Liu All rights reserved.",
+      "sourceFragments": [
+        "page-5.xhtml:p3",
+        "page-5.xhtml:p4"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "本书中所有文字与图片作品，均受版权法保护。未经作者书面许可，不得以任何形式复制、转载、传播或用于商业用途。",
+      "sourceFragments": [
+        "page-5.xhtml:p5",
+        "page-5.xhtml:p6"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "本书为作者基于个人创作与思考完成之作品，不构成任何专业建议。书中观点仅代表作者个人立场。",
+      "sourceFragments": [
+        "page-5.xhtml:p7",
+        "page-5.xhtml:p8"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "出版形式：电子书",
+      "sourceFragments": [
+        "page-5.xhtml:p9"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "Title: From Long Exposure Photography to a Philosophy of Life Subtitle: Relearning Seeing and Being Through the Extension of Time",
+      "sourceFragments": [
+        "page-5.xhtml:p11",
+        "page-5.xhtml:p12"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "Author: Weihong Liu",
+      "sourceFragments": [
+        "page-5.xhtml:p13"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "© 2026 Weihong Liu All rights reserved.",
+      "sourceFragments": [
+        "page-5.xhtml:p14",
+        "page-5.xhtml:p15"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "No part of this book may be reproduced, stored, or transmitted in any form or by any means without prior written permission from the author.",
+      "sourceFragments": [
+        "page-5.xhtml:p16",
+        "page-5.xhtml:p17",
+        "page-5.xhtml:p18"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "This book reflects the author’s personal observations and reflections. It does not constitute professional advice.",
+      "sourceFragments": [
+        "page-5.xhtml:p19",
+        "page-5.xhtml:p20"
+      ],
+      "sourcePage": 5
+    },
+    {
+      "type": "paragraph",
+      "text": "Written and published in Australia.",
+      "sourceFragments": [
+        "page-5.xhtml:p21"
+      ],
+      "sourcePage": 5
+    }
+  ]
+}

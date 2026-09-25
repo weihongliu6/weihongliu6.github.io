@@ -1,0 +1,663 @@
+{
+  "id": "chapter-02",
+  "title": "第二章｜关于模糊",
+  "source": {
+    "file": "从慢门摄影到生活哲学  (Book).epub",
+    "format": "epub",
+    "label": "正文与图片依据作者确认的 EPUB 版本收录。",
+    "sha256": "da12ef30d19c07a0464e179657ee3cacbbb5bc362d24af4e61937bfec821a045",
+    "pages": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "第二章｜关于模糊",
+      "sourceFragments": [
+        "page-15.xhtml:p1"
+      ],
+      "sourcePage": 15,
+      "anchor": "heading-15-1"
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-shutter-epub/photo-02-reading.jpg",
+      "fullSrc": "assets/books/slow-shutter-epub/photo-02-original.jpg",
+      "width": 1414,
+      "height": 2000,
+      "alt": "AdelaideSunsetModified.jpg",
+      "caption": "",
+      "sourcePage": 16,
+      "sourceImage": "OPS/images/AdelaideSunsetModified.jpg",
+      "role": "photograph"
+    },
+    {
+      "type": "heading",
+      "text": "引言｜模糊，并不是失去",
+      "sourceFragments": [
+        "page-17.xhtml:p1"
+      ],
+      "sourcePage": 17,
+      "anchor": "heading-17-1"
+    },
+    {
+      "type": "paragraph",
+      "text": "我们已经习惯于观看清晰而锐利的影像。",
+      "sourceFragments": [
+        "page-17.xhtml:p2"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "在摄影经验中，清晰往往被视为一种基本要求。它让事物显得确定、稳定，也更容易被辨认与理解。正因如此，当慢门摄影所呈现的画面出现模糊时，我们常常会下意识地认为：那是一种缺失——仿佛世界原本清楚的样貌，被不恰当地削弱了。",
+      "sourceFragments": [
+        "page-17.xhtml:p3",
+        "page-17.xhtml:p4",
+        "page-17.xhtml:p5"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，这种判断，本身便建立在一个并不完全成立的前提之上。",
+      "sourceFragments": [
+        "page-17.xhtml:p6"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "清晰与模糊，并不是“真实”与“失真”的对立，而是同一现实在不同时间尺度下的两种呈现方式。它们并非彼此否定，而是相互补充。之所以清晰影像在我们的视觉经验中占据主导地位，很大程度上源于我们的观看习惯——在日常生活中，我们更容易将目光停留在静止或相对稳定的对象之上。正是这些反复被确认的稳定形态，逐渐强化了“清晰即真实”的认知。",
+      "sourceFragments": [
+        "page-17.xhtml:p7",
+        "page-17.xhtml:p8",
+        "page-17.xhtml:p9",
+        "page-17.xhtml:p10"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "从成像的角度来看，慢门摄影中的模糊并不是偶然产生的偏差，而是一种必然的结果。长时间曝光，可以被理解为无数个极短瞬间在感光平面上的叠加。当被摄物处于运动之中，每一个瞬间的位置都会发生微小变化，最终呈现出的，便是一种连续的、具有方向与节奏的痕迹。",
+      "sourceFragments": [
+        "page-17.xhtml:p11",
+        "page-17.xhtml:p12",
+        "page-17.xhtml:p13",
+        "page-17.xhtml:p14"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "这种痕迹，同样属于客观世界的一部分。它并没有虚构运动，也没有夸大变化，而只是以不同于静态凝固的方式，将时间本身纳入画面之中。模糊并非对现实的遮蔽，而是现实在延展中的另一种形态。",
+      "sourceFragments": [
+        "page-17.xhtml:p15",
+        "page-17.xhtml:p16",
+        "page-17.xhtml:p17"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "从信息的角度看，慢门曝光并没有减少影像所包含的内容。恰恰相反，与高速快门相比，长时间曝光所记录的，是更多瞬间的累积。只是这些信息不再以清晰的细节呈现，而被重新组织为时间的痕迹、运动的轨迹与变化的整体节奏。",
+      "sourceFragments": [
+        "page-17.xhtml:p18",
+        "page-17.xhtml:p19",
+        "page-17.xhtml:p20"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "也正因如此，慢门影像往往带来不同于清晰照片的情绪体验。模糊并不是空白，而是一种开放的状态。它不急于给出明确的指认，而是为观看者留下感知与想象的空间。在这种空间中，影像不再只是被“看清”，而开始被“感受”。",
+      "sourceFragments": [
+        "page-17.xhtml:p21",
+        "page-17.xhtml:p22",
+        "page-17.xhtml:p23"
+      ],
+      "sourcePage": 17
+    },
+    {
+      "type": "paragraph",
+      "text": "或许，真正需要被重新理解的，并不是模糊本身，而是我们长期以来对清晰的执念。",
+      "sourceFragments": [
+        "page-18.xhtml:p0"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门哲学句：模糊并不是失去，而是让时间留下来。",
+      "sourceFragments": [
+        "page-18.xhtml:p1"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "heading",
+      "text": "模糊不是失败",
+      "sourceFragments": [
+        "page-18.xhtml:p3"
+      ],
+      "sourcePage": 18,
+      "anchor": "heading-18-3"
+    },
+    {
+      "type": "paragraph",
+      "text": "在摄影实践中，“模糊”往往首先被理解为一种偏差。",
+      "sourceFragments": [
+        "page-18.xhtml:p4"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "它意味着对焦不准、快门选择失误，或是拍摄者未能有效控制现场。正因如此，我们习惯性地将模糊与失败联系在一起，仿佛清晰才是唯一被允许的结果，而模糊只是尚未达标的状态。",
+      "sourceFragments": [
+        "page-18.xhtml:p5",
+        "page-18.xhtml:p6",
+        "page-18.xhtml:p7"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，这种理解忽略了一个事实：模糊并不总是源于失控，有时，它恰恰来自一种明确而主动的选择。",
+      "sourceFragments": [
+        "page-18.xhtml:p8",
+        "page-18.xhtml:p9"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门摄影中，模糊并非偶然出现的瑕疵，而是时间进入画面的直接结果。当曝光时间被延长，运动中的事物不再以单一形态存在，而是在画面中展开为连续的痕迹。这种模糊，并不是因为影像缺乏信息，而是因为信息的呈现方式发生了改变。",
+      "sourceFragments": [
+        "page-18.xhtml:p10",
+        "page-18.xhtml:p11",
+        "page-18.xhtml:p12"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "如果说清晰强调的是“此刻在哪里”，那么模糊所呈现的，则是“曾经如何经过”。",
+      "sourceFragments": [
+        "page-18.xhtml:p13"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "从这个角度看，模糊并不是失败，而是一种对过程的尊重。它承认事物并非瞬间完成，也不急于为变化设定终点。慢门影像中的模糊，记录的是持续，而非结果；是流动，而非定格。",
+      "sourceFragments": [
+        "page-18.xhtml:p14",
+        "page-18.xhtml:p15"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "这种观念，与我们在生活中对失败的理解形成了微妙的对照。",
+      "sourceFragments": [
+        "page-18.xhtml:p16"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "我们常常以结果来判断价值。清晰、明确、可被迅速确认的状态，更容易被视为成功；而那些尚在变化之中的、不够明朗的阶段，则容易被贴上“还不够好”的标签。然而，许多重要的转变，正是在这些模糊的阶段中发生的。它们不具备立刻被识别的形态，却承载着方向与可能。",
+      "sourceFragments": [
+        "page-18.xhtml:p17",
+        "page-18.xhtml:p18",
+        "page-18.xhtml:p19",
+        "page-18.xhtml:p20"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影提醒我们：模糊并不意味着偏离，反而可能意味着更接近真实的轨迹。",
+      "sourceFragments": [
+        "page-18.xhtml:p21"
+      ],
+      "sourcePage": 18
+    },
+    {
+      "type": "paragraph",
+      "text": "当影像不再急于证明自身的清晰度，观看者也被邀请放下即时判断的冲动。模糊使目光停留，使理解延后，让意义有时间自行浮现。在这种延后之中，失败与否不再是首要问题，重要的是过程是否被真实地经历。",
+      "sourceFragments": [
+        "page-19.xhtml:p0",
+        "page-19.xhtml:p1",
+        "page-19.xhtml:p2"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "也许，我们之所以如此害怕模糊，是因为它拒绝给出快速的结论。但正是在这种拒绝之中，新的观看方式得以生成。模糊并不是清晰的对立面，而是清晰尚未完成之前的状态。",
+      "sourceFragments": [
+        "page-19.xhtml:p3",
+        "page-19.xhtml:p4"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门哲学句：模糊不是失败，而是变化正在发生的样子。",
+      "sourceFragments": [
+        "page-19.xhtml:p5"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "heading",
+      "text": "有些真实，本来就没有边界",
+      "sourceFragments": [
+        "page-19.xhtml:p7"
+      ],
+      "sourcePage": 19,
+      "anchor": "heading-19-7"
+    },
+    {
+      "type": "paragraph",
+      "text": "我们之所以渴望清晰，往往是因为清晰意味着边界。",
+      "sourceFragments": [
+        "page-19.xhtml:p8"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "在清晰的影像中，事物彼此区分：这里是主体，那里是背景；这是开始，那是结束。边界让世界显得可控，也让观看变得轻松。然而，这种清晰并不总是源自现实本身，更多时候，它来自我们对世界的整理方式。",
+      "sourceFragments": [
+        "page-19.xhtml:p9",
+        "page-19.xhtml:p10",
+        "page-19.xhtml:p11"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "现实中的许多真实，其实并不具备明确的边界。",
+      "sourceFragments": [
+        "page-19.xhtml:p12"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "光与影之间，并非一条清楚的分界线；运动与静止之间，也并非截然对立。情绪、关系、时间的流动，往往处在连续的过渡之中。它们并不以“完成”的形态出现，而是在不断变化中存在。",
+      "sourceFragments": [
+        "page-19.xhtml:p13",
+        "page-19.xhtml:p14",
+        "page-19.xhtml:p15"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影正是在这种连续性中工作。",
+      "sourceFragments": [
+        "page-19.xhtml:p16"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "当曝光时间被拉长，画面不再急于为每一个元素划清界限。主体与背景开始相互渗透，运动的痕迹与静止的结构彼此交叠。影像中的模糊，并不是对形态的破坏，而是对边界的松动。",
+      "sourceFragments": [
+        "page-19.xhtml:p17",
+        "page-19.xhtml:p18"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "这种松动，恰恰更接近许多真实的本来状态。",
+      "sourceFragments": [
+        "page-19.xhtml:p19"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "我们之所以习惯用清晰的边界来理解世界，很大程度上是因为边界让判断变得迅速。当事物被明确区分，我们便可以立刻归类、立刻命名、立刻作出反应。然而，那些最难被界定的部分，往往也是最值得被停留的地方。",
+      "sourceFragments": [
+        "page-19.xhtml:p20",
+        "page-19.xhtml:p21",
+        "page-19.xhtml:p22"
+      ],
+      "sourcePage": 19
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门影像中的模糊，让这些过渡区域显现出来。它们既不完全属于此，也不完全属于彼，而是在两者之间缓慢展开。观看这样的影像，需要放弃对明确指认的执念，转而接受一种开放的感知方式。",
+      "sourceFragments": [
+        "page-20.xhtml:p1",
+        "page-20.xhtml:p2",
+        "page-20.xhtml:p3"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "这种感知方式，同样适用于生活。",
+      "sourceFragments": [
+        "page-20.xhtml:p4"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "许多重要的经验，并不发生在清楚的节点之上，而是在尚未成形的阶段中逐渐显露。理解并非总是来自清晰的界定，有时，它恰恰来自对不确定性的容忍。模糊并不是理解的障碍，而是理解尚在生成中的表现。",
+      "sourceFragments": [
+        "page-20.xhtml:p5",
+        "page-20.xhtml:p6",
+        "page-20.xhtml:p7"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "当我们允许边界变得柔软，真实也随之变得更为宽广。",
+      "sourceFragments": [
+        "page-20.xhtml:p8"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门哲学句：有些真实，正是在没有边界的地方，才得以存在。",
+      "sourceFragments": [
+        "page-20.xhtml:p9"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "heading",
+      "text": "当轮廓消失，整体开始显现",
+      "sourceFragments": [
+        "page-20.xhtml:p11"
+      ],
+      "sourcePage": 20,
+      "anchor": "heading-20-11"
+    },
+    {
+      "type": "paragraph",
+      "text": "我们习惯于通过轮廓来理解世界。",
+      "sourceFragments": [
+        "page-20.xhtml:p12"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "清晰的边界，让事物彼此分离，也让观看有了抓手。轮廓明确的形态，容易被识别、被命名、被记住。正因如此，在摄影中，清晰的边缘常常被视为成功的标志，而轮廓的消失，则被理解为信息的缺失。",
+      "sourceFragments": [
+        "page-20.xhtml:p13",
+        "page-20.xhtml:p14",
+        "page-20.xhtml:p15"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，轮廓并不总是帮助我们看得更全面。",
+      "sourceFragments": [
+        "page-20.xhtml:p16"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门摄影中，当曝光时间被延长，运动中的事物逐渐失去清晰的边界。轮廓开始融化，形态不再固定，局部的细节被时间抚平。乍看之下，画面似乎变得不够明确，但正是在这种不明确之中，整体的节奏开始浮现。",
+      "sourceFragments": [
+        "page-20.xhtml:p17",
+        "page-20.xhtml:p18",
+        "page-20.xhtml:p19"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "当边缘不再尖锐，目光便不再被局部牵引。",
+      "sourceFragments": [
+        "page-20.xhtml:p20"
+      ],
+      "sourcePage": 20
+    },
+    {
+      "type": "paragraph",
+      "text": "观看者不再急于确认某一个点，而是被引导去感受画面中更大的结构：运动的方向、光的分布、空间的层次，以及时间在其中留下的痕迹。轮廓的消失，并没有让画面变得空洞，反而让整体的关系变得更为清楚。",
+      "sourceFragments": [
+        "page-21.xhtml:p0",
+        "page-21.xhtml:p1",
+        "page-21.xhtml:p2"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "这种体验提醒我们，清晰的局部有时会遮蔽整体的存在。",
+      "sourceFragments": [
+        "page-21.xhtml:p3"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "在生活中，我们也常常陷入对局部的过度关注。一个细节、一次判断、一段结果，被不断放大，成为理解一切的依据。而整体的走向、内在的节奏，却因为缺乏明确轮廓，反而被忽略。我们以为自己看得很清楚，却只是在反复确认局部。",
+      "sourceFragments": [
+        "page-21.xhtml:p4",
+        "page-21.xhtml:p5",
+        "page-21.xhtml:p6"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影所改变的，正是这种观看重心。",
+      "sourceFragments": [
+        "page-21.xhtml:p7"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "当轮廓不再成为焦点，观看者被迫放慢速度，重新调整视线的落点。整体不再是局部的简单相加，而是在时间的延展中自然显现。画面不需要每一个元素都被看清，意义却在整体关系中逐渐成形。",
+      "sourceFragments": [
+        "page-21.xhtml:p8",
+        "page-21.xhtml:p9",
+        "page-21.xhtml:p10"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "这是一种更接近经验本身的观看方式。",
+      "sourceFragments": [
+        "page-21.xhtml:p11"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "真实的生活，很少以清晰的轮廓出现。它更像是一种持续的状态，一种在变化中保持自身节奏的整体。当我们不再执着于抓住每一个边缘，反而更容易感受到正在发生的事情。",
+      "sourceFragments": [
+        "page-21.xhtml:p12",
+        "page-21.xhtml:p13"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "或许，真正的理解，并不是来自对轮廓的紧抓不放，而是来自对整体的耐心等待。",
+      "sourceFragments": [
+        "page-21.xhtml:p14"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门哲学句：当轮廓退场，整体，才有机会出现。",
+      "sourceFragments": [
+        "page-21.xhtml:p15"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "heading",
+      "text": "我们为何害怕看不清",
+      "sourceFragments": [
+        "page-21.xhtml:p17"
+      ],
+      "sourcePage": 21,
+      "anchor": "heading-21-17"
+    },
+    {
+      "type": "paragraph",
+      "text": "我们对模糊的抗拒，往往并不来自影像本身。",
+      "sourceFragments": [
+        "page-21.xhtml:p18"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "在多数情况下，模糊之所以令人不安，并不是因为它真的让世界变得不可理解，而是因为它推迟了判断。当事物无法被迅速辨认、归类或命名，我们便失去了熟悉的控制感。这种失去，常常被误认为是一种危险。",
+      "sourceFragments": [
+        "page-21.xhtml:p19",
+        "page-21.xhtml:p20",
+        "page-21.xhtml:p21"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "看清，意味着确定；确定，意味着安全。",
+      "sourceFragments": [
+        "page-21.xhtml:p22"
+      ],
+      "sourcePage": 21
+    },
+    {
+      "type": "paragraph",
+      "text": "在摄影中，清晰的画面让人安心。主体明确，细节可辨，画面仿佛已经被完整地掌握。模糊则恰恰相反，它拒绝立刻给出答案，让观看停留在一种未完成的状态之中。正是在这种停留里，焦虑开始出现。",
+      "sourceFragments": [
+        "page-22.xhtml:p1",
+        "page-22.xhtml:p2",
+        "page-22.xhtml:p3"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影所呈现的模糊，迫使观看者放弃即时判断。运动中的形态无法被固定，边界持续变化，意义并未立刻显现。对于习惯于快速确认的人来说，这种状态并不舒适。我们害怕的，并不是看不清，而是不得不承认：有些事情，尚未准备好被理解。",
+      "sourceFragments": [
+        "page-22.xhtml:p4",
+        "page-22.xhtml:p5",
+        "page-22.xhtml:p6"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "这种恐惧，并不只存在于影像经验中。",
+      "sourceFragments": [
+        "page-22.xhtml:p7"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "在生活里，我们同样渴望清楚的答案。关系要有明确的定位，选择要有立刻的结果，未来最好能够被提前预见。当事情处在模糊阶段，我们便急于为它贴上标签，仿佛只要足够快，就能避免不确定性带来的不安。",
+      "sourceFragments": [
+        "page-22.xhtml:p8",
+        "page-22.xhtml:p9",
+        "page-22.xhtml:p10"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，许多重要的经验，本就无法在第一时间被看清。",
+      "sourceFragments": [
+        "page-22.xhtml:p11"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "理解需要时间，情绪需要发酵，方向往往是在反复试探中逐渐显露。慢门摄影中的模糊，并不是对现实的遮蔽，而是一种诚实的呈现——它承认变化正在发生，而意义尚在途中。",
+      "sourceFragments": [
+        "page-22.xhtml:p12",
+        "page-22.xhtml:p13"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "当我们允许影像保持模糊，也是在练习一种不同的态度：不急于下结论，不急于确认立场，不急于将一切纳入清晰的框架之中。这种态度，并不是放弃理解，而是为理解预留空间。",
+      "sourceFragments": [
+        "page-22.xhtml:p14",
+        "page-22.xhtml:p15"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "或许，我们真正害怕的，并不是看不清世界，而是面对一个仍在展开、尚未定型的过程。",
+      "sourceFragments": [
+        "page-22.xhtml:p16"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影所给予的，不是答案，而是一种耐心。",
+      "sourceFragments": [
+        "page-22.xhtml:p17"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "在这份耐心中，看不清不再是一种缺陷，而成为理解开始之前的必要阶段。",
+      "sourceFragments": [
+        "page-22.xhtml:p18"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门哲学句：我们害怕的，不是模糊，而是尚未确定的过程。",
+      "sourceFragments": [
+        "page-22.xhtml:p19"
+      ],
+      "sourcePage": 22
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-shutter-epub/photo-03-reading.jpg",
+      "fullSrc": "assets/books/slow-shutter-epub/photo-03-original.jpg",
+      "width": 1413,
+      "height": 2000,
+      "alt": "TempleMonks1Modified.jpg",
+      "caption": "",
+      "sourcePage": 23,
+      "sourceImage": "OPS/images/TempleMonks1Modified.jpg",
+      "role": "photograph"
+    }
+  ]
+}

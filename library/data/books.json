@@ -751,12 +751,225 @@
   },
   {
     "id": "slow-shutter",
-    "title": "慢门摄影与生活哲学",
-    "cover": null,
-    "status": "coming",
-    "coverNote": "封面待确认",
+    "title": "从慢门摄影到生活哲学",
+    "cover": "assets/books/slow-shutter-epub/cover.png",
+    "status": "complete",
+    "coverNote": "EPUB 原书封面",
     "appleBooksUrl": "https://books.apple.com/au/book/id6758567346",
-    "appleBooksTitle": "从慢门摄影到生活哲学"
+    "appleBooksTitle": "从慢门摄影到生活哲学",
+    "author": "Weihong Liu",
+    "subtitle": "——在时间的延展中，重新理解观看与存在",
+    "edition": "epub-full-v1",
+    "intro": "我们所处的世界，正在不断加速。",
+    "introSource": "原书「序言」",
+    "sectionCount": 9,
+    "chapterCount": 5,
+    "imageCount": 9,
+    "editionSummary": "序言、作者说明、五个主体篇章及后记 · 9 幅摄影作品。",
+    "chapters": [
+      {
+        "id": "front-matter",
+        "title": "书名与版权",
+        "file": "data/chapters/slow-shutter-full/front-matter.json"
+      },
+      {
+        "id": "preface",
+        "title": "序言",
+        "file": "data/chapters/slow-shutter-full/preface.json"
+      },
+      {
+        "id": "author-note",
+        "title": "作者说明｜关于这本书的来路",
+        "file": "data/chapters/slow-shutter-full/author-note.json"
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章｜关于速度",
+        "file": "data/chapters/slow-shutter-full/chapter-01.json"
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章｜关于模糊",
+        "file": "data/chapters/slow-shutter-full/chapter-02.json"
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章｜关于时间",
+        "file": "data/chapters/slow-shutter-full/chapter-03.json"
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章 关于身体与感受",
+        "file": "data/chapters/slow-shutter-full/chapter-04.json"
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五辑｜关于生活的慢态度",
+        "file": "data/chapters/slow-shutter-full/chapter-05.json"
+      },
+      {
+        "id": "afterword",
+        "title": "后记｜慢门之后，我们如何继续生活",
+        "file": "data/chapters/slow-shutter-full/afterword.json"
+      }
+    ],
+    "toc": [
+      {
+        "id": "front-matter",
+        "title": "书名与版权",
+        "sections": []
+      },
+      {
+        "id": "preface",
+        "title": "序言",
+        "sections": [
+          {
+            "title": "从慢门摄影到生活哲学",
+            "anchor": "heading-6-1"
+          }
+        ]
+      },
+      {
+        "id": "author-note",
+        "title": "作者说明｜关于这本书的来路",
+        "sections": []
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章｜关于速度",
+        "sections": [
+          {
+            "title": "引言｜慢下来",
+            "anchor": "heading-9-2"
+          },
+          {
+            "title": "世界为什么总是催促我们",
+            "anchor": "heading-10-12"
+          },
+          {
+            "title": "快，并不等于清醒",
+            "anchor": "heading-11-14"
+          },
+          {
+            "title": "当一切都很清楚，反而开始失真",
+            "anchor": "heading-12-16"
+          },
+          {
+            "title": "慢门，是对瞬间崇拜的温和反抗",
+            "anchor": "heading-13-16"
+          }
+        ]
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章｜关于模糊",
+        "sections": [
+          {
+            "title": "引言｜模糊，并不是失去",
+            "anchor": "heading-17-1"
+          },
+          {
+            "title": "模糊不是失败",
+            "anchor": "heading-18-3"
+          },
+          {
+            "title": "有些真实，本来就没有边界",
+            "anchor": "heading-19-7"
+          },
+          {
+            "title": "当轮廓消失，整体开始显现",
+            "anchor": "heading-20-11"
+          },
+          {
+            "title": "我们为何害怕看不清",
+            "anchor": "heading-21-17"
+          }
+        ]
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章｜关于时间",
+        "sections": [
+          {
+            "title": "引言｜让时间进入画面",
+            "anchor": "heading-25-1"
+          },
+          {
+            "title": "时间不是敌人",
+            "anchor": "heading-26-3"
+          },
+          {
+            "title": "过程为何值得被看见",
+            "anchor": "heading-28-2"
+          },
+          {
+            "title": "当过去与现在同时存在",
+            "anchor": "heading-30-6"
+          },
+          {
+            "title": "与时间并肩，而非赛跑",
+            "anchor": "heading-31-10"
+          }
+        ]
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章 关于身体与感受",
+        "sections": [
+          {
+            "title": "引言｜当身体先于理解",
+            "anchor": "heading-35-0"
+          },
+          {
+            "title": "呼吸变慢的那一刻",
+            "anchor": "heading-35-14"
+          },
+          {
+            "title": "拍照时，身体先于思想",
+            "anchor": "heading-36-16"
+          },
+          {
+            "title": "当注意力不再分散",
+            "anchor": "heading-38-2"
+          },
+          {
+            "title": "安静，本身就是一种能力",
+            "anchor": "heading-40-7"
+          }
+        ]
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五辑｜关于生活的慢态度",
+        "sections": [
+          {
+            "title": "引言｜慢，不是一种退让",
+            "anchor": "heading-44-0"
+          },
+          {
+            "title": "不急着回应",
+            "anchor": "heading-44-16"
+          },
+          {
+            "title": "给情绪一点曝光时间",
+            "anchor": "heading-45-18"
+          },
+          {
+            "title": "不把所有事情都拍得太清楚",
+            "anchor": "heading-47-0"
+          },
+          {
+            "title": "慢下来，并不是放弃",
+            "anchor": "heading-49-3"
+          }
+        ]
+      },
+      {
+        "id": "afterword",
+        "title": "后记｜慢门之后，我们如何继续生活",
+        "sections": []
+      }
+    ]
   },
   {
     "id": "structure",
