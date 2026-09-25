@@ -1,0 +1,153 @@
+{
+  "id": "chapter-01",
+  "title": "第一章 什么是慢门？",
+  "source": {
+    "file": "慢下来看见世界.epub",
+    "pages": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "第一章    什么是慢门？",
+      "sourcePage": 10
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门，并不是一种特殊技巧，而是一种对时间在摄影中的不同理解。",
+      "sourcePage": 10
+    },
+    {
+      "type": "paragraph",
+      "text": "在谈论慢门摄影之前，我们需要先回答一个看似简单、却经常被误解的问题：什么是“慢门”？",
+      "sourcePage": 10
+    },
+    {
+      "type": "paragraph",
+      "text": "从技术上说，慢门只是指较长的快门开启曝光时间。但如果仅停留在这一层理解，慢门摄影很容易被简化为一种“拍糊了”的技巧，一种依赖器材与滤镜的操作方法。事实上，慢门的意义远不止于此。慢门并不是为了制造模糊，它的真正对象，是时间。",
+      "sourcePage": 10
+    },
+    {
+      "type": "heading",
+      "text": "一、快门记录的，从来不只是光",
+      "sourcePage": 11
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-down/CinqueTerreItaly_2-reading.jpg",
+      "fullSrc": "assets/books/slow-down/CinqueTerreItaly_2.jpg",
+      "alt": "CinqueTerreItaly 2.jpg",
+      "caption": "慢门并不是为了制造模糊，它的真正对象，是时间。",
+      "sourcePage": 11
+    },
+    {
+      "type": "paragraph",
+      "text": "在摄影中，快门常被理解为控制曝光的工具。快门打开，光线进入；快门关闭，曝光结束。在这一逻辑中，快门似乎只是一个“光线控制开关”。",
+      "sourcePage": 11
+    },
+    {
+      "type": "paragraph",
+      "text": "但当快门时间被拉长，摄影便不再只是记录光的强弱，而开始记录光影在时间中的变化。也正是在这一刻，摄影从记录瞬间，转向记录过程。",
+      "sourcePage": 11
+    },
+    {
+      "type": "paragraph",
+      "text": "一张快门速度为 1/1000 秒的照片，记录的是一个极短的时间切片；而一张 10 秒、30 秒，甚至数分钟的照片，记录的则是一段时间的叠加结果。",
+      "sourcePage": 12
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门的本质，并不是“慢”，而是让时间参与成像。",
+      "sourcePage": 12
+    },
+    {
+      "type": "heading",
+      "text": "二、为什么我们习惯把“快”当作真实",
+      "sourcePage": 12
+    },
+    {
+      "type": "paragraph",
+      "text": "在日常经验中，人们往往更容易接受清晰、锐利、冻结的影像。这并不奇怪，因为人的视觉系统正是以“瞬间”为单位运作的。",
+      "sourcePage": 12
+    },
+    {
+      "type": "paragraph",
+      "text": "我们的眼睛不断接收画面，大脑迅速筛选、判断、更新。过于缓慢、连续的变化，往往会被自动忽略；过于细微、持久的运动，容易被“平均”成静止。",
+      "sourcePage": 12
+    },
+    {
+      "type": "paragraph",
+      "text": "因此，当摄影技术能够捕捉更短的瞬间时，“清晰”“凝固”“决定性瞬间”逐渐成为摄影的重要价值标准。",
+      "sourcePage": 12
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-down/BussellTownWA1_3-reading.jpg",
+      "fullSrc": "assets/books/slow-down/BussellTownWA1_3.jpg",
+      "alt": "BussellTownWA1 3.jpg",
+      "caption": "慢门不是偏离真实，而是靠近另一种真实。",
+      "sourcePage": 13
+    },
+    {
+      "type": "paragraph",
+      "text": "在这种背景下，慢门常常被误认为是偏离真实的手段，是对现实的干扰。但问题在于：真实，是否只存在于瞬间之中？",
+      "sourcePage": 13
+    },
+    {
+      "type": "heading",
+      "text": "三、慢门不是偏离真实，而是靠近另一种真实",
+      "sourcePage": 13
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影并没有否定瞬间摄影的价值，它只是提出了一个不同的立场。当水流被拉成丝状，当云在天空中铺展开来，当人群化为流线，这些并非凭空出现的幻象，而是运动在时间中留下的真实痕迹。只是这些真实，无法被人眼在一瞬间完整感知。",
+      "sourcePage": 13
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影让我们意识到：我们日常所见的世界，其实是被感知系统简化过的版本。慢门并不是在制造“不真实”，而是在揭示那些被忽略的连续性。在这个意义上，慢门不是摄影的例外，而是摄影对时间最诚实的一种回应。",
+      "sourcePage": 14
+    },
+    {
+      "type": "heading",
+      "text": "四、慢门是一种选择，而不是限制",
+      "sourcePage": 14
+    },
+    {
+      "type": "paragraph",
+      "text": "选择慢门，意味着放弃对“抓住瞬间”的执着。它要求摄影者接受不确定性，接受画面中无法完全预判的结果。这也是为什么慢门摄影往往显得安静、柔和，甚至带有某种克制。它不追求冲击力，而强调持续与流动；不强调瞬间判断，而允许时间自然展开。因此，慢门并不是一种技术门槛，而是一种观看立场。",
+      "sourcePage": 14
+    },
+    {
+      "type": "paragraph",
+      "text": "当摄影者选择慢门，他实际上是在选择：以时间，而不是瞬间，作为理解世界的方式。",
+      "sourcePage": 14
+    },
+    {
+      "type": "heading",
+      "text": "五、慢门的意义，从来不止于摄影",
+      "sourcePage": 15
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影的价值，并不只体现在画面之中。它改变的，是观看的节奏，是人与世界相处的方式。在慢门中，摄影不再是占有现实的一瞬，而是一种陪伴——陪伴事物在时间中发生、变化、消散。",
+      "sourcePage": 15
+    },
+    {
+      "type": "paragraph",
+      "text": "也正是在这一点上，慢门摄影超越了技术层面，进入了审美、心理与哲学的领域。",
+      "sourcePage": 15
+    },
+    {
+      "type": "paragraph",
+      "text": "但在深入这些讨论之前，我们仍需回到一个更基础的问题：慢门并不是现代摄影的发明，它在摄影史中，曾经是常态。",
+      "sourcePage": 15
+    }
+  ]
+}

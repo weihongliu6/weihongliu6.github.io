@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f3ec">
+  <meta name="description" content="影子观察的个人数字书房。摄影、艺术、医学与生活，在书页之间相遇。">
+  <title>影子观察 · 数字书房</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <header class="site-header">
+    <a href="#/" class="brand" aria-label="影子观察数字书房首页"><span class="brand-mark" aria-hidden="true">影</span><span>影子观察<span class="brand-separator"> / </span><span class="brand-small">数字书房</span></span></a>
+    <nav aria-label="主导航"><a href="#/" id="shelf-link">书架 <span aria-hidden="true">↗</span></a><button id="theme-toggle" type="button" aria-label="切换为深色模式" aria-pressed="false">夜间阅读 <span aria-hidden="true">◐</span></button></nav>
+  </header>
+  <main id="main" tabindex="-1"><p class="loading">正在打开书房…</p></main>
+  <footer class="site-footer"><span>影子观察 · 数字书房</span><span>摄影 · 艺术 · 医学 · 生活</span><span>个人阅读空间 <span class="footer-dot">·</span> 第一阶段</span></footer>
+  <dialog id="image-viewer" aria-labelledby="image-title">
+    <div class="image-toolbar"><p id="image-title">原图查看</p><button id="close-image" type="button" aria-label="关闭图片">关闭 ×</button></div>
+    <div class="image-stage"><img id="full-image" alt=""></div>
+    <p id="image-caption"></p>
+  </dialog>
+  <noscript><p>请启用 JavaScript 以浏览书架和阅读样章。本站仅在本机保存字号、主题及阅读位置。</p></noscript>
+</body>
+</html>

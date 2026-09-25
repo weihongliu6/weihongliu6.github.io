@@ -1,0 +1,161 @@
+[
+  {
+    "id": "slow-down",
+    "title": "慢下来看见世界",
+    "author": "Weihong Liu",
+    "subtitle": "慢门摄影的时间之眼",
+    "cover": "assets/covers/slow-down.jpg",
+    "status": "sample",
+    "intro": "《慢下来，看见世界》并非摄影教程，而是一组关于节奏、观看与日常经验的摄影随笔。",
+    "introSource": "原书「作者说明」",
+    "chapters": [
+      {
+        "id": "preface",
+        "title": "前言：慢下来，看见世界",
+        "file": "data/chapters/preface.json"
+      },
+      {
+        "id": "author-note",
+        "title": "作者说明",
+        "file": "data/chapters/author-note.json"
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章 什么是慢门？",
+        "file": "data/chapters/chapter-01.json"
+      }
+    ],
+    "toc": [
+      {
+        "title": "前言",
+        "id": "preface",
+        "sourcePage": 3
+      },
+      {
+        "title": "作者说明",
+        "id": "author-note",
+        "sourcePage": 9
+      },
+      {
+        "title": "第一章 什么是慢门？",
+        "id": "chapter-01",
+        "sourcePage": 10
+      },
+      {
+        "title": "第二章 慢门从何而来",
+        "id": null,
+        "sourcePage": 16
+      },
+      {
+        "title": "第三章 慢门 ≠ 模糊：关于清晰、失焦与意义",
+        "id": null,
+        "sourcePage": 21
+      },
+      {
+        "title": "第四章 慢门摄影的常见误解",
+        "id": null,
+        "sourcePage": 28
+      },
+      {
+        "title": "第五章 慢门摄影的技术基础",
+        "id": null,
+        "sourcePage": 33
+      },
+      {
+        "title": "第六章 慢门与稳定",
+        "id": null,
+        "sourcePage": 38
+      },
+      {
+        "title": "第七章 器材不是门槛",
+        "id": null,
+        "sourcePage": 44
+      },
+      {
+        "title": "第八章 慢门与自然",
+        "id": null,
+        "sourcePage": 50
+      },
+      {
+        "title": "第九章 慢门与城市",
+        "id": null,
+        "sourcePage": 57
+      },
+      {
+        "title": "第十章 慢门与夜色",
+        "id": null,
+        "sourcePage": 62
+      },
+      {
+        "title": "第十一章 慢门与情绪",
+        "id": null,
+        "sourcePage": 69
+      },
+      {
+        "title": "第十二章 慢门与感知边界",
+        "id": null,
+        "sourcePage": 75
+      },
+      {
+        "title": "第十三章 慢门与记忆",
+        "id": null,
+        "sourcePage": 82
+      },
+      {
+        "title": "第十四章 慢门与观看立场",
+        "id": null,
+        "sourcePage": 88
+      },
+      {
+        "title": "第十五章 慢门之后",
+        "id": null,
+        "sourcePage": 93
+      },
+      {
+        "title": "第十六章 在路上，看见时间",
+        "id": null,
+        "sourcePage": 99
+      },
+      {
+        "title": "第十七章 慢门与当下",
+        "id": null,
+        "sourcePage": 105
+      },
+      {
+        "title": "第十八章 为什么，要慢下来？",
+        "id": null,
+        "sourcePage": 110
+      },
+      {
+        "title": "结语",
+        "id": null,
+        "sourcePage": 114
+      }
+    ]
+  },
+  {
+    "id": "slow-shutter",
+    "title": "慢门摄影与生活哲学",
+    "cover": null,
+    "status": "coming",
+    "coverNote": "封面待确认"
+  },
+  {
+    "id": "structure",
+    "title": "结构之道",
+    "cover": "assets/covers/structure.jpg",
+    "status": "coming"
+  },
+  {
+    "id": "metabolism",
+    "title": "人体代谢：从生存优势到现代慢性代谢病",
+    "cover": "assets/covers/metabolism.jpg",
+    "status": "coming"
+  },
+  {
+    "id": "renaissance",
+    "title": "寻找文艺复兴",
+    "cover": "assets/covers/renaissance.jpg",
+    "status": "coming"
+  }
+]
