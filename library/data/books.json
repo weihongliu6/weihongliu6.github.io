@@ -131,14 +131,17 @@
         "id": null,
         "sourcePage": 114
       }
-    ]
+    ],
+    "appleBooksUrl": "https://books.apple.com/au/book/id6757672905"
   },
   {
     "id": "slow-shutter",
     "title": "慢门摄影与生活哲学",
     "cover": null,
     "status": "coming",
-    "coverNote": "封面待确认"
+    "coverNote": "封面待确认",
+    "appleBooksUrl": "https://books.apple.com/au/book/id6758567346",
+    "appleBooksTitle": "从慢门摄影到生活哲学"
   },
   {
     "id": "structure",
