@@ -1,0 +1,36 @@
+{
+  "id": "front-matter",
+  "title": "结构之道:复杂世界如何一步步生成",
+  "openingImage": true,
+  "source": {
+    "file": "结构之道_FINAL_LOCK.pages",
+    "format": "pages",
+    "label": "正文与图片依据作者确认的 Pages 定稿收录。"
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "src": "assets/books/structure-pages/image-00-reading.jpg",
+      "fullSrc": "assets/books/structure-pages/image-00-original.png",
+      "width": 1024,
+      "height": 1536,
+      "caption": "",
+      "alt": "原书封面",
+      "sourceParagraph": 0,
+      "sourceAsset": "Data/image1-31.png",
+      "originalSha256": "312d310d6d8887ca0b7009f70b05782e08c9073e455937382d717061328dd9ca"
+    },
+    {
+      "type": "heading",
+      "text": "结构之道:复杂世界如何一步步生成",
+      "sourceParagraph": 2,
+      "sourceStyle": "内封书名"
+    },
+    {
+      "type": "paragraph",
+      "text": "从老子思想到 DNA，从文明到 AI",
+      "sourceParagraph": 3,
+      "sourceStyle": "内封副题"
+    }
+  ]
+}

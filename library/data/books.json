@@ -974,8 +974,481 @@
   {
     "id": "structure",
     "title": "结构之道",
-    "cover": "assets/covers/structure.jpg",
-    "status": "coming"
+    "cover": "assets/books/structure-pages/image-00-reading.jpg",
+    "status": "complete",
+    "author": "影子观察",
+    "subtitle": "从老子思想到 DNA，从文明到 AI",
+    "edition": "pages-final-lock-full-v1",
+    "intro": "人们往往习惯于把文明的进步理解为不断创造新的事物：新的工具、新的制度、新的思想，乃至新的技术。然而，当我们从更高的尺度回望历史，会发现真正决定文明高度的，并非创造了多少新内容，而是哪些推进文明的结构被成功复制了下来。",
+    "introSource": "引言",
+    "editionSummary": "引言、12 章正文及后记 · 75 个小节 · 原书封面与 13 幅扉页图。",
+    "chapters": [
+      {
+        "id": "front-matter",
+        "title": "结构之道:复杂世界如何一步步生成",
+        "file": "data/chapters/structure-full/front-matter.json"
+      },
+      {
+        "id": "introduction",
+        "title": "引言 结构如何成为文明的楼梯",
+        "file": "data/chapters/structure-full/introduction.json"
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章 抽象思维帮助我们理解越来越复杂的世界",
+        "file": "data/chapters/structure-full/chapter-01.json"
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章 老子并不生活在简单世界",
+        "file": "data/chapters/structure-full/chapter-02.json"
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章 “一”：如何出现",
+        "file": "data/chapters/structure-full/chapter-03.json"
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章 “二”：对立为何不可避免",
+        "file": "data/chapters/structure-full/chapter-04.json"
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五章 “三”：结构如何得以复制",
+        "file": "data/chapters/structure-full/chapter-05.json"
+      },
+      {
+        "id": "chapter-06",
+        "title": "第六章 生命的版本：DNA 在复制什么？",
+        "file": "data/chapters/structure-full/chapter-06.json"
+      },
+      {
+        "id": "chapter-07",
+        "title": "第七章 人类的版本：语言与性别",
+        "file": "data/chapters/structure-full/chapter-07.json"
+      },
+      {
+        "id": "chapter-08",
+        "title": "第八章 文明的版本：制度与技术",
+        "file": "data/chapters/structure-full/chapter-08.json"
+      },
+      {
+        "id": "chapter-09",
+        "title": "第九章 失败的文明：结构无法继承",
+        "file": "data/chapters/structure-full/chapter-09.json"
+      },
+      {
+        "id": "chapter-10",
+        "title": "第十章 是否存在“可持续的文明结构”？",
+        "file": "data/chapters/structure-full/chapter-10.json"
+      },
+      {
+        "id": "chapter-11",
+        "title": "第十一章 AI：复制首次脱离人类身体",
+        "file": "data/chapters/structure-full/chapter-11.json"
+      },
+      {
+        "id": "chapter-12",
+        "title": "第十二章 慢下来：理解是否仍能追上复制？",
+        "file": "data/chapters/structure-full/chapter-12.json"
+      },
+      {
+        "id": "afterword",
+        "title": "后记 仍需理解",
+        "file": "data/chapters/structure-full/afterword.json"
+      }
+    ],
+    "toc": [
+      {
+        "id": "front-matter",
+        "title": "结构之道:复杂世界如何一步步生成",
+        "sections": []
+      },
+      {
+        "id": "introduction",
+        "title": "引言 结构如何成为文明的楼梯",
+        "sections": []
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章 抽象思维帮助我们理解越来越复杂的世界",
+        "sections": [
+          {
+            "title": "一、当经验不再足够",
+            "anchor": "section-39"
+          },
+          {
+            "title": "二、抽象的出现，并非逃离现实",
+            "anchor": "section-42"
+          },
+          {
+            "title": "三、从事件层面进入结构层面",
+            "anchor": "section-46"
+          },
+          {
+            "title": "四、抽象作为认知的升维",
+            "anchor": "section-50"
+          },
+          {
+            "title": "五、抽象的本质：压缩与稳定",
+            "anchor": "section-53"
+          },
+          {
+            "title": "六、抽象作为文明继续前行的条件",
+            "anchor": "section-58"
+          }
+        ]
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章 老子并不生活在简单世界",
+        "sections": [
+          {
+            "title": "一、关于老子与“简单时代”的误判",
+            "anchor": "section-83"
+          },
+          {
+            "title": "二、系统失稳的时代背景",
+            "anchor": "section-86"
+          },
+          {
+            "title": "三、为何必须转向结构层面",
+            "anchor": "section-90"
+          },
+          {
+            "title": "四、《道德经》的压缩逻辑",
+            "anchor": "section-95"
+          },
+          {
+            "title": "五、为何这一结构可以跨越时代",
+            "anchor": "section-99"
+          }
+        ]
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章 “一”：如何出现",
+        "sections": [
+          {
+            "title": "一、“一”不是物，而是整体显现的状态",
+            "anchor": "section-118"
+          },
+          {
+            "title": "二、“一”是秩序的显现，而非完成",
+            "anchor": "section-122"
+          },
+          {
+            "title": "三、整体并非天然，而是逐步凝结",
+            "anchor": "section-126"
+          },
+          {
+            "title": "四、“一”的脆弱性与持续确认",
+            "anchor": "section-130"
+          },
+          {
+            "title": "五、“一”为差异提供位置，而非答案",
+            "anchor": "section-134"
+          }
+        ]
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章 “二”：对立为何不可避免",
+        "sections": [
+          {
+            "title": "一、没有整体，就没有对立",
+            "anchor": "section-150"
+          },
+          {
+            "title": "二、对立并不等于对抗",
+            "anchor": "section-153"
+          },
+          {
+            "title": "三、对立是系统成熟的标志",
+            "anchor": "section-156"
+          },
+          {
+            "title": "四、张力是否仍在可承受范围内",
+            "anchor": "section-160"
+          },
+          {
+            "title": "五、从对立走向生成的门槛",
+            "anchor": "section-163"
+          }
+        ]
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五章 “三”：结构如何得以复制",
+        "sections": [
+          {
+            "title": "一、对立并不能保证系统存活",
+            "anchor": "section-176"
+          },
+          {
+            "title": "二、系统如何在对立中“活下来”",
+            "anchor": "section-179"
+          },
+          {
+            "title": "三、“三”不是规则，而是关系被稳定下来",
+            "anchor": "section-182"
+          },
+          {
+            "title": "四、边界条件：关系得以延续的前提",
+            "anchor": "section-185"
+          },
+          {
+            "title": "五、真正被复制的是结构",
+            "anchor": "section-188"
+          },
+          {
+            "title": "六、当结构可以被复制：从生命到文明",
+            "anchor": "section-197"
+          }
+        ]
+      },
+      {
+        "id": "chapter-06",
+        "title": "第六章 生命的版本：DNA 在复制什么？",
+        "sections": [
+          {
+            "title": "一、当生命被误解为个体",
+            "anchor": "section-215"
+          },
+          {
+            "title": "二、DNA：复制的不是结果",
+            "anchor": "section-223"
+          },
+          {
+            "title": "三、生命系统中的“一”与“二”",
+            "anchor": "section-226"
+          },
+          {
+            "title": "四、为什么差异本身还不够",
+            "anchor": "section-229"
+          },
+          {
+            "title": "五、“三”：被复制的关系结构",
+            "anchor": "section-232"
+          },
+          {
+            "title": "六、DNA：关系结构的物质化形式",
+            "anchor": "section-236"
+          }
+        ]
+      },
+      {
+        "id": "chapter-07",
+        "title": "第七章 人类的版本：语言与性别",
+        "sections": [
+          {
+            "title": "一、语言：不是思想的外衣，而是关系得以复制的条件",
+            "anchor": "section-253"
+          },
+          {
+            "title": "二、性别：作为“二”的稳定来源",
+            "anchor": "section-259"
+          },
+          {
+            "title": "三、语言与性别：人类社会中的“第三者”",
+            "anchor": "section-264"
+          },
+          {
+            "title": "四、复制的力量，与结构僵化的风险",
+            "anchor": "section-268"
+          },
+          {
+            "title": "五、条件变化中的结构张力",
+            "anchor": "section-273"
+          },
+          {
+            "title": "六、人类的版本，仍在生成之中",
+            "anchor": "section-276"
+          }
+        ]
+      },
+      {
+        "id": "chapter-08",
+        "title": "第八章 文明的版本：制度与技术",
+        "sections": [
+          {
+            "title": "一、制度：将偶然经验转化为可重复秩序",
+            "anchor": "section-287"
+          },
+          {
+            "title": "二、技术：将能力外化并加速复制",
+            "anchor": "section-292"
+          },
+          {
+            "title": "三、制度与技术作为文明的“第三者”",
+            "anchor": "section-297"
+          },
+          {
+            "title": "四、复制的成功，隐藏着失控的可能",
+            "anchor": "section-301"
+          },
+          {
+            "title": "五、现代文明的特征：技术先行，制度滞后",
+            "anchor": "section-306"
+          },
+          {
+            "title": "六、文明是否还能升级？",
+            "anchor": "section-310"
+          },
+          {
+            "title": "七、文明的版本，并非终章",
+            "anchor": "section-314"
+          }
+        ]
+      },
+      {
+        "id": "chapter-09",
+        "title": "第九章 失败的文明：结构无法继承",
+        "sections": [
+          {
+            "title": "一、文明并非失败于破坏，而是失败于“教不会”",
+            "anchor": "section-325"
+          },
+          {
+            "title": "二、结构一旦只剩形式，复制便会失真",
+            "anchor": "section-334"
+          },
+          {
+            "title": "三、技术的继承，远比技术本身更脆弱",
+            "anchor": "section-338"
+          },
+          {
+            "title": "四、当语言不再指向经验，文明便开始失语",
+            "anchor": "section-342"
+          },
+          {
+            "title": "五、结构无法继承的真正原因：问题已经改变",
+            "anchor": "section-346"
+          },
+          {
+            "title": "六、失败并非终结，而是升级受阻的标志",
+            "anchor": "section-350"
+          },
+          {
+            "title": "七、失败文明留下的不是答案，而是警示",
+            "anchor": "section-354"
+          }
+        ]
+      },
+      {
+        "id": "chapter-10",
+        "title": "第十章 是否存在“可持续的文明结构”？",
+        "sections": [
+          {
+            "title": "一、为什么“永恒结构”在逻辑上不可成立",
+            "anchor": "section-365"
+          },
+          {
+            "title": "二、可持续性的真正对象：不是结构，而是生成能力",
+            "anchor": "section-369"
+          },
+          {
+            "title": "三、一个可持续文明必须满足的最低条件",
+            "anchor": "section-373"
+          },
+          {
+            "title": "四、为什么现代文明尤其接近失衡边界",
+            "anchor": "section-380"
+          },
+          {
+            "title": "五、可持续性的悖论：它无法被设计完成",
+            "anchor": "section-384"
+          },
+          {
+            "title": "六、那么，人类还能做什么？",
+            "anchor": "section-389"
+          },
+          {
+            "title": "七、一个并不乐观、但足够诚实的结论",
+            "anchor": "section-393"
+          }
+        ]
+      },
+      {
+        "id": "chapter-11",
+        "title": "第十一章 AI：复制首次脱离人类身体",
+        "sections": [
+          {
+            "title": "一、为什么说这是“首次”？",
+            "anchor": "section-405"
+          },
+          {
+            "title": "二、AI 复制的不是人，而是“人类结构的外形”",
+            "anchor": "section-410"
+          },
+          {
+            "title": "三、复制脱离身体，意味着什么？",
+            "anchor": "section-416"
+          },
+          {
+            "title": "四、AI 不是“新主体”，而是“结构加速器”",
+            "anchor": "section-421"
+          },
+          {
+            "title": "五、当复制不再依附身体，文明的制衡机制失效",
+            "anchor": "section-425"
+          },
+          {
+            "title": "六、问题不在于 AI，而在于我们选择复制什么",
+            "anchor": "section-430"
+          },
+          {
+            "title": "七、人类不再是唯一复制者",
+            "anchor": "section-437"
+          },
+          {
+            "title": "八、AI 是显影剂，而非答案",
+            "anchor": "section-445"
+          }
+        ]
+      },
+      {
+        "id": "chapter-12",
+        "title": "第十二章 慢下来：理解是否仍能追上复制？",
+        "sections": [
+          {
+            "title": "一、复制从来不等人",
+            "anchor": "section-458"
+          },
+          {
+            "title": "二、当复制速度超过理解速度，会发生什么？",
+            "anchor": "section-465"
+          },
+          {
+            "title": "三、“慢下来”不是反技术，而是反失控",
+            "anchor": "section-476"
+          },
+          {
+            "title": "四、理解并非全知，而是一种结构能力",
+            "anchor": "section-481"
+          },
+          {
+            "title": "五、重新理解“人”的位置",
+            "anchor": "section-486"
+          },
+          {
+            "title": "六、是否仍有希望？",
+            "anchor": "section-492"
+          },
+          {
+            "title": "七、最后的回到起点",
+            "anchor": "section-496"
+          }
+        ]
+      },
+      {
+        "id": "afterword",
+        "title": "后记 仍需理解",
+        "sections": []
+      }
+    ],
+    "coverLabel": "原书封面"
   },
   {
     "id": "metabolism",

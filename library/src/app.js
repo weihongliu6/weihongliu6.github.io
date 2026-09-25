@@ -1,6 +1,6 @@
 import { storage } from './storage.js?v=phase2-20260925';
 import { escapeHTML as e, bookURL, readURL, cover, tocItems } from './components.js?v=phase2-20260925';
-import { renderReader, bindReader } from './reader.js?v=phase3-20260925';
+import { renderReader, bindReader } from './reader.js?v=phase4-20260925';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -41,7 +41,7 @@ function bookPage(book){
   if(!canRead(book)) return `<section class="coming-page"><a class="back-link" href="#/">← 返回书架</a><div class="coming-cover book-object">${cover(book,true)}</div><p class="eyebrow">THE COLLECTION</p><h1>${e(book.title)}</h1><p class="coming-label">即将进入数字书房</p><p>本书的数字阅读内容尚未收录。</p>${book.appleBooksTitle?`<p class="sample-note">Apple Books 版题名：《${e(book.appleBooksTitle)}》</p>`:''}${book.appleBooksUrl?`<div>${appleBooksLink(book,'primary-link')}</div>`:''}<a class="primary-link" href="#/">返回数字书房 <span aria-hidden="true">→</span></a></section>`;
   const last=storage.get(`reading:${book.id}`);
   const validLast=last && book.chapters.some(c=>c.id===last.chapter);
-  return `<div class="book-page"><a class="back-link" href="#/">← 返回书架</a><section class="book-intro"><div class="book-display"><div class="book-object">${cover(book,true)}</div><span class="cover-credit">已出版版本封面</span></div><div class="book-details"><p class="eyebrow">${book.status==='complete'?'完整数字版':'第一本开放样章'} <span class="fine-divider">/</span> ${String(books.findIndex(entry=>entry.id===book.id)+1).padStart(2,'0')}</p><h1>${e(book.title)}</h1><p class="book-subtitle">${e(book.subtitle)}</p><p class="author">${e(book.author)} <span>著</span></p><div class="intro-excerpt"><p>${e(book.intro)}</p><small>摘自${e(book.introSource)}</small></div><div class="book-actions"><a class="primary-link" href="${readURL(book.id,book.chapters[0].id)}">在线阅读 / Read Online <span aria-hidden="true">→</span></a>${appleBooksLink(book,'resume-link')}${validLast?`<a class="resume-link" href="${readURL(book.id,last.chapter)}?resume=1">继续上次阅读 <span>${Math.max(0,Math.min(100,((book.chapters.findIndex(c=>c.id===last.chapter)+Math.max(0,Math.min(1,Number(last.fraction)||0)))/book.chapters.length*100).toFixed(0)))}%</span></a>`:''}</div><p class="sample-note">${book.editionSummary?e(book.editionSummary):(book.status==='complete'?'前言、双语作者说明、18 章正文及结语 · 24 幅摄影作品。':'目前开放 3 节样章。目录来自原书，其他章节待收录。')}</p></div></section><section id="toc" class="contents-section"><div class="section-label"><h2>目录 <span>CONTENTS</span></h2><span>${book.status==='complete'?'完整目录':'原书目录 · 样章先行'}</span></div><ol class="book-toc">${tocItems(book)}</ol></section></div>`;
+  return `<div class="book-page"><a class="back-link" href="#/">← 返回书架</a><section class="book-intro"><div class="book-display"><div class="book-object">${cover(book,true)}</div><span class="cover-credit">${e(book.coverLabel || '已出版版本封面')}</span></div><div class="book-details"><p class="eyebrow">${book.status==='complete'?'完整数字版':'第一本开放样章'} <span class="fine-divider">/</span> ${String(books.findIndex(entry=>entry.id===book.id)+1).padStart(2,'0')}</p><h1>${e(book.title)}</h1><p class="book-subtitle">${e(book.subtitle)}</p><p class="author">${e(book.author)} <span>著</span></p><div class="intro-excerpt"><p>${e(book.intro)}</p><small>摘自${e(book.introSource)}</small></div><div class="book-actions"><a class="primary-link" href="${readURL(book.id,book.chapters[0].id)}">在线阅读 / Read Online <span aria-hidden="true">→</span></a>${appleBooksLink(book,'resume-link')}${validLast?`<a class="resume-link" href="${readURL(book.id,last.chapter)}?resume=1">继续上次阅读 <span>${Math.max(0,Math.min(100,((book.chapters.findIndex(c=>c.id===last.chapter)+Math.max(0,Math.min(1,Number(last.fraction)||0)))/book.chapters.length*100).toFixed(0)))}%</span></a>`:''}</div><p class="sample-note">${book.editionSummary?e(book.editionSummary):(book.status==='complete'?'前言、双语作者说明、18 章正文及结语 · 24 幅摄影作品。':'目前开放 3 节样章。目录来自原书，其他章节待收录。')}</p></div></section><section id="toc" class="contents-section"><div class="section-label"><h2>目录 <span>CONTENTS</span></h2><span>${book.status==='complete'?'完整目录':'原书目录 · 样章先行'}</span></div><ol class="book-toc">${tocItems(book)}</ol></section></div>`;
 }
 async function render(){
   const version=++renderVersion;cleanup();cleanup=()=>{};
@@ -77,7 +77,7 @@ async function render(){
   if(hash.endsWith('#toc')) document.querySelector('#toc')?.scrollIntoView();
 }
 try{
-  const response=await fetch('data/books.json?v=phase3-20260925-r2');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=phase4-20260925');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();await render();
   window.addEventListener('hashchange',render);
 }catch(error){main.innerHTML='<section class="empty-state"><h1>书房还没有打开</h1><p>书架资料暂时无法载入。</p><p>请刷新页面重试。</p></section>';}

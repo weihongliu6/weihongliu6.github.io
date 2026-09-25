@@ -1,0 +1,72 @@
+{
+  "id": "afterword",
+  "title": "后记 仍需理解",
+  "openingImage": true,
+  "source": {
+    "file": "结构之道_FINAL_LOCK.pages",
+    "format": "pages",
+    "label": "正文与图片依据作者确认的 Pages 定稿收录。"
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "src": "assets/books/structure-pages/image-13-reading.jpg",
+      "fullSrc": "assets/books/structure-pages/image-13-original.png",
+      "width": 1024,
+      "height": 1536,
+      "caption": "",
+      "alt": "后记 仍需理解",
+      "sourceParagraph": 503,
+      "sourceAsset": "Data/image14-57.png",
+      "originalSha256": "4506238c364d6000a2ee4d17a7ef816cebab3f9df1001fde1c65d2ed38f5bf99"
+    },
+    {
+      "type": "heading",
+      "text": "后记",
+      "sourceParagraph": 504,
+      "sourceStyle": "章号"
+    },
+    {
+      "type": "heading",
+      "text": "仍需理解",
+      "sourceParagraph": 505,
+      "sourceStyle": "正式章名"
+    },
+    {
+      "type": "paragraph",
+      "text": "这本书并未试图给出答案，也未提供任何可以直接执行的方案。它所做的，只是反复回到一个看似简单、却不断被忽略的问题：我们究竟在复制什么，又是否仍然理解这一复制正在发生。",
+      "sourceParagraph": 506,
+      "sourceStyle": "章首正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "从生命到文明，从 DNA 到语言、制度与技术，人类一次次证明，延续并不来自保存具体结果，而来自生成关系的可复制性。正是这种复制，使系统得以跨越个体、跨越时间，持续存在。然而，当复制变得过于成功，当结构可以在无需理解的情况下被无限放大，延续本身便开始转化为风险。",
+      "sourceParagraph": 507,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "理解，从来不是全知，也不是控制。它更像一种位置——在结构之中保留反思的可能，在效率之前保留迟疑的空间，在成功之中保持距离。理解的价值，并不在于阻止复制，而在于让复制仍然指向问题，而非只指向自身。",
+      "sourceParagraph": 508,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "在一个越来越强调速度、规模与自动化的时代，“慢下来”并不是对进步的否定，而是一种必要的校准。慢下来，是为了让判断重新出现，让关系重新被看见，让结构仍然可以被继承、被修正、被超越。",
+      "sourceParagraph": 509,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "文明从未因为变化而失败，它失败于无法理解自身正在如何变化。只要理解仍然能够介入，只要结构仍然允许被质疑，生成便尚未终止。",
+      "sourceParagraph": 510,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "这不是结论，而是一个持续有效的提醒。",
+      "sourceParagraph": 511,
+      "sourceStyle": "正文"
+    }
+  ]
+}

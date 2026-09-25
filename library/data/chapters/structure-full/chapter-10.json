@@ -1,0 +1,253 @@
+{
+  "id": "chapter-10",
+  "title": "第十章 是否存在“可持续的文明结构”？",
+  "openingImage": true,
+  "source": {
+    "file": "结构之道_FINAL_LOCK.pages",
+    "format": "pages",
+    "label": "正文与图片依据作者确认的 Pages 定稿收录。"
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "src": "assets/books/structure-pages/image-10-reading.jpg",
+      "fullSrc": "assets/books/structure-pages/image-10-original.png",
+      "width": 1024,
+      "height": 1536,
+      "caption": "",
+      "alt": "第十章 是否存在“可持续的文明结构”？",
+      "sourceParagraph": 359,
+      "sourceAsset": "Data/image11-51.png",
+      "originalSha256": "4616316e2ef8e246cc4bcaeef52e2f4a075c3ff24562b8ae5108440f0ef1d047"
+    },
+    {
+      "type": "heading",
+      "text": "第十章",
+      "sourceParagraph": 360,
+      "sourceStyle": "章号"
+    },
+    {
+      "type": "heading",
+      "text": "是否存在“可持续的文明结构”？",
+      "sourceParagraph": 361,
+      "sourceStyle": "正式章名"
+    },
+    {
+      "type": "paragraph",
+      "text": "在回顾了生命、人类与文明的不同“版本”之后，一个问题不可避免地浮现出来：是否存在一种可以长期维持自身、不走向崩溃的文明结构？",
+      "sourceParagraph": 362,
+      "sourceStyle": "章首正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "这个问题之所以重要，并不是因为人类期待一个永恒的答案，而是因为文明已经进入一个前所未有的阶段——结构的复制速度，正在逼近甚至超越人类理解与调节的能力。在这样的条件下，如果不存在某种形式的可持续性判断，文明的延续将越来越依赖偶然，而非选择。",
+      "sourceParagraph": 363,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，在尝试回答这个问题之前，有必要先澄清一件事：可持续，并不意味着不变化；稳定，也不等同于停滞。如果把可持续理解为一种永恒不变的秩序，那么问题本身就已经设错了。",
+      "sourceParagraph": 364,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "一、为什么“永恒结构”在逻辑上不可成立",
+      "sourceParagraph": 365,
+      "sourceStyle": "小标题",
+      "anchor": "section-365"
+    },
+    {
+      "type": "paragraph",
+      "text": "从系统的角度看，任何试图“永久维持”的结构，都必然面临一个悖论：环境在变，而结构若不变，便必然失配。",
+      "sourceParagraph": 366,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "生命系统如此，文明系统亦然。没有任何一种结构，可以在不调整自身的前提下，长期适应不断变化的外部条件。试图冻结结构，只会延缓崩溃，而不会避免崩溃。",
+      "sourceParagraph": 367,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "因此，如果“可持续”被理解为一种固定形态的长期存在，那么答案只能是否定的。不存在一种一劳永逸的文明结构， 这也即老子的“非常道”。",
+      "sourceParagraph": 368,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "二、可持续性的真正对象：不是结构，而是生成能力",
+      "sourceParagraph": 369,
+      "sourceStyle": "小标题",
+      "anchor": "section-369"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果转换视角，问题便会发生变化。",
+      "sourceParagraph": 370,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "文明是否能够持续，并不取决于它是否拥有某种完美结构，而取决于它是否能够持续生成适应新条件的结构。换言之，可持续的不是某一套制度、技术或价值观，而是结构被不断修正、替换与升级的能力本身。",
+      "sourceParagraph": 371,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "这与前面关于“道”“三”“关系”的讨论高度一致：真正生万物的，不是规则，而是关系；真正使文明延续的，不仅仅是结构，同时还包括结构得以更新的机制。",
+      "sourceParagraph": 372,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "三、一个可持续文明必须满足的最低条件",
+      "sourceParagraph": 373,
+      "sourceStyle": "小标题",
+      "anchor": "section-373"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果一定要为“可持续的文明结构”设定条件，那么这些条件并不应是具体内容，而应是功能性约束。",
+      "sourceParagraph": 374,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "至少包括以下几点：",
+      "sourceParagraph": 375,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "第一，结构必须可被理解，而非仅可被执行。一旦制度、技术或语言复杂到只能被使用、却无法被理解，继承便会中断。可持续的结构，必须允许下一代重新理解其原理，而不是只能照本宣科。",
+      "sourceParagraph": 376,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "第二，结构必须允许被质疑与修改。任何不允许被反思的结构，都会在环境变化时迅速僵化。可持续性并不来自稳定本身，而来自对稳定的可调整性。",
+      "sourceParagraph": 377,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "第三，复制速度不得长期超过理解速度。当技术或制度扩展得太快，而社会尚未形成相应的理解与调节能力时，系统风险将迅速累积。可持续的文明，必须在复制与理解之间维持张力。",
+      "sourceParagraph": 378,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "第四，结构必须服务于生成，而非取代生成。当规则、制度或技术开始以自我维持为目的，生成能力便会被压制。可持续的结构，应始终被视为手段，而非终点。",
+      "sourceParagraph": 379,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "四、为什么现代文明尤其接近失衡边界",
+      "sourceParagraph": 380,
+      "sourceStyle": "小标题",
+      "anchor": "section-380"
+    },
+    {
+      "type": "paragraph",
+      "text": "现代文明面临的挑战，并不在于缺乏制度或技术，而在于结构的自我强化能力过强。",
+      "sourceParagraph": 381,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "技术能够快速放大能力，制度能够快速复制秩序，语言能够迅速固化观念。这些机制在提升效率的同时，也降低了系统的自我修正频率。结构越成功，越难被质疑；路径越清晰，越难转向。",
+      "sourceParagraph": 382,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "在这种情况下，文明并非缺乏“好意”，而是缺乏结构层面的刹车机制。当问题被不断外包给技术或制度，而非回到生成关系本身，文明便逐渐失去调整方向的能力。",
+      "sourceParagraph": 383,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "五、可持续性的悖论：它无法被设计完成",
+      "sourceParagraph": 384,
+      "sourceStyle": "小标题",
+      "anchor": "section-384"
+    },
+    {
+      "type": "paragraph",
+      "text": "这里出现了一个看似矛盾却至关重要的结论：任何被完整设计出来的“可持续文明结构”，",
+      "sourceParagraph": 385,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "本身就已经不可持续。",
+      "sourceParagraph": 386,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "因为一旦设计完成，它便假定未来是可预测的，而历史一再证明，这种假定并不成立。",
+      "sourceParagraph": 387,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "真正可持续的文明，并不是按照某张蓝图建成的，而是在不断试错、修正、重构中维持生成能力的结果。它更像一种过程，而不是一种状态。",
+      "sourceParagraph": 388,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "六、那么，人类还能做什么？",
+      "sourceParagraph": 389,
+      "sourceStyle": "小标题",
+      "anchor": "section-389"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果不存在终极结构，也不存在完美设计，那么人类所能做的，并不是寻找“正确答案”，而是保持对结构的清醒意识。",
+      "sourceParagraph": 390,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "这意味着：不把制度神圣化，不把技术绝对化，不把语言当成现实本身，不把成功经验视为永久有效。",
+      "sourceParagraph": 391,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "换言之，人类需要学会与自己的结构保持距离，而不是完全沉溺其中。",
+      "sourceParagraph": 392,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "heading",
+      "text": "七、一个并不乐观、但足够诚实的结论",
+      "sourceParagraph": 393,
+      "sourceStyle": "小标题",
+      "anchor": "section-393"
+    },
+    {
+      "type": "paragraph",
+      "text": "是否存在“可持续的文明结构”？",
+      "sourceParagraph": 394,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果这个问题指向一种可以永久维持的形式，答案是否定的。但如果这个问题指向一种能够不断重建自身的能力，那么答案仍然是开放的。",
+      "sourceParagraph": 395,
+      "sourceStyle": "正文"
+    },
+    {
+      "type": "paragraph",
+      "text": "文明的延续，从来不是因为它找到了终点，而是因为它在每一次接近终点时，仍然能够看清自身结构的问题，并作出调整。可持续性不在于避免失败，而在于失败是否仍然能够转化为新的生成条件。",
+      "sourceParagraph": 396,
+      "sourceStyle": "正文"
+    }
+  ]
+}
