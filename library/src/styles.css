@@ -11,3 +11,6 @@
 @media(max-width:350px){.site-header{padding-left:15px;padding-right:15px}.site-header nav{gap:10px}.library-hero h1{font-size:25px}.collection{padding:0 18px}.bookshelf{gap:28px 19px}.placeholder-title{font-size:16px}.section-label>span{display:none}.book-caption h3{font-size:15px}.book-status{font-size:8px}.reading-status progress{width:40px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{.site-header,.reader-aside,.reader-toolbar,.reading-status,.chapter-nav,.site-footer,.reader-library-link{display:none}.reader-layout{display:block;padding:0}.chapter-body{font-size:12pt}body{background:#fff;color:#000}}
+
+/* Optional heading navigation for full editions; existing layout is unchanged. */
+.toc-sections{margin:0 0 14px 36px;color:var(--muted);font-size:11px}.toc-sections summary{cursor:pointer;padding:6px 0}.toc-sections ol{list-style:none;padding:0;margin:4px 0 0}.book-toc .toc-sections li{border:0}.book-toc .toc-sections li a,.reader-toc .toc-sections li a{display:block;padding:8px 0;font:12px/1.8 var(--sans);overflow-wrap:anywhere}.reader-toc .toc-sections{margin:0 8px 12px 26px}.reader-toc .toc-sections ol{max-height:none;overflow:visible}.reader-toc .toc-sections summary{min-height:30px;font-size:10px;letter-spacing:0}.chapter-body h2{scroll-margin-top:95px}

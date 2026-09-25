@@ -1,0 +1,42 @@
+{
+  "id": "conclusion",
+  "title": "结语",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "结语",
+      "sourceParagraph": 639,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-639"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影并不是一种风格，也不是一种技术路线。",
+      "sourceParagraph": 640,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "它是一种提醒：世界并不只存在于瞬间。有些真实，需要时间才能显现。有些意义，只有在慢下来之后，才会被看见。",
+      "sourceParagraph": 641,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "当你再次按下快门，无论快或慢，你都已经知道自己在选择什么。",
+      "sourceParagraph": 642,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "而这，或许正是慢门留给我们的最重要的东西。",
+      "sourceParagraph": 643,
+      "sourceStyle": "Body"
+    }
+  ]
+}

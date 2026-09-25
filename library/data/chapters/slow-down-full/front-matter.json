@@ -1,0 +1,71 @@
+{
+  "id": "front-matter",
+  "title": "书名与版权",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "《慢下来，看见世界》",
+      "sourceParagraph": 8,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "Slow Down, and See the World",
+      "sourceParagraph": 9,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "——慢门摄影的时间之眼",
+      "sourceParagraph": 11,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Time Gaze of Long Exposure Photography",
+      "sourceParagraph": 12,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "Weihong Liu",
+      "sourceParagraph": 14,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "书名：慢下来，看见世界",
+      "sourceParagraph": 15,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "作者：Weihong Liu",
+      "sourceParagraph": 16,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "© 2024 Weihong Liu",
+      "sourceParagraph": 17,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "All rights reserved.",
+      "sourceParagraph": 18,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "本书为作者个人创作与思考之记录，不构成任何专业建议。",
+      "sourceParagraph": 19,
+      "sourceStyle": "Body"
+    }
+  ]
+}

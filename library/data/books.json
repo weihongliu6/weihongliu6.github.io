@@ -5,134 +5,749 @@
     "author": "Weihong Liu",
     "subtitle": "慢门摄影的时间之眼",
     "cover": "assets/covers/slow-down.jpg",
-    "status": "sample",
+    "status": "complete",
     "intro": "《慢下来，看见世界》并非摄影教程，而是一组关于节奏、观看与日常经验的摄影随笔。",
     "introSource": "原书「作者说明」",
     "chapters": [
       {
+        "id": "front-matter",
+        "title": "书名与版权",
+        "file": "data/chapters/slow-down-full/front-matter.json"
+      },
+      {
         "id": "preface",
-        "title": "前言：慢下来，看见世界",
-        "file": "data/chapters/preface.json"
+        "title": "前言",
+        "file": "data/chapters/slow-down-full/preface.json"
       },
       {
         "id": "author-note",
         "title": "作者说明",
-        "file": "data/chapters/author-note.json"
+        "file": "data/chapters/slow-down-full/author-note.json"
       },
       {
         "id": "chapter-01",
-        "title": "第一章 什么是慢门？",
-        "file": "data/chapters/chapter-01.json"
+        "title": "第一章    什么是慢门？",
+        "file": "data/chapters/slow-down-full/chapter-01.json"
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章     慢门从何而来",
+        "file": "data/chapters/slow-down-full/chapter-02.json"
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章    慢门 ≠ 模糊：关于清晰、失焦与意义",
+        "file": "data/chapters/slow-down-full/chapter-03.json"
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章    慢门摄影的常见误解",
+        "file": "data/chapters/slow-down-full/chapter-04.json"
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五章    慢门摄影的技术基础",
+        "file": "data/chapters/slow-down-full/chapter-05.json"
+      },
+      {
+        "id": "chapter-06",
+        "title": "第六章    慢门与稳定",
+        "file": "data/chapters/slow-down-full/chapter-06.json"
+      },
+      {
+        "id": "chapter-07",
+        "title": "第七章   器材不是门槛",
+        "file": "data/chapters/slow-down-full/chapter-07.json"
+      },
+      {
+        "id": "chapter-08",
+        "title": "第八章    慢门与自然",
+        "file": "data/chapters/slow-down-full/chapter-08.json"
+      },
+      {
+        "id": "chapter-09",
+        "title": "第九章    慢门与城市",
+        "file": "data/chapters/slow-down-full/chapter-09.json"
+      },
+      {
+        "id": "chapter-10",
+        "title": "第十章    慢门与夜色",
+        "file": "data/chapters/slow-down-full/chapter-10.json"
+      },
+      {
+        "id": "chapter-11",
+        "title": "第十一章    慢门与情绪",
+        "file": "data/chapters/slow-down-full/chapter-11.json"
+      },
+      {
+        "id": "chapter-12",
+        "title": "第十二章    慢门与感知边界",
+        "file": "data/chapters/slow-down-full/chapter-12.json"
+      },
+      {
+        "id": "chapter-13",
+        "title": "第十三章    慢门与记忆",
+        "file": "data/chapters/slow-down-full/chapter-13.json"
+      },
+      {
+        "id": "chapter-14",
+        "title": "第十四章    慢门与观看立场",
+        "file": "data/chapters/slow-down-full/chapter-14.json"
+      },
+      {
+        "id": "chapter-15",
+        "title": "第十五章    慢门之后",
+        "file": "data/chapters/slow-down-full/chapter-15.json"
+      },
+      {
+        "id": "chapter-16",
+        "title": "第十六章    在路上，看见时间",
+        "file": "data/chapters/slow-down-full/chapter-16.json"
+      },
+      {
+        "id": "chapter-17",
+        "title": "第十七章    慢门与当下",
+        "file": "data/chapters/slow-down-full/chapter-17.json"
+      },
+      {
+        "id": "chapter-18",
+        "title": "第十八章   为什么，要慢下来？",
+        "file": "data/chapters/slow-down-full/chapter-18.json"
+      },
+      {
+        "id": "conclusion",
+        "title": "结语",
+        "file": "data/chapters/slow-down-full/conclusion.json"
       }
     ],
     "toc": [
       {
+        "title": "书名与版权",
+        "id": "front-matter",
+        "sections": []
+      },
+      {
         "title": "前言",
         "id": "preface",
-        "sourcePage": 3
+        "sections": [
+          {
+            "title": "慢下来，看见世界",
+            "anchor": "heading-22"
+          }
+        ]
       },
       {
         "title": "作者说明",
         "id": "author-note",
-        "sourcePage": 9
+        "sections": []
       },
       {
-        "title": "第一章 什么是慢门？",
+        "title": "第一章    什么是慢门？",
         "id": "chapter-01",
-        "sourcePage": 10
+        "sections": [
+          {
+            "title": "一、快门记录的，从来不只是光",
+            "anchor": "heading-58"
+          },
+          {
+            "title": "二、为什么我们习惯把“快”当作真实",
+            "anchor": "heading-63"
+          },
+          {
+            "title": "三、慢门不是偏离真实，而是靠近另一种真实",
+            "anchor": "heading-68"
+          },
+          {
+            "title": "四、慢门是一种选择，而不是限制",
+            "anchor": "heading-71"
+          },
+          {
+            "title": "五、慢门的意义，从来不止于摄影",
+            "anchor": "heading-74"
+          }
+        ]
       },
       {
-        "title": "第二章 慢门从何而来",
-        "id": null,
-        "sourcePage": 16
+        "title": "第二章     慢门从何而来",
+        "id": "chapter-02",
+        "sections": [
+          {
+            "title": "一、当摄影只能“慢下来”",
+            "anchor": "heading-83"
+          },
+          {
+            "title": "二、最早的摄影，是对时间的妥协",
+            "anchor": "heading-87"
+          },
+          {
+            "title": "三、当摄影开始“追求快”",
+            "anchor": "heading-91"
+          },
+          {
+            "title": "四、“决定性瞬间”与时间观的转变",
+            "anchor": "heading-94"
+          },
+          {
+            "title": "五、慢门作为一种“回到时间”的选择",
+            "anchor": "heading-97"
+          },
+          {
+            "title": "六、慢门在当代摄影中的位置",
+            "anchor": "heading-100"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-103"
+          }
+        ]
       },
       {
-        "title": "第三章 慢门 ≠ 模糊：关于清晰、失焦与意义",
-        "id": null,
-        "sourcePage": 21
+        "title": "第三章    慢门 ≠ 模糊：关于清晰、失焦与意义",
+        "id": "chapter-03",
+        "sections": [
+          {
+            "title": "一、清晰，并不是摄影的自然法则",
+            "anchor": "heading-111"
+          },
+          {
+            "title": "二、慢门中的模糊，是运动留下的痕迹",
+            "anchor": "heading-114"
+          },
+          {
+            "title": "三、失焦模糊，与慢门模糊的本质差异",
+            "anchor": "heading-118"
+          },
+          {
+            "title": "四、模糊为何常常引发不安",
+            "anchor": "heading-121"
+          },
+          {
+            "title": "五、当模糊成为语言",
+            "anchor": "heading-124"
+          },
+          {
+            "title": "六、慢门摄影中的“适度清晰”",
+            "anchor": "heading-127"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-130"
+          }
+        ]
       },
       {
-        "title": "第四章 慢门摄影的常见误解",
-        "id": null,
-        "sourcePage": 28
+        "title": "第四章    慢门摄影的常见误解",
+        "id": "chapter-04",
+        "sections": [
+          {
+            "title": "一、慢门只是技巧，而不是创作？",
+            "anchor": "heading-138"
+          },
+          {
+            "title": "二、慢门一定要三脚架？",
+            "anchor": "heading-141"
+          },
+          {
+            "title": "三、慢门只能拍水和云？",
+            "anchor": "heading-144"
+          },
+          {
+            "title": "四、慢门画面不好控制，结果不可预测？",
+            "anchor": "heading-147"
+          },
+          {
+            "title": "五、慢门是不是“不够专业”？",
+            "anchor": "heading-150"
+          },
+          {
+            "title": "六、慢门是不是需要“解释”才能被看懂？",
+            "anchor": "heading-153"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-156"
+          }
+        ]
       },
       {
-        "title": "第五章 慢门摄影的技术基础",
-        "id": null,
-        "sourcePage": 33
+        "title": "第五章    慢门摄影的技术基础",
+        "id": "chapter-05",
+        "sections": [
+          {
+            "title": "一、快门：让时间进入画面的入口",
+            "anchor": "heading-166"
+          },
+          {
+            "title": "二、光圈与 ISO：为慢门创造可能性",
+            "anchor": "heading-170"
+          },
+          {
+            "title": "三、曝光不是公式，而是平衡",
+            "anchor": "heading-175"
+          },
+          {
+            "title": "四、稳定与不稳定之间",
+            "anchor": "heading-180"
+          },
+          {
+            "title": "五、技术的“够用原则”",
+            "anchor": "heading-184"
+          },
+          {
+            "title": "六、当技术退后，观看才能出现",
+            "anchor": "heading-187"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-190"
+          }
+        ]
       },
       {
-        "title": "第六章 慢门与稳定",
-        "id": null,
-        "sourcePage": 38
+        "title": "第六章    慢门与稳定",
+        "id": "chapter-06",
+        "sections": [
+          {
+            "title": "一、稳定不是目的，而是参照",
+            "anchor": "heading-198"
+          },
+          {
+            "title": "二、三脚架的价值与局限",
+            "anchor": "heading-201"
+          },
+          {
+            "title": "三、手持慢门的可能性",
+            "anchor": "heading-205"
+          },
+          {
+            "title": "四、身体不是干扰，而是参与者",
+            "anchor": "heading-208"
+          },
+          {
+            "title": "五、控制与放手之间的平衡",
+            "anchor": "heading-211"
+          },
+          {
+            "title": "六、稳定背后的心理转变",
+            "anchor": "heading-214"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-217"
+          }
+        ]
       },
       {
-        "title": "第七章 器材不是门槛",
-        "id": null,
-        "sourcePage": 44
+        "title": "第七章   器材不是门槛",
+        "id": "chapter-07",
+        "sections": [
+          {
+            "title": "一、器材的作用，只是延伸而非替代",
+            "anchor": "heading-226"
+          },
+          {
+            "title": "二、“够用”是一种判断，而不是妥协",
+            "anchor": "heading-229"
+          },
+          {
+            "title": "三、手机慢门：并非替代，而是另一种路径",
+            "anchor": "heading-232"
+          },
+          {
+            "title": "四、当设备变轻，观看反而变重",
+            "anchor": "heading-236"
+          },
+          {
+            "title": "五、器材选择背后的价值判断",
+            "anchor": "heading-239"
+          },
+          {
+            "title": "六、慢门摄影的民主性",
+            "anchor": "heading-244"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-247"
+          }
+        ]
       },
       {
-        "title": "第八章 慢门与自然",
-        "id": null,
-        "sourcePage": 50
+        "title": "第八章    慢门与自然",
+        "id": "chapter-08",
+        "sections": [
+          {
+            "title": "一、自然中的时间，从未停止",
+            "anchor": "heading-255"
+          },
+          {
+            "title": "二、水：最直观的时间载体",
+            "anchor": "heading-259"
+          },
+          {
+            "title": "三、云：空间中的缓慢变化",
+            "anchor": "heading-264"
+          },
+          {
+            "title": "四、自然慢门中的“静点”",
+            "anchor": "heading-268"
+          },
+          {
+            "title": "五、自然慢门的情绪气质",
+            "anchor": "heading-271"
+          },
+          {
+            "title": "六、慢门并非“美化自然”",
+            "anchor": "heading-274"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-277"
+          }
+        ]
       },
       {
-        "title": "第九章 慢门与城市",
-        "id": null,
-        "sourcePage": 57
+        "title": "第九章    慢门与城市",
+        "id": "chapter-09",
+        "sections": [
+          {
+            "title": "一、城市是一种持续运行的系统",
+            "anchor": "heading-284"
+          },
+          {
+            "title": "二、人群：从个体到轨迹",
+            "anchor": "heading-289"
+          },
+          {
+            "title": "三、车流与光轨：被看见的速度",
+            "anchor": "heading-294"
+          },
+          {
+            "title": "四、建筑：慢门中的“静点”",
+            "anchor": "heading-298"
+          },
+          {
+            "title": "五、城市慢门的情绪气质",
+            "anchor": "heading-301"
+          },
+          {
+            "title": "六、慢门不是逃离城市",
+            "anchor": "heading-305"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-308"
+          }
+        ]
       },
       {
-        "title": "第十章 慢门与夜色",
-        "id": null,
-        "sourcePage": 62
+        "title": "第十章    慢门与夜色",
+        "id": "chapter-10",
+        "sections": [
+          {
+            "title": "一、夜晚并不是“光线不足”的白天",
+            "anchor": "heading-318"
+          },
+          {
+            "title": "二、光轨：时间在空间中的书写",
+            "anchor": "heading-323"
+          },
+          {
+            "title": "三、光与空间的关系",
+            "anchor": "heading-326"
+          },
+          {
+            "title": "四、夜色慢门的情绪维度",
+            "anchor": "heading-330"
+          },
+          {
+            "title": "五、夜色中的“不可见者”",
+            "anchor": "heading-335"
+          },
+          {
+            "title": "六、慢门不是让夜晚更“漂亮”",
+            "anchor": "heading-339"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-343"
+          }
+        ]
       },
       {
-        "title": "第十一章 慢门与情绪",
-        "id": null,
-        "sourcePage": 69
+        "title": "第十一章    慢门与情绪",
+        "id": "chapter-11",
+        "sections": [
+          {
+            "title": "一、情绪并非来自画面，而来自观看方式",
+            "anchor": "heading-352"
+          },
+          {
+            "title": "二、慢门如何让观看变得温和",
+            "anchor": "heading-360"
+          },
+          {
+            "title": "三、模糊与情绪的关系",
+            "anchor": "heading-365"
+          },
+          {
+            "title": "四、慢门与安静感的生成",
+            "anchor": "heading-369"
+          },
+          {
+            "title": "五、慢门如何影响摄影者本身",
+            "anchor": "heading-374"
+          },
+          {
+            "title": "六、情绪不是主题，而是结果",
+            "anchor": "heading-378"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-382"
+          }
+        ]
       },
       {
-        "title": "第十二章 慢门与感知边界",
-        "id": null,
-        "sourcePage": 75
+        "title": "第十二章    慢门与感知边界",
+        "id": "chapter-12",
+        "sections": [
+          {
+            "title": "一、看不见，并不等于不存在",
+            "anchor": "heading-391"
+          },
+          {
+            "title": "二、慢门如何跨越感知的限制",
+            "anchor": "heading-395"
+          },
+          {
+            "title": "三、真实并非只有一种形态",
+            "anchor": "heading-400"
+          },
+          {
+            "title": "四、感知边界塑造了我们的世界观",
+            "anchor": "heading-405"
+          },
+          {
+            "title": "五、慢门作为一种“认识工具”",
+            "anchor": "heading-409"
+          },
+          {
+            "title": "六、从“看见”到“理解”",
+            "anchor": "heading-413"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-417"
+          }
+        ]
       },
       {
-        "title": "第十三章 慢门与记忆",
-        "id": null,
-        "sourcePage": 82
+        "title": "第十三章    慢门与记忆",
+        "id": "chapter-13",
+        "sections": [
+          {
+            "title": "一、记忆并非“清晰再现”",
+            "anchor": "heading-427"
+          },
+          {
+            "title": "二、慢门影像为何让人感到“熟悉”",
+            "anchor": "heading-431"
+          },
+          {
+            "title": "三、时间被拉长，意义反而浮现",
+            "anchor": "heading-437"
+          },
+          {
+            "title": "四、慢门与怀旧的区别",
+            "anchor": "heading-441"
+          },
+          {
+            "title": "五、慢门作为“经验的保存方式”",
+            "anchor": "heading-445"
+          },
+          {
+            "title": "六、慢门与个人时间",
+            "anchor": "heading-450"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-455"
+          }
+        ]
       },
       {
-        "title": "第十四章 慢门与观看立场",
-        "id": null,
-        "sourcePage": 88
+        "title": "第十四章    慢门与观看立场",
+        "id": "chapter-14",
+        "sections": [
+          {
+            "title": "一、摄影并非只有一种正确方式",
+            "anchor": "heading-464"
+          },
+          {
+            "title": "二、慢门是一种拒绝加速的姿态",
+            "anchor": "heading-468"
+          },
+          {
+            "title": "三、观看立场决定影像气质",
+            "anchor": "heading-473"
+          },
+          {
+            "title": "四、慢门并不是逃避现实",
+            "anchor": "heading-478"
+          },
+          {
+            "title": "五、观看立场与创作者的关系",
+            "anchor": "heading-483"
+          },
+          {
+            "title": "六、当摄影成为选择，而非本能",
+            "anchor": "heading-488"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-492"
+          }
+        ]
       },
       {
-        "title": "第十五章 慢门之后",
-        "id": null,
-        "sourcePage": 93
+        "title": "第十五章    慢门之后",
+        "id": "chapter-15",
+        "sections": [
+          {
+            "title": "一、慢门并不止于按下快门",
+            "anchor": "heading-500"
+          },
+          {
+            "title": "二、慢下来，并不是停下来",
+            "anchor": "heading-506"
+          },
+          {
+            "title": "三、节奏感如何影响经验的质量",
+            "anchor": "heading-511"
+          },
+          {
+            "title": "四、慢门与行走",
+            "anchor": "heading-515"
+          },
+          {
+            "title": "五、当慢门进入日常",
+            "anchor": "heading-520"
+          },
+          {
+            "title": "六、慢门之后，摄影的位置",
+            "anchor": "heading-526"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-531"
+          }
+        ]
       },
       {
-        "title": "第十六章 在路上，看见时间",
-        "id": null,
-        "sourcePage": 99
+        "title": "第十六章    在路上，看见时间",
+        "id": "chapter-16",
+        "sections": [
+          {
+            "title": "一、行走不是为了抵达",
+            "anchor": "heading-540"
+          },
+          {
+            "title": "二、行走中的时间感",
+            "anchor": "heading-544"
+          },
+          {
+            "title": "三、慢门作为“途中之物”",
+            "anchor": "heading-549"
+          },
+          {
+            "title": "四、行走中的不确定性",
+            "anchor": "heading-554"
+          },
+          {
+            "title": "五、慢门与旅行的区别",
+            "anchor": "heading-558"
+          },
+          {
+            "title": "六、当行走成为观看方式",
+            "anchor": "heading-563"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-568"
+          }
+        ]
       },
       {
-        "title": "第十七章 慢门与当下",
-        "id": null,
-        "sourcePage": 105
+        "title": "第十七章    慢门与当下",
+        "id": "chapter-17",
+        "sections": [
+          {
+            "title": "一、当下并不等于瞬间",
+            "anchor": "heading-578"
+          },
+          {
+            "title": "二、慢门对“即时性”的回应",
+            "anchor": "heading-583"
+          },
+          {
+            "title": "三、当一切都在发生，何以选择停留",
+            "anchor": "heading-588"
+          },
+          {
+            "title": "四、慢门与注意力的回收",
+            "anchor": "heading-592"
+          },
+          {
+            "title": "五、慢门不是抵抗，而是调整",
+            "anchor": "heading-595"
+          },
+          {
+            "title": "六、在瞬息中保留连续",
+            "anchor": "heading-599"
+          },
+          {
+            "title": "小结",
+            "anchor": "heading-603"
+          }
+        ]
       },
       {
-        "title": "第十八章 为什么，要慢下来？",
-        "id": null,
-        "sourcePage": 110
+        "title": "第十八章   为什么，要慢下来？",
+        "id": "chapter-18",
+        "sections": [
+          {
+            "title": "一、慢下来，并不是因为时间不够",
+            "anchor": "heading-614"
+          },
+          {
+            "title": "二、慢门不是对抗，而是回归",
+            "anchor": "heading-620"
+          },
+          {
+            "title": "三、慢门让摄影重新变得谦逊",
+            "anchor": "heading-625"
+          },
+          {
+            "title": "四、当影像退后，经验走向前",
+            "anchor": "heading-630"
+          },
+          {
+            "title": "五、慢门之后，仍然是生活",
+            "anchor": "heading-635"
+          }
+        ]
       },
       {
         "title": "结语",
-        "id": null,
-        "sourcePage": 114
+        "id": "conclusion",
+        "sections": []
       }
     ],
-    "appleBooksUrl": "https://books.apple.com/au/book/id6757672905"
+    "appleBooksUrl": "https://books.apple.com/au/book/id6757672905",
+    "edition": "docx-full-v1",
+    "sectionCount": 22,
+    "chapterCount": 18,
+    "imageCount": 24
   },
   {
     "id": "slow-shutter",

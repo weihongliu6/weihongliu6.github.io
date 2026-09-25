@@ -1,0 +1,186 @@
+{
+  "id": "chapter-06",
+  "title": "第六章    慢门与稳定",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "第六章    慢门与稳定",
+      "sourceParagraph": 193,
+      "sourceStyle": "Heading 1",
+      "anchor": "heading-193"
+    },
+    {
+      "type": "paragraph",
+      "text": "在时间被拉长的过程中，稳定，成为一切画面的前提。",
+      "sourceParagraph": 194,
+      "sourceStyle": "入口句"
+    },
+    {
+      "type": "paragraph",
+      "text": "三脚架、手持与身体的参与在慢门摄影中，“稳定”几乎是一个绕不开的话题。许多人在尚未真正理解慢门之前，就已经被一个结论提前劝退：慢门，一定要三脚架。",
+      "sourceParagraph": 196,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "这个结论并不完全错误，却过于简单。它忽略了一个更重要的问题——稳定，究竟是为了什么？",
+      "sourceParagraph": 197,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "一、稳定不是目的，而是参照",
+      "sourceParagraph": 198,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-198"
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门摄影中，稳定并不是为了消除一切变化，而是为了在画面中建立一个可以被识别的参照。当画面中存在稳定的元素，流动才变得可见；当一切都在晃动，变化反而失去了方向。",
+      "sourceParagraph": 199,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "稳定的意义，不在于“绝对静止”，而在于为时间的痕迹提供对照。",
+      "sourceParagraph": 200,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "二、三脚架的价值与局限",
+      "sourceParagraph": 201,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-201"
+    },
+    {
+      "type": "paragraph",
+      "text": "三脚架在慢门摄影中确实非常有用。它能够提供可靠的结构稳定性，帮助保留画面中的清晰部分。",
+      "sourceParagraph": 202,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "在需要长时间曝光、或对构图要求极为精确的场景中，三脚架几乎不可替代。但三脚架并不是慢门摄影的通行证。它解决的是“如何不动”，却并不解决“如何看”。",
+      "sourceParagraph": 203,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果对画面中的时间关系缺乏理解，再稳定的设备，也只能得到空洞的结果。",
+      "sourceParagraph": 204,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "三、手持慢门的可能性",
+      "sourceParagraph": 205,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-205"
+    },
+    {
+      "type": "paragraph",
+      "text": "与常见认知不同，慢门并不总是排斥手持。在相对较短的慢门时间内，在有环境支撑的条件下，手持慢门完全可以成为一种有效方式。墙面、栏杆、地面、身体本身，都可以成为稳定的一部分。",
+      "sourceParagraph": 206,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "更重要的是，手持慢门让摄影重新回到“行走”之中。它允许拍摄发生在移动中，发生在观察的当下，而不是被器材固定在原地。",
+      "sourceParagraph": 207,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "四、身体不是干扰，而是参与者",
+      "sourceParagraph": 208,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-208"
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门摄影中，身体并非必须被消除的变量。呼吸、重心的微调、站立的方式、按下快门的节奏，都会在画面中留下痕迹。",
+      "sourceParagraph": 209,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "这些痕迹并不一定是缺陷。在某些情况下，它们反而让影像更接近人的感受方式。慢门摄影并不要求摄影者变成一台机器，它允许身体的存在，甚至接纳身体的不完美。",
+      "sourceParagraph": 210,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "五、控制与放手之间的平衡",
+      "sourceParagraph": 211,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-211"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影并不是完全放弃控制，也不是追求绝对控制。它更像是在两者之间寻找平衡。知道哪些部分需要稳定，也知道哪些部分可以交给时间。这种平衡，并非一次学会，而是在不断拍摄中逐渐形成。",
+      "sourceParagraph": 212,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "当摄影者开始信任时间，画面反而会变得更加从容。",
+      "sourceParagraph": 213,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "六、稳定背后的心理转变",
+      "sourceParagraph": 214,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-214"
+    },
+    {
+      "type": "paragraph",
+      "text": "对稳定的执着，往往并非源于画面本身，而是源于对失败的恐惧。慢门摄影需要接受结果的不确定性，而这种不确定性，正是很多人感到不安的地方。",
+      "sourceParagraph": 215,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "但慢门并不要求每一次都成功。它更像一种持续的练习，一次次靠近，一次次修正。当稳定不再成为负担，慢门摄影才真正变得自由。",
+      "sourceParagraph": 216,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "小结",
+      "sourceParagraph": 217,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-217"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影中的稳定，不是对变化的压制，而是对变化的理解。三脚架、手持、身体参与，都只是不同的路径，没有高低之分。",
+      "sourceParagraph": 218,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "真正重要的，是你是否清楚自己在为哪一部分提供稳定，又愿意让哪一部分继续流动。",
+      "sourceParagraph": 219,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-down-docx/photo-05-reading.jpg",
+      "fullSrc": "assets/books/slow-down-docx/photo-05-large.jpg",
+      "width": 1400,
+      "height": 788,
+      "alt": "慢门并不回答问题，它让问题停留得更久。",
+      "caption": "慢门并不回答问题，它让问题停留得更久。",
+      "sourceParagraph": 219,
+      "sourceImage": "IMG_4867.HEIC"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "id": "chapter-13",
+  "title": "第十三章    慢门与记忆",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "第十三章    慢门与记忆",
+      "sourceParagraph": 421,
+      "sourceStyle": "Heading 1",
+      "anchor": "heading-421"
+    },
+    {
+      "type": "paragraph",
+      "text": "有些画面之所以被记住，并不是因为它们清晰，而是因为它们承载了时间。",
+      "sourceParagraph": 422,
+      "sourceStyle": "入口句"
+    },
+    {
+      "type": "paragraph",
+      "text": "——时间如何接近人的经验",
+      "sourceParagraph": 424,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "记忆，从来不是瞬间的。我们以为自己记住的是某一个画面、某一个时刻，但真正留在心里的，往往是一段持续的感受：气温、光线、步伐的节奏、以及当时的心境。",
+      "sourceParagraph": 425,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影之所以与记忆产生共鸣，正是因为它与记忆拥有相似的时间结构。",
+      "sourceParagraph": 426,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "一、记忆并非“清晰再现”",
+      "sourceParagraph": 427,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-427"
+    },
+    {
+      "type": "paragraph",
+      "text": "在回忆中，我们很少拥有完整、锐利的细节。边缘往往是模糊的，时间顺序也并不严格。",
+      "sourceParagraph": 428,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "记忆并不像一张高分辨率的照片，它更像是一段被反复叠加的经验。",
+      "sourceParagraph": 429,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影所呈现的，正是这种叠加后的状态。它并不强调某一个瞬间的准确性，而是让一段时间在画面中自然沉淀。",
+      "sourceParagraph": 430,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-down-docx/photo-17-reading.jpg",
+      "fullSrc": "assets/books/slow-down-docx/photo-17-large.jpg",
+      "width": 1400,
+      "height": 788,
+      "alt": "记忆从不完整，它更像一次缓慢的回望。",
+      "caption": "记忆从不完整，它更像一次缓慢的回望。",
+      "sourceParagraph": 430,
+      "sourceImage": "ParisArchitecture 2.jpg"
+    },
+    {
+      "type": "heading",
+      "text": "二、慢门影像为何让人感到“熟悉”",
+      "sourceParagraph": 431,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-431"
+    },
+    {
+      "type": "paragraph",
+      "text": "许多人在观看慢门作品时，会产生一种难以言明的熟悉感。并不是因为见过同样的场景，而是因为这种影像方式",
+      "sourceParagraph": 432,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "贴近我们记忆的工作方式。",
+      "sourceParagraph": 433,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门中的模糊、连续的轨迹、稳定与流动并存的结构，",
+      "sourceParagraph": 434,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "都与人类回忆时的心理状态高度相似。",
+      "sourceParagraph": 435,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门并不复制记忆，它只是采用了与记忆相近的语言。",
+      "sourceParagraph": 436,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "三、时间被拉长，意义反而浮现",
+      "sourceParagraph": 437,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-437"
+    },
+    {
+      "type": "paragraph",
+      "text": "在瞬间摄影中，意义往往集中在某一个“决定性时刻”。而在记忆中，意义却常常来自持续。",
+      "sourceParagraph": 438,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "一段旅途的意义，并不来自某一张照片，而来自一路走来的节奏。",
+      "sourceParagraph": 439,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影通过拉长时间，让画面接近这种经验结构。它不急于给出答案，而是允许意义在观看中逐渐形成。",
+      "sourceParagraph": 440,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "四、慢门与怀旧的区别",
+      "sourceParagraph": 441,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-441"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影常被误认为带有怀旧气质。但慢门并不试图回到过去。怀旧强调的是时间的距离，而慢门强调的是时间的连续。",
+      "sourceParagraph": 442,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门所关注的，并不是“曾经发生过什么”，而是“正在发生的过程”。",
+      "sourceParagraph": 443,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "它并不制造回忆，而是让当下更接近未来的记忆形态。",
+      "sourceParagraph": 444,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "image",
+      "src": "assets/books/slow-down-docx/photo-18-reading.jpg",
+      "fullSrc": "assets/books/slow-down-docx/photo-18-large.jpg",
+      "width": 1400,
+      "height": 787,
+      "alt": "有些经历，不是被记住，而是被安放。",
+      "caption": "有些经历，不是被记住，而是被安放。",
+      "sourceParagraph": 444,
+      "sourceImage": "BusselTownBaW1a.jpg"
+    },
+    {
+      "type": "heading",
+      "text": "五、慢门作为“经验的保存方式”",
+      "sourceParagraph": 445,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-445"
+    },
+    {
+      "type": "paragraph",
+      "text": "在这一意义上，慢门摄影并不是为了留住画面，而是为了保存一种体验方式。",
+      "sourceParagraph": 446,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "当我们以慢门的方式观看世界，我们并不是在延迟拍摄，",
+      "sourceParagraph": 447,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "而是在延迟离开。这种延迟，让经验得以完整展开，",
+      "sourceParagraph": 448,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "也让记忆有了生长的空间。",
+      "sourceParagraph": 449,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "六、慢门与个人时间",
+      "sourceParagraph": 450,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-450"
+    },
+    {
+      "type": "paragraph",
+      "text": "每个人的时间感受并不相同。有人感到时间飞快，有人感到时间沉重。",
+      "sourceParagraph": 451,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门摄影并不统一时间，它尊重个人节奏。",
+      "sourceParagraph": 452,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门中，时间不再是外在的刻度，而是与人的经验发生关系。",
+      "sourceParagraph": 453,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "摄影在这里，成为一种与自身时间对齐的方式。",
+      "sourceParagraph": 454,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "小结",
+      "sourceParagraph": 455,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-455"
+    },
+    {
+      "type": "paragraph",
+      "text": "记忆不是瞬间的集合，而是持续经验的结果。慢门摄影之所以动人，并不是因为它“拍得慢”，而是因为它让影像更接近人类记忆的形态。",
+      "sourceParagraph": 456,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "在慢门中，时间不再被切割，而是被温柔地保存下来。",
+      "sourceParagraph": 457,
+      "sourceStyle": "Body"
+    }
+  ]
+}

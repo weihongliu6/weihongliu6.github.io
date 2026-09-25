@@ -1,0 +1,72 @@
+{
+  "id": "author-note",
+  "title": "作者说明",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "作者说明",
+      "sourceParagraph": 41,
+      "sourceStyle": "Heading 2",
+      "anchor": "heading-41"
+    },
+    {
+      "type": "paragraph",
+      "text": "作者以手机进行长期摄影创作，关注时间、光影与情绪在影像中的关系。",
+      "sourceParagraph": 42,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "相比捕捉瞬间，更在意影像如何承载一段正在流动的时间，以及观看本身所带来的感受变化。",
+      "sourceParagraph": 43,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "《慢下来，看见世界》并非摄影教程，而是一组关于节奏、观看与日常经验的摄影随笔。",
+      "sourceParagraph": 44,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "这些影像与文字，来自行走途中，也来自平凡生活之中。",
+      "sourceParagraph": 45,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "About the Author",
+      "sourceParagraph": 46,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "The author works primarily with mobile photography, focusing on the relationship between time, light, and emotional perception.",
+      "sourceParagraph": 48,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "Rather than capturing decisive moments, the author is more interested in how an image can carry the trace of time as it slowly unfolds.",
+      "sourceParagraph": 49,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "Slow Down, and See the World is not a photography manual, but a collection of reflective notes on seeing, rhythm, and everyday experience.",
+      "sourceParagraph": 51,
+      "sourceStyle": "章节号"
+    },
+    {
+      "type": "paragraph",
+      "text": "The images and words in this book come from moments of travel as well as from ordinary daily life.",
+      "sourceParagraph": 52,
+      "sourceStyle": "章节号"
+    }
+  ]
+}

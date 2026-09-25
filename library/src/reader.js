@@ -1,8 +1,10 @@
-import { storage } from './storage.js';
-import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks } from './components.js';
+import { storage } from './storage.js?v=phase2-20260925';
+import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks } from './components.js?v=phase2-20260925';
 
 export function renderReader(book, chapter, index, resume = false) {
   const list = book.chapters;
+  const full = book.status==='complete';
+  const readingLabel = full?'阅读进度':'样章阅读进度';
   const previous = list[index - 1], next = list[index + 1];
   const titleText=chapter.title.replace(/\s/g,'');
   let firstBody=0;
@@ -12,15 +14,15 @@ export function renderReader(book, chapter, index, resume = false) {
       <aside class="reader-aside"><a class="back-link" href="${bookURL(book.id)}">← 书籍与目录</a><details class="reader-toc" ${matchMedia('(min-width: 1050px)').matches ? 'open' : ''}><summary>本书目录 <span aria-hidden="true">＋</span></summary><p class="aside-title">${e(book.title)}</p><ol>${tocItems(book,chapter.id)}</ol></details></aside>
       <div class="reader-main">
         <div class="reader-toolbar"><a href="${bookURL(book.id)}">${e(book.title)}</a><div class="font-tools" role="group" aria-label="字号设置"><button type="button" id="font-smaller" aria-label="减小字号">A−</button><output id="font-size" aria-live="polite"></output><button type="button" id="font-larger" aria-label="增大字号">A＋</button></div></div>
-        <article class="reading-content" id="reading-content"><header class="chapter-header"><p class="eyebrow">阅读样章 <span class="fine-divider">/</span> ${String(index+1).padStart(2,'0')} — ${String(list.length).padStart(2,'0')}</p><h1>${e(chapter.title)}</h1><p class="chapter-byline">${e(book.author)} <span>·</span> 原书文字与图片</p></header><div class="chapter-body">${contentBlocks(chapter.blocks.slice(firstBody))}</div><div class="source-note">本节来自已出版 EPUB 第 ${chapter.source.pages[0]}–${chapter.source.pages.at(-1)} 页。仅调整网页段落与版式，未改写原文。</div></article>
-        <nav class="chapter-nav" aria-label="章节导航">${previous ? `<a href="${readURL(book.id,previous.id)}"><small>← 上一章</small><span>${e(previous.title)}</span></a>` : '<button disabled type="button"><small>← 上一章</small><span>已是样章起点</span></button>'}${next ? `<a href="${readURL(book.id,next.id)}"><small>下一章 →</small><span>${e(next.title)}</span></a>` : `<a href="${bookURL(book.id)}#toc"><small>样章已读完 ✓</small><span>返回目录</span></a>`}</nav>
+        <article class="reading-content" id="reading-content"><header class="chapter-header"><p class="eyebrow">${full?'在线阅读':'阅读样章'} <span class="fine-divider">/</span> ${String(index+1).padStart(2,'0')} — ${String(list.length).padStart(2,'0')}</p><h1>${e(chapter.title)}</h1><p class="chapter-byline">${e(book.author)} <span>·</span> 原书文字与图片</p></header><div class="chapter-body">${contentBlocks(chapter.blocks.slice(firstBody))}</div><div class="source-note">${chapter.source.format==='docx'?'正文与图注依据作者确认版本收录。':`本节来自已出版 EPUB 第 ${chapter.source.pages[0]}–${chapter.source.pages.at(-1)} 页。仅调整网页段落与版式，未改写原文。`}</div></article>
+        <nav class="chapter-nav" aria-label="章节导航">${previous ? `<a href="${readURL(book.id,previous.id)}"><small>← 上一章</small><span>${e(previous.title)}</span></a>` : `<button disabled type="button"><small>← 上一章</small><span>${full?'已是本书起点':'已是样章起点'}</span></button>`}${next ? `<a href="${readURL(book.id,next.id)}"><small>下一章 →</small><span>${e(next.title)}</span></a>` : `<a href="${bookURL(book.id)}#toc"><small>${full?'全书已读完':'样章已读完'} ✓</small><span>返回目录</span></a>`}</nav>
         <a class="reader-library-link" href="#/">← 返回数字书房</a>
       </div>
     </div>
-    <div class="reading-status"><span>样章阅读进度 <strong id="progress-text">0%</strong></span><progress id="reading-progress" max="100" value="0" aria-label="样章阅读进度"></progress><span>${index+1} / ${list.length} 节</span></div>`;
+    <div class="reading-status"><span>${readingLabel} <strong id="progress-text">0%</strong></span><progress id="reading-progress" max="100" value="0" aria-label="${readingLabel}"></progress><span>${index+1} / ${list.length} 节</span></div>`;
 }
 
-export function bindReader(book, chapter, index, restore) {
+export function bindReader(book, chapter, index, restore, sectionAnchor = null) {
   let size = Number(storage.get('font-size', 21));
   if (!Number.isFinite(size)) size=21;
   size = Math.max(17, Math.min(29, size));
@@ -28,6 +30,7 @@ export function bindReader(book, chapter, index, restore) {
   const saved=storage.get(`reading:${book.id}`);
   let frame, cancelled=false;
   const updateProgress=()=>{
+    if(cancelled) return;
     const article=document.querySelector('#reading-content');
     if (!article) return;
     const start=article.offsetTop;
@@ -37,7 +40,7 @@ export function bindReader(book, chapter, index, restore) {
     document.querySelector('#progress-text').textContent=`${percent}%`;
     document.querySelector('#reading-progress').value=percent;
     document.querySelector('#reading-track-fill').style.width=`${percent}%`;
-    storage.set(`reading:${book.id}`,{chapter:chapter.id,fraction,percent});
+    storage.set(`reading:${book.id}`,{chapter:chapter.id,fraction,percent,edition:book.edition||'sample'});
   };
   const applyFont=()=>{
     document.documentElement.style.setProperty('--reading-size',`${size}px`);
@@ -55,15 +58,17 @@ export function bindReader(book, chapter, index, restore) {
   for(const img of document.querySelectorAll('.chapter-body img')) img.addEventListener('load',onScroll,{once:true});
   const restorePosition=()=>{
     if(cancelled) return;
-    if(restore && saved?.chapter===chapter.id){
+    if(sectionAnchor){
+      document.getElementById(sectionAnchor)?.scrollIntoView();
+    } else if(restore && saved?.chapter===chapter.id){
       const article=document.querySelector('#reading-content');
       const fraction=Math.min(1,Math.max(0,Number(saved.fraction)||0));
       window.scrollTo(0,article.offsetTop-80+fraction*Math.max(1,article.offsetHeight-window.innerHeight+130));
     }
     updateProgress();
   };
-  const images=[...document.querySelectorAll('.chapter-body img')];
-  // Decode even lazy images for a stable restored position; only two images in Phase 1.
-  Promise.all(images.map(img=>img.decode().catch(()=>{}))).then(restorePosition);
+  // Intrinsic dimensions reserve image space. Do not await off-screen lazy images:
+  // they may not load until scrolling, which would prevent anchor/resume restoration.
+  requestAnimationFrame(restorePosition);
   return ()=>{cancelled=true;cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll);};
 }

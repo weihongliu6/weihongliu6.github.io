@@ -1,0 +1,175 @@
+{
+  "id": "chapter-02",
+  "title": "第二章     慢门从何而来",
+  "source": {
+    "file": "慢下来Apple.docx",
+    "format": "docx",
+    "sha256": "c0424e8c16eb400c5c142a7a9b7941535e404e5a3604d45e19059def8df2466c"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "第二章     慢门从何而来",
+      "sourceParagraph": 78,
+      "sourceStyle": "Heading 1",
+      "anchor": "heading-78"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门并非一开始就被认可，它是在不断被纠正与怀疑中，慢慢形成的。",
+      "sourceParagraph": 79,
+      "sourceStyle": "入口句"
+    },
+    {
+      "type": "paragraph",
+      "text": "摄影史中的时间",
+      "sourceParagraph": 81,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果从今天回看摄影，慢门似乎是一种刻意的选择。但若回到摄影诞生之初，我们会发现一个事实：慢门并非后来者，而是摄影最初的形态。",
+      "sourceParagraph": 82,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "一、当摄影只能“慢下来”",
+      "sourceParagraph": 83,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-83"
+    },
+    {
+      "type": "paragraph",
+      "text": "在摄影技术尚未成熟的年代，感光材料的灵敏度极低。曝光时间往往以分钟，甚至以小时计。早期摄影并不是因为创作者“想要慢”，而是不得不慢。",
+      "sourceParagraph": 84,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "这意味着，摄影从一开始就不是对瞬间的捕捉，而是对时间的积累。街道常常显得空旷，行人因为移动而消失，建筑与静物成为最容易被记录的对象。",
+      "sourceParagraph": 85,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "在这些影像中，时间并非被隐藏，而是以“缺席”的方式显现出来。",
+      "sourceParagraph": 86,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "二、最早的摄影，是对时间的妥协",
+      "sourceParagraph": 87,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-87"
+    },
+    {
+      "type": "paragraph",
+      "text": "由于长时间曝光的限制，早期摄影必须与静止合作。人像需要被固定，场景需要保持不动。摄影并不是在选择题材，而是在被时间塑造题材。",
+      "sourceParagraph": 88,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "然而，正是在这种限制之中，摄影第一次展现出它与绘画的根本不同：它不是描绘，而是记录；不是想象，而是物理过程的结果。",
+      "sourceParagraph": 89,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "在当时，慢门并不是一种审美选择，而是一种现实条件。",
+      "sourceParagraph": 90,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "三、当摄影开始“追求快”",
+      "sourceParagraph": 91,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-91"
+    },
+    {
+      "type": "paragraph",
+      "text": "随着感光材料、镜头与机械结构的进步，曝光时间可以作到不断地缩短。摄影第一次拥有了捕捉瞬间的能力。",
+      "sourceParagraph": 92,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "运动被冻结，表情被定格，世界被分割成无数清晰的时间切片。这一技术突破，极大地改变了摄影的价值观。“清晰”“锐利”“决定性瞬间”逐渐成为衡量一张照片成功与否的重要标准。在这一过程中，慢门逐渐从“常态”变成了“例外”。",
+      "sourceParagraph": 93,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "四、“决定性瞬间”与时间观的转变",
+      "sourceParagraph": 94,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-94"
+    },
+    {
+      "type": "paragraph",
+      "text": "当摄影可以轻松捕捉瞬间时，时间被压缩到一个理想的点。这一点被视为意义最集中的时刻，被认为最接近真实、最具表达力。在这种摄影观之下，连续、模糊、不可预期的变化，往往被视为干扰。",
+      "sourceParagraph": 95,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门在此时，开始被误解为技术不足或控制失败的结果。但这并不意味着慢门失去了价值，而是摄影的主流叙事暂时转向了“快”。",
+      "sourceParagraph": 96,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "五、慢门作为一种“回到时间”的选择",
+      "sourceParagraph": 97,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-97"
+    },
+    {
+      "type": "paragraph",
+      "text": "当摄影进入高度成熟的阶段，技术不再是限制，慢门才第一次成为真正意义上的“选择”。在这一阶段，摄影者开始重新思考：如果摄影不仅能记录瞬间，是否也可以记录持续、流动与变化？",
+      "sourceParagraph": 98,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门重新出现，不再是因为技术不足，而是作为一种反向选择。它让摄影回到时间之中，让过程重新获得价值。",
+      "sourceParagraph": 99,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "六、慢门在当代摄影中的位置",
+      "sourceParagraph": 100,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-100"
+    },
+    {
+      "type": "paragraph",
+      "text": "在当代摄影语境中，慢门不再与“落后”或“失误”相关。相反，它成为一种明确的立场：拒绝单一瞬间的统治，承认世界的连续性。",
+      "sourceParagraph": 101,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "paragraph",
+      "text": "慢门不试图取代瞬间摄影，它只是补充了一种被忽略的时间维度。从这个意义上说，慢门并不是复古，而是一种对摄影本质问题的持续回应。",
+      "sourceParagraph": 102,
+      "sourceStyle": "Body"
+    },
+    {
+      "type": "heading",
+      "text": "小结",
+      "sourceParagraph": 103,
+      "sourceStyle": "Heading 3",
+      "anchor": "heading-103"
+    },
+    {
+      "type": "paragraph",
+      "text": "摄影史并不是一条从慢到快的单向进化路径。它更像是一条在“瞬间”与“持续”之间不断摆动的时间曲线。慢门从未真正消失，它只是等待被重新理解。",
+      "sourceParagraph": 104,
+      "sourceStyle": "Body"
+    }
+  ]
+}
