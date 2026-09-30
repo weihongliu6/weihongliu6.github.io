@@ -220,86 +220,6 @@
       letter-spacing:0.1px;
     }
 
-    .travel-feature{
-      display:grid;
-      grid-template-columns:minmax(0, 1.12fr) minmax(260px, .88fr);
-      max-width:920px;
-      min-height:270px;
-      margin:26px auto 8px;
-      overflow:hidden;
-      border:1px solid rgba(64,75,62,.15);
-      border-radius:22px;
-      background:rgba(255,255,255,.9);
-      box-shadow:0 12px 34px rgba(39,51,42,.12);
-      text-decoration:none;
-      color:inherit;
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-
-    .travel-feature:hover{
-      transform:translateY(-3px);
-      box-shadow:0 18px 42px rgba(39,51,42,.16);
-    }
-
-    .travel-feature__image{
-      min-height:270px;
-      background:url("images/travel/southern-africa-2027-hero.png") center/cover;
-    }
-
-    .travel-feature__content{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding:28px;
-    }
-
-    .travel-feature__eyebrow{
-      margin:0 0 12px;
-      color:#8a6846;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:1.6px;
-      text-transform:uppercase;
-    }
-
-    .travel-feature h2{
-      margin:0;
-      color:#26362e;
-      font-family:Georgia,"Times New Roman","Songti SC",serif;
-      font-size:clamp(24px,3vw,34px);
-      font-weight:500;
-      line-height:1.22;
-    }
-
-    .travel-feature__en{
-      display:block;
-      margin-top:8px;
-      color:#657067;
-      font-size:13px;
-      line-height:1.4;
-    }
-
-    .travel-feature__meta{
-      margin:18px 0 0;
-      color:#59635b;
-      font-size:12px;
-      line-height:1.7;
-    }
-
-    .travel-feature__cta{
-      margin-top:18px;
-      color:#9a6234;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.5px;
-    }
-
-    @media (max-width: 720px){
-      .travel-feature{ grid-template-columns:1fr; }
-      .travel-feature__image{ min-height:210px; }
-      .travel-feature__content{ padding:23px; }
-    }
-
     footer{
       margin-top:22px;
       text-align:center;
@@ -316,25 +236,31 @@
       filter:grayscale(1);
     }
 
-    .photography-note-entry{
-      display:block;
+    .studio-categories{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
       max-width:920px;
-      box-sizing:border-box;
       margin:26px auto;
-      padding:20px 24px;
+    }
+    .studio-category{
+      min-width:0;
+      padding:22px 24px;
       border:1px solid var(--border);
       border-radius:var(--radius);
       background:rgba(255,255,255,.9);
-      color:var(--text);
-      text-decoration:none;
       line-height:1.7;
     }
-    .photography-note-entry strong{display:block;font-size:16px;font-weight:600}
-    .photography-note-entry .en{font-size:11px;letter-spacing:.5px;margin-left:8px}
-    .photography-note-entry__title{display:block;margin-top:5px;font-size:17px}
-    .photography-note-entry__description{display:block;margin-top:4px;color:var(--muted);font-size:13px}
-    .photography-note-entry:hover{border-color:rgba(0,0,0,.25)}
-    .photography-note-entry:focus-visible{outline:2px solid #1a5fb4;outline-offset:4px}
+    .studio-category h2{margin:0;font-size:19px;font-weight:500}
+    .studio-category h2 a{color:var(--text);text-decoration:none}
+    .studio-category .en{display:block;margin-top:2px;font-size:11px;letter-spacing:.5px}
+    .studio-category p{margin:12px 0;font-size:13px;color:var(--muted)}
+    .studio-category .category-latest{margin-top:16px;font-size:12px;line-height:1.8}
+    .category-latest a{color:inherit;text-underline-offset:3px}
+    .category-action{display:inline-flex;align-items:center;min-height:44px;color:#1a5fb4;font-size:13px;text-decoration:none}
+    .studio-category a:hover{text-decoration:underline;text-underline-offset:4px}
+    .studio-category a:focus-visible{outline:2px solid #1a5fb4;outline-offset:4px}
+    @media(max-width:640px){.studio-categories{grid-template-columns:1fr;gap:12px}.studio-category{padding:18px 20px}}
   </style>
 
   <!-- GoatCounter 后台统计 -->
@@ -398,24 +324,20 @@
       </div>
     </div>
 
-    <a class="photography-note-entry" href="/notes/light-falls/">
-      <strong>摄影札记 <span class="en" lang="en">Photography Notes</span></strong>
-      <span class="photography-note-entry__title">不等待光线，是因为更理解光线。</span>
-      <span class="photography-note-entry__description">从一张自然光人像开始，谈光线、观察与摄影表达。 →</span>
-    </a>
-
-    <a class="travel-feature" href="travel/southern-africa-2027/" aria-label="打开2027非洲南部五国自然探索之旅">
-      <div class="travel-feature__image" role="img" aria-label="非洲南部沙漠、湿地与象群"></div>
-      <div class="travel-feature__content">
-        <p class="travel-feature__eyebrow">私人行程 · Private Journey</p>
-        <h2>
-          2027 非洲南部<br>五国自然探索之旅
-          <span class="travel-feature__en">2027 Southern Africa<br>Five-Country Nature Exploration Journey</span>
-        </h2>
-        <p class="travel-feature__meta">详细行程仅限获准成员查看<br>Itinerary details are available to approved members.</p>
-        <span class="travel-feature__cta">进入私人行程 / ACCESS PRIVATE ITINERARY →</span>
-      </div>
-    </a>
+    <section class="studio-categories" aria-label="创作与探索 · Studio categories">
+      <article class="studio-category">
+        <h2><a href="/notes/">摄影札记<span class="en" lang="en">Photography Notes</span></a></h2>
+        <p>观察光线、时间与摄影表达。</p>
+        <p class="category-latest">最新：<a href="/notes/light-falls/">不等待光线，是因为更理解光线。</a></p>
+        <a class="category-action" href="/notes/">进入摄影札记 →</a>
+      </article>
+      <article class="studio-category">
+        <h2><a href="/travel/">旅行与探索<span class="en" lang="en">Travel &amp; Exploration</span></a></h2>
+        <p>在行走中观察地方、文化、自然与时间。</p>
+        <p class="category-latest">近期计划：<a href="/travel/southern-africa-2027/">2027 非洲南部五国自然探索之旅</a></p>
+        <a class="category-action" href="/travel/">进入旅行与探索 →</a>
+      </article>
+    </section>
 
     <div class="nav-row">
       <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span><span class="nav-count" data-count-paths="/works.html,/works">visits --</span></a>
