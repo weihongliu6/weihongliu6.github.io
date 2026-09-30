@@ -6,3 +6,12 @@
 
 /* Local pilot: keep the secondary return visible and keyboard accessible. */
 .studio-return{display:inline-flex;align-items:center;gap:.35em;min-height:44px}.studio-return:focus-visible{outline:2px solid var(--ink);outline-offset:4px}@media(max-width:480px){.site-footer{flex-wrap:wrap}.studio-return{width:100%}}
+
+/* Native film player: retain the portrait, prose and existing reading layout. */
+.photography-film{margin:0 0 32px;font-family:var(--sans);letter-spacing:0}
+.photography-film h2{font-size:13px;line-height:1.7;font-weight:500;color:var(--accent);margin:0 0 14px}
+.photography-film h2 span{font-size:11px;color:var(--muted)}
+.photography-film video{display:block;width:min(100%,300px);height:auto;aspect-ratio:9/16;object-fit:contain;margin-inline:auto;background:var(--paper)}
+.photography-film video:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.photography-film figcaption{margin-top:12px;font-size:11px;line-height:1.8;color:var(--muted);text-align:center}
+.photography-film figcaption span{display:block;font-size:10px}

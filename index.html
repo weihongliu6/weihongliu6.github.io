@@ -315,6 +315,26 @@
       opacity:.35;
       filter:grayscale(1);
     }
+
+    .photography-note-entry{
+      display:block;
+      max-width:920px;
+      box-sizing:border-box;
+      margin:26px auto;
+      padding:20px 24px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.9);
+      color:var(--text);
+      text-decoration:none;
+      line-height:1.7;
+    }
+    .photography-note-entry strong{display:block;font-size:16px;font-weight:600}
+    .photography-note-entry .en{font-size:11px;letter-spacing:.5px;margin-left:8px}
+    .photography-note-entry__title{display:block;margin-top:5px;font-size:17px}
+    .photography-note-entry__description{display:block;margin-top:4px;color:var(--muted);font-size:13px}
+    .photography-note-entry:hover{border-color:rgba(0,0,0,.25)}
+    .photography-note-entry:focus-visible{outline:2px solid #1a5fb4;outline-offset:4px}
   </style>
 
   <!-- GoatCounter 后台统计 -->
@@ -377,6 +397,12 @@
         Shadow Observer Digital Studio explores photography and ideas, observing the world slowly in an age of acceleration.
       </div>
     </div>
+
+    <a class="photography-note-entry" href="/notes/light-falls/">
+      <strong>摄影札记 <span class="en" lang="en">Photography Notes</span></strong>
+      <span class="photography-note-entry__title">不等待光线，是因为更理解光线。</span>
+      <span class="photography-note-entry__description">从一张自然光人像开始，谈光线、观察与摄影表达。 →</span>
+    </a>
 
     <a class="travel-feature" href="travel/southern-africa-2027/" aria-label="打开2027非洲南部五国自然探索之旅">
       <div class="travel-feature__image" role="img" aria-label="非洲南部沙漠、湿地与象群"></div>
