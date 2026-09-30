@@ -182,7 +182,8 @@
       border:1px solid rgba(188,208,255,0.95);
     }
 
-    .nav-pill--stridelog{
+    .nav-pill--stridelog,
+    .nav-pill--notes{
       min-height:56px;
       justify-content:center;
       text-align:center;
@@ -236,31 +237,6 @@
       filter:grayscale(1);
     }
 
-    .studio-categories{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-      max-width:920px;
-      margin:26px auto;
-    }
-    .studio-category{
-      min-width:0;
-      padding:22px 24px;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.9);
-      line-height:1.7;
-    }
-    .studio-category h2{margin:0;font-size:19px;font-weight:500}
-    .studio-category h2 a{color:var(--text);text-decoration:none}
-    .studio-category .en{display:block;margin-top:2px;font-size:11px;letter-spacing:.5px}
-    .studio-category p{margin:12px 0;font-size:13px;color:var(--muted)}
-    .studio-category .category-latest{margin-top:16px;font-size:12px;line-height:1.8}
-    .category-latest a{color:inherit;text-underline-offset:3px}
-    .category-action{display:inline-flex;align-items:center;min-height:44px;color:#1a5fb4;font-size:13px;text-decoration:none}
-    .studio-category a:hover{text-decoration:underline;text-underline-offset:4px}
-    .studio-category a:focus-visible{outline:2px solid #1a5fb4;outline-offset:4px}
-    @media(max-width:640px){.studio-categories{grid-template-columns:1fr;gap:12px}.studio-category{padding:18px 20px}}
   </style>
 
   <!-- GoatCounter 后台统计 -->
@@ -324,24 +300,10 @@
       </div>
     </div>
 
-    <section class="studio-categories" aria-label="创作与探索 · Studio categories">
-      <article class="studio-category">
-        <h2><a href="/notes/">摄影札记<span class="en" lang="en">Photography Notes</span></a></h2>
-        <p>观察光线、时间与摄影表达。</p>
-        <p class="category-latest">最新：<a href="/notes/light-falls/">不等待光线，是因为更理解光线。</a></p>
-        <a class="category-action" href="/notes/">进入摄影札记 →</a>
-      </article>
-      <article class="studio-category">
-        <h2><a href="/travel/">旅行与探索<span class="en" lang="en">Travel &amp; Exploration</span></a></h2>
-        <p>在行走中观察地方、文化、自然与时间。</p>
-        <p class="category-latest">近期计划：<a href="/travel/southern-africa-2027/">2027 非洲南部五国自然探索之旅</a></p>
-        <a class="category-action" href="/travel/">进入旅行与探索 →</a>
-      </article>
-    </section>
-
     <div class="nav-row">
       <a class="nav-pill" href="works.html"><span class="zh">摄影作品</span><span class="en">Photography Works</span><span class="nav-count" data-count-paths="/works.html,/works">visits --</span></a>
       <a class="nav-pill" href="projects.html"><span class="zh">摄影专辑</span><span class="en">Projects</span><span class="nav-count" data-count-paths="/projects.html,/projects">visits --</span></a>
+      <a class="nav-pill nav-pill--notes" href="/notes/"><span class="zh">摄影札记</span><span class="en">Photography Notes</span></a>
       <a class="nav-pill" href="music-player.html"><span class="zh">音乐播放器</span><span class="en">Music Player</span><span class="nav-count" data-count-paths="/music-player.html,/music-player">visits --</span></a>
       <a class="nav-pill" href="ai-video/index.html"><span class="zh">AI 音乐视频</span><span class="en">AI Music Videos</span><span class="nav-count" data-count-paths="/ai-video/,/ai-video/index.html,/ai-video">visits --</span></a>
       <a class="nav-pill" href="articles.html"><span class="zh">思想随笔</span><span class="en">Reflections and Essays</span><span class="nav-count" data-count-paths="/articles.html,/articles">visits --</span></a>
