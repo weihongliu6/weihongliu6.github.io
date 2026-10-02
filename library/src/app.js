@@ -26,10 +26,11 @@ main.addEventListener('click',event=>{
   const image=document.querySelector('#full-image'); image.src=button.dataset.image;image.alt=button.dataset.alt;
   document.querySelector('#image-caption').textContent=button.dataset.caption;
   viewer.showModal();
+  window.ShadowAnalytics?.event('photo_enlarge', 'book-illustration');
 });
 
 function appleBooksLink(book, className = 'text-link'){
-  return book.appleBooksUrl ? `<a class="${className}" href="${e(book.appleBooksUrl)}" target="_blank" rel="noopener noreferrer" title="在新标签页打开 / Opens in a new tab">Apple Books ↗</a>` : '';
+  return book.appleBooksUrl ? `<a class="${className}" data-analytics-book="${e(book.id)}" href="${e(book.appleBooksUrl)}" target="_blank" rel="noopener noreferrer" title="在新标签页打开 / Opens in a new tab">Apple Books ↗</a>` : '';
 }
 function weReadEntry(book){
   if(book.id !== 'slow-down') return '';
@@ -48,6 +49,7 @@ function bookPage(book){
   return `<div class="book-page"><a class="back-link" href="#/">← 返回书架</a><section class="book-intro"><div class="book-display"><div class="book-object">${cover(book,true)}</div><span class="cover-credit">${e(book.coverLabel || '已出版版本封面')}</span></div><div class="book-details"><p class="eyebrow">${book.status==='complete'?'完整数字版':'第一本开放样章'} <span class="fine-divider">/</span> ${String(books.findIndex(entry=>entry.id===book.id)+1).padStart(2,'0')}</p><h1>${e(book.title)}</h1><p class="book-subtitle">${e(book.subtitle)}</p><p class="author">${e(book.author)} <span>著</span></p><div class="intro-excerpt"><p>${e(book.intro)}</p><small>摘自${e(book.introSource)}</small></div><div class="book-actions"><a class="primary-link" href="${readURL(book.id,book.chapters[0].id)}">在线阅读 / Read Online <span aria-hidden="true">→</span></a>${appleBooksLink(book,'resume-link')}${validLast?`<a class="resume-link" href="${readURL(book.id,last.chapter)}?resume=1">继续上次阅读 <span>${Math.max(0,Math.min(100,((book.chapters.findIndex(c=>c.id===last.chapter)+Math.max(0,Math.min(1,Number(last.fraction)||0)))/book.chapters.length*100).toFixed(0)))}%</span></a>`:''}</div>${weReadEntry(book)}<p class="sample-note">${book.editionSummary?e(book.editionSummary):(book.status==='complete'?'前言、双语作者说明、18 章正文及结语 · 24 幅摄影作品。':'目前开放 3 节样章。目录来自原书，其他章节待收录。')}</p></div></section><section id="toc" class="contents-section"><div class="section-label"><h2>目录 <span>CONTENTS</span></h2><span>${book.status==='complete'?'完整目录':'原书目录 · 样章先行'}</span></div><ol class="book-toc">${tocItems(book)}</ol></section></div>`;
 }
 async function render(){
+  let analyticsSuccess=true;
   const version=++renderVersion;cleanup();cleanup=()=>{};
   if(viewer.open) viewer.close();
   const hash=location.hash.slice(1)||'/';
@@ -75,7 +77,8 @@ async function render(){
       document.title=`${entry.title} · ${book.title}`;
       window.scrollTo(0,0);cleanup=bindReader(book,chapterCache.get(entry.file),index,new URLSearchParams(query).get('resume')==='1',new URLSearchParams(query).get('section'));
     } else throw Error('这个页面尚未收录。');
-  }catch(error){main.innerHTML=`<section class="empty-state"><h1>暂时无法打开</h1><p>${e(error.message)}</p><a class="primary-link" href="#/">返回书架 →</a></section>`;}
+  }catch(error){analyticsSuccess=false;main.innerHTML=`<section class="empty-state"><h1>暂时无法打开</h1><p>${e(error.message)}</p><a class="primary-link" href="#/">返回书架 →</a></section>`;}
+  if(analyticsSuccess) window.ShadowAnalytics?.bookPage(book?.id, page==='read'?chapterId:null);
   main.focus({preventScroll:true});
   if(page!=='read') window.scrollTo(0,0);
   if(hash.endsWith('#toc')) document.querySelector('#toc')?.scrollIntoView();

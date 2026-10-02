@@ -205,7 +205,7 @@
       color: #777;
       text-align: center;
     }
-  
+
     .visit-badge{
       display:block;
       margin:10px auto 0;
@@ -214,8 +214,8 @@
       filter:grayscale(1);
     }
 </style>
-  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
+
+  <script defer src="/assets/analytics/analytics.js?v=20261002-1"></script>
 </head>
 
 <body>
@@ -241,7 +241,7 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
 
     <section class="featured-section top-works" aria-label="Most Viewed Works">
       <div class="top-works-wrapper">
-        <h2 class="section-title-zh">Top 3 热门作品</h2>
+        <h2 class="section-title-zh">精选作品</h2>
         <h2 class="section-title-en">Top 3 Most Viewed Works</h2>
         <p class="section-intro">这些作品，正在被更多人看见。<br/>These works are being seen by more viewers.</p>
         <p class="section-intro">基于页面浏览量自动更新<br/>Automatically updated based on page views</p>
@@ -305,7 +305,7 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
         </div>
       </a>
 
-     
+
 
 <!-- 6: Sydney -->
 <a class="card" href="works/sydney.html">
@@ -360,9 +360,7 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
 
     <footer>© 影子观察 | Shadow Observer</footer>
 
-    <img class="visit-badge"
-     src="https://hits.sh/weihongliu6.github.io/works.svg?label=visits&color=777777&labelColor=eeeeee"
-     alt="visits">
+
 
   </div>
 
@@ -396,34 +394,8 @@ These images emerge from Dr Weihong Liu’s real presence in the world — not c
       `).join("");
     }
 
-    async function loadTopWorks() {
-      try {
-        const rankedWorks = await Promise.all(
-          topWorksCandidates.map(async (work) => {
-            const encodedPath = encodeURIComponent(work.path);
-            const counterUrl = `https://weihongliu.goatcounter.com/counter/${encodedPath}.json`;
-            const response = await fetch(counterUrl);
-            if (!response.ok) {
-              throw new Error(`GoatCounter request failed for ${work.path}`);
-            }
-            const data = await response.json();
-            const rawCount = String(data.count ?? "0");
-            const count = Number(rawCount.replace(/,/g, ""));
-            return { ...work, count: Number.isFinite(count) ? count : 0 };
-          })
-        );
-
-        rankedWorks.sort((a, b) => b.count - a.count);
-        renderTopWorks(rankedWorks.slice(0, 3));
-      } catch (error) {
-        const fallbackWorks = topWorksFallback
-          .map((path) => topWorksCandidates.find((work) => work.path === path))
-          .filter(Boolean);
-        renderTopWorks(fallbackWorks);
-      }
-    }
-
-    loadTopWorks();
+    // Curated selection: detailed analytics are private.
+    renderTopWorks(topWorksFallback.map(path => topWorksCandidates.find(work => work.path === path)).filter(Boolean));
   </script>
 </body>
 </html>

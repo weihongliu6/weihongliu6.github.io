@@ -380,8 +380,8 @@
       filter:grayscale(1);
     }
   </style>
-  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
+
+  <script defer src="/assets/analytics/analytics.js?v=20261002-1"></script>
 </head>
 
 <body>
@@ -487,9 +487,7 @@
         <p>Please enjoy and share this album freely.<br>If you enjoy the music, sharing this page is the greatest support for the creator.</p>
       </div>
       © 2026 Shadow Observer Digital Studio
-      <img class="visit-badge"
-           src="https://hits.sh/weihongliu6.github.io/music-player.svg?label=visits&color=777777&labelColor=eeeeee"
-           alt="visits">
+
     </footer>
   </main>
 
@@ -550,15 +548,17 @@
       });
     }
 
-    function playTrack(index){
+    function playTrack(index, automatic=false){
+      if(automatic) window.ShadowAnalytics?.musicAutomatic();
+      else window.ShadowAnalytics?.musicIntent("track-"+String(index+1).padStart(2,"0"));
       currentTrack = index;
       updateDisplay();
       audio.play().catch(() => {});
     }
 
-    function nextTrack(){
+    function nextTrack(automatic=false){
       currentTrack = (currentTrack + 1) % tracks.length;
-      playTrack(currentTrack);
+      playTrack(currentTrack, automatic===true);
     }
 
     function prevTrack(){
@@ -568,6 +568,7 @@
 
     playBtn.addEventListener("click", () => {
       if(audio.paused){
+        window.ShadowAnalytics?.musicIntent("track-"+String(currentTrack+1).padStart(2,"0"));
         audio.play().catch(() => {});
       } else {
         audio.pause();
@@ -575,7 +576,8 @@
     });
     prevBtn.addEventListener("click", prevTrack);
     nextBtn.addEventListener("click", nextTrack);
-    audio.addEventListener("ended", nextTrack);
+    audio.addEventListener("ended", () => nextTrack(true));
+    ["pointerdown","keydown"].forEach(type => audio.addEventListener(type, event => { if(event.isTrusted) window.ShadowAnalytics?.musicIntent("track-"+String(currentTrack+1).padStart(2,"0")); }));
 
     renderTracks();
     updateDisplay();

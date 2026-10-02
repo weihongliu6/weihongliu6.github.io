@@ -532,7 +532,7 @@
       line-height:1.8;
       margin:8px 0;
     }
-  
+
     .visit-badge{
       display:block;
       margin:10px auto 0;
@@ -541,8 +541,8 @@
       filter:grayscale(1);
     }
 </style>
-  <script data-goatcounter="https://weihongliu.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
+
+  <script defer src="/assets/analytics/analytics.js?v=20261002-1"></script>
 </head>
 
 <body>
@@ -604,9 +604,7 @@
 
         <footer>© Dr Weihong Liu · Digital Studio</footer>
 
-    <img class="visit-badge"
-     src="https://hits.sh/weihongliu6.github.io/projects.svg?label=visits&color=777777&labelColor=eeeeee"
-     alt="visits">
+
 
       </section>
 
@@ -1032,6 +1030,7 @@
         const key = btn.dataset.album;
         setActiveBtn(key);
         mainShow.setAlbum(key);
+        if(ALBUMS[key]?.slides.length) window.ShadowAnalytics?.event("gallery_open",key);
       });
     });
 
@@ -1058,6 +1057,7 @@
       modalShow.setAlbum(albumKey);
       mainShow.stopAuto();
       modalShow.startAuto();
+      if(ALBUMS[albumKey]?.slides.length) window.ShadowAnalytics?.event("photo_enlarge",albumKey);
     }
 
     function closeModal(){
