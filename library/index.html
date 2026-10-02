@@ -9,7 +9,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="src/styles.css?v=phase2-20260925">
   <script type="module" src="src/app.js?v=analytics-20261002"></script>
-  <script defer src="/assets/analytics/analytics.js?v=20261002-1"></script>
+  <script defer src="/assets/analytics/analytics.js?v=20261002-2"></script>
+  <link rel="stylesheet" href="/assets/analytics/counter.css">
+  <script defer src="/assets/analytics/counter.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳至正文</a>
@@ -19,6 +21,7 @@
   </header>
   <main id="main" tabindex="-1"><p class="loading">正在打开书房…</p></main>
   <footer class="site-footer"><span>影子观察 · 数字书房</span><span>摄影 · 艺术 · 医学 · 生活</span><span>个人阅读空间 <span class="footer-dot">·</span> 完整数字版</span></footer>
+    <div class="simple-visit-counter" data-visit-paths="/books/,/library/,/library/index.html,/books.html,/books" hidden><span class="visit-label">visits</span><span class="visit-number"></span></div>
   <dialog id="image-viewer" aria-labelledby="image-title">
     <div class="image-toolbar"><p id="image-title">大图查看</p><button id="close-image" type="button" aria-label="关闭图片">关闭 ×</button></div>
     <div class="image-stage"><img id="full-image" alt=""></div>

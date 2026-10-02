@@ -31,7 +31,7 @@
     const item = document.createElement('li'); item.textContent = JSON.stringify(payload); log.append(item);
   }
   function emit(path, title, event = true, referrer = '') {
-    if (!consent || document.visibilityState !== 'visible') return false;
+    if ((event && !consent) || (!event && choice?.allowed === false && choice.until > Date.now()) || document.visibilityState !== 'visible') return false;
     const payload = {p:path, t:title, e:event ? 'true' : '', ns:'true', r:referrer};
     if (test) { showLog(payload); return true; }
     if (blocked()) return false;
@@ -72,9 +72,9 @@
     if (!info || !manifest[info.key]) return;
     const base = manifest[info.key];
     current = {...base, ...info};
-    if (!consent || document.visibilityState !== 'visible' || (!test && blocked()) || rendered === current.path) return;
+    if ((choice?.allowed === false && choice.until > Date.now()) || document.visibilityState !== 'visible' || (!test && blocked()) || rendered === current.path) return;
     rendered = current.path; activeMs = 0; maxDepth = 0; lastInput = 0; lastTick = performance.now();
-    dailyBrowser();
+    if (consent) dailyBrowser();
     emit(current.path, `[${current.section}] ${current.title}`, false, sourceUsed ? '' : source());
     sourceUsed = true;
     // Coarse layout category only, never exact screen size or hardware characteristics.
@@ -194,5 +194,10 @@
     if(activeMs>=30000 && maxDepth>=.75) event('article_depth_75');
   },1000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&current)page(current);});
-  ready.then(() => { preferences(); staticPage(); });
+  ready.then(() => {
+    // The main pages show only their small counter. Preferences remain on the
+    // dedicated privacy page; diagnostic UI requires an explicit test URL.
+    if (location.pathname === '/privacy.html' || params.get('analytics') === 'test') preferences();
+    staticPage();
+  });
 })();

@@ -1,0 +1,6 @@
+/* The former compact grey visits badge, without a panel or dashboard link. */
+.simple-visit-counter{display:flex;width:max-content;height:16px;margin:10px auto 0;border-radius:3px;overflow:hidden;font:10px/16px Verdana,sans-serif;opacity:.35;white-space:nowrap}
+.simple-visit-counter[hidden],body.is-reading .simple-visit-counter{display:none}
+.simple-visit-counter span{padding:0 5px}
+.simple-visit-counter .visit-label{background:#eee;color:#555}
+.simple-visit-counter .visit-number{background:#777;color:#fff}

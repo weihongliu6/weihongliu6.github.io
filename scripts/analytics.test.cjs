@@ -12,7 +12,7 @@ async function boot({url='https://weihongliu6.github.io/',consent=true,storage=n
  return {requests,handlers,nodes,storage,context,document,window,runAgain:()=>vm.runInContext(code,context),tick(ms=1000){now+=ms;timers.forEach(f=>f())},focus(v){focused=v},fire(type,e={}){(handlers[type]||[]).forEach(f=>f(e))},payloads:()=>requests.map(r=>Object.fromEntries(new URL(r.u).searchParams))};
 }
 test('consent denied, local/preview origins, owner exclusion and DNT send nothing',async()=>{
- for(const options of [{consent:false},{url:'http://localhost:5174/'},{url:'https://preview.example.org/'},{dnt:true},{storage:new Map([['so-analytics-exclude','1']])}]) assert.equal((await boot(options)).requests.length,0);
+ for(const options of [{consent:false,storage:new Map([['so-analytics-choice',JSON.stringify({allowed:false,until:Date.now()+86400000})]])},{url:'http://localhost:5174/'},{url:'https://preview.example.org/'},{dnt:true},{storage:new Map([['so-analytics-exclude','1']])}]) assert.equal((await boot(options)).requests.length,0);
 });
 test('privacy: no query/referrer parameters, no fingerprints, credentials omitted',async()=>{
  const b=await boot({url:'https://weihongliu6.github.io/index.html?email=secret&token=private&utm_campaign=secret'});
@@ -46,4 +46,11 @@ test('audio requires explicit intent plus playing; autoplay and repeat playing e
  b.fire('playing',{target:audio});assert(!b.payloads().some(p=>p.p.includes('music_play_start')));
  b.window.ShadowAnalytics.musicIntent('track-01');b.fire('playing',{target:audio});b.fire('playing',{target:audio});assert.equal(b.payloads().filter(p=>p.p.includes('music_play_start')).length,1);
  b.window.ShadowAnalytics.musicIntent('track-02');b.window.ShadowAnalytics.musicAutomatic();b.fire('playing',{target:audio});assert.equal(b.payloads().filter(p=>p.p.includes('music_play_start')).length,1);
+});
+
+test('basic counting without a prompt writes no visitor markers or interaction metrics',async()=>{
+ const b=await boot({consent:false});
+ assert.equal(b.requests.length,1);assert.equal(b.payloads()[0].p,'/');assert(!b.payloads()[0].e);
+ assert.equal(b.storage.size,0);b.runAgain();assert.equal(b.requests.length,1);
+ assert.equal(b.document.body.children.length,0);
 });
