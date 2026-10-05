@@ -5,7 +5,7 @@ import { renderReader, bindReader } from './reader.js?v=phase4-20260925';
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
 const viewer=document.querySelector('#image-viewer');
-let books=[], cleanup=()=>{}, renderVersion=0;
+let platform={name:'Shadow Library Platform',version:'1'}, books=[], cleanup=()=>{}, renderVersion=0;
 const chapterCache=new Map();
 document.querySelector('.skip-link').onclick=event=>{event.preventDefault();main.focus();main.scrollIntoView();};
 function setTheme(theme){
@@ -30,23 +30,32 @@ main.addEventListener('click',event=>{
 });
 
 function appleBooksLink(book, className = 'text-link'){
-  return book.appleBooksUrl ? `<a class="${className}" data-analytics-book="${e(book.id)}" href="${e(book.appleBooksUrl)}" target="_blank" rel="noopener noreferrer" title="在新标签页打开 / Opens in a new tab">Apple Books ↗</a>` : '';
+  const entry=externalEditions(book).find(entry=>entry.channel==='apple-books');
+  const url=entry?.url || book.appleBooksUrl;
+  return url ? `<a class="${className}" data-analytics-book="${e(book.id)}" href="${e(url)}" target="_blank" rel="noopener noreferrer" title="在新标签页打开 / Opens in a new tab">Apple Books ↗</a>` : '';
 }
-function weReadEntry(book){
-  if(book.id !== 'slow-down') return '';
-  return `<div class="book-actions"><a class="resume-link" href="https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb" target="_blank" rel="noopener noreferrer">微信读书阅读 / Read on WeRead ↗</a></div><p class="sample-note">微信读书书名：《从镜头里，看见慢下来的世界》，与本站《慢下来看见世界》为同一作品。<br><span lang="en">The same book is available under its WeRead title.</span></p>`;
+// Legacy Apple fields remain supported; structured entries enable future channels.
+function externalEditions(book){
+  return (book.publication?.externalEditions || []).filter(entry=>{
+    try { return ['https:','http:'].includes(new URL(entry.url).protocol); } catch { return false; }
+  });
+}
+function otherEditionLinks(book){
+  return externalEditions(book).filter(entry=>entry.channel!=='apple-books').map(entry=>
+    `<div class="book-actions"><a class="resume-link" href="${e(entry.url)}" target="_blank" rel="noopener noreferrer">${e(entry.label)} ↗</a></div>${entry.title && entry.title!==book.title?`<p class="sample-note">${e(entry.label)}版题名：《${e(entry.title)}》，与本站《${e(book.title)}》为同一作品。</p>`:''}`
+  ).join('');
 }
 function canRead(book){ return ['sample','complete'].includes(book?.status); }
 function home(){
-  return `<section class="library-hero"><div class="eyebrow"><span class="tiny-line"></span> SHADOW OBSERVER <span class="fine-divider">/</span> PERSONAL LIBRARY</div><h1>影子观察<span class="title-dot"> · </span>数字书房</h1><p class="english-subtitle">A Personal Library of Photography, Art, Medicine &amp; Life</p><p class="hero-invitation">在书页之间，留一点时间给自己。</p></section>
-    <section class="collection" aria-labelledby="collection-title"><div class="section-label"><h2 id="collection-title">书架 <span>THE COLLECTION</span></h2><span>五本书 <span class="fine-divider">/</span> 一间书房</span></div><div class="bookshelf">${books.map((book,i)=>`<article class="book-card"><a class="book-cover-link" href="${bookURL(book.id)}" aria-label="打开《${e(book.title)}》${canRead(book)?(book.status==='complete'?'，可在线阅读':'，可阅读样章'):'，即将进入数字书房'}"><div class="book-object">${cover(book)}<span class="book-spine" aria-hidden="true"></span></div></a><div class="book-caption"><div class="book-meta"><span class="book-number">${String(i+1).padStart(2,'0')}</span><span class="book-status ${canRead(book)?'available':''}">${canRead(book)?(book.status==='complete'?'完整数字版':'样章开放'):'即将进入数字书房'}</span></div><h3><a href="${bookURL(book.id)}">${e(book.title)}</a></h3>${canRead(book)?'<a class="text-link" href="'+bookURL(book.id)+'">在线阅读 / Read Online <span aria-hidden="true">→</span></a>':''}${appleBooksLink(book)}</div></article>`).join('')}</div></section>
-    <section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>《慢下来看见世界》的完整数字版，现可在线阅读。<br>其余作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
+  return `<section class="library-hero"><div class="eyebrow"><span class="tiny-line"></span> ${e(platform.name)} <span class="fine-divider">/</span> V${e(platform.version)}</div><h1>影子观察<span class="title-dot"> · </span>数字书房</h1><p class="english-subtitle">Photography, Art, Medicine &amp; Life</p><p class="hero-invitation">在书页之间，留一点时间给自己。</p></section>
+    <section class="collection" aria-labelledby="collection-title"><div class="section-label"><h2 id="collection-title">书架 <span>THE COLLECTION</span></h2><span>${books.length} 本书 <span class="fine-divider">/</span> 一间书房</span></div><div class="bookshelf">${books.map((book,i)=>`<article class="book-card"><a class="book-cover-link" href="${bookURL(book.id)}" aria-label="打开《${e(book.title)}》${canRead(book)?(book.status==='complete'?'，可在线阅读':'，可阅读样章'):'，即将进入数字书房'}"><div class="book-object">${cover(book)}<span class="book-spine" aria-hidden="true"></span></div></a><div class="book-caption"><div class="book-meta"><span class="book-number">${String(i+1).padStart(2,'0')}</span><span class="book-status ${canRead(book)?'available':''}">${canRead(book)?(book.status==='complete'?'完整数字版':'样章开放'):'即将进入数字书房'}</span></div><h3><a href="${bookURL(book.id)}">${e(book.title)}</a></h3>${canRead(book)?'<a class="text-link" href="'+bookURL(book.id)+'">在线阅读 / Read Online <span aria-hidden="true">→</span></a>':''}${appleBooksLink(book)}</div></article>`).join('')}</div></section>
+    <section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>现有 ${books.filter(book=>book.status==='complete').length} 本完整数字书可在线阅读。<br>更多作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
 }
 function bookPage(book){
-  if(!canRead(book)) return `<section class="coming-page"><a class="back-link" href="#/">← 返回书架</a><div class="coming-cover book-object">${cover(book,true)}</div><p class="eyebrow">THE COLLECTION</p><h1>${e(book.title)}</h1><p class="coming-label">即将进入数字书房</p><p>本书的数字阅读内容尚未收录。</p>${book.appleBooksTitle?`<p class="sample-note">Apple Books 版题名：《${e(book.appleBooksTitle)}》</p>`:''}${book.appleBooksUrl?`<div>${appleBooksLink(book,'primary-link')}</div>`:''}<a class="primary-link" href="#/">返回数字书房 <span aria-hidden="true">→</span></a></section>`;
+  if(!canRead(book)) return `<section class="coming-page"><a class="back-link" href="#/">← 返回书架</a><div class="coming-cover book-object">${cover(book,true)}</div><p class="eyebrow">THE COLLECTION</p><h1>${e(book.title)}</h1><p class="coming-label">即将进入数字书房</p><p>本书的数字阅读内容尚未收录。</p>${book.appleBooksTitle?`<p class="sample-note">Apple Books 版题名：《${e(book.appleBooksTitle)}》</p>`:''}${appleBooksLink(book,'primary-link')}${otherEditionLinks(book)}<a class="primary-link" href="#/">返回数字书房 <span aria-hidden="true">→</span></a></section>`;
   const last=storage.get(`reading:${book.id}`);
   const validLast=last && book.chapters.some(c=>c.id===last.chapter);
-  return `<div class="book-page"><a class="back-link" href="#/">← 返回书架</a><section class="book-intro"><div class="book-display"><div class="book-object">${cover(book,true)}</div><span class="cover-credit">${e(book.coverLabel || '已出版版本封面')}</span></div><div class="book-details"><p class="eyebrow">${book.status==='complete'?'完整数字版':'第一本开放样章'} <span class="fine-divider">/</span> ${String(books.findIndex(entry=>entry.id===book.id)+1).padStart(2,'0')}</p><h1>${e(book.title)}</h1><p class="book-subtitle">${e(book.subtitle)}</p><p class="author">${e(book.author)} <span>著</span></p><div class="intro-excerpt"><p>${e(book.intro)}</p><small>摘自${e(book.introSource)}</small></div><div class="book-actions"><a class="primary-link" href="${readURL(book.id,book.chapters[0].id)}">在线阅读 / Read Online <span aria-hidden="true">→</span></a>${appleBooksLink(book,'resume-link')}${validLast?`<a class="resume-link" href="${readURL(book.id,last.chapter)}?resume=1">继续上次阅读 <span>${Math.max(0,Math.min(100,((book.chapters.findIndex(c=>c.id===last.chapter)+Math.max(0,Math.min(1,Number(last.fraction)||0)))/book.chapters.length*100).toFixed(0)))}%</span></a>`:''}</div>${weReadEntry(book)}<p class="sample-note">${book.editionSummary?e(book.editionSummary):(book.status==='complete'?'前言、双语作者说明、18 章正文及结语 · 24 幅摄影作品。':'目前开放 3 节样章。目录来自原书，其他章节待收录。')}</p></div></section><section id="toc" class="contents-section"><div class="section-label"><h2>目录 <span>CONTENTS</span></h2><span>${book.status==='complete'?'完整目录':'原书目录 · 样章先行'}</span></div><ol class="book-toc">${tocItems(book)}</ol></section></div>`;
+  return `<div class="book-page"><a class="back-link" href="#/">← 返回书架</a><section class="book-intro"><div class="book-display"><div class="book-object">${cover(book,true)}</div><span class="cover-credit">${e(book.coverLabel || '已出版版本封面')}</span></div><div class="book-details"><p class="eyebrow">${book.status==='complete'?'完整数字版':'第一本开放样章'} <span class="fine-divider">/</span> ${String(books.findIndex(entry=>entry.id===book.id)+1).padStart(2,'0')}</p><h1>${e(book.title)}</h1><p class="book-subtitle">${e(book.subtitle)}</p><p class="author">${e(book.author)} <span>著</span></p><div class="intro-excerpt"><p>${e(book.intro)}</p><small>摘自${e(book.introSource)}</small></div><div class="book-actions"><a class="primary-link" href="${readURL(book.id,book.chapters[0].id)}">在线阅读 / Read Online <span aria-hidden="true">→</span></a>${appleBooksLink(book,'resume-link')}${validLast?`<a class="resume-link" href="${readURL(book.id,last.chapter)}?resume=1">继续上次阅读 <span>${Math.max(0,Math.min(100,((book.chapters.findIndex(c=>c.id===last.chapter)+Math.max(0,Math.min(1,Number(last.fraction)||0)))/book.chapters.length*100).toFixed(0)))}%</span></a>`:''}</div>${otherEditionLinks(book)}<p class="sample-note">${book.editionSummary?e(book.editionSummary):(book.status==='complete'?'前言、双语作者说明、18 章正文及结语 · 24 幅摄影作品。':'目前开放 3 节样章。目录来自原书，其他章节待收录。')}</p></div></section><section id="toc" class="contents-section"><div class="section-label"><h2>目录 <span>CONTENTS</span></h2><span>${book.status==='complete'?'完整目录':'原书目录 · 样章先行'}</span></div><ol class="book-toc">${tocItems(book)}</ol></section></div>`;
 }
 async function render(){
   let analyticsSuccess=true;
@@ -61,7 +70,7 @@ async function render(){
   if(!page) document.querySelector('#shelf-link').setAttribute('aria-current','page');
   else document.querySelector('#shelf-link').removeAttribute('aria-current');
   try{
-    if(!page){main.innerHTML=home();document.title='影子观察 · 数字书房';}
+    if(!page){main.innerHTML=home();document.title='影子观察 · 数字书房 | '+platform.name;}
     else if(page==='book'&&book){main.innerHTML=bookPage(book);document.title=`${book.title} · 数字书房`;}
     else if(page==='read'&&canRead(book)){
       const index=book.chapters.findIndex(c=>c.id===chapterId);
@@ -84,7 +93,9 @@ async function render(){
   if(hash.endsWith('#toc')) document.querySelector('#toc')?.scrollIntoView();
 }
 try{
-  const response=await fetch('data/books.json?v=phase4-20260925');if(!response.ok) throw Error('书架资料加载失败');
+  // Platform branding must not make the existing book catalogue unavailable.
+  try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
+  const response=await fetch('data/books.json?v=platform-v1-20261006');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();await render();
   window.addEventListener('hashchange',render);
 }catch(error){main.innerHTML='<section class="empty-state"><h1>书房还没有打开</h1><p>书架资料暂时无法载入。</p><p>请刷新页面重试。</p></section>';}
