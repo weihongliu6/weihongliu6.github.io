@@ -1584,7 +1584,14 @@
         "platformPermission": null,
         "exclusive": null
       },
-      "externalEditions": []
+      "externalEditions": [
+        {
+          "label": "平装纸书",
+          "format": "paperback",
+          "isbn": "9781763913608",
+          "url": null
+        }
+      ]
     }
   }
 ]

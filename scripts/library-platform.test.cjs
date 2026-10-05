@@ -49,3 +49,37 @@ test('legacy Apple records work; unsafe structured destinations are excluded',()
   assert.ok(c.appleBooksLink({id:'old',appleBooksUrl:'https://books.apple.com/au/book/id6757672905'}).includes('id6757672905'));
   assert.equal(c.otherEditionLinks({publication:{externalEditions:[{channel:'test',label:'Bad',url:'javascript:alert(1)'}]}}),'');
 });
+test('URL-less paperback metadata stays separate from the web edition and renders without a link',()=>{
+  const book=books.find(book=>book.id==='renaissance');
+  assert.equal(book.status,'coming');
+  assert.equal(book.publication.isbn,null);
+  assert.equal(book.publication.publisher,null);
+  assert.deepEqual(book.publication.externalEditions,[{label:'平装纸书',format:'paperback',isbn:'9781763913608',url:null}]);
+  const c=context();
+  const html=c.otherEditionLinks(book);
+  assert.match(html,/平装纸书 · ISBN 9781763913608/);
+  assert.doesNotMatch(html,/<a\b|href=|↗/);
+  assert.ok(c.bookPage(book).includes(html));
+  const schema=JSON.parse(read('library/data/publication.schema.json')).properties.externalEditions.items;
+  assert.ok(!schema.required.includes('url'));
+  assert.ok(!schema.required.includes('channel'));
+  assert.ok(schema.properties.url.type.includes('null'));
+});
+test('physical and digital editions without URLs render escaped metadata; only HTTP(S) creates links',()=>{
+  const c=context();
+  for(const format of ['paperback','epub']){
+    for(const url of [undefined,null,'','javascript:alert(1)','data:text/html,bad','https://']){
+      const entry={channel:'apple-books',label:'Edition <test>',format,isbn:'9781763913608',url};
+      const book={publication:{externalEditions:[entry]}};
+      const html=c.otherEditionLinks(book);
+      assert.match(html,/Edition &lt;test&gt; · ISBN 9781763913608/);
+      assert.doesNotMatch(html,/<a\b|href=|↗/);
+      assert.equal(c.appleBooksLink(book),'');
+    }
+  }
+  for(const url of ['https://example.org/book','http://example.org/book']){
+    const book={publication:{externalEditions:[{label:'平装纸书',format:'paperback',isbn:'9781763913608',url}]}};
+    assert.ok(c.otherEditionLinks(book).includes(`href="${url}"`));
+  }
+  assert.equal(c.appleBooksLink({appleBooksUrl:'javascript:alert(1)'}),'');
+});
