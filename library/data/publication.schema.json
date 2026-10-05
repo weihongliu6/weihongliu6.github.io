@@ -128,9 +128,7 @@
       "items": {
         "type": "object",
         "required": [
-          "channel",
-          "label",
-          "url"
+          "label"
         ],
         "properties": {
           "publisher": {
@@ -231,7 +229,10 @@
             "minLength": 1
           },
           "url": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri",
             "pattern": "^https?://"
           }

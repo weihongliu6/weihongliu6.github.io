@@ -30,20 +30,27 @@ main.addEventListener('click',event=>{
 });
 
 function appleBooksLink(book, className = 'text-link'){
-  const entry=externalEditions(book).find(entry=>entry.channel==='apple-books');
+  const entry=externalEditions(book).find(entry=>entry.channel==='apple-books' && hasEditionURL(entry.url));
   const url=entry?.url || book.appleBooksUrl;
+  if(!hasEditionURL(url)) return '';
   return url ? `<a class="${className}" data-analytics-book="${e(book.id)}" href="${e(url)}" target="_blank" rel="noopener noreferrer" title="在新标签页打开 / Opens in a new tab">Apple Books ↗</a>` : '';
 }
-// Legacy Apple fields remain supported; structured entries enable future channels.
+function hasEditionURL(url){
+  try { return typeof url==='string' && ['https:','http:'].includes(new URL(url).protocol); } catch { return false; }
+}
+// A verified edition can exist before a public destination is available.
 function externalEditions(book){
-  return (book.publication?.externalEditions || []).filter(entry=>{
-    try { return ['https:','http:'].includes(new URL(entry.url).protocol); } catch { return false; }
-  });
+  return (book.publication?.externalEditions || []).filter(entry=>entry && typeof entry==='object');
 }
 function otherEditionLinks(book){
-  return externalEditions(book).filter(entry=>entry.channel!=='apple-books').map(entry=>
-    `<div class="book-actions"><a class="resume-link" href="${e(entry.url)}" target="_blank" rel="noopener noreferrer">${e(entry.label)} ↗</a></div>${entry.title && entry.title!==book.title?`<p class="sample-note">${e(entry.label)}版题名：《${e(entry.title)}》，与本站《${e(book.title)}》为同一作品。</p>`:''}`
-  ).join('');
+  return externalEditions(book).map(entry=>{
+    if(hasEditionURL(entry.url)){
+      if(entry.channel==='apple-books') return '';
+      return `<div class="book-actions"><a class="resume-link" href="${e(entry.url)}" target="_blank" rel="noopener noreferrer">${e(entry.label)} ↗</a></div>${entry.title && entry.title!==book.title?`<p class="sample-note">${e(entry.label)}版题名：《${e(entry.title)}》，与本站《${e(book.title)}》为同一作品。</p>`:''}`;
+    }
+    const details=[entry.format?e(entry.label || entry.format):'',entry.isbn?`ISBN ${e(entry.isbn)}`:''].filter(Boolean);
+    return details.length?`<p class="sample-note">${details.join(' · ')}</p>`:'';
+  }).join('');
 }
 function canRead(book){ return ['sample','complete'].includes(book?.status); }
 function home(){
