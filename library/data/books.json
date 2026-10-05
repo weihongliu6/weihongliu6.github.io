@@ -747,7 +747,43 @@
     "edition": "docx-full-v1",
     "sectionCount": 22,
     "chapterCount": 18,
-    "imageCount": 24
+    "imageCount": 24,
+    "publication": {
+      "metadataVersion": 1,
+      "publisher": null,
+      "imprint": null,
+      "language": "zh-CN",
+      "format": "web",
+      "isbn": null,
+      "edition": null,
+      "contributors": [
+        {
+          "name": "Weihong Liu",
+          "role": "author"
+        }
+      ],
+      "rights": {
+        "holder": null,
+        "license": null,
+        "statement": null,
+        "platformPermission": null,
+        "exclusive": null
+      },
+      "externalEditions": [
+        {
+          "channel": "apple-books",
+          "label": "Apple Books",
+          "url": "https://books.apple.com/au/book/id6757672905",
+          "title": "慢下来看见世界"
+        },
+        {
+          "channel": "weread",
+          "label": "微信读书阅读 / Read on WeRead",
+          "url": "https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb",
+          "title": "从镜头里，看见慢下来的世界"
+        }
+      ]
+    }
   },
   {
     "id": "slow-shutter",
@@ -969,7 +1005,37 @@
         "title": "后记｜慢门之后，我们如何继续生活",
         "sections": []
       }
-    ]
+    ],
+    "publication": {
+      "metadataVersion": 1,
+      "publisher": null,
+      "imprint": null,
+      "language": "zh-CN",
+      "format": "web",
+      "isbn": null,
+      "edition": null,
+      "contributors": [
+        {
+          "name": "Weihong Liu",
+          "role": "author"
+        }
+      ],
+      "rights": {
+        "holder": null,
+        "license": null,
+        "statement": null,
+        "platformPermission": null,
+        "exclusive": null
+      },
+      "externalEditions": [
+        {
+          "channel": "apple-books",
+          "label": "Apple Books",
+          "url": "https://books.apple.com/au/book/id6758567346",
+          "title": "从慢门摄影到生活哲学"
+        }
+      ]
+    }
   },
   {
     "id": "structure",
@@ -1448,18 +1514,77 @@
         "sections": []
       }
     ],
-    "coverLabel": "原书封面"
+    "coverLabel": "原书封面",
+    "publication": {
+      "metadataVersion": 1,
+      "publisher": null,
+      "imprint": null,
+      "language": "zh-CN",
+      "format": "web",
+      "isbn": null,
+      "edition": null,
+      "contributors": [
+        {
+          "name": "影子观察",
+          "role": "author"
+        }
+      ],
+      "rights": {
+        "holder": null,
+        "license": null,
+        "statement": null,
+        "platformPermission": null,
+        "exclusive": null
+      },
+      "externalEditions": []
+    }
   },
   {
     "id": "metabolism",
     "title": "人体代谢：从生存优势到现代慢性代谢病",
     "cover": "assets/covers/metabolism.jpg",
-    "status": "coming"
+    "status": "coming",
+    "publication": {
+      "metadataVersion": 1,
+      "publisher": null,
+      "imprint": null,
+      "language": "zh-CN",
+      "format": null,
+      "isbn": null,
+      "edition": null,
+      "contributors": [],
+      "rights": {
+        "holder": null,
+        "license": null,
+        "statement": null,
+        "platformPermission": null,
+        "exclusive": null
+      },
+      "externalEditions": []
+    }
   },
   {
     "id": "renaissance",
     "title": "寻找文艺复兴",
     "cover": "assets/covers/renaissance.jpg",
-    "status": "coming"
+    "status": "coming",
+    "publication": {
+      "metadataVersion": 1,
+      "publisher": null,
+      "imprint": null,
+      "language": "zh-CN",
+      "format": null,
+      "isbn": null,
+      "edition": null,
+      "contributors": [],
+      "rights": {
+        "holder": null,
+        "license": null,
+        "statement": null,
+        "platformPermission": null,
+        "exclusive": null
+      },
+      "externalEditions": []
+    }
   }
 ]

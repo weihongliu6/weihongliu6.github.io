@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "shadow-library",
+  "name": "Shadow Library Platform",
+  "version": "1",
+  "displayName": "影子观察 · 数字书房",
+  "brand": "Shadow Observer / 影子观察",
+  "home": "/library/"
+}
