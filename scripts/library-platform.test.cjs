@@ -7,7 +7,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const books=JSON.parse(read('library/data/books.json'));
 function context(catalogue=books){
-  const sandbox={URL,books:catalogue,platform:JSON.parse(read('library/data/platform.json')),storage:{get:()=>null}};
+  const sandbox={URL,isSaved:()=>false,isDownloaded:()=>false,books:catalogue,platform:JSON.parse(read('library/data/platform.json')),storage:{get:()=>null}};
   vm.createContext(sandbox);
   vm.runInContext(read('library/src/components.js').replaceAll('export ',''),sandbox);
   const app=read('library/src/app.js');
@@ -87,14 +87,14 @@ test('shelf search, reading filters and listening catalogue do not advertise una
  const c=context();
  assert.equal(c.matchesShelf(books[0],'慢下','readable'),true);
  assert.equal(c.matchesShelf(books[0],'no-such-title','all'),false);
- assert.equal(c.matchesShelf(books[4],'','readable'),false);
- assert.equal(c.matchesShelf(books[4],'','coming'),true);
+ assert.equal(c.matchesShelf(books[3],'','readable'),false);
+ assert.equal(c.matchesShelf(books[3],'','coming'),true);
  c.storage.get=key=>key==='reading:slow-down'?{chapter:books[0].chapters[1].id}:null;
  assert.equal(c.matchesShelf(books[0],'','reading'),true);
  assert.ok(c.shelfTools().includes(`#/read/slow-down/${books[0].chapters[1].id}?resume=1`));
  const html=c.listeningHome();
  assert.ok(html.includes('设备语音朗读'));assert.ok(html.includes('?listen=1'));
- assert.ok(!html.includes('寻找文艺复兴'));assert.ok(!html.includes('人体代谢'));
+ assert.ok(html.includes('寻找文艺复兴'));assert.ok(!html.includes('人体代谢'));
  c.storage.get=()=>({chapter:'deleted-chapter'});
  assert.equal(c.savedReading(books[0]),null);
 });

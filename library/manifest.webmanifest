@@ -1,0 +1,16 @@
+{
+  "id": "/library/",
+  "name": "影子观察 · 数字书房",
+  "short_name": "数字书房",
+  "lang": "zh-CN",
+  "description": "免费的个人阅读书房：本地书架、搜索与离线阅读。",
+  "start_url": "/library/",
+  "scope": "/library/",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#f6f3ec",
+  "icons": [
+    {"src":"assets/app-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"assets/app-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
