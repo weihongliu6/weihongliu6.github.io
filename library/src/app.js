@@ -1,3 +1,4 @@
+import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp } from './offline.js?v=pwa-20261006';
 import { storage } from './storage.js?v=phase2-20260925';
 import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL } from './components.js?v=renaissance-20261006';
 import { renderReader, bindReader } from './reader.js?v=renaissance-20261006';
@@ -74,7 +75,7 @@ function listeningURL(book){
 }
 function shelfTools(){
   const recent=books.filter(book=>savedReading(book));
-  return `<section class="shelf-tools" aria-label="找书与继续阅读"><div class="shelf-search"><div class="search-field"><label class="sr-only" for="book-search">搜索书名、作者</label><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="book-search" type="search" placeholder="搜索书名、作者" autocomplete="off"></div><label class="sr-only" for="book-filter">阅读状态</label><select id="book-filter"><option value="all">全部书籍</option><option value="readable">可在线阅读</option><option value="reading">继续阅读</option><option value="coming">待收录</option></select><p id="shelf-results" role="status" aria-live="polite"></p></div>${recent.length?`<section class="continue-reading" aria-labelledby="continue-title"><div class="continue-heading"><h2 id="continue-title">继续阅读</h2><span>阅读位置保存在此浏览器</span></div><div class="continue-grid">${recent.map(book=>{
+  return `<section class="shelf-tools" aria-label="找书与继续阅读"><div class="shelf-search"><div class="search-field"><label class="sr-only" for="book-search">搜索书名、作者、章节</label><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="book-search" type="search" placeholder="搜索书名、作者、章节" autocomplete="off"></div><label class="sr-only" for="book-filter">阅读状态</label><select id="book-filter"><option value="all">全部书籍</option><option value="mine">我的书架</option><option value="downloaded">已下载 · 离线可读</option><option value="readable">可在线阅读</option><option value="reading">继续阅读</option><option value="coming">待收录</option></select><p id="shelf-results" role="status" aria-live="polite"></p></div>${recent.length?`<section class="continue-reading" aria-labelledby="continue-title"><div class="continue-heading"><h2 id="continue-title">继续阅读</h2><span>阅读位置保存在此浏览器</span></div><div class="continue-grid">${recent.map(book=>{
     const saved=savedReading(book);
     const index=book.chapters.findIndex(chapter=>chapter.id===saved.chapter);
     const percent=Math.round((index+Math.max(0,Math.min(1,Number(saved.fraction)||0)))/book.chapters.length*100);
@@ -82,8 +83,8 @@ function shelfTools(){
   }).join('')}</div></section>`:''}</section>`;
 }
 function matchesShelf(book,query='',filter='all'){
-  const text=[book.title,book.author,...(book.publication?.contributors||[]).map(c=>c.name)].join(' ').toLowerCase();
-  return text.includes(query.trim().toLowerCase()) && (filter==='all' || filter==='readable'&&canRead(book) || filter==='reading'&&!!savedReading(book) || filter==='coming'&&!canRead(book));
+  const text=[book.title,book.subtitle,book.author,...(book.chapters||[]).map(c=>c.title),...(book.publication?.contributors||[]).map(c=>c.name)].join(' ').toLowerCase();
+  return text.includes(query.trim().toLowerCase()) && (filter==='all' || filter==='mine'&&isSaved(book.id) || filter==='downloaded'&&isDownloaded(book.id) || filter==='readable'&&canRead(book) || filter==='reading'&&!!savedReading(book) || filter==='coming'&&!canRead(book));
 }
 function bindShelf(){
   const search=document.querySelector('#book-search'), filter=document.querySelector('#book-filter');
@@ -129,6 +130,7 @@ async function render(){
     } else throw Error('这个页面尚未收录。');
   }catch(error){analyticsSuccess=false;main.innerHTML=`<section class="empty-state"><h1>暂时无法打开</h1><p>${e(error.message)}</p><a class="primary-link" href="#/">返回书架 →</a></section>`;}
   if(!page) bindShelf();
+  mountLibraryApp(books);
   const listenLink=document.querySelector('#listen-link');
   if(page==='listen')listenLink.setAttribute('aria-current','page');else listenLink.removeAttribute('aria-current');
   if(analyticsSuccess) window.ShadowAnalytics?.bookPage(book?.id, page==='read'?chapterId:null);
@@ -141,7 +143,7 @@ try{
   // Platform branding must not make the existing book catalogue unavailable.
   try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
   const response=await fetch('data/books.json?v=renaissance-20261006');if(!response.ok) throw Error('书架资料加载失败');
-  books=await response.json();await render();
+  books=await response.json();await render();void initLibraryApp(books);
   window.addEventListener('hashchange',render);
 }catch(error){main.innerHTML='<section class="empty-state"><h1>书房还没有打开</h1><p>书架资料暂时无法载入。</p><p>请刷新页面重试。</p></section>';}
 

@@ -35,5 +35,5 @@ test('chapter end, stop, restart, voice errors and unsupported browsers remain u
 test('speech chunks exclude images and split long text; chapter selection does not auto-play',()=>{
  const b=boot();const chunks=b.c.speechChunks({...chapter,blocks:[...chapter.blocks,{type:'paragraph',text:'字'.repeat(500)}]});
  assert(chunks.every(s=>s.length<=160));assert(!chunks.join('').includes('secret.jpg'));
- b.node('listen-chapter').onchange({target:{value:'chapter-02'}});assert.equal(b.c.location.hash,'#/read/test/chapter-02?listen=1');assert.equal(b.spoken.length,0);b.cleanup();
+ b.node('listen-chapter').onchange({target:{value:'chapter-02'}});assert.equal(b.c.location.hash,'#/read/test/chapter-02?listen=1&from=start');assert.equal(b.spoken.length,0);b.cleanup();
 });
