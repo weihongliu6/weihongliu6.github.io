@@ -1,6 +1,6 @@
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, cover, tocItems } from './components.js?v=phase2-20260925';
-import { renderReader, bindReader } from './reader.js?v=listen-20261006';
+import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL } from './components.js?v=chapters-20261006';
+import { renderReader, bindReader } from './reader.js?v=chapters-20261006';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -70,8 +70,7 @@ function savedReading(book){
   return canRead(book) && book.chapters?.some(c=>c.id===saved?.chapter) ? saved : null;
 }
 function listeningURL(book){
-  const saved=savedReading(book);
-  return readURL(book.id,saved?.chapter || book.chapters[0].id)+'?listen=1';
+  return chapterListenURL(book,firstListeningChapter(book));
 }
 function shelfTools(){
   const recent=books.filter(book=>savedReading(book));
@@ -93,7 +92,7 @@ function bindShelf(){
   search.oninput=update;filter.onchange=update;update();
 }
 function listeningHome(){
-  return `<section class="listening-home"><a class="back-link" href="#/">← 返回书架</a><p class="eyebrow">LISTEN & READ</p><h1>让文字，读给你听。</h1><p>从已有数字正文开始，选择一本书、一个章节，再点击开始朗读。</p><p class="sample-note">设备语音朗读 · 非录制有声书。声音与可用性取决于浏览器及设备，锁屏播放不保证持续。正式有声书音频尚未上架。</p><div class="listening-books">${books.filter(canRead).map(book=>`<article><h2>${e(book.title)}</h2><p>${book.chapters.length} 节可朗读</p><a class="primary-link" href="${listeningURL(book)}">选择章节并朗读 →</a><a class="text-link" href="${bookURL(book.id)}">查看书籍与目录</a></article>`).join('')}</div></section>`;
+  return `<section class="listening-home"><a class="back-link" href="#/">← 返回书架</a><p class="eyebrow">LISTEN & READ</p><h1>让文字，读给你听。</h1><p>从序言、引言或第一章开始，也可以选择目录中的任意章节。</p><p class="sample-note">设备语音朗读 · 非录制有声书。锁屏或切换应用可能中断播放。</p><div class="listening-books">${books.filter(canRead).map(book=>`<article><h2>${e(book.title)}</h2><p>${listeningChapters(book).length} 节可朗读</p><a class="primary-link" href="${listeningURL(book)}">从${e(firstListeningChapter(book).title)}开始听</a><details class="listen-chapter-list"><summary>选择章节</summary><ol>${listeningChapters(book).map(chapter=>`<li><span>${e(chapter.title)}</span><a class="chapter-listen-link" href="${chapterListenURL(book,chapter)}" aria-label="听《${e(chapter.title)}》，从本章开始">听本章</a></li>`).join('')}</ol></details><a class="text-link" href="${bookURL(book.id)}">查看书籍与目录</a></article>`).join('')}</div></section>`;
 }
 async function render(){
   let analyticsSuccess=true;
@@ -114,6 +113,9 @@ async function render(){
     else if(page==='read'&&canRead(book)){
       const index=book.chapters.findIndex(c=>c.id===chapterId);
       if(index<0) throw Error('没有找到这个章节。');
+      if(new URLSearchParams(query).get('listen')==='1' && !listeningChapters(book).some(chapter=>chapter.id===chapterId)){
+        location.hash=listeningURL(book);return;
+      }
       const entry=book.chapters[index];
       if(!chapterCache.has(entry.file)){
         const response=await fetch(entry.file);if(!response.ok) throw Error('章节暂时无法打开。');
@@ -123,7 +125,7 @@ async function render(){
       document.body.classList.add('is-reading');
       main.innerHTML=renderReader(book,chapterCache.get(entry.file),index);
       document.title=`${entry.title} · ${book.title}`;
-      window.scrollTo(0,0);cleanup=bindReader(book,chapterCache.get(entry.file),index,new URLSearchParams(query).get('resume')==='1',new URLSearchParams(query).get('section'));
+      window.scrollTo(0,0);cleanup=bindReader(book,chapterCache.get(entry.file),index,new URLSearchParams(query).get('resume')==='1',new URLSearchParams(query).get('section'),new URLSearchParams(query).get('from')==='start');
     } else throw Error('这个页面尚未收录。');
   }catch(error){analyticsSuccess=false;main.innerHTML=`<section class="empty-state"><h1>暂时无法打开</h1><p>${e(error.message)}</p><a class="primary-link" href="#/">返回书架 →</a></section>`;}
   if(!page) bindShelf();
