@@ -83,3 +83,18 @@ test('physical and digital editions without URLs render escaped metadata; only H
   }
   assert.equal(c.appleBooksLink({appleBooksUrl:'javascript:alert(1)'}),'');
 });
+test('shelf search, reading filters and listening catalogue do not advertise unavailable books',()=>{
+ const c=context();
+ assert.equal(c.matchesShelf(books[0],'慢下','readable'),true);
+ assert.equal(c.matchesShelf(books[0],'no-such-title','all'),false);
+ assert.equal(c.matchesShelf(books[4],'','readable'),false);
+ assert.equal(c.matchesShelf(books[4],'','coming'),true);
+ c.storage.get=key=>key==='reading:slow-down'?{chapter:books[0].chapters[1].id}:null;
+ assert.equal(c.matchesShelf(books[0],'','reading'),true);
+ assert.ok(c.shelfTools().includes(`#/read/slow-down/${books[0].chapters[1].id}?resume=1`));
+ const html=c.listeningHome();
+ assert.ok(html.includes('设备语音朗读'));assert.ok(html.includes('?listen=1'));
+ assert.ok(!html.includes('寻找文艺复兴'));assert.ok(!html.includes('人体代谢'));
+ c.storage.get=()=>({chapter:'deleted-chapter'});
+ assert.equal(c.savedReading(books[0]),null);
+});
