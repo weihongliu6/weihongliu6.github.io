@@ -790,7 +790,8 @@
       "sampleChapter": "chapter-01",
       "price": null,
       "currency": "AUD",
-      "purchaseStatus": "preview"
+      "purchaseStatus": "preview",
+      "accessVersion": "pilot-20261007-1"
     }
   },
   {

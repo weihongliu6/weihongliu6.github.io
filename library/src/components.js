@@ -1,9 +1,20 @@
 export const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const bookURL = id => `#/book/${encodeURIComponent(id)}`;
 export const readURL = (id, chapter) => `#/read/${encodeURIComponent(id)}/${encodeURIComponent(chapter)}`;
+// Preview access is a reading-flow boundary, not a server-side paywall.
+export const pilotCommerce = book => book?.id==='slow-down' && book?.commerce?.mode==='pilot';
+export const purchaseURL = book => `#/purchase/${encodeURIComponent(book.id)}`;
+export const canAccessChapter = (book, id) => !!book?.chapters?.some(chapter=>chapter.id===id) && (!pilotCommerce(book) || id===book.commerce.sampleChapter);
+export const accessibleChapters = book => (book.chapters || []).filter(chapter=>canAccessChapter(book,chapter.id));
+export const chapterURL = (book, id) => canAccessChapter(book,id) ? readURL(book.id,id) : purchaseURL(book);
+export function purchaseLabel(book) {
+  const price=book.commerce?.price;
+  return (typeof price==='number' || typeof price==='string' && price.trim()!=='') && Number.isFinite(Number(price)) && Number(price)>=0
+    ? `购买完整版 · ${escapeHTML(book.commerce.currency || 'AUD')} ${Number(price).toFixed(2)}` : '即将开放 · 价格待定';
+}
 // Narration is for the book itself, rather than publication or author metadata.
 export function listeningChapters(book) {
-  return (book.chapters || []).filter(chapter =>
+  return accessibleChapters(book).filter(chapter =>
     !/^(front-matter|author-note|copyright|title-page|english)(?:$|-)/i.test(chapter.id) &&
     !/版权|作者说明|作者简介|英文版|English|Copyright/i.test(chapter.title));
 }
@@ -11,7 +22,7 @@ export function firstListeningChapter(book) {
   const chapters=listeningChapters(book);
   return chapters.find(chapter=>/^(preface|introduction)$/.test(chapter.id) || /^(序言|前言|引言)/.test(chapter.title)) || chapters[0];
 }
-export const chapterListenURL = (book, chapter) => readURL(book.id,chapter.id)+'?listen=1&from=start';
+export const chapterListenURL = (book, chapter) => chapterURL(book,chapter.id)+(canAccessChapter(book,chapter.id)?'?listen=1&from=start':'');
 export function cover(book, large = false) {
   return book.cover
     ? `<img class="cover-img" src="${escapeHTML(book.cover)}" alt="《${escapeHTML(book.title)}》现有封面" ${large ? 'fetchpriority="high"' : ''} decoding="async">`
@@ -20,9 +31,11 @@ export function cover(book, large = false) {
 export function tocItems(book, current = '') {
   return book.toc.map((entry, index) => {
     if(!entry.id) return `<li class="toc-pending"><span class="toc-num">${String(index+1).padStart(2,'0')}</span><span>${escapeHTML(entry.title)}</span><span class="toc-state">待收录</span></li>`;
-    const sections=entry.sections?.length ? `<details class="toc-sections"><summary>小节 · ${entry.sections.length}</summary><ol>${entry.sections.map(section=>`<li><a href="${readURL(book.id,entry.id)}?section=${encodeURIComponent(section.anchor)}">${escapeHTML(section.title)}</a></li>`).join('')}</ol></details>` : '';
+    const locked=!canAccessChapter(book,entry.id);
+    const destination=chapterURL(book,entry.id);
+    const sections=entry.sections?.length ? `<details class="toc-sections"><summary>小节 · ${entry.sections.length}</summary><ol>${entry.sections.map(section=>`<li><a href="${destination}${locked?'':'?section='+encodeURIComponent(section.anchor)}">${escapeHTML(section.title)}</a></li>`).join('')}</ol></details>` : '';
     const chapter=listeningChapters(book).find(chapter=>chapter.id===entry.id);
-    return `<li><div class="toc-entry"><a href="${readURL(book.id,entry.id)}" ${current===entry.id?'aria-current="page"':''}><span class="toc-num">${String(index+1).padStart(2,'0')}</span><span>${escapeHTML(entry.title)}</span><span class="toc-state">${current===entry.id?'正在阅读':'可阅读 →'}</span></a>${chapter?`<a class="chapter-listen-link" href="${chapterListenURL(book,chapter)}" aria-label="听《${escapeHTML(entry.title)}》，从本章开始">听本章</a>`:''}</div>${sections}</li>`;
+    return `<li class="${locked?'toc-locked':'toc-open'}"><div class="toc-entry"><a href="${destination}" ${current===entry.id?'aria-current="page"':''}><span class="toc-num">${String(index+1).padStart(2,'0')}</span><span>${escapeHTML(entry.title)}</span><span class="toc-state">${locked?'🔒 尚未开放':current===entry.id?'正在阅读':'可阅读 →'}</span></a>${chapter?`<a class="chapter-listen-link" href="${chapterListenURL(book,chapter)}" aria-label="听《${escapeHTML(entry.title)}》，从本章开始">听本章</a>`:''}</div>${sections}</li>`;
   }).join('');
 }
 export function contentBlocks(blocks) {

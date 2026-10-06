@@ -93,3 +93,8 @@ body:not(.is-reading){background:radial-gradient(ellipse at 3% 8%,var(--ambient-
 .purchase-page{max-width:720px;margin:50px auto 90px;padding:0 30px}.purchase-page h1{font:400 clamp(30px,5vw,46px)/1.5 var(--serif);margin:22px 0 12px}
 .purchase-card{margin:28px 0;padding:28px;border:1px solid var(--line);border-radius:14px;background:var(--shelf-paper)}.purchase-card strong{font:400 22px/1.5 var(--serif)}.purchase-card p{margin:14px 0 20px;line-height:1.9}.purchase-card button{min-height:44px;padding:11px 18px;border:1px solid var(--line);border-radius:6px;opacity:.6}
 @media(max-width:700px){.book-abstract{padding:18px}.book-abstract h2{font-size:21px}.book-abstract>p:last-child{font-size:15px}.sample-paywall{padding:26px 18px}.sample-paywall h2{font-size:25px}.purchase-page{margin-top:28px;padding:0 24px}}
+
+/* Keep the complete contents legible while making preview availability clear. */
+.book-toc .toc-locked .toc-state,.reader-toc .toc-locked .toc-state{display:inline;font-size:12px;color:var(--muted);white-space:nowrap}
+.toc-locked .toc-entry>a:first-child{grid-template-columns:24px 1fr auto}
+@media(max-width:700px){.book-toc .toc-locked .toc-entry>a:first-child,.reader-toc .toc-locked .toc-entry>a:first-child{grid-template-columns:20px 1fr}.toc-locked .toc-state{grid-column:2}}

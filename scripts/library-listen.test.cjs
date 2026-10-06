@@ -9,7 +9,7 @@ function boot(supported=true){
  const node=id=>{if(!nodes.has(id))nodes.set(id,{value:id==='listen-rate'?'1':'',disabled:false,open:true,options:[],textContent:'',addEventListener(name,fn){this[name]=fn;}});return nodes.get(id);};
  const synth={cancel(){cancels++},speak(u){spoken.push(u)},getVoices:()=>[{voiceURI:'zh',name:'中文',lang:'zh-CN'}],addEventListener(n,f){listeners[n]=f},removeEventListener(n){delete listeners[n]}};
  const window={...(supported?{speechSynthesis:synth,SpeechSynthesisUtterance:class{constructor(text){this.text=text}}}:{}),addEventListener(n,f){listeners[n]=f},removeEventListener(n){delete listeners[n]}};
- const c={window,document:{querySelector:s=>node(s.slice(1))},location:{hash:''},storage:{get:(k,d=null)=>saved.has(k)?saved.get(k):d,set:(k,v)=>saved.set(k,v)},e:s=>String(s).replaceAll('<','&lt;')};vm.createContext(c);
+ const c={pilotCommerce:b=>b?.id==='slow-down'&&b?.commerce?.mode==='pilot',canAccessChapter:(b,id)=>!b.commerce||id===b.commerce.sampleChapter,purchaseURL:b=>'#/purchase/'+b.id,window,document:{querySelector:s=>node(s.slice(1))},location:{hash:''},storage:{get:(k,d=null)=>saved.has(k)?saved.get(k):d,set:(k,v)=>saved.set(k,v)},e:s=>String(s).replaceAll('<','&lt;')};vm.createContext(c);
  vm.runInContext(fs.readFileSync('library/src/listen.js','utf8').replace(/^import .*;\n/gm,'').replaceAll('export ',''),c);
  return {c,node,saved,spoken,listeners,get cancels(){return cancels;},cleanup:c.bindListen(book,chapter)};
 }

@@ -31,11 +31,11 @@ test('existing Apple and WeRead destinations and reader routes remain available'
   for(const book of books){
     const html=c.bookPage(book);
     if(book.appleBooksUrl) assert.ok(html.includes(book.appleBooksUrl));
-    if(book.status==='complete') assert.ok(html.includes(`#/read/${book.id}/${book.chapters[0].id}`));
+    if(book.status==='complete') assert.ok(html.includes(`#/read/${book.id}/${book.commerce?.mode==='pilot'?book.commerce.sampleChapter:book.chapters[0].id}`));
     else assert.ok(html.includes('即将进入数字书房'));
   }
   assert.ok(c.bookPage(books[0]).includes('https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb'));
-  assert.ok(c.home().includes('4 本完整数字书'));
+  assert.ok(c.home().includes('3 本完整数字书'));
 });
 test('sixth book and new external channel render from metadata without code changes',()=>{
   const extra={id:'future-author',title:'A & B',author:'Another Author',status:'coming',publication:{externalEditions:[{channel:'publisher-store',label:'Publisher <store>',url:'https://example.org/book',title:'Other title'}]}};
@@ -91,7 +91,8 @@ test('shelf search, reading filters and listening catalogue do not advertise una
  assert.equal(c.matchesShelf(books[3],'','coming'),true);
  c.storage.get=key=>key==='reading:slow-down'?{chapter:books[0].chapters[1].id}:null;
  assert.equal(c.matchesShelf(books[0],'','reading'),true);
- assert.ok(c.shelfTools().includes(`#/read/slow-down/${books[0].chapters[1].id}?resume=1`));
+ assert.ok(c.shelfTools().includes('#/purchase/slow-down'));
+ assert.ok(!c.shelfTools().includes(`#/read/slow-down/${books[0].chapters[1].id}?resume=1`));
  const html=c.listeningHome();
  assert.ok(html.includes('设备语音朗读'));assert.ok(html.includes('?listen=1'));
  assert.ok(html.includes('寻找文艺复兴'));assert.ok(!html.includes('人体代谢'));

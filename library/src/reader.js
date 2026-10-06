@@ -1,12 +1,13 @@
-import { listenPanel, bindListen } from './listen.js?v=renaissance-20261006';
+import { listenPanel, bindListen } from './listen.js?v=pilot-20261007-1';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks, listeningChapters } from './components.js?v=renaissance-20261006';
+import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks, listeningChapters, pilotCommerce, canAccessChapter, purchaseURL } from './components.js?v=pilot-20261007-1';
 
 export function renderReader(book, chapter, index, resume = false) {
+  if(!canAccessChapter(book,chapter.id)) return '';
   const list = book.chapters;
   const full = book.status==='complete';
   const readingLabel = full?'阅读进度':'样章阅读进度';
-  const pilot = book.commerce?.mode==='pilot';
+  const pilot = pilotCommerce(book);
   const sampleIndex = pilot ? list.findIndex(entry=>entry.id===book.commerce.sampleChapter) : -1;
   const sampleOnly = pilot && sampleIndex===index;
   const previous = sampleOnly ? null : list[index - 1], next = sampleOnly ? null : list[index + 1];
@@ -21,8 +22,8 @@ export function renderReader(book, chapter, index, resume = false) {
         <div class="reader-toolbar"><a href="${bookURL(book.id)}">${e(book.title)}</a><div class="font-tools" role="group" aria-label="字号设置"><button type="button" id="font-smaller" aria-label="减小字号">A−</button><output id="font-size" aria-live="polite"></output><button type="button" id="font-larger" aria-label="增大字号">A＋</button></div></div>
         ${listenPanel(book,chapter,index)}
         <article class="reading-content" id="reading-content">${openingImage?contentBlocks([chapter.blocks[0]]):''}<header class="chapter-header"><p class="eyebrow">${full?'在线阅读':'阅读样章'} <span class="fine-divider">/</span> ${String(index+1).padStart(2,'0')} — ${String(list.length).padStart(2,'0')}</p><h1>${e(chapter.title)}</h1>${listeningChapters(book).some(entry=>entry.id===chapter.id)?'<button type="button" class="chapter-listen-button" id="listen-current">听本章 · 从章首开始</button>':''}<p class="chapter-byline">${e(book.author)} <span>·</span> 原书文字与图片</p></header><div class="chapter-body">${contentBlocks(chapter.blocks.slice(firstBody))}</div><div class="source-note">${chapter.source.label?e(chapter.source.label):chapter.source.format==='docx'?'正文与图注依据作者确认版本收录。':`本节来自已出版 EPUB 第 ${chapter.source.pages[0]}–${chapter.source.pages.at(-1)} 页。仅调整网页段落与版式，未改写原文。`}</div></article>
-        ${sampleOnly?`<section class="sample-paywall"><p class="eyebrow">FREE SAMPLE COMPLETE</p><h2>免费试读到此结束</h2><p>如果你喜欢这本书，可以购买完整版继续阅读。</p><a class="primary-link" href="#/purchase/${encodeURIComponent(book.id)}">购买完整版 <span aria-hidden="true">→</span></a><a class="resume-link" href="${bookURL(book.id)}">返回本书摘要</a></section>`:''}
-        <nav class="chapter-nav" aria-label="章节导航">${previous ? `<a href="${readURL(book.id,previous.id)}"><small>← 上一章</small><span>${e(previous.title)}</span></a>` : `<button disabled type="button"><small>← 上一章</small><span>${full?'已是本书起点':'已是样章起点'}</span></button>`}${next ? `<a href="${readURL(book.id,next.id)}"><small>下一章 →</small><span>${e(next.title)}</span></a>` : `<a href="${bookURL(book.id)}#toc"><small>${full?'全书已读完':'样章已读完'} ✓</small><span>返回目录</span></a>`}</nav>
+        ${sampleOnly?`<section class="sample-paywall"><p class="eyebrow">CONTINUE READING</p><h2>继续阅读</h2><p>下一章将继续探索慢门摄影的起源。完整版即将开放，你可以先查看购买预览。</p><a class="primary-link" href="#/purchase/${encodeURIComponent(book.id)}">查看购买预览 <span aria-hidden="true">→</span></a><a class="resume-link" href="${bookURL(book.id)}">返回书籍详情</a></section>`:''}
+        ${sampleOnly?'':`<nav class="chapter-nav" aria-label="章节导航">${previous ? `<a href="${readURL(book.id,previous.id)}"><small>← 上一章</small><span>${e(previous.title)}</span></a>` : `<button disabled type="button"><small>← 上一章</small><span>${full?'已是本书起点':'已是样章起点'}</span></button>`}${next ? `<a href="${readURL(book.id,next.id)}"><small>下一章 →</small><span>${e(next.title)}</span></a>` : `<a href="${bookURL(book.id)}#toc"><small>${full?'全书已读完':'样章已读完'} ✓</small><span>返回目录</span></a>`}</nav>`}
         <a class="reader-library-link" href="#/">← 返回数字书房</a>
       </div>
     </div>
