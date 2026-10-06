@@ -1,6 +1,6 @@
-import { listenPanel, bindListen } from './listen.js?v=20261006';
+import { listenPanel, bindListen } from './listen.js?v=chapters-20261006';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks } from './components.js?v=phase2-20260925';
+import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks, listeningChapters } from './components.js?v=chapters-20261006';
 
 export function renderReader(book, chapter, index, resume = false) {
   const list = book.chapters;
@@ -17,7 +17,7 @@ export function renderReader(book, chapter, index, resume = false) {
       <div class="reader-main">
         <div class="reader-toolbar"><a href="${bookURL(book.id)}">${e(book.title)}</a><div class="font-tools" role="group" aria-label="字号设置"><button type="button" id="font-smaller" aria-label="减小字号">A−</button><output id="font-size" aria-live="polite"></output><button type="button" id="font-larger" aria-label="增大字号">A＋</button></div></div>
         ${listenPanel(book,chapter,index)}
-        <article class="reading-content" id="reading-content">${openingImage?contentBlocks([chapter.blocks[0]]):''}<header class="chapter-header"><p class="eyebrow">${full?'在线阅读':'阅读样章'} <span class="fine-divider">/</span> ${String(index+1).padStart(2,'0')} — ${String(list.length).padStart(2,'0')}</p><h1>${e(chapter.title)}</h1><p class="chapter-byline">${e(book.author)} <span>·</span> 原书文字与图片</p></header><div class="chapter-body">${contentBlocks(chapter.blocks.slice(firstBody))}</div><div class="source-note">${chapter.source.label?e(chapter.source.label):chapter.source.format==='docx'?'正文与图注依据作者确认版本收录。':`本节来自已出版 EPUB 第 ${chapter.source.pages[0]}–${chapter.source.pages.at(-1)} 页。仅调整网页段落与版式，未改写原文。`}</div></article>
+        <article class="reading-content" id="reading-content">${openingImage?contentBlocks([chapter.blocks[0]]):''}<header class="chapter-header"><p class="eyebrow">${full?'在线阅读':'阅读样章'} <span class="fine-divider">/</span> ${String(index+1).padStart(2,'0')} — ${String(list.length).padStart(2,'0')}</p><h1>${e(chapter.title)}</h1>${listeningChapters(book).some(entry=>entry.id===chapter.id)?'<button type="button" class="chapter-listen-button" id="listen-current">听本章 · 从章首开始</button>':''}<p class="chapter-byline">${e(book.author)} <span>·</span> 原书文字与图片</p></header><div class="chapter-body">${contentBlocks(chapter.blocks.slice(firstBody))}</div><div class="source-note">${chapter.source.label?e(chapter.source.label):chapter.source.format==='docx'?'正文与图注依据作者确认版本收录。':`本节来自已出版 EPUB 第 ${chapter.source.pages[0]}–${chapter.source.pages.at(-1)} 页。仅调整网页段落与版式，未改写原文。`}</div></article>
         <nav class="chapter-nav" aria-label="章节导航">${previous ? `<a href="${readURL(book.id,previous.id)}"><small>← 上一章</small><span>${e(previous.title)}</span></a>` : `<button disabled type="button"><small>← 上一章</small><span>${full?'已是本书起点':'已是样章起点'}</span></button>`}${next ? `<a href="${readURL(book.id,next.id)}"><small>下一章 →</small><span>${e(next.title)}</span></a>` : `<a href="${bookURL(book.id)}#toc"><small>${full?'全书已读完':'样章已读完'} ✓</small><span>返回目录</span></a>`}</nav>
         <a class="reader-library-link" href="#/">← 返回数字书房</a>
       </div>
@@ -25,8 +25,8 @@ export function renderReader(book, chapter, index, resume = false) {
     <div class="reading-status"><span>${readingLabel} <strong id="progress-text">0%</strong></span><progress id="reading-progress" max="100" value="0" aria-label="${readingLabel}"></progress><span>${index+1} / ${list.length} 节</span></div>`;
 }
 
-export function bindReader(book, chapter, index, restore, sectionAnchor = null) {
-  const stopListening=bindListen(book,chapter);
+export function bindReader(book, chapter, index, restore, sectionAnchor = null, listenFromStart = false) {
+  const stopListening=bindListen(book,chapter,listenFromStart);
   let size = Number(storage.get('font-size', 21));
   if (!Number.isFinite(size)) size=21;
   size = Math.max(17, Math.min(29, size));
