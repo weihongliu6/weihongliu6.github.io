@@ -1,5 +1,5 @@
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e } from './components.js?v=phase2-20260925';
+import { escapeHTML as e, listeningChapters } from './components.js?v=chapters-20261006';
 
 // Short utterances avoid sending an entire chapter to the speech queue.
 export function speechChunks(chapter){
@@ -8,20 +8,24 @@ export function speechChunks(chapter){
     .flatMap(text=>Array.from(text.trim()).join('').match(/[\s\S]{1,160}/gu)||[]).filter(text=>text.trim());
 }
 export function listenPanel(book,chapter,index){
-  return `<details class="listen-panel" id="listen-panel"><summary>听本章 · 设备语音朗读</summary><p class="sample-note">使用设备／浏览器提供的语音，不是录制有声书。语音可能需要联网；锁屏或切换应用可能中断播放。听书位置仅保存在此浏览器。</p><div class="listen-controls"><label>章节 <select id="listen-chapter">${book.chapters.map((c,i)=>`<option value="${e(c.id)}" ${i===index?'selected':''}>${e(c.title)}</option>`).join('')}</select></label><label>语速 <select id="listen-rate">${[0.75,1,1.25,1.5].map(n=>`<option value="${n}" ${n===1?'selected':''}>${n}×</option>`).join('')}</select></label><label>声音 <select id="listen-voice"><option value="">设备默认中文语音</option></select></label></div><div class="listen-controls"><button type="button" id="listen-play">开始／继续朗读</button><button type="button" id="listen-pause" disabled>暂停</button><button type="button" id="listen-stop" disabled>停止</button><button type="button" id="listen-restart">从章首重听</button></div><p id="listen-status" role="status" aria-live="polite"></p></details>`;
+  if(!listeningChapters(book).some(entry=>entry.id===chapter.id))return '';
+  return `<details class="listen-panel" id="listen-panel"><summary>听本章 · ${e(chapter.title)}</summary><p class="sample-note">使用设备／浏览器提供的语音，不是录制有声书。语音可能需要联网；锁屏或切换应用可能中断播放。听书位置仅保存在此浏览器。</p><div class="listen-controls"><label>章节 <select id="listen-chapter">${listeningChapters(book).map(c=>`<option value="${e(c.id)}" ${c.id===chapter.id?'selected':''}>${e(c.title)}</option>`).join('')}</select></label><label>语速 <select id="listen-rate">${[0.75,1,1.25,1.5].map(n=>`<option value="${n}" ${n===1?'selected':''}>${n}×</option>`).join('')}</select></label><label>声音 <select id="listen-voice"><option value="">设备默认中文语音</option></select></label></div><div class="listen-controls"><button type="button" id="listen-play">开始／继续本章</button><button type="button" id="listen-pause" disabled>暂停</button><button type="button" id="listen-stop" disabled>停止</button><button type="button" id="listen-restart">从章首重听</button></div><p id="listen-status" role="status" aria-live="polite"></p></details>`;
 }
-export function bindListen(book,chapter){
+export function bindListen(book,chapter,fromStart=false){
   const panel=document.querySelector('#listen-panel'), play=document.querySelector('#listen-play'), pause=document.querySelector('#listen-pause'), stop=document.querySelector('#listen-stop'), restart=document.querySelector('#listen-restart'), rate=document.querySelector('#listen-rate'), voice=document.querySelector('#listen-voice'), status=document.querySelector('#listen-status');
-  document.querySelector('#listen-chapter').onchange=event=>{location.hash=`#/read/${encodeURIComponent(book.id)}/${encodeURIComponent(event.target.value)}?listen=1`;};
+  if(!panel)return ()=>{};
+  document.querySelector('#listen-chapter').onchange=event=>{location.hash=`#/read/${encodeURIComponent(book.id)}/${encodeURIComponent(event.target.value)}?listen=1&from=start`;};
+  const currentButton=document.querySelector('#listen-current');
+  if(currentButton)currentButton.onclick=()=>{panel.open=true;panel.scrollIntoView({block:'start'});restart.click();};
   const synth=window.speechSynthesis;
   if(!synth || !window.SpeechSynthesisUtterance){
-    [play,pause,stop,restart,rate,voice].forEach(control=>control.disabled=true);
+    [play,pause,stop,restart,rate,voice,currentButton].filter(Boolean).forEach(control=>control.disabled=true);
     status.textContent='此浏览器不支持语音朗读，请使用支持此功能的浏览器；仍可正常阅读正文。';
     return ()=>{};
   }
   const chunks=speechChunks(chapter), key=`listening:${book.id}:${chapter.id}`;
   const saved=storage.get(key), edition=book.edition||'sample';
-  let position=saved?.edition===edition?Math.max(0,Math.min(chunks.length-1,Number(saved.position)||0)):0;
+  let position=!fromStart && saved?.edition===edition?Math.max(0,Math.min(chunks.length-1,Number(saved.position)||0)):0;
   position=Math.floor(position);
   let generation=0,active=false,disposed=false,utterance=null;
   const save=()=>storage.set(key,{position,edition});
