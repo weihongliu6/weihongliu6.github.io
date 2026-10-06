@@ -54,10 +54,10 @@ function otherEditionLinks(book){
 }
 function canRead(book){ return ['sample','complete'].includes(book?.status); }
 function home(){
-  return `<section class="library-hero"><div class="eyebrow"><span class="tiny-line"></span> ${e(platform.name)} <span class="fine-divider">/</span> V${e(platform.version)}</div><h1>影子观察<span class="title-dot"> · </span>数字书房</h1><p class="english-subtitle">Photography, Art, Medicine &amp; Life</p><p class="hero-invitation">在书页之间，留一点时间给自己。</p></section>
+  return `<section class="library-hero"><div><p class="eyebrow">SHADOW LIBRARY</p><h1>数字书房</h1><p class="hero-invitation">在书页之间，留一点时间给自己。</p></div><a class="shelf-listen-link" href="#/listen"><span aria-hidden="true">◖◗</span> 听书<span class="listen-link-caption">设备语音朗读</span></a></section>
     ${shelfTools()}
     <section class="collection" aria-labelledby="collection-title"><div class="section-label"><h2 id="collection-title">书架 <span>THE COLLECTION</span></h2><span>${books.length} 本书 <span class="fine-divider">/</span> 一间书房</span></div><div class="bookshelf">${books.map((book,i)=>`<article class="book-card" data-book-id="${e(book.id)}"><a class="book-cover-link" href="${bookURL(book.id)}" aria-label="打开《${e(book.title)}》${canRead(book)?(book.status==='complete'?'，可在线阅读':'，可阅读样章'):'，即将进入数字书房'}"><div class="book-object">${cover(book)}<span class="book-spine" aria-hidden="true"></span></div></a><div class="book-caption"><div class="book-meta"><span class="book-number">${String(i+1).padStart(2,'0')}</span><span class="book-status ${canRead(book)?'available':''}">${canRead(book)?(book.status==='complete'?'完整数字版':'样章开放'):'即将进入数字书房'}</span></div><h3><a href="${bookURL(book.id)}">${e(book.title)}</a></h3>${canRead(book)?'<a class="text-link" href="'+bookURL(book.id)+'">在线阅读 / Read Online <span aria-hidden="true">→</span></a>':''}${appleBooksLink(book)}</div></article>`).join('')}</div></section>
-    <p id="shelf-results" role="status" aria-live="polite" class="sample-note"></p><section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>现有 ${books.filter(book=>book.status==='complete').length} 本完整数字书可在线阅读。<br>更多作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
+    <section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>现有 ${books.filter(book=>book.status==='complete').length} 本完整数字书可在线阅读。<br>更多作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
 }
 function bookPage(book){
   if(!canRead(book)) return `<section class="coming-page"><a class="back-link" href="#/">← 返回书架</a><div class="coming-cover book-object">${cover(book,true)}</div><p class="eyebrow">THE COLLECTION</p><h1>${e(book.title)}</h1><p class="coming-label">即将进入数字书房</p><p>本书的数字阅读内容尚未收录。</p>${book.appleBooksTitle?`<p class="sample-note">Apple Books 版题名：《${e(book.appleBooksTitle)}》</p>`:''}${appleBooksLink(book,'primary-link')}${otherEditionLinks(book)}<a class="primary-link" href="#/">返回数字书房 <span aria-hidden="true">→</span></a></section>`;
@@ -75,7 +75,12 @@ function listeningURL(book){
 }
 function shelfTools(){
   const recent=books.filter(book=>savedReading(book));
-  return `<section class="shelf-tools" aria-label="找书与继续阅读"><div class="shelf-search"><label for="book-search">找一本书</label><input id="book-search" type="search" placeholder="搜索书名、作者" autocomplete="off"><label for="book-filter">阅读状态</label><select id="book-filter"><option value="all">全部书籍</option><option value="readable">可在线阅读</option><option value="reading">继续阅读</option><option value="coming">待收录</option></select><a class="text-link" href="#/listen">听书 · 设备语音 →</a></div>${recent.length?`<div class="continue-reading"><h2>继续阅读</h2><p class="sample-note">阅读位置保存在此浏览器。</p>${recent.map(book=>`<a href="${readURL(book.id,savedReading(book).chapter)}?resume=1">${e(book.title)} <span>继续上次阅读 →</span></a>`).join('')}</div>`:''}</section>`;
+  return `<section class="shelf-tools" aria-label="找书与继续阅读"><div class="shelf-search"><div class="search-field"><label class="sr-only" for="book-search">搜索书名、作者</label><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="book-search" type="search" placeholder="搜索书名、作者" autocomplete="off"></div><label class="sr-only" for="book-filter">阅读状态</label><select id="book-filter"><option value="all">全部书籍</option><option value="readable">可在线阅读</option><option value="reading">继续阅读</option><option value="coming">待收录</option></select><p id="shelf-results" role="status" aria-live="polite"></p></div>${recent.length?`<section class="continue-reading" aria-labelledby="continue-title"><div class="continue-heading"><h2 id="continue-title">继续阅读</h2><span>阅读位置保存在此浏览器</span></div><div class="continue-grid">${recent.map(book=>{
+    const saved=savedReading(book);
+    const index=book.chapters.findIndex(chapter=>chapter.id===saved.chapter);
+    const percent=Math.round((index+Math.max(0,Math.min(1,Number(saved.fraction)||0)))/book.chapters.length*100);
+    return `<a class="continue-card" href="${readURL(book.id,saved.chapter)}?resume=1"><div class="continue-cover">${cover(book)}</div><div class="continue-info"><h3>${e(book.title)}</h3><p>${e(book.chapters[index].title)}</p><div class="continue-progress"><progress max="100" value="${percent}" aria-label="${e(book.title)}阅读进度"></progress><span>${percent}%</span></div><span class="continue-action">继续阅读</span></div></a>`;
+  }).join('')}</div></section>`:''}</section>`;
 }
 function matchesShelf(book,query='',filter='all'){
   const text=[book.title,book.author,...(book.publication?.contributors||[]).map(c=>c.name)].join(' ').toLowerCase();
@@ -84,7 +89,7 @@ function matchesShelf(book,query='',filter='all'){
 function bindShelf(){
   const search=document.querySelector('#book-search'), filter=document.querySelector('#book-filter');
   if(!search||!filter)return;
-  const update=()=>{let count=0;document.querySelectorAll('.book-card[data-book-id]').forEach(card=>{const book=books.find(b=>b.id===card.dataset.bookId);card.hidden=!matchesShelf(book,search.value,filter.value);if(!card.hidden)count++;});document.querySelector('#shelf-results').textContent=count?`显示 ${count} 本书`:'没有匹配的书籍，请换个关键词或筛选条件。';};
+  const update=()=>{let count=0;document.querySelectorAll('.book-card[data-book-id]').forEach(card=>{const book=books.find(b=>b.id===card.dataset.bookId);card.hidden=!matchesShelf(book,search.value,filter.value);if(!card.hidden)count++;});document.querySelector('#shelf-results').textContent=count?(search.value||filter.value!=='all'?`找到 ${count} 本书`:''):'没有匹配的书籍，请换个关键词或筛选条件。';};
   search.oninput=update;filter.onchange=update;update();
 }
 function listeningHome(){
