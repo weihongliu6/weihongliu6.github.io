@@ -28,8 +28,11 @@ export function tocItems(book, current = '') {
 export function contentBlocks(blocks) {
   return blocks.map(block => {
     if (block.type === 'heading') return `<h2${block.anchor?` id="${escapeHTML(block.anchor)}"`:""}>${escapeHTML(block.text)}</h2>`;
-    if (block.type === 'paragraph') return `<p>${escapeHTML(block.text)}</p>`;
-    if (block.type === 'image') return `<figure><button class="image-button" type="button" data-image="${escapeHTML(block.fullSrc || block.src)}" data-caption="${escapeHTML(block.caption || '')}" data-alt="${escapeHTML(block.alt || '')}" aria-label="放大图片${block.caption ? '：'+escapeHTML(block.caption) : ''}"><img src="${escapeHTML(block.src)}" alt="${escapeHTML(block.alt || '')}" ${block.width&&block.height?`width="${Number(block.width)}" height="${Number(block.height)}"`:""} loading="lazy" decoding="async"><span class="enlarge" aria-hidden="true">查看大图 ↗</span></button>${block.caption ? `<figcaption>${escapeHTML(block.caption)}</figcaption>` : ''}</figure>`;
+    if (block.type === 'reference-page') return `<section class="reference-page" id="${escapeHTML(block.anchor || '')}">${contentBlocks([{...block,type:'image',anchor:null}])}<details class="page-transcript"><summary>展开本页文字 · 可调字号</summary>${block.text.split('\n').filter(Boolean).map(line=>`<p>${escapeHTML(line)}</p>`).join('')}</details>${(block.links||[]).map(link=>/^https?:\/\//i.test(link.url)?`<p class="source-link"><a href="${escapeHTML(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(link.label)} ↗</a></p>`:'').join('')}</section>`;
+    if (block.type === 'link') return /^https?:\/\//i.test(block.url) ? `<p class="source-link"><a href="${escapeHTML(block.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(block.label)} ↗</a></p>` : '';
+    if (block.type === 'paragraph') return `<p${block.anchor?` id="${escapeHTML(block.anchor)}"`:''}>${escapeHTML(block.text)}</p>`;
+    if (block.type === 'image') return `<figure${block.anchor?` id="${escapeHTML(block.anchor)}"`:''}><button class="image-button" type="button" data-image="${escapeHTML(block.fullSrc || block.src)}" data-caption="${escapeHTML(block.caption || '')}" data-alt="${escapeHTML(block.alt || '')}" aria-label="放大图片${block.caption ? '：'+escapeHTML(block.caption) : ''}"><img src="${escapeHTML(block.src)}" alt="${escapeHTML(block.alt || '')}" ${block.width&&block.height?`width="${Number(block.width)}" height="${Number(block.height)}"`:""} loading="lazy" decoding="async"><span class="enlarge" aria-hidden="true">查看大图 ↗</span></button>${block.caption ? `<figcaption>${escapeHTML(block.caption)}</figcaption>` : ''}</figure>`;
     return '';
   }).join('');
 }
+

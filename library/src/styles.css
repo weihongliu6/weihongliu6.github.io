@@ -70,3 +70,10 @@ body:not(.is-reading){background:radial-gradient(ellipse at 3% 8%,var(--ambient-
 @media print{body:not(.is-reading){background:#fff}.collection{background:#fff;box-shadow:none}.chapter-listen-link,.chapter-listen-button,.listen-panel{display:none!important}}
 
 @media(max-width:350px){.collection{margin-left:10px;margin-right:10px;padding-left:8px;padding-right:8px}}
+
+
+/* Original reference layouts retain legible maps, tables and source records. */
+.reference-page { margin-block: 2rem; scroll-margin-top: 6rem; }
+.page-transcript { border: 1px solid var(--line, #d8d5cd); border-radius: 10px; padding: .8rem 1rem; }
+.page-transcript summary { cursor: pointer; font-size: .85em; }
+.source-link { overflow-wrap: anywhere; font-size: .75em; }

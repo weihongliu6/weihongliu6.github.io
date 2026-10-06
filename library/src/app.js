@@ -1,6 +1,6 @@
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL } from './components.js?v=chapters-20261006';
-import { renderReader, bindReader } from './reader.js?v=chapters-20261006';
+import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL } from './components.js?v=renaissance-20261006';
+import { renderReader, bindReader } from './reader.js?v=renaissance-20261006';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -140,7 +140,8 @@ async function render(){
 try{
   // Platform branding must not make the existing book catalogue unavailable.
   try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
-  const response=await fetch('data/books.json?v=platform-v1-20261006');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=renaissance-20261006');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();await render();
   window.addEventListener('hashchange',render);
 }catch(error){main.innerHTML='<section class="empty-state"><h1>书房还没有打开</h1><p>书架资料暂时无法载入。</p><p>请刷新页面重试。</p></section>';}
+

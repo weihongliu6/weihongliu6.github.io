@@ -1567,16 +1567,21 @@
     "id": "renaissance",
     "title": "寻找文艺复兴",
     "cover": "assets/covers/renaissance.jpg",
-    "status": "coming",
+    "status": "complete",
     "publication": {
       "metadataVersion": 1,
       "publisher": null,
       "imprint": null,
       "language": "zh-CN",
-      "format": null,
+      "format": "web",
       "isbn": null,
       "edition": null,
-      "contributors": [],
+      "contributors": [
+        {
+          "name": "影子观察",
+          "role": "author"
+        }
+      ],
       "rights": {
         "holder": null,
         "license": null,
@@ -1592,6 +1597,2762 @@
           "url": null
         }
       ]
-    }
+    },
+    "author": "影子观察",
+    "subtitle": "沿着意大利的城市、教堂与街巷，遇见散落人间的艺术珍宝",
+    "edition": "renaissance-web-20261006",
+    "coverLabel": "原书封面",
+    "intro": "最后，这本书写给所有愿意慢下来的人。愿下一次站在画前时，我们都少一点赶路，多一点辨认；少一点“我看过”的得意，多一点“我还在看”的谦卑。",
+    "introSource": "原书《写在重新出发之前》",
+    "editionSummary": "647页书稿 · 7部38章 · 现场寻宝地图、艺术家短传与附录。图075、176、177的图片暂缺，正文及图注保留。",
+    "chapters": [
+      {
+        "id": "front-matter",
+        "title": "封面、书名与原书目录",
+        "file": "data/chapters/renaissance/front-matter.json"
+      },
+      {
+        "id": "preface",
+        "title": "写在重新出发之前",
+        "file": "data/chapters/renaissance/preface.json"
+      },
+      {
+        "id": "chapter-01",
+        "title": "第1章 从看过到看见：复兴的不是一个消失的世界",
+        "file": "data/chapters/renaissance/chapter-01.json"
+      },
+      {
+        "id": "chapter-02",
+        "title": "第2章 人体、透视与光：画面怎样把人留下",
+        "file": "data/chapters/renaissance/chapter-02.json"
+      },
+      {
+        "id": "chapter-03",
+        "title": "第3章 一面墙、一块木板、一层颜料：媒介的四个问题",
+        "file": "data/chapters/renaissance/chapter-03.json"
+      },
+      {
+        "id": "chapter-04",
+        "title": "第4章 走进教堂：空间、人物与观看礼仪",
+        "file": "data/chapters/renaissance/chapter-04.json"
+      },
+      {
+        "id": "chapter-05",
+        "title": "第5章 两块青铜与一座穹顶：竞争从哪里开始",
+        "file": "data/chapters/renaissance/chapter-05.json"
+      },
+      {
+        "id": "chapter-06",
+        "title": "第6章 人体走上街头：多纳太罗与行会的目光",
+        "file": "data/chapters/renaissance/chapter-06.json"
+      },
+      {
+        "id": "chapter-07",
+        "title": "第7章 阿尔诺河南岸：布兰卡奇礼拜堂的三代画家",
+        "file": "data/chapters/renaissance/chapter-07.json"
+      },
+      {
+        "id": "chapter-08",
+        "title": "第8章 从新圣母到圣马可：给公共生活和独处画画",
+        "file": "data/chapters/renaissance/chapter-08.json"
+      },
+      {
+        "id": "chapter-09",
+        "title": "第9章 美第奇的房间：金钱、信仰与城市记忆",
+        "file": "data/chapters/renaissance/chapter-09.json"
+      },
+      {
+        "id": "chapter-10",
+        "title": "第10章 再进乌菲兹：从利皮到波提切利，从线条到空气",
+        "file": "data/chapters/renaissance/chapter-10.json"
+      },
+      {
+        "id": "chapter-11",
+        "title": "第11章 米开朗基罗的佛罗伦萨：未完成的石头与完成的权力",
+        "file": "data/chapters/renaissance/chapter-11.json"
+      },
+      {
+        "id": "chapter-12",
+        "title": "第12章 锡耶纳：另一座城市对美的回答",
+        "file": "data/chapters/renaissance/chapter-12.json"
+      },
+      {
+        "id": "chapter-13",
+        "title": "第13章 圣吉米尼亚诺与普拉托：小城的大画家",
+        "file": "data/chapters/renaissance/chapter-13.json"
+      },
+      {
+        "id": "chapter-14",
+        "title": "第14章 阿雷佐、蒙特尔基、圣塞波尔克罗：追着皮埃罗走",
+        "file": "data/chapters/renaissance/chapter-14.json"
+      },
+      {
+        "id": "chapter-15",
+        "title": "第15章 乌尔比诺：雇佣军统帅的书房",
+        "file": "data/chapters/renaissance/chapter-15.json"
+      },
+      {
+        "id": "chapter-16",
+        "title": "第16章 阿西西、佩鲁贾与斯佩洛：沿着信仰走进文艺复兴",
+        "file": "data/chapters/renaissance/chapter-16.json"
+      },
+      {
+        "id": "chapter-17",
+        "title": "第17章 奥尔维耶托与斯波莱托：仰头看见身体与末日",
+        "file": "data/chapters/renaissance/chapter-17.json"
+      },
+      {
+        "id": "chapter-18",
+        "title": "第18章 从废墟到教皇工程：古罗马并没有远去",
+        "file": "data/chapters/renaissance/chapter-18.json"
+      },
+      {
+        "id": "chapter-19",
+        "title": "第19章 梵蒂冈：拉斐尔的房间与米开朗基罗的天顶",
+        "file": "data/chapters/renaissance/chapter-19.json"
+      },
+      {
+        "id": "chapter-20",
+        "title": "第20章 河两岸的私人订单：法尔内西纳、卡拉法与西比拉",
+        "file": "data/chapters/renaissance/chapter-20.json"
+      },
+      {
+        "id": "chapter-21",
+        "title": "第21章 一尊摩西，三面墙：走向样式主义和巴洛克",
+        "file": "data/chapters/renaissance/chapter-21.json"
+      },
+      {
+        "id": "chapter-22",
+        "title": "第22章 水城的画为什么这样画：从贝利尼开始",
+        "file": "data/chapters/renaissance/chapter-22.json"
+      },
+      {
+        "id": "chapter-23",
+        "title": "第23章 弗拉里教堂：站在祭坛画原来面对的人群中",
+        "file": "data/chapters/renaissance/chapter-23.json"
+      },
+      {
+        "id": "chapter-24",
+        "title": "第24章 圣罗科与圣塞巴斯蒂安：整座建筑成为画面",
+        "file": "data/chapters/renaissance/chapter-24.json"
+      },
+      {
+        "id": "chapter-25",
+        "title": "第25章 学院美术馆与总督宫：诗意、权力和观看的距离",
+        "file": "data/chapters/renaissance/chapter-25.json"
+      },
+      {
+        "id": "chapter-26",
+        "title": "第26章 帕多瓦：先到乔托那里，再看多纳太罗",
+        "file": "data/chapters/renaissance/chapter-26.json"
+      },
+      {
+        "id": "chapter-27",
+        "title": "第27章 曼图亚：曼特尼亚的房间，朱利奥的幻觉",
+        "file": "data/chapters/renaissance/chapter-27.json"
+      },
+      {
+        "id": "chapter-28",
+        "title": "第28章 米兰：与一顿晚餐共处",
+        "file": "data/chapters/renaissance/chapter-28.json"
+      },
+      {
+        "id": "chapter-29",
+        "title": "第29章 费拉拉、博洛尼亚与帕尔马：不应跳过的三种声音",
+        "file": "data/chapters/renaissance/chapter-29.json"
+      },
+      {
+        "id": "chapter-30",
+        "title": "第30章 维罗纳与威尼托小城：祭坛画的归处",
+        "file": "data/chapters/renaissance/chapter-30.json"
+      },
+      {
+        "id": "chapter-31",
+        "title": "第31章 出发方法：预约、交通、行李与体力",
+        "file": "data/chapters/renaissance/chapter-31.json"
+      },
+      {
+        "id": "chapter-32",
+        "title": "第32章 第一次去意大利：10至14天经典路线",
+        "file": "data/chapters/renaissance/chapter-32.json"
+      },
+      {
+        "id": "chapter-33",
+        "title": "第33章 佛罗伦萨深度5日",
+        "file": "data/chapters/renaissance/chapter-33.json"
+      },
+      {
+        "id": "chapter-34",
+        "title": "第34章 托斯卡纳艺术自驾7日",
+        "file": "data/chapters/renaissance/chapter-34.json"
+      },
+      {
+        "id": "chapter-35",
+        "title": "第35章 罗马教堂艺术3至4日",
+        "file": "data/chapters/renaissance/chapter-35.json"
+      },
+      {
+        "id": "chapter-36",
+        "title": "第36章 威尼斯艺术3日",
+        "file": "data/chapters/renaissance/chapter-36.json"
+      },
+      {
+        "id": "chapter-37",
+        "title": "第37章 北意大利文艺复兴7至10日",
+        "file": "data/chapters/renaissance/chapter-37.json"
+      },
+      {
+        "id": "chapter-38",
+        "title": "第38章 第二次去意大利：隐藏艺术珍宝10日",
+        "file": "data/chapters/renaissance/chapter-38.json"
+      },
+      {
+        "id": "afterword",
+        "title": "后记｜把下一次观看留给自己",
+        "file": "data/chapters/renaissance/afterword.json"
+      },
+      {
+        "id": "reference-414",
+        "title": "现场寻宝地图｜总览与使用说明",
+        "file": "data/chapters/renaissance/reference-414.json"
+      },
+      {
+        "id": "reference-418",
+        "title": "寻宝地图｜佛罗伦萨 / Florence",
+        "file": "data/chapters/renaissance/reference-418.json"
+      },
+      {
+        "id": "reference-429",
+        "title": "寻宝地图｜锡耶纳 / Siena",
+        "file": "data/chapters/renaissance/reference-429.json"
+      },
+      {
+        "id": "reference-432",
+        "title": "寻宝地图｜皮恩扎 / Pienza",
+        "file": "data/chapters/renaissance/reference-432.json"
+      },
+      {
+        "id": "reference-434",
+        "title": "寻宝地图｜圣吉米尼亚诺 / San Gimignano",
+        "file": "data/chapters/renaissance/reference-434.json"
+      },
+      {
+        "id": "reference-436",
+        "title": "寻宝地图｜普拉托 / Prato",
+        "file": "data/chapters/renaissance/reference-436.json"
+      },
+      {
+        "id": "reference-438",
+        "title": "寻宝地图｜阿雷佐 / Arezzo",
+        "file": "data/chapters/renaissance/reference-438.json"
+      },
+      {
+        "id": "reference-440",
+        "title": "寻宝地图｜蒙特尔基 / Monterchi",
+        "file": "data/chapters/renaissance/reference-440.json"
+      },
+      {
+        "id": "reference-442",
+        "title": "寻宝地图｜圣塞波尔克罗 / Sansepolcro",
+        "file": "data/chapters/renaissance/reference-442.json"
+      },
+      {
+        "id": "reference-444",
+        "title": "寻宝地图｜乌尔比诺 / Urbino",
+        "file": "data/chapters/renaissance/reference-444.json"
+      },
+      {
+        "id": "reference-446",
+        "title": "寻宝地图｜阿西西 / Assisi",
+        "file": "data/chapters/renaissance/reference-446.json"
+      },
+      {
+        "id": "reference-448",
+        "title": "寻宝地图｜佩鲁贾 / Perugia",
+        "file": "data/chapters/renaissance/reference-448.json"
+      },
+      {
+        "id": "reference-450",
+        "title": "寻宝地图｜斯佩洛 / Spello",
+        "file": "data/chapters/renaissance/reference-450.json"
+      },
+      {
+        "id": "reference-452",
+        "title": "寻宝地图｜奥尔维耶托 / Orvieto",
+        "file": "data/chapters/renaissance/reference-452.json"
+      },
+      {
+        "id": "reference-454",
+        "title": "寻宝地图｜斯波莱托 / Spoleto",
+        "file": "data/chapters/renaissance/reference-454.json"
+      },
+      {
+        "id": "reference-456",
+        "title": "寻宝地图｜阿夏诺（Asciano） / Asciano",
+        "file": "data/chapters/renaissance/reference-456.json"
+      },
+      {
+        "id": "reference-458",
+        "title": "寻宝地图｜罗马 / Rome",
+        "file": "data/chapters/renaissance/reference-458.json"
+      },
+      {
+        "id": "reference-465",
+        "title": "寻宝地图｜梵蒂冈 / Vatican City",
+        "file": "data/chapters/renaissance/reference-465.json"
+      },
+      {
+        "id": "reference-468",
+        "title": "寻宝地图｜威尼斯 / Venice",
+        "file": "data/chapters/renaissance/reference-468.json"
+      },
+      {
+        "id": "reference-474",
+        "title": "寻宝地图｜帕多瓦 / Padua",
+        "file": "data/chapters/renaissance/reference-474.json"
+      },
+      {
+        "id": "reference-477",
+        "title": "寻宝地图｜曼图亚 / Mantua",
+        "file": "data/chapters/renaissance/reference-477.json"
+      },
+      {
+        "id": "reference-480",
+        "title": "寻宝地图｜米兰 / Milan",
+        "file": "data/chapters/renaissance/reference-480.json"
+      },
+      {
+        "id": "reference-483",
+        "title": "寻宝地图｜费拉拉 / Ferrara",
+        "file": "data/chapters/renaissance/reference-483.json"
+      },
+      {
+        "id": "reference-485",
+        "title": "寻宝地图｜博洛尼亚 / Bologna",
+        "file": "data/chapters/renaissance/reference-485.json"
+      },
+      {
+        "id": "reference-487",
+        "title": "寻宝地图｜帕尔马 / Parma",
+        "file": "data/chapters/renaissance/reference-487.json"
+      },
+      {
+        "id": "reference-489",
+        "title": "寻宝地图｜维罗纳 / Verona",
+        "file": "data/chapters/renaissance/reference-489.json"
+      },
+      {
+        "id": "reference-491",
+        "title": "寻宝地图｜卡斯泰尔弗兰科威尼托 / Castelfranco Veneto",
+        "file": "data/chapters/renaissance/reference-491.json"
+      },
+      {
+        "id": "reference-493",
+        "title": "寻宝地图｜维琴察 / Vicenza",
+        "file": "data/chapters/renaissance/reference-493.json"
+      },
+      {
+        "id": "reference-495",
+        "title": "寻宝地图｜现场核对提示",
+        "file": "data/chapters/renaissance/reference-495.json"
+      },
+      {
+        "id": "reference-498",
+        "title": "寻宝地图｜地点索引",
+        "file": "data/chapters/renaissance/reference-498.json"
+      },
+      {
+        "id": "reference-503",
+        "title": "寻宝地图｜来源与地图说明",
+        "file": "data/chapters/renaissance/reference-503.json"
+      },
+      {
+        "id": "reference-504",
+        "title": "寻宝地图｜西西里｜卡拉瓦乔现场",
+        "file": "data/chapters/renaissance/reference-504.json"
+      },
+      {
+        "id": "reference-505",
+        "title": "寻宝地图｜锡拉库萨｜地图",
+        "file": "data/chapters/renaissance/reference-505.json"
+      },
+      {
+        "id": "reference-507",
+        "title": "寻宝地图｜墨西拿｜地图",
+        "file": "data/chapters/renaissance/reference-507.json"
+      },
+      {
+        "id": "reference-509",
+        "title": "寻宝地图｜巴勒莫｜地图",
+        "file": "data/chapters/renaissance/reference-509.json"
+      },
+      {
+        "id": "reference-511",
+        "title": "寻宝地图｜西西里｜图例与地点索引",
+        "file": "data/chapters/renaissance/reference-511.json"
+      },
+      {
+        "id": "reference-512",
+        "title": "寻宝地图｜西西里｜来源",
+        "file": "data/chapters/renaissance/reference-512.json"
+      },
+      {
+        "id": "reference-513",
+        "title": "寻宝地图｜来源与地图署名",
+        "file": "data/chapters/renaissance/reference-513.json"
+      },
+      {
+        "id": "reference-514",
+        "title": "附录｜时间轴与现场快查",
+        "file": "data/chapters/renaissance/reference-514.json"
+      },
+      {
+        "id": "reference-518",
+        "title": "意大利艺术旅行地点中—意—英对照表",
+        "file": "data/chapters/renaissance/reference-518.json"
+      },
+      {
+        "id": "reference-528",
+        "title": "同名与易混淆地点",
+        "file": "data/chapters/renaissance/reference-528.json"
+      },
+      {
+        "id": "reference-530",
+        "title": "主要艺术家短传｜阅读说明",
+        "file": "data/chapters/renaissance/reference-530.json"
+      },
+      {
+        "id": "reference-531",
+        "title": "艺术家短传｜乔托—菲利波·布鲁内莱斯基",
+        "file": "data/chapters/renaissance/reference-531.json"
+      },
+      {
+        "id": "reference-536",
+        "title": "艺术家短传｜多纳太罗—菲利波·利皮",
+        "file": "data/chapters/renaissance/reference-536.json"
+      },
+      {
+        "id": "reference-541",
+        "title": "艺术家短传｜菲利皮诺·利皮—桑德罗·波提切利",
+        "file": "data/chapters/renaissance/reference-541.json"
+      },
+      {
+        "id": "reference-546",
+        "title": "艺术家短传｜列奥纳多·达·芬奇—列昂·巴蒂斯塔·阿尔贝蒂",
+        "file": "data/chapters/renaissance/reference-546.json"
+      },
+      {
+        "id": "reference-551",
+        "title": "艺术家短传｜伯纳多·罗塞利诺—索多马",
+        "file": "data/chapters/renaissance/reference-551.json"
+      },
+      {
+        "id": "reference-556",
+        "title": "艺术家短传｜巴尔达萨雷·佩鲁齐—提香",
+        "file": "data/chapters/renaissance/reference-556.json"
+      },
+      {
+        "id": "reference-561",
+        "title": "艺术家短传｜雅各布·丁托列托—朱利奥·罗马诺",
+        "file": "data/chapters/renaissance/reference-561.json"
+      },
+      {
+        "id": "reference-566",
+        "title": "艺术家短传｜贝尔纳迪诺·卢伊尼—科雷乔",
+        "file": "data/chapters/renaissance/reference-566.json"
+      },
+      {
+        "id": "reference-571",
+        "title": "艺术家短传｜帕尔米贾尼诺—安尼巴莱·卡拉奇",
+        "file": "data/chapters/renaissance/reference-571.json"
+      },
+      {
+        "id": "reference-576",
+        "title": "艺术家短传｜乔尔乔·瓦萨里—南尼·迪·班科",
+        "file": "data/chapters/renaissance/reference-576.json"
+      },
+      {
+        "id": "reference-581",
+        "title": "艺术家短传｜保罗·乌切洛—西蒙内·马尔蒂尼",
+        "file": "data/chapters/renaissance/reference-581.json"
+      },
+      {
+        "id": "reference-586",
+        "title": "艺术家短传｜小安东尼奥·达·桑加罗—乔瓦尼·达·乌迪内",
+        "file": "data/chapters/renaissance/reference-586.json"
+      },
+      {
+        "id": "reference-591",
+        "title": "艺术家短传｜安德烈亚·帕拉第奥—奥雷利奥·卢伊尼",
+        "file": "data/chapters/renaissance/reference-591.json"
+      },
+      {
+        "id": "reference-596",
+        "title": "艺术家短传｜科西莫·图拉—多梅尼科·丰塔纳",
+        "file": "data/chapters/renaissance/reference-596.json"
+      },
+      {
+        "id": "reference-601",
+        "title": "艺术家肖像来源记录",
+        "file": "data/chapters/renaissance/reference-601.json"
+      },
+      {
+        "id": "reference-604",
+        "title": "人名原文与主要章节",
+        "file": "data/chapters/renaissance/reference-604.json"
+      },
+      {
+        "id": "reference-606",
+        "title": "主要艺术作品中—意—英对照表",
+        "file": "data/chapters/renaissance/reference-606.json"
+      },
+      {
+        "id": "reference-616",
+        "title": "六个容易混淆的词",
+        "file": "data/chapters/renaissance/reference-616.json"
+      },
+      {
+        "id": "reference-617",
+        "title": "继续读什么",
+        "file": "data/chapters/renaissance/reference-617.json"
+      },
+      {
+        "id": "reference-618",
+        "title": "艺术与建筑术语对照表",
+        "file": "data/chapters/renaissance/reference-618.json"
+      },
+      {
+        "id": "reference-622",
+        "title": "资料来源与出发前查询入口",
+        "file": "data/chapters/renaissance/reference-622.json"
+      },
+      {
+        "id": "reference-628",
+        "title": "作品插图来源与页码",
+        "file": "data/chapters/renaissance/reference-628.json"
+      },
+      {
+        "id": "reference-633",
+        "title": "作品插图来源与页码（续）",
+        "file": "data/chapters/renaissance/reference-633.json"
+      },
+      {
+        "id": "reference-638",
+        "title": "作品插图来源与页码（续）",
+        "file": "data/chapters/renaissance/reference-638.json"
+      },
+      {
+        "id": "reference-643",
+        "title": "作品插图来源与页码（续）",
+        "file": "data/chapters/renaissance/reference-643.json"
+      }
+    ],
+    "toc": [
+      {
+        "id": "front-matter",
+        "title": "封面、书名与原书目录",
+        "sections": []
+      },
+      {
+        "id": "preface",
+        "title": "写在重新出发之前",
+        "sections": [
+          {
+            "title": "怎样使用这本书",
+            "anchor": "page-7"
+          }
+        ]
+      },
+      {
+        "id": "chapter-01",
+        "title": "第1章 从看过到看见：复兴的不是一个消失的世界",
+        "sections": []
+      },
+      {
+        "id": "chapter-02",
+        "title": "第2章 人体、透视与光：画面怎样把人留下",
+        "sections": []
+      },
+      {
+        "id": "chapter-03",
+        "title": "第3章 一面墙、一块木板、一层颜料：媒介的四个问题",
+        "sections": []
+      },
+      {
+        "id": "chapter-04",
+        "title": "第4章 走进教堂：空间、人物与观看礼仪",
+        "sections": []
+      },
+      {
+        "id": "chapter-05",
+        "title": "第5章 两块青铜与一座穹顶：竞争从哪里开始",
+        "sections": [
+          {
+            "title": "现场寻宝 F01｜两件《献祭以撒》竞赛浮雕",
+            "anchor": "page-28"
+          },
+          {
+            "title": "现场寻宝 F02｜天堂之门 Porta del Paradiso",
+            "anchor": "page-31"
+          },
+          {
+            "title": "现场寻宝 F03｜布鲁内莱斯基穹顶 Cupola del Brunelleschi",
+            "anchor": "page-34"
+          },
+          {
+            "title": "作品图001｜献祭以撒（吉贝尔蒂）",
+            "anchor": "page-29"
+          },
+          {
+            "title": "作品图002｜献祭以撒（布鲁内莱斯基）",
+            "anchor": "page-30"
+          },
+          {
+            "title": "作品图003｜天堂之门",
+            "anchor": "page-32"
+          },
+          {
+            "title": "作品图004｜洗礼堂北门",
+            "anchor": "page-33"
+          },
+          {
+            "title": "作品图005｜布鲁内莱斯基穹顶",
+            "anchor": "page-35"
+          },
+          {
+            "title": "作品图006｜穹顶《最后的审判》",
+            "anchor": "page-36"
+          },
+          {
+            "title": "作品图007｜乔托钟楼",
+            "anchor": "page-38"
+          }
+        ]
+      },
+      {
+        "id": "chapter-06",
+        "title": "第6章 人体走上街头：多纳太罗与行会的目光",
+        "sections": [
+          {
+            "title": "现场寻宝 F04｜青铜大卫 David",
+            "anchor": "page-40"
+          },
+          {
+            "title": "现场寻宝 F05｜圣乔治 San Giorgio",
+            "anchor": "page-43"
+          },
+          {
+            "title": "现场寻宝 F06｜忏悔的抹大拉 Maddalena penitente",
+            "anchor": "page-47"
+          },
+          {
+            "title": "作品图008｜青铜大卫",
+            "anchor": "page-41"
+          },
+          {
+            "title": "作品图009｜大卫（韦罗基奥）",
+            "anchor": "page-42"
+          },
+          {
+            "title": "作品图010｜圣乔治",
+            "anchor": "page-44"
+          },
+          {
+            "title": "作品图011｜圣乔治屠龙（底座浮雕）",
+            "anchor": "page-45"
+          },
+          {
+            "title": "作品图012｜四圣徒／四位加冕圣徒",
+            "anchor": "page-46"
+          },
+          {
+            "title": "作品图013｜忏悔的抹大拉",
+            "anchor": "page-48"
+          },
+          {
+            "title": "作品图014｜圣约翰福音书作者",
+            "anchor": "page-49"
+          },
+          {
+            "title": "作品图015｜光头先知",
+            "anchor": "page-50"
+          }
+        ]
+      },
+      {
+        "id": "chapter-07",
+        "title": "第7章 阿尔诺河南岸：布兰卡奇礼拜堂的三代画家",
+        "sections": [
+          {
+            "title": "现场寻宝 F07｜布兰卡奇礼拜堂 Cappella Brancacci",
+            "anchor": "page-53"
+          },
+          {
+            "title": "作品图016｜纳税银",
+            "anchor": "page-54"
+          },
+          {
+            "title": "作品图017｜逐出伊甸园",
+            "anchor": "page-55"
+          },
+          {
+            "title": "作品图018｜治愈跛者与复活塔比莎",
+            "anchor": "page-56"
+          },
+          {
+            "title": "作品图019｜圣灵教堂内部建筑",
+            "anchor": "page-59"
+          }
+        ]
+      },
+      {
+        "id": "chapter-08",
+        "title": "第8章 从新圣母到圣马可：给公共生活和独处画画",
+        "sections": [
+          {
+            "title": "现场寻宝 F08｜圣三位一体 Trinità",
+            "anchor": "page-62"
+          },
+          {
+            "title": "现场寻宝 F09｜楼梯上方的天使报喜 Annunciazione",
+            "anchor": "page-67"
+          },
+          {
+            "title": "作品图020｜圣三位一体",
+            "anchor": "page-63"
+          },
+          {
+            "title": "作品图021｜托尔纳博尼礼拜堂壁画",
+            "anchor": "page-64"
+          },
+          {
+            "title": "作品图022｜菲利波·斯特罗齐礼拜堂壁画",
+            "anchor": "page-65"
+          },
+          {
+            "title": "作品图023｜木雕十字架（布鲁内莱斯基）",
+            "anchor": "page-66"
+          },
+          {
+            "title": "作品图024｜楼梯上方的天使报喜",
+            "anchor": "page-68"
+          }
+        ]
+      },
+      {
+        "id": "chapter-09",
+        "title": "第9章 美第奇的房间：金钱、信仰与城市记忆",
+        "sections": [
+          {
+            "title": "现场寻宝 F10｜三王行列 Corteo dei Magi",
+            "anchor": "page-73"
+          },
+          {
+            "title": "现场寻宝 F11｜圣十字教堂的两种身体",
+            "anchor": "page-77"
+          },
+          {
+            "title": "作品图025｜三王行列",
+            "anchor": "page-74"
+          },
+          {
+            "title": "作品图026｜圣洛伦佐教堂建筑",
+            "anchor": "page-75"
+          },
+          {
+            "title": "作品图027｜老祭衣间",
+            "anchor": "page-76"
+          },
+          {
+            "title": "作品图028｜巴尔迪礼拜堂圣方济各生平壁画",
+            "anchor": "page-78"
+          },
+          {
+            "title": "作品图029｜木雕十字架（多纳太罗）",
+            "anchor": "page-79"
+          }
+        ]
+      },
+      {
+        "id": "chapter-10",
+        "title": "第10章 再进乌菲兹：从利皮到波提切利，从线条到空气",
+        "sections": [
+          {
+            "title": "现场寻宝 F12｜圣母子与两位天使 Madonna col Bambino e due angeli",
+            "anchor": "page-84"
+          },
+          {
+            "title": "现场寻宝 F13｜维纳斯的诞生 Nascita di Venere",
+            "anchor": "page-86"
+          },
+          {
+            "title": "现场寻宝 F14｜春 Primavera",
+            "anchor": "page-88"
+          },
+          {
+            "title": "现场寻宝 F15｜天使报喜 Annunciazione",
+            "anchor": "page-91"
+          },
+          {
+            "title": "作品图030｜圣母子与两位天使",
+            "anchor": "page-85"
+          },
+          {
+            "title": "作品图031｜维纳斯的诞生",
+            "anchor": "page-87"
+          },
+          {
+            "title": "作品图032｜春",
+            "anchor": "page-89"
+          },
+          {
+            "title": "作品图033｜帕拉斯与半人马",
+            "anchor": "page-90"
+          },
+          {
+            "title": "作品图034｜天使报喜（达·芬奇）",
+            "anchor": "page-92"
+          },
+          {
+            "title": "作品图035｜基督受洗",
+            "anchor": "page-93"
+          },
+          {
+            "title": "作品图036｜乌尔比诺的维纳斯",
+            "anchor": "page-94"
+          }
+        ]
+      },
+      {
+        "id": "chapter-11",
+        "title": "第11章 米开朗基罗的佛罗伦萨：未完成的石头与完成的权力",
+        "sections": [
+          {
+            "title": "现场寻宝 F16｜大卫 David",
+            "anchor": "page-96"
+          },
+          {
+            "title": "现场寻宝 F17｜新祭衣间 Sagrestia Nuova",
+            "anchor": "page-102"
+          },
+          {
+            "title": "作品图037｜大卫（米开朗基罗）",
+            "anchor": "page-97"
+          },
+          {
+            "title": "作品图038｜囚徒（青年奴隶）",
+            "anchor": "page-98"
+          },
+          {
+            "title": "作品图039｜囚徒（觉醒的奴隶）",
+            "anchor": "page-99"
+          },
+          {
+            "title": "作品图040｜囚徒（有胡须的奴隶）",
+            "anchor": "page-100"
+          },
+          {
+            "title": "作品图041｜囚徒（阿特拉斯奴隶）",
+            "anchor": "page-101"
+          },
+          {
+            "title": "作品图042｜新祭衣间（建筑）",
+            "anchor": "page-103"
+          },
+          {
+            "title": "作品图043｜昼",
+            "anchor": "page-104"
+          },
+          {
+            "title": "作品图044｜夜",
+            "anchor": "page-105"
+          },
+          {
+            "title": "作品图045｜晨",
+            "anchor": "page-106"
+          },
+          {
+            "title": "作品图046｜暮",
+            "anchor": "page-107"
+          },
+          {
+            "title": "作品图047｜朱利亚诺公爵像",
+            "anchor": "page-108"
+          },
+          {
+            "title": "作品图048｜洛伦佐公爵像",
+            "anchor": "page-109"
+          },
+          {
+            "title": "作品图049｜多尼圆画",
+            "anchor": "page-110"
+          },
+          {
+            "title": "作品图050｜阿尼奥洛·多尼肖像",
+            "anchor": "page-111"
+          },
+          {
+            "title": "作品图051｜玛达莱娜·多尼肖像",
+            "anchor": "page-112"
+          }
+        ]
+      },
+      {
+        "id": "chapter-12",
+        "title": "第12章 锡耶纳：另一座城市对美的回答",
+        "sections": [
+          {
+            "title": "现场寻宝 C01｜《好政府与坏政府的寓意及其效果》",
+            "anchor": "page-116"
+          },
+          {
+            "title": "现场寻宝 C02｜《希律王的宴会》",
+            "anchor": "page-120"
+          },
+          {
+            "title": "现场寻宝 C03｜皮科洛米尼图书馆",
+            "anchor": "page-124"
+          },
+          {
+            "title": "作品图052｜庄严圣母",
+            "anchor": "page-115"
+          },
+          {
+            "title": "作品图053｜好政府的寓意",
+            "anchor": "page-117"
+          },
+          {
+            "title": "作品图054｜好政府在城市与乡村的效果",
+            "anchor": "page-118"
+          },
+          {
+            "title": "作品图055｜坏政府的寓意及其效果",
+            "anchor": "page-119"
+          },
+          {
+            "title": "作品图056｜希律王的宴会（多纳太罗）",
+            "anchor": "page-121"
+          },
+          {
+            "title": "作品图057｜基督受洗（锡耶纳洗礼池）",
+            "anchor": "page-122"
+          },
+          {
+            "title": "作品图058｜施洗约翰被捕",
+            "anchor": "page-123"
+          },
+          {
+            "title": "作品图059｜庇护二世生平壁画",
+            "anchor": "page-125"
+          },
+          {
+            "title": "作品图060｜庇护二世广场建筑群",
+            "anchor": "page-127"
+          }
+        ]
+      },
+      {
+        "id": "chapter-13",
+        "title": "第13章 圣吉米尼亚诺与普拉托：小城的大画家",
+        "sections": [
+          {
+            "title": "现场寻宝 C04｜圣菲娜礼拜堂",
+            "anchor": "page-130"
+          },
+          {
+            "title": "现场寻宝 C05｜圣奥古斯丁的一生",
+            "anchor": "page-134"
+          },
+          {
+            "title": "现场寻宝 C06｜普拉托大教堂的双重故事",
+            "anchor": "page-136"
+          },
+          {
+            "title": "作品图061｜圣格列高利向圣菲娜显现",
+            "anchor": "page-131"
+          },
+          {
+            "title": "作品图062｜圣菲娜葬礼",
+            "anchor": "page-132"
+          },
+          {
+            "title": "作品图063｜圣奥古斯丁故事组画",
+            "anchor": "page-135"
+          },
+          {
+            "title": "作品图064｜圣斯德望葬礼",
+            "anchor": "page-137"
+          },
+          {
+            "title": "作品图065｜希律王的宴会（利皮）",
+            "anchor": "page-138"
+          },
+          {
+            "title": "作品图066｜普拉托大教堂外讲坛",
+            "anchor": "page-140"
+          }
+        ]
+      },
+      {
+        "id": "chapter-14",
+        "title": "第14章 阿雷佐、蒙特尔基、圣塞波尔克罗：追着皮埃罗走",
+        "sections": [
+          {
+            "title": "现场寻宝 C07｜真十字架传奇",
+            "anchor": "page-143"
+          },
+          {
+            "title": "现场寻宝 C08｜《孕妇圣母》",
+            "anchor": "page-148"
+          },
+          {
+            "title": "现场寻宝 C09｜《复活》与《慈悲圣母》",
+            "anchor": "page-151"
+          },
+          {
+            "title": "作品图067｜君士坦丁之梦",
+            "anchor": "page-144"
+          },
+          {
+            "title": "作品图068｜示巴女王朝拜圣木与会见所罗门",
+            "anchor": "page-145"
+          },
+          {
+            "title": "作品图069｜君士坦丁与马克森提乌斯之战",
+            "anchor": "page-146"
+          },
+          {
+            "title": "作品图070｜希拉克略与霍斯劳之战",
+            "anchor": "page-147"
+          },
+          {
+            "title": "作品图071｜抹大拉的玛利亚",
+            "anchor": "page-149"
+          },
+          {
+            "title": "作品图072｜孕妇圣母",
+            "anchor": "page-150"
+          },
+          {
+            "title": "作品图073｜复活",
+            "anchor": "page-152"
+          },
+          {
+            "title": "作品图074｜慈悲圣母多联画",
+            "anchor": "page-153"
+          }
+        ]
+      },
+      {
+        "id": "chapter-15",
+        "title": "第15章 乌尔比诺：雇佣军统帅的书房",
+        "sections": [
+          {
+            "title": "现场寻宝 C10｜《鞭笞基督》",
+            "anchor": "page-156"
+          },
+          {
+            "title": "现场寻宝 C11｜费德里科公爵书房",
+            "anchor": "page-159"
+          },
+          {
+            "title": "作品图075｜鞭笞基督",
+            "anchor": "page-157"
+          },
+          {
+            "title": "作品图076｜塞尼加利亚圣母",
+            "anchor": "page-158"
+          },
+          {
+            "title": "作品图077｜费德里科公爵书房",
+            "anchor": "page-160"
+          }
+        ]
+      },
+      {
+        "id": "chapter-16",
+        "title": "第16章 阿西西、佩鲁贾与斯佩洛：沿着信仰走进文艺复兴",
+        "sections": [
+          {
+            "title": "现场寻宝 C12｜阿西西的圣方济各故事",
+            "anchor": "page-163"
+          },
+          {
+            "title": "现场寻宝 C13｜换钱商行会的议事厅",
+            "anchor": "page-168"
+          },
+          {
+            "title": "现场寻宝 C14｜斯佩洛巴廖尼礼拜堂",
+            "anchor": "page-171"
+          },
+          {
+            "title": "作品图078｜阿西西圣方济各生平壁画总览",
+            "anchor": "page-164"
+          },
+          {
+            "title": "作品图079｜放弃财产",
+            "anchor": "page-165"
+          },
+          {
+            "title": "作品图080｜圣方济各受圣痕",
+            "anchor": "page-166"
+          },
+          {
+            "title": "作品图081｜圣母与圣方济各",
+            "anchor": "page-169"
+          },
+          {
+            "title": "作品图082｜换钱商行会议事厅装饰",
+            "anchor": "page-170"
+          },
+          {
+            "title": "作品图083｜天使报喜（巴廖尼礼拜堂）",
+            "anchor": "page-172"
+          },
+          {
+            "title": "作品图084｜牧人来拜",
+            "anchor": "page-173"
+          },
+          {
+            "title": "作品图085｜耶稣与学者辩论",
+            "anchor": "page-174"
+          }
+        ]
+      },
+      {
+        "id": "chapter-17",
+        "title": "第17章 奥尔维耶托与斯波莱托：仰头看见身体与末日",
+        "sections": [
+          {
+            "title": "现场寻宝 C15｜圣布里齐奥礼拜堂",
+            "anchor": "page-177"
+          },
+          {
+            "title": "现场寻宝 C16｜斯波莱托大教堂后殿",
+            "anchor": "page-183"
+          },
+          {
+            "title": "作品图086｜肉身复活",
+            "anchor": "page-178"
+          },
+          {
+            "title": "作品图087｜反基督者的讲道",
+            "anchor": "page-179"
+          },
+          {
+            "title": "作品图088｜安杰利科天顶部分",
+            "anchor": "page-180"
+          },
+          {
+            "title": "作品图089｜奥尔维耶托大教堂立面雕刻",
+            "anchor": "page-182"
+          },
+          {
+            "title": "作品图090｜圣母加冕（斯波莱托）",
+            "anchor": "page-184"
+          },
+          {
+            "title": "作品图091｜天使报喜（斯波莱托）",
+            "anchor": "page-185"
+          },
+          {
+            "title": "作品图092｜圣母安息",
+            "anchor": "page-186"
+          },
+          {
+            "title": "作品图093｜圣本笃生平回廊壁画",
+            "anchor": "page-188"
+          }
+        ]
+      },
+      {
+        "id": "chapter-18",
+        "title": "第18章 从废墟到教皇工程：古罗马并没有远去",
+        "sections": [
+          {
+            "title": "现场寻宝 R01｜布拉曼特小圣堂",
+            "anchor": "page-193"
+          },
+          {
+            "title": "现场寻宝 R02｜圣彼得大殿《哀悼基督》",
+            "anchor": "page-196"
+          },
+          {
+            "title": "作品图094｜万神殿",
+            "anchor": "page-190"
+          },
+          {
+            "title": "作品图095｜拉奥孔",
+            "anchor": "page-192"
+          },
+          {
+            "title": "作品图096｜布拉曼特小圣堂",
+            "anchor": "page-194"
+          },
+          {
+            "title": "作品图097｜哀悼基督（圣彼得圣殇）",
+            "anchor": "page-197"
+          },
+          {
+            "title": "作品图098｜圣彼得大殿建筑与穹顶",
+            "anchor": "page-198"
+          },
+          {
+            "title": "作品图099｜圣彼得华盖",
+            "anchor": "page-199"
+          }
+        ]
+      },
+      {
+        "id": "chapter-19",
+        "title": "第19章 梵蒂冈：拉斐尔的房间与米开朗基罗的天顶",
+        "sections": [
+          {
+            "title": "现场寻宝 R03｜《雅典学院》与签字厅",
+            "anchor": "page-203"
+          },
+          {
+            "title": "现场寻宝 R04｜西斯廷天顶",
+            "anchor": "page-209"
+          },
+          {
+            "title": "现场寻宝 R05｜《最后的审判》",
+            "anchor": "page-214"
+          },
+          {
+            "title": "作品图100｜雅典学院",
+            "anchor": "page-204"
+          },
+          {
+            "title": "作品图101｜圣礼之争",
+            "anchor": "page-205"
+          },
+          {
+            "title": "作品图102｜帕耳那索斯山",
+            "anchor": "page-206"
+          },
+          {
+            "title": "作品图103｜三德像",
+            "anchor": "page-207"
+          },
+          {
+            "title": "作品图104｜西斯廷礼拜堂天顶画",
+            "anchor": "page-210"
+          },
+          {
+            "title": "作品图105｜创造亚当",
+            "anchor": "page-211"
+          },
+          {
+            "title": "作品图106｜神分光暗",
+            "anchor": "page-212"
+          },
+          {
+            "title": "作品图107｜挪亚醉酒",
+            "anchor": "page-213"
+          },
+          {
+            "title": "作品图108｜西斯廷十五世纪侧墙壁画",
+            "anchor": "page-215"
+          },
+          {
+            "title": "作品图109｜最后的审判（米开朗基罗）",
+            "anchor": "page-216"
+          },
+          {
+            "title": "作品图110｜基督下葬（卡拉瓦乔）",
+            "anchor": "page-218"
+          }
+        ]
+      },
+      {
+        "id": "chapter-20",
+        "title": "第20章 河两岸的私人订单：法尔内西纳、卡拉法与西比拉",
+        "sections": [
+          {
+            "title": "现场寻宝 R06｜《加拉忒亚的凯旋》与丘比特、普绪克凉廊",
+            "anchor": "page-220"
+          },
+          {
+            "title": "现场寻宝 R07｜卡拉法礼拜堂",
+            "anchor": "page-225"
+          },
+          {
+            "title": "现场寻宝 R08｜拉斐尔《西比拉》",
+            "anchor": "page-230"
+          },
+          {
+            "title": "作品图111｜加拉忒亚的凯旋",
+            "anchor": "page-221"
+          },
+          {
+            "title": "作品图112｜透视厅壁画",
+            "anchor": "page-222"
+          },
+          {
+            "title": "作品图113｜丘比特与普绪克凉廊",
+            "anchor": "page-224"
+          },
+          {
+            "title": "作品图114｜亚历山大与罗克珊娜房间壁画",
+            "anchor": "page-226"
+          },
+          {
+            "title": "作品图115｜卡拉法礼拜堂天使报喜",
+            "anchor": "page-227"
+          },
+          {
+            "title": "作品图116｜卡拉法礼拜堂圣母升天",
+            "anchor": "page-228"
+          },
+          {
+            "title": "作品图117｜圣托马斯·阿奎那的胜利",
+            "anchor": "page-229"
+          },
+          {
+            "title": "作品图118｜复活的基督",
+            "anchor": "page-231"
+          },
+          {
+            "title": "作品图119｜西比拉与天使",
+            "anchor": "page-232"
+          },
+          {
+            "title": "作品图120｜布拉曼特回廊",
+            "anchor": "page-233"
+          }
+        ]
+      },
+      {
+        "id": "chapter-21",
+        "title": "第21章 一尊摩西，三面墙：走向样式主义和巴洛克",
+        "sections": [
+          {
+            "title": "现场寻宝 R09｜《摩西》",
+            "anchor": "page-238"
+          },
+          {
+            "title": "现场寻宝 R10｜孔塔雷利礼拜堂的三幅圣马太",
+            "anchor": "page-240"
+          },
+          {
+            "title": "现场寻宝 R11｜《朝圣者圣母》",
+            "anchor": "page-246"
+          },
+          {
+            "title": "现场寻宝 R12｜切拉西礼拜堂",
+            "anchor": "page-249"
+          },
+          {
+            "title": "作品图121｜长颈圣母",
+            "anchor": "page-237"
+          },
+          {
+            "title": "作品图122｜摩西",
+            "anchor": "page-239"
+          },
+          {
+            "title": "作品图123｜圣马太蒙召",
+            "anchor": "page-241"
+          },
+          {
+            "title": "作品图124｜圣马太殉难",
+            "anchor": "page-242"
+          },
+          {
+            "title": "作品图125｜圣马太与天使",
+            "anchor": "page-243"
+          },
+          {
+            "title": "作品图126｜图拉真柱浮雕",
+            "anchor": "page-244"
+          },
+          {
+            "title": "作品图127｜朝圣者圣母／洛雷托圣母",
+            "anchor": "page-247"
+          },
+          {
+            "title": "作品图128｜先知以赛亚",
+            "anchor": "page-248"
+          },
+          {
+            "title": "作品图129｜圣彼得被钉十字架",
+            "anchor": "page-250"
+          },
+          {
+            "title": "作品图130｜圣保罗皈依",
+            "anchor": "page-251"
+          },
+          {
+            "title": "作品图131｜圣母升天（卡拉奇）",
+            "anchor": "page-252"
+          },
+          {
+            "title": "作品图132｜人民圣母基吉礼拜堂",
+            "anchor": "page-254"
+          }
+        ]
+      },
+      {
+        "id": "chapter-22",
+        "title": "第22章 水城的画为什么这样画：从贝利尼开始",
+        "sections": [
+          {
+            "title": "现场寻宝 V01｜圣扎卡里亚祭坛画",
+            "anchor": "page-258"
+          },
+          {
+            "title": "作品图133｜圣马可大教堂马赛克",
+            "anchor": "page-256"
+          },
+          {
+            "title": "作品图134｜圣扎卡里亚祭坛画",
+            "anchor": "page-259"
+          }
+        ]
+      },
+      {
+        "id": "chapter-23",
+        "title": "第23章 弗拉里教堂：站在祭坛画原来面对的人群中",
+        "sections": [
+          {
+            "title": "现场寻宝 V02｜《圣母升天》",
+            "anchor": "page-262"
+          },
+          {
+            "title": "现场寻宝 V03｜《佩萨罗圣母》",
+            "anchor": "page-265"
+          },
+          {
+            "title": "现场寻宝 V04｜弗拉里三联画",
+            "anchor": "page-267"
+          },
+          {
+            "title": "作品图135｜圣母升天（提香）",
+            "anchor": "page-263"
+          },
+          {
+            "title": "作品图136｜佩萨罗圣母",
+            "anchor": "page-266"
+          },
+          {
+            "title": "作品图137｜弗拉里三联画",
+            "anchor": "page-268"
+          },
+          {
+            "title": "作品图138｜施洗约翰木雕（弗拉里）",
+            "anchor": "page-270"
+          }
+        ]
+      },
+      {
+        "id": "chapter-24",
+        "title": "第24章 圣罗科与圣塞巴斯蒂安：整座建筑成为画面",
+        "sections": [
+          {
+            "title": "现场寻宝 V05｜圣罗科《基督被钉十字架》",
+            "anchor": "page-274"
+          },
+          {
+            "title": "现场寻宝 V06｜圣塞巴斯蒂安的委罗内塞",
+            "anchor": "page-277"
+          },
+          {
+            "title": "现场寻宝 V07｜大圣乔治教堂《最后的晚餐》",
+            "anchor": "page-281"
+          },
+          {
+            "title": "作品图139｜最后的晚餐（圣罗科）",
+            "anchor": "page-273"
+          },
+          {
+            "title": "作品图140｜基督被钉十字架（圣罗科）",
+            "anchor": "page-275"
+          },
+          {
+            "title": "作品图141｜圣罗科在荣耀中",
+            "anchor": "page-276"
+          },
+          {
+            "title": "作品图142｜以斯帖加冕",
+            "anchor": "page-278"
+          },
+          {
+            "title": "作品图143｜瓦实提被废",
+            "anchor": "page-279"
+          },
+          {
+            "title": "作品图144｜末底改的胜利",
+            "anchor": "page-280"
+          },
+          {
+            "title": "作品图145｜最后的晚餐（丁托列托，大圣乔治）",
+            "anchor": "page-282"
+          },
+          {
+            "title": "作品图146｜旷野中的以色列人／收集吗哪",
+            "anchor": "page-283"
+          },
+          {
+            "title": "作品图147｜大圣乔治教堂建筑",
+            "anchor": "page-284"
+          },
+          {
+            "title": "作品图148｜最后的审判（菜园圣母）",
+            "anchor": "page-286"
+          },
+          {
+            "title": "作品图149｜金牛犊的崇拜",
+            "anchor": "page-287"
+          }
+        ]
+      },
+      {
+        "id": "chapter-25",
+        "title": "第25章 学院美术馆与总督宫：诗意、权力和观看的距离",
+        "sections": [
+          {
+            "title": "现场寻宝 V08｜《暴风雨》",
+            "anchor": "page-291"
+          },
+          {
+            "title": "现场寻宝 V09｜《利未家中的宴会》",
+            "anchor": "page-293"
+          },
+          {
+            "title": "现场寻宝 V10｜总督宫《天堂》",
+            "anchor": "page-296"
+          },
+          {
+            "title": "现场寻宝 V11｜卡尔帕乔与达尔马提亚兄弟会",
+            "anchor": "page-298"
+          },
+          {
+            "title": "作品图150｜暴风雨",
+            "anchor": "page-292"
+          },
+          {
+            "title": "作品图151｜利未家中的宴会",
+            "anchor": "page-294"
+          },
+          {
+            "title": "作品图152｜圣马可解救奴隶的奇迹",
+            "anchor": "page-295"
+          },
+          {
+            "title": "作品图153｜天堂",
+            "anchor": "page-297"
+          },
+          {
+            "title": "作品图154｜圣乔治屠龙（卡尔帕乔）",
+            "anchor": "page-299"
+          },
+          {
+            "title": "作品图155｜圣奥古斯丁的幻视",
+            "anchor": "page-300"
+          },
+          {
+            "title": "作品图156｜圣哲罗姆与狮子",
+            "anchor": "page-301"
+          },
+          {
+            "title": "作品图157｜圣马可大教堂外观",
+            "anchor": "page-302"
+          }
+        ]
+      },
+      {
+        "id": "chapter-26",
+        "title": "第26章 帕多瓦：先到乔托那里，再看多纳太罗",
+        "sections": [
+          {
+            "title": "现场寻宝 N01｜斯克罗维尼礼拜堂",
+            "anchor": "page-306"
+          },
+          {
+            "title": "现场寻宝 N02｜圣安东尼大殿的多纳太罗",
+            "anchor": "page-311"
+          },
+          {
+            "title": "作品图158｜犹大之吻",
+            "anchor": "page-307"
+          },
+          {
+            "title": "作品图159｜哀悼基督（乔托）",
+            "anchor": "page-308"
+          },
+          {
+            "title": "作品图160｜最后的审判（乔托）",
+            "anchor": "page-309"
+          },
+          {
+            "title": "作品图161｜七德与七恶灰色壁画",
+            "anchor": "page-310"
+          },
+          {
+            "title": "作品图162｜奥韦塔里礼拜堂壁画遗存",
+            "anchor": "page-312"
+          },
+          {
+            "title": "作品图163｜圣安东尼大殿主祭坛雕塑与浮雕",
+            "anchor": "page-313"
+          },
+          {
+            "title": "作品图164｜加塔梅拉塔骑马像",
+            "anchor": "page-315"
+          },
+          {
+            "title": "作品图165｜提香圣安东尼奇迹壁画",
+            "anchor": "page-316"
+          }
+        ]
+      },
+      {
+        "id": "chapter-27",
+        "title": "第27章 曼图亚：曼特尼亚的房间，朱利奥的幻觉",
+        "sections": [
+          {
+            "title": "现场寻宝 N03｜夫妻之室",
+            "anchor": "page-321"
+          },
+          {
+            "title": "现场寻宝 N04｜泰宫巨人厅",
+            "anchor": "page-326"
+          },
+          {
+            "title": "作品图166｜圣安德烈大殿建筑",
+            "anchor": "page-319"
+          },
+          {
+            "title": "作品图167｜夫妻之室宫廷场景",
+            "anchor": "page-322"
+          },
+          {
+            "title": "作品图168｜夫妻之室会见场景",
+            "anchor": "page-323"
+          },
+          {
+            "title": "作品图169｜夫妻之室天顶圆孔",
+            "anchor": "page-324"
+          },
+          {
+            "title": "作品图170｜巨人厅",
+            "anchor": "page-327"
+          },
+          {
+            "title": "作品图171｜骏马厅",
+            "anchor": "page-328"
+          },
+          {
+            "title": "作品图172｜丘比特与普绪克厅",
+            "anchor": "page-329"
+          }
+        ]
+      },
+      {
+        "id": "chapter-28",
+        "title": "第28章 米兰：与一顿晚餐共处",
+        "sections": [
+          {
+            "title": "现场寻宝 N05｜《最后的晚餐》",
+            "anchor": "page-333"
+          },
+          {
+            "title": "现场寻宝 N06｜圣毛里齐奥的两半教堂",
+            "anchor": "page-336"
+          },
+          {
+            "title": "现场寻宝 N07｜布雷拉的两种安静",
+            "anchor": "page-338"
+          },
+          {
+            "title": "作品图173｜最后的晚餐（达·芬奇）",
+            "anchor": "page-334"
+          },
+          {
+            "title": "作品图174｜钉十字架（蒙托尔法诺）",
+            "anchor": "page-335"
+          },
+          {
+            "title": "作品图175｜圣毛里齐奥教堂壁画装饰",
+            "anchor": "page-337"
+          },
+          {
+            "title": "作品图176｜哀悼死去的基督（曼特尼亚）",
+            "anchor": "page-339"
+          },
+          {
+            "title": "作品图177｜蒙特费尔特罗祭坛画",
+            "anchor": "page-340"
+          },
+          {
+            "title": "作品图178｜圣母的婚礼",
+            "anchor": "page-341"
+          }
+        ]
+      },
+      {
+        "id": "chapter-29",
+        "title": "第29章 费拉拉、博洛尼亚与帕尔马：不应跳过的三种声音",
+        "sections": [
+          {
+            "title": "现场寻宝 N08｜斯基法诺亚宫月份厅",
+            "anchor": "page-347"
+          },
+          {
+            "title": "现场寻宝 N09｜陶土中的哀悼",
+            "anchor": "page-350"
+          },
+          {
+            "title": "现场寻宝 N10｜帕尔马大教堂的天空",
+            "anchor": "page-352"
+          },
+          {
+            "title": "作品图179｜三月",
+            "anchor": "page-348"
+          },
+          {
+            "title": "作品图180｜四月",
+            "anchor": "page-349"
+          },
+          {
+            "title": "作品图181｜哀悼死去的基督（陶塑群）",
+            "anchor": "page-351"
+          },
+          {
+            "title": "作品图182｜圣彼得罗尼奥正门浮雕",
+            "anchor": "page-353"
+          },
+          {
+            "title": "作品图183｜圣母升天（科雷乔）",
+            "anchor": "page-354"
+          },
+          {
+            "title": "作品图184｜圣若望福音者教堂穹顶",
+            "anchor": "page-356"
+          },
+          {
+            "title": "作品图185｜圣保罗修道院女院长房间",
+            "anchor": "page-357"
+          }
+        ]
+      },
+      {
+        "id": "chapter-30",
+        "title": "第30章 维罗纳与威尼托小城：祭坛画的归处",
+        "sections": [
+          {
+            "title": "现场寻宝 N11｜圣泽诺祭坛画",
+            "anchor": "page-361"
+          },
+          {
+            "title": "现场寻宝 N12｜卡斯泰尔弗兰科祭坛画",
+            "anchor": "page-364"
+          },
+          {
+            "title": "作品图186｜圣乔治与公主",
+            "anchor": "page-360"
+          },
+          {
+            "title": "作品图187｜圣泽诺祭坛画",
+            "anchor": "page-362"
+          },
+          {
+            "title": "作品图188｜圣泽诺青铜门",
+            "anchor": "page-363"
+          },
+          {
+            "title": "作品图189｜卡斯泰尔弗兰科祭坛画",
+            "anchor": "page-365"
+          },
+          {
+            "title": "作品图190｜圣泽诺回廊",
+            "anchor": "page-366"
+          },
+          {
+            "title": "作品图191｜奥林匹克剧院",
+            "anchor": "page-368"
+          },
+          {
+            "title": "作品图192｜圆厅别墅",
+            "anchor": "page-369"
+          }
+        ]
+      },
+      {
+        "id": "chapter-31",
+        "title": "第31章 出发方法：预约、交通、行李与体力",
+        "sections": []
+      },
+      {
+        "id": "chapter-32",
+        "title": "第32章 第一次去意大利：10至14天经典路线",
+        "sections": []
+      },
+      {
+        "id": "chapter-33",
+        "title": "第33章 佛罗伦萨深度5日",
+        "sections": [
+          {
+            "title": "作品图193｜育婴堂拱廊",
+            "anchor": "page-381"
+          }
+        ]
+      },
+      {
+        "id": "chapter-34",
+        "title": "第34章 托斯卡纳艺术自驾7日",
+        "sections": []
+      },
+      {
+        "id": "chapter-35",
+        "title": "第35章 罗马教堂艺术3至4日",
+        "sections": [
+          {
+            "title": "作品图194｜大卫与歌利亚",
+            "anchor": "page-392"
+          },
+          {
+            "title": "作品图195｜抱着水果篮的男孩",
+            "anchor": "page-393"
+          },
+          {
+            "title": "作品图196｜普鲁托与普罗塞尔皮娜",
+            "anchor": "page-394"
+          },
+          {
+            "title": "作品图197｜大卫（贝尔尼尼）",
+            "anchor": "page-395"
+          },
+          {
+            "title": "作品图198｜阿波罗与达芙涅",
+            "anchor": "page-396"
+          },
+          {
+            "title": "作品图199｜下葬的基督（拉斐尔）",
+            "anchor": "page-397"
+          },
+          {
+            "title": "作品图200｜神圣与世俗的爱",
+            "anchor": "page-398"
+          }
+        ]
+      },
+      {
+        "id": "chapter-36",
+        "title": "第36章 威尼斯艺术3日",
+        "sections": []
+      },
+      {
+        "id": "chapter-37",
+        "title": "第37章 北意大利文艺复兴7至10日",
+        "sections": []
+      },
+      {
+        "id": "chapter-38",
+        "title": "第38章 第二次去意大利：隐藏艺术珍宝10日",
+        "sections": []
+      },
+      {
+        "id": "afterword",
+        "title": "后记｜把下一次观看留给自己",
+        "sections": []
+      },
+      {
+        "id": "reference-414",
+        "title": "现场寻宝地图｜总览与使用说明",
+        "sections": [
+          {
+            "title": "现场寻宝地图",
+            "anchor": "page-414"
+          },
+          {
+            "title": "如何使用",
+            "anchor": "page-415"
+          },
+          {
+            "title": "意大利总览",
+            "anchor": "page-416"
+          },
+          {
+            "title": "城市目录",
+            "anchor": "page-417"
+          }
+        ]
+      },
+      {
+        "id": "reference-418",
+        "title": "寻宝地图｜佛罗伦萨 / Florence",
+        "sections": [
+          {
+            "title": "佛罗伦萨 / Florence",
+            "anchor": "page-418"
+          }
+        ]
+      },
+      {
+        "id": "reference-429",
+        "title": "寻宝地图｜锡耶纳 / Siena",
+        "sections": [
+          {
+            "title": "锡耶纳 / Siena",
+            "anchor": "page-429"
+          }
+        ]
+      },
+      {
+        "id": "reference-432",
+        "title": "寻宝地图｜皮恩扎 / Pienza",
+        "sections": [
+          {
+            "title": "皮恩扎 / Pienza",
+            "anchor": "page-432"
+          }
+        ]
+      },
+      {
+        "id": "reference-434",
+        "title": "寻宝地图｜圣吉米尼亚诺 / San Gimignano",
+        "sections": [
+          {
+            "title": "圣吉米尼亚诺 / San Gimignano",
+            "anchor": "page-434"
+          }
+        ]
+      },
+      {
+        "id": "reference-436",
+        "title": "寻宝地图｜普拉托 / Prato",
+        "sections": [
+          {
+            "title": "普拉托 / Prato",
+            "anchor": "page-436"
+          }
+        ]
+      },
+      {
+        "id": "reference-438",
+        "title": "寻宝地图｜阿雷佐 / Arezzo",
+        "sections": [
+          {
+            "title": "阿雷佐 / Arezzo",
+            "anchor": "page-438"
+          }
+        ]
+      },
+      {
+        "id": "reference-440",
+        "title": "寻宝地图｜蒙特尔基 / Monterchi",
+        "sections": [
+          {
+            "title": "蒙特尔基 / Monterchi",
+            "anchor": "page-440"
+          }
+        ]
+      },
+      {
+        "id": "reference-442",
+        "title": "寻宝地图｜圣塞波尔克罗 / Sansepolcro",
+        "sections": [
+          {
+            "title": "圣塞波尔克罗 / Sansepolcro",
+            "anchor": "page-442"
+          }
+        ]
+      },
+      {
+        "id": "reference-444",
+        "title": "寻宝地图｜乌尔比诺 / Urbino",
+        "sections": [
+          {
+            "title": "乌尔比诺 / Urbino",
+            "anchor": "page-444"
+          }
+        ]
+      },
+      {
+        "id": "reference-446",
+        "title": "寻宝地图｜阿西西 / Assisi",
+        "sections": [
+          {
+            "title": "阿西西 / Assisi",
+            "anchor": "page-446"
+          }
+        ]
+      },
+      {
+        "id": "reference-448",
+        "title": "寻宝地图｜佩鲁贾 / Perugia",
+        "sections": [
+          {
+            "title": "佩鲁贾 / Perugia",
+            "anchor": "page-448"
+          }
+        ]
+      },
+      {
+        "id": "reference-450",
+        "title": "寻宝地图｜斯佩洛 / Spello",
+        "sections": [
+          {
+            "title": "斯佩洛 / Spello",
+            "anchor": "page-450"
+          }
+        ]
+      },
+      {
+        "id": "reference-452",
+        "title": "寻宝地图｜奥尔维耶托 / Orvieto",
+        "sections": [
+          {
+            "title": "奥尔维耶托 / Orvieto",
+            "anchor": "page-452"
+          }
+        ]
+      },
+      {
+        "id": "reference-454",
+        "title": "寻宝地图｜斯波莱托 / Spoleto",
+        "sections": [
+          {
+            "title": "斯波莱托 / Spoleto",
+            "anchor": "page-454"
+          }
+        ]
+      },
+      {
+        "id": "reference-456",
+        "title": "寻宝地图｜阿夏诺（Asciano） / Asciano",
+        "sections": [
+          {
+            "title": "阿夏诺（Asciano） / Asciano",
+            "anchor": "page-456"
+          }
+        ]
+      },
+      {
+        "id": "reference-458",
+        "title": "寻宝地图｜罗马 / Rome",
+        "sections": [
+          {
+            "title": "罗马 / Rome",
+            "anchor": "page-458"
+          }
+        ]
+      },
+      {
+        "id": "reference-465",
+        "title": "寻宝地图｜梵蒂冈 / Vatican City",
+        "sections": [
+          {
+            "title": "梵蒂冈 / Vatican City",
+            "anchor": "page-465"
+          }
+        ]
+      },
+      {
+        "id": "reference-468",
+        "title": "寻宝地图｜威尼斯 / Venice",
+        "sections": [
+          {
+            "title": "威尼斯 / Venice",
+            "anchor": "page-468"
+          }
+        ]
+      },
+      {
+        "id": "reference-474",
+        "title": "寻宝地图｜帕多瓦 / Padua",
+        "sections": [
+          {
+            "title": "帕多瓦 / Padua",
+            "anchor": "page-474"
+          }
+        ]
+      },
+      {
+        "id": "reference-477",
+        "title": "寻宝地图｜曼图亚 / Mantua",
+        "sections": [
+          {
+            "title": "曼图亚 / Mantua",
+            "anchor": "page-477"
+          }
+        ]
+      },
+      {
+        "id": "reference-480",
+        "title": "寻宝地图｜米兰 / Milan",
+        "sections": [
+          {
+            "title": "米兰 / Milan",
+            "anchor": "page-480"
+          }
+        ]
+      },
+      {
+        "id": "reference-483",
+        "title": "寻宝地图｜费拉拉 / Ferrara",
+        "sections": [
+          {
+            "title": "费拉拉 / Ferrara",
+            "anchor": "page-483"
+          }
+        ]
+      },
+      {
+        "id": "reference-485",
+        "title": "寻宝地图｜博洛尼亚 / Bologna",
+        "sections": [
+          {
+            "title": "博洛尼亚 / Bologna",
+            "anchor": "page-485"
+          }
+        ]
+      },
+      {
+        "id": "reference-487",
+        "title": "寻宝地图｜帕尔马 / Parma",
+        "sections": [
+          {
+            "title": "帕尔马 / Parma",
+            "anchor": "page-487"
+          }
+        ]
+      },
+      {
+        "id": "reference-489",
+        "title": "寻宝地图｜维罗纳 / Verona",
+        "sections": [
+          {
+            "title": "维罗纳 / Verona",
+            "anchor": "page-489"
+          }
+        ]
+      },
+      {
+        "id": "reference-491",
+        "title": "寻宝地图｜卡斯泰尔弗兰科威尼托 / Castelfranco Veneto",
+        "sections": [
+          {
+            "title": "卡斯泰尔弗兰科威尼托 / Castelfranco Veneto",
+            "anchor": "page-491"
+          }
+        ]
+      },
+      {
+        "id": "reference-493",
+        "title": "寻宝地图｜维琴察 / Vicenza",
+        "sections": [
+          {
+            "title": "维琴察 / Vicenza",
+            "anchor": "page-493"
+          }
+        ]
+      },
+      {
+        "id": "reference-495",
+        "title": "寻宝地图｜现场核对提示",
+        "sections": [
+          {
+            "title": "现场核对提示",
+            "anchor": "page-495"
+          }
+        ]
+      },
+      {
+        "id": "reference-498",
+        "title": "寻宝地图｜地点索引",
+        "sections": [
+          {
+            "title": "地点索引",
+            "anchor": "page-498"
+          }
+        ]
+      },
+      {
+        "id": "reference-503",
+        "title": "寻宝地图｜来源与地图说明",
+        "sections": [
+          {
+            "title": "来源与地图说明",
+            "anchor": "page-503"
+          }
+        ]
+      },
+      {
+        "id": "reference-504",
+        "title": "寻宝地图｜西西里｜卡拉瓦乔现场",
+        "sections": [
+          {
+            "title": "西西里｜卡拉瓦乔现场",
+            "anchor": "page-504"
+          }
+        ]
+      },
+      {
+        "id": "reference-505",
+        "title": "寻宝地图｜锡拉库萨｜地图",
+        "sections": [
+          {
+            "title": "锡拉库萨｜地图",
+            "anchor": "page-505"
+          },
+          {
+            "title": "TH-216｜圣露西亚的安葬",
+            "anchor": "page-506"
+          }
+        ]
+      },
+      {
+        "id": "reference-507",
+        "title": "寻宝地图｜墨西拿｜地图",
+        "sections": [
+          {
+            "title": "墨西拿｜地图",
+            "anchor": "page-507"
+          },
+          {
+            "title": "TH-217、TH-218｜MuMe",
+            "anchor": "page-508"
+          }
+        ]
+      },
+      {
+        "id": "reference-509",
+        "title": "寻宝地图｜巴勒莫｜地图",
+        "sections": [
+          {
+            "title": "巴勒莫｜地图",
+            "anchor": "page-509"
+          },
+          {
+            "title": "圣洛伦佐祈祷所｜失窃历史现场",
+            "anchor": "page-510"
+          }
+        ]
+      },
+      {
+        "id": "reference-511",
+        "title": "寻宝地图｜西西里｜图例与地点索引",
+        "sections": [
+          {
+            "title": "西西里｜图例与地点索引",
+            "anchor": "page-511"
+          }
+        ]
+      },
+      {
+        "id": "reference-512",
+        "title": "寻宝地图｜西西里｜来源",
+        "sections": [
+          {
+            "title": "西西里｜来源",
+            "anchor": "page-512"
+          }
+        ]
+      },
+      {
+        "id": "reference-513",
+        "title": "寻宝地图｜来源与地图署名",
+        "sections": [
+          {
+            "title": "来源与地图署名",
+            "anchor": "page-513"
+          }
+        ]
+      },
+      {
+        "id": "reference-514",
+        "title": "附录｜时间轴与现场快查",
+        "sections": [
+          {
+            "title": "附录｜把名字、年代与地点接起来",
+            "anchor": "page-514"
+          },
+          {
+            "title": "城市与现场卡快查",
+            "anchor": "page-515"
+          }
+        ]
+      },
+      {
+        "id": "reference-518",
+        "title": "意大利艺术旅行地点中—意—英对照表",
+        "sections": []
+      },
+      {
+        "id": "reference-528",
+        "title": "同名与易混淆地点",
+        "sections": []
+      },
+      {
+        "id": "reference-530",
+        "title": "主要艺术家短传｜阅读说明",
+        "sections": [
+          {
+            "title": "主要艺术家短传｜Artist Biographies",
+            "anchor": "page-530"
+          }
+        ]
+      },
+      {
+        "id": "reference-531",
+        "title": "艺术家短传｜乔托—菲利波·布鲁内莱斯基",
+        "sections": [
+          {
+            "title": "乔托",
+            "anchor": "page-531"
+          },
+          {
+            "title": "杜乔",
+            "anchor": "page-532"
+          },
+          {
+            "title": "安布罗乔·洛伦采蒂",
+            "anchor": "page-533"
+          },
+          {
+            "title": "洛伦佐·吉贝尔蒂",
+            "anchor": "page-534"
+          },
+          {
+            "title": "菲利波·布鲁内莱斯基",
+            "anchor": "page-535"
+          }
+        ]
+      },
+      {
+        "id": "reference-536",
+        "title": "艺术家短传｜多纳太罗—菲利波·利皮",
+        "sections": [
+          {
+            "title": "多纳太罗",
+            "anchor": "page-536"
+          },
+          {
+            "title": "马萨乔",
+            "anchor": "page-537"
+          },
+          {
+            "title": "马索利诺",
+            "anchor": "page-538"
+          },
+          {
+            "title": "安杰利科",
+            "anchor": "page-539"
+          },
+          {
+            "title": "菲利波·利皮",
+            "anchor": "page-540"
+          }
+        ]
+      },
+      {
+        "id": "reference-541",
+        "title": "艺术家短传｜菲利皮诺·利皮—桑德罗·波提切利",
+        "sections": [
+          {
+            "title": "菲利皮诺·利皮",
+            "anchor": "page-541"
+          },
+          {
+            "title": "贝诺佐·戈佐利",
+            "anchor": "page-542"
+          },
+          {
+            "title": "多梅尼科·吉兰达约",
+            "anchor": "page-543"
+          },
+          {
+            "title": "皮埃罗·德拉·弗朗切斯卡",
+            "anchor": "page-544"
+          },
+          {
+            "title": "桑德罗·波提切利",
+            "anchor": "page-545"
+          }
+        ]
+      },
+      {
+        "id": "reference-546",
+        "title": "艺术家短传｜列奥纳多·达·芬奇—列昂·巴蒂斯塔·阿尔贝蒂",
+        "sections": [
+          {
+            "title": "列奥纳多·达·芬奇",
+            "anchor": "page-546"
+          },
+          {
+            "title": "米开朗基罗",
+            "anchor": "page-547"
+          },
+          {
+            "title": "拉斐尔",
+            "anchor": "page-548"
+          },
+          {
+            "title": "多纳托·布拉曼特",
+            "anchor": "page-549"
+          },
+          {
+            "title": "列昂·巴蒂斯塔·阿尔贝蒂",
+            "anchor": "page-550"
+          }
+        ]
+      },
+      {
+        "id": "reference-551",
+        "title": "艺术家短传｜伯纳多·罗塞利诺—索多马",
+        "sections": [
+          {
+            "title": "伯纳多·罗塞利诺",
+            "anchor": "page-551"
+          },
+          {
+            "title": "佩鲁吉诺",
+            "anchor": "page-552"
+          },
+          {
+            "title": "平图里基奥",
+            "anchor": "page-553"
+          },
+          {
+            "title": "卢卡·西尼奥雷利",
+            "anchor": "page-554"
+          },
+          {
+            "title": "索多马",
+            "anchor": "page-555"
+          }
+        ]
+      },
+      {
+        "id": "reference-556",
+        "title": "艺术家短传｜巴尔达萨雷·佩鲁齐—提香",
+        "sections": [
+          {
+            "title": "巴尔达萨雷·佩鲁齐",
+            "anchor": "page-556"
+          },
+          {
+            "title": "塞巴斯蒂亚诺·德尔·皮翁博",
+            "anchor": "page-557"
+          },
+          {
+            "title": "乔瓦尼·贝利尼",
+            "anchor": "page-558"
+          },
+          {
+            "title": "乔尔乔内",
+            "anchor": "page-559"
+          },
+          {
+            "title": "提香",
+            "anchor": "page-560"
+          }
+        ]
+      },
+      {
+        "id": "reference-561",
+        "title": "艺术家短传｜雅各布·丁托列托—朱利奥·罗马诺",
+        "sections": [
+          {
+            "title": "雅各布·丁托列托",
+            "anchor": "page-561"
+          },
+          {
+            "title": "保罗·委罗内塞",
+            "anchor": "page-562"
+          },
+          {
+            "title": "维托雷·卡尔帕乔",
+            "anchor": "page-563"
+          },
+          {
+            "title": "安德烈亚·曼特尼亚",
+            "anchor": "page-564"
+          },
+          {
+            "title": "朱利奥·罗马诺",
+            "anchor": "page-565"
+          }
+        ]
+      },
+      {
+        "id": "reference-566",
+        "title": "艺术家短传｜贝尔纳迪诺·卢伊尼—科雷乔",
+        "sections": [
+          {
+            "title": "贝尔纳迪诺·卢伊尼",
+            "anchor": "page-566"
+          },
+          {
+            "title": "弗朗切斯科·德尔·科萨",
+            "anchor": "page-567"
+          },
+          {
+            "title": "埃尔科莱·德·罗贝尔蒂",
+            "anchor": "page-568"
+          },
+          {
+            "title": "尼科洛·德拉尔卡",
+            "anchor": "page-569"
+          },
+          {
+            "title": "科雷乔",
+            "anchor": "page-570"
+          }
+        ]
+      },
+      {
+        "id": "reference-571",
+        "title": "艺术家短传｜帕尔米贾尼诺—安尼巴莱·卡拉奇",
+        "sections": [
+          {
+            "title": "帕尔米贾尼诺",
+            "anchor": "page-571"
+          },
+          {
+            "title": "拉维尼亚·丰塔纳",
+            "anchor": "page-572"
+          },
+          {
+            "title": "皮萨内洛",
+            "anchor": "page-573"
+          },
+          {
+            "title": "卡拉瓦乔",
+            "anchor": "page-574"
+          },
+          {
+            "title": "安尼巴莱·卡拉奇",
+            "anchor": "page-575"
+          }
+        ]
+      },
+      {
+        "id": "reference-576",
+        "title": "艺术家短传｜乔尔乔·瓦萨里—南尼·迪·班科",
+        "sections": [
+          {
+            "title": "乔尔乔·瓦萨里",
+            "anchor": "page-576"
+          },
+          {
+            "title": "卢卡·德拉·罗比亚",
+            "anchor": "page-577"
+          },
+          {
+            "title": "费德里科·祖卡里",
+            "anchor": "page-578"
+          },
+          {
+            "title": "安德烈亚·德尔·韦罗基奥",
+            "anchor": "page-579"
+          },
+          {
+            "title": "南尼·迪·班科",
+            "anchor": "page-580"
+          }
+        ]
+      },
+      {
+        "id": "reference-581",
+        "title": "艺术家短传｜保罗·乌切洛—西蒙内·马尔蒂尼",
+        "sections": [
+          {
+            "title": "保罗·乌切洛",
+            "anchor": "page-581"
+          },
+          {
+            "title": "米凯洛佐",
+            "anchor": "page-582"
+          },
+          {
+            "title": "契马布埃",
+            "anchor": "page-583"
+          },
+          {
+            "title": "彼得罗·洛伦采蒂",
+            "anchor": "page-584"
+          },
+          {
+            "title": "西蒙内·马尔蒂尼",
+            "anchor": "page-585"
+          }
+        ]
+      },
+      {
+        "id": "reference-586",
+        "title": "艺术家短传｜小安东尼奥·达·桑加罗—乔瓦尼·达·乌迪内",
+        "sections": [
+          {
+            "title": "小安东尼奥·达·桑加罗",
+            "anchor": "page-586"
+          },
+          {
+            "title": "吉安·洛伦佐·贝尔尼尼",
+            "anchor": "page-587"
+          },
+          {
+            "title": "卡洛·马德尔诺",
+            "anchor": "page-588"
+          },
+          {
+            "title": "科西莫·罗塞利",
+            "anchor": "page-589"
+          },
+          {
+            "title": "乔瓦尼·达·乌迪内",
+            "anchor": "page-590"
+          }
+        ]
+      },
+      {
+        "id": "reference-591",
+        "title": "艺术家短传｜安德烈亚·帕拉第奥—奥雷利奥·卢伊尼",
+        "sections": [
+          {
+            "title": "安德烈亚·帕拉第奥",
+            "anchor": "page-591"
+          },
+          {
+            "title": "多梅尼科·丁托列托",
+            "anchor": "page-592"
+          },
+          {
+            "title": "卢卡·凡切利",
+            "anchor": "page-593"
+          },
+          {
+            "title": "乔瓦尼·多纳托·达·蒙托尔法诺",
+            "anchor": "page-594"
+          },
+          {
+            "title": "奥雷利奥·卢伊尼",
+            "anchor": "page-595"
+          }
+        ]
+      },
+      {
+        "id": "reference-596",
+        "title": "艺术家短传｜科西莫·图拉—多梅尼科·丰塔纳",
+        "sections": [
+          {
+            "title": "科西莫·图拉",
+            "anchor": "page-596"
+          },
+          {
+            "title": "普罗斯佩罗·丰塔纳",
+            "anchor": "page-597"
+          },
+          {
+            "title": "雅各布·德拉·奎尔恰",
+            "anchor": "page-598"
+          },
+          {
+            "title": "贾科莫·德拉·波尔塔",
+            "anchor": "page-599"
+          },
+          {
+            "title": "多梅尼科·丰塔纳",
+            "anchor": "page-600"
+          }
+        ]
+      },
+      {
+        "id": "reference-601",
+        "title": "艺术家肖像来源记录",
+        "sections": []
+      },
+      {
+        "id": "reference-604",
+        "title": "人名原文与主要章节",
+        "sections": []
+      },
+      {
+        "id": "reference-606",
+        "title": "主要艺术作品中—意—英对照表",
+        "sections": [
+          {
+            "title": "一｜佛罗伦萨 Florence",
+            "anchor": "page-606"
+          },
+          {
+            "title": "二｜托斯卡纳与中部意大利 Tuscany & Central Italy",
+            "anchor": "page-609"
+          },
+          {
+            "title": "三｜罗马与梵蒂冈 Rome & Vatican",
+            "anchor": "page-611"
+          },
+          {
+            "title": "四｜威尼斯 Venice",
+            "anchor": "page-613"
+          },
+          {
+            "title": "五｜北意大利 Northern Italy",
+            "anchor": "page-614"
+          }
+        ]
+      },
+      {
+        "id": "reference-616",
+        "title": "六个容易混淆的词",
+        "sections": []
+      },
+      {
+        "id": "reference-617",
+        "title": "继续读什么",
+        "sections": []
+      },
+      {
+        "id": "reference-618",
+        "title": "艺术与建筑术语对照表",
+        "sections": [
+          {
+            "title": "艺术与建筑常用术语中—意—英对照表",
+            "anchor": "page-618"
+          },
+          {
+            "title": "二｜材料补充与作品形式",
+            "anchor": "page-619"
+          },
+          {
+            "title": "三｜教堂与修道院空间",
+            "anchor": "page-620"
+          },
+          {
+            "title": "四｜观看、构图与修复",
+            "anchor": "page-621"
+          }
+        ]
+      },
+      {
+        "id": "reference-622",
+        "title": "资料来源与出发前查询入口",
+        "sections": []
+      },
+      {
+        "id": "reference-628",
+        "title": "作品插图来源与页码",
+        "sections": []
+      },
+      {
+        "id": "reference-633",
+        "title": "作品插图来源与页码（续）",
+        "sections": []
+      },
+      {
+        "id": "reference-638",
+        "title": "作品插图来源与页码（续）",
+        "sections": []
+      },
+      {
+        "id": "reference-643",
+        "title": "作品插图来源与页码（续）",
+        "sections": []
+      }
+    ]
   }
 ]

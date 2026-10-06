@@ -14,10 +14,10 @@ function context(catalogue=books){
   vm.runInContext('const e=escapeHTML;\n'+app.slice(app.indexOf('function appleBooksLink'),app.indexOf('async function render')),sandbox);
   return sandbox;
 }
-test('five stable records, three complete and two coming; metadata has explicit unknowns',()=>{
+test('five stable records, four complete and one coming; metadata has explicit unknowns',()=>{
   assert.deepEqual(books.map(b=>b.id),['slow-down','slow-shutter','structure','metabolism','renaissance']);
-  assert.equal(books.filter(b=>b.status==='complete').length,3);
-  assert.equal(books.filter(b=>b.status==='coming').length,2);
+  assert.equal(books.filter(b=>b.status==='complete').length,4);
+  assert.equal(books.filter(b=>b.status==='coming').length,1);
   for(const book of books){
     assert.equal(book.publication.metadataVersion,1);
     assert.equal(book.publication.isbn,null);
@@ -35,7 +35,7 @@ test('existing Apple and WeRead destinations and reader routes remain available'
     else assert.ok(html.includes('即将进入数字书房'));
   }
   assert.ok(c.bookPage(books[0]).includes('https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb'));
-  assert.ok(c.home().includes('3 本完整数字书'));
+  assert.ok(c.home().includes('4 本完整数字书'));
 });
 test('sixth book and new external channel render from metadata without code changes',()=>{
   const extra={id:'future-author',title:'A & B',author:'Another Author',status:'coming',publication:{externalEditions:[{channel:'publisher-store',label:'Publisher <store>',url:'https://example.org/book',title:'Other title'}]}};
@@ -51,7 +51,7 @@ test('legacy Apple records work; unsafe structured destinations are excluded',()
 });
 test('URL-less paperback metadata stays separate from the web edition and renders without a link',()=>{
   const book=books.find(book=>book.id==='renaissance');
-  assert.equal(book.status,'coming');
+  assert.equal(book.status,'complete');
   assert.equal(book.publication.isbn,null);
   assert.equal(book.publication.publisher,null);
   assert.deepEqual(book.publication.externalEditions,[{label:'平装纸书',format:'paperback',isbn:'9781763913608',url:null}]);
@@ -98,3 +98,4 @@ test('shelf search, reading filters and listening catalogue do not advertise una
  c.storage.get=()=>({chapter:'deleted-chapter'});
  assert.equal(c.savedReading(books[0]),null);
 });
+

@@ -1,6 +1,6 @@
-import { listenPanel, bindListen } from './listen.js?v=chapters-20261006';
+import { listenPanel, bindListen } from './listen.js?v=renaissance-20261006';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks, listeningChapters } from './components.js?v=chapters-20261006';
+import { escapeHTML as e, bookURL, readURL, tocItems, contentBlocks, listeningChapters } from './components.js?v=renaissance-20261006';
 
 export function renderReader(book, chapter, index, resume = false) {
   const list = book.chapters;
@@ -76,3 +76,4 @@ export function bindReader(book, chapter, index, restore, sectionAnchor = null, 
   requestAnimationFrame(restorePosition);
   return ()=>{stopListening();cancelled=true;cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll);};
 }
+

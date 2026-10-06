@@ -1,9 +1,9 @@
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, listeningChapters } from './components.js?v=chapters-20261006';
+import { escapeHTML as e, listeningChapters } from './components.js?v=renaissance-20261006';
 
 // Short utterances avoid sending an entire chapter to the speech queue.
 export function speechChunks(chapter){
-  return [chapter.title,...chapter.blocks.filter(b=>['heading','paragraph'].includes(b.type)).map(b=>b.text)]
+  return [chapter.title,...chapter.blocks.filter(b=>['heading','paragraph','reference-page'].includes(b.type)).map(b=>b.text)]
     .filter(Boolean).flatMap(text=>text.match(/[^。！？.!?\n]+[。！？.!?]?/g)||[])
     .flatMap(text=>Array.from(text.trim()).join('').match(/[\s\S]{1,160}/gu)||[]).filter(text=>text.trim());
 }
@@ -64,3 +64,4 @@ export function bindListen(book,chapter,fromStart=false){
   if(!chunks.length)[play,restart].forEach(control=>control.disabled=true);
   return ()=>{disposed=true;exit();synth.removeEventListener('voiceschanged',voices);window.removeEventListener('pagehide',exit);};
 }
+
