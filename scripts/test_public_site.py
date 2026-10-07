@@ -56,6 +56,13 @@ class PublicationTests(unittest.TestCase):
         for p in BUILD_FILES:
             self.assertFalse((self.output/p).exists())
 
+    def test_renaissance_embedded_images_preserved_inside_chapter(self):
+        p='library/data/chapters/renaissance/8.json'
+        self.put(p, {'blocks':[{'type':'image','src':'data:image/webp;base64,V0VCUA=='}]})
+        result=self.run_build()
+        self.assertEqual(result['preservedBooks']['renaissance']['embeddedImageReferences'],1)
+        self.assertEqual((self.source/p).read_bytes(),(self.output/p).read_bytes())
+
     def test_missing_tracked_file_fails_before_output(self):
         (self.source/'library/data/chapters/renaissance/107.json').unlink()
         with self.assertRaisesRegex(ValueError,'Incomplete source'):

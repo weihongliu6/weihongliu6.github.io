@@ -5,6 +5,7 @@ This is publication minimization, not DRM. Public Git history and prior copies r
 Only the explicitly reviewed Pilot paths may be published. New paths fail closed.
 """
 import argparse
+import base64
 import hashlib
 import json
 import pathlib
@@ -114,6 +115,7 @@ def build(source, output, tracked=None):
             raise ValueError('Service worker shell file omitted: ' + path)
     preserved = {}
     for book in books[1:]:
+        embedded_images = 0
         refs = {'library/' + book['cover']} if book.get('cover') else set()
         for entry in book.get('chapters', []):
             p = 'library/' + entry['file'].split('?')[0]
@@ -121,10 +123,22 @@ def build(source, output, tracked=None):
             data = json.loads(inputs[p])
             for block in data.get('blocks', []):
                 if block.get('type') == 'image':
-                    refs.update('library/' + block[k] for k in ('src', 'fullSrc') if block.get(k))
+                    for key in ('src', 'fullSrc'):
+                        image = block.get(key)
+                        if not image:
+                            continue
+                        if image.startswith('data:image/'):
+                            header, encoded = image.split(',', 1)
+                            if header not in ('data:image/webp;base64', 'data:image/png;base64', 'data:image/jpeg;base64'):
+                                raise ValueError('Unreviewed embedded image type in ' + p)
+                            base64.b64decode(encoded, validate=True)
+                            # Image bytes are preserved inside this chapter's exact hash.
+                            embedded_images += 1
+                        else:
+                            refs.add('library/' + image)
         if refs - public:
             raise ValueError('Other book content omitted: ' + repr(sorted(refs - public)))
-        preserved[book['id']] = {'chapterCount': len(book.get('chapters', [])), 'metadataSha256': sha(json.dumps(book, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()), 'files': {p: sha(inputs[p]) for p in sorted(refs)}}
+        preserved[book['id']] = {'chapterCount': len(book.get('chapters', [])), 'embeddedImageReferences': embedded_images, 'metadataSha256': sha(json.dumps(book, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()), 'files': {p: sha(inputs[p]) for p in sorted(refs)}}
     output.mkdir(parents=True)
     for p in sorted(public):
         target = output / p
@@ -151,5 +165,11 @@ if __name__ == '__main__':
     parser.add_argument('--source', type=pathlib.Path, default=pathlib.Path('.'))
     parser.add_argument('--output', type=pathlib.Path, required=True)
     args = parser.parse_args()
-    result = build(args.source, args.output)
+    try:
+        result = build(args.source, args.output)
+    except Exception as error:
+        # Surface a concise path-only diagnostic in public Actions annotations.
+        message = str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print('::error title=Public artifact validation failed::' + message, flush=True)
+        raise
     print(json.dumps({'sourceCommit': result['sourceCommit'], 'publicFiles': len(result['publicFiles']), 'excludedPilotFiles': len(result['excludedPilotFiles']), 'preservedBooks': {k: {'chapterCount': v['chapterCount'], 'fileCount': len(v['files'])} for k, v in result['preservedBooks'].items()}}, indent=2))
