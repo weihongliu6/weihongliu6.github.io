@@ -28,7 +28,7 @@ export function saveProgress(storage, assetId, ratio) { try { storage.setItem(PR
 export function resetProgress(storage) { try { storage.removeItem(PROGRESS_KEY); } catch {} }
 // All content, sessions and URLs are volatile. Storage helpers above accept only position metadata.
 export class ProtectedReader {
-  constructor(config, {fetcher=fetch, urls=URL, onClear=()=>{}} = {}) {
+  constructor(config, {fetcher=(...args)=>globalThis.fetch(...args), urls=URL, onClear=()=>{}} = {}) {
     this.config=config; this.fetcher=fetcher; this.urls=urls; this.onClear=onClear;
     this.token=null; this.expiry=0; this.catalog=null; this.epoch=0; this.blobs=new Set(); this.pending=new Set(); this.timer=null;
   }

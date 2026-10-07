@@ -29,3 +29,35 @@ test('offline listener saves position, invalidates navigation, locks and clears 
   const context={window:{addEventListener:(name,fn)=>{assert.equal(name,'offline');callback=fn;}},storePosition:()=>saved++,reader:{lock:()=>locked++},navigation:4,catalog:{bookId:'slow-down'},say:text=>message=text};
   runInNewContext(listener,context);callback();assert.equal(saved,1);assert.equal(locked,1);assert.equal(context.navigation,5);assert.equal(context.catalog,null);assert.ok(message.includes('网络已断开'));
 });
+
+
+test('default native fetch retains global receiver for OTP, protected requests and logout',async()=>{
+  const original=globalThis.fetch, calls=[];
+  globalThis.fetch=function(url,options){
+    assert.equal(this,globalThis,'native browser fetch requires a global receiver');
+    calls.push({url,options});
+    return Promise.resolve(new Response(null,{status:200}));
+  };
+  let r;
+  try{
+    r=new ProtectedReader(config);
+    await r.sendLink(config.ownerEmail);
+    r.setSession('synthetic-test-token',30);
+    await r.request(config.projectUrl+'/auth/v1/user','none');
+    await r.logout();
+    assert.equal(calls.length,3);
+    assert.equal(calls[0].options.headers.Authorization,undefined);
+    assert.equal(calls[1].options.headers.Authorization,'Bearer synthetic-test-token');
+    assert.equal(calls[2].options.headers.Authorization,'Bearer synthetic-test-token');
+    assert.equal(r.token,null);
+  }finally{r?.lock();globalThis.fetch=original;}
+});
+
+test('explicit custom fetch remains injectable without accessing native fetch',async()=>{
+  const original=globalThis.fetch;let called=0;
+  globalThis.fetch=()=>{throw new Error('native fetch must not be used');};
+  try{
+    const r=new ProtectedReader(config,{fetcher:async()=>{called++;return new Response(null,{status:200});}});
+    await r.sendLink(config.ownerEmail);assert.equal(called,1);
+  }finally{globalThis.fetch=original;}
+});
