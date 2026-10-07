@@ -2,7 +2,7 @@ import json
 import pathlib
 import tempfile
 import unittest
-from build_public_site import BUILD_FILES, POLICY_PATH, SAMPLE, build
+from build_public_site import BUILD_FILES, POLICY_PATH, SAMPLE, build, sha
 
 class PublicationTests(unittest.TestCase):
     def setUp(self):
@@ -14,8 +14,6 @@ class PublicationTests(unittest.TestCase):
         self.allowed = [SAMPLE, 'library/assets/covers/slow-down.jpg'] + [f'library/assets/books/slow-down-docx/photo-{n:02d}-{variant}.jpg' for n in (1, 2) for variant in ('reading', 'large')]
         self.locked = [f'library/data/chapters/slow-down-full/chapter-{n:02d}.json' for n in range(2,23)]
         self.put(SAMPLE, {'id':'chapter-01','blocks':[{'type':'image', 'src':f'assets/books/slow-down-docx/photo-{n:02d}-reading.jpg','fullSrc':f'assets/books/slow-down-docx/photo-{n:02d}-large.jpg'} for n in (1,2)]})
-        for p in self.locked:
-            self.put(p, {'blocks':[{'type':'paragraph','text':'Locked chapter unique paragraph. '*8}]})
         for p in self.allowed[1:]:
             self.put(p,b'image bytes')
         books=[{'id':'slow-down','chapters':[{'file':p.removeprefix('library/')} for p in [SAMPLE,*self.locked]],'toc':[{}]*22,'commerce':{'sampleChapter':'chapter-01'}}]
@@ -32,6 +30,7 @@ class PublicationTests(unittest.TestCase):
             self.put(p, 'build-only')
         self.tracked = {p.relative_to(self.source).as_posix() for p in self.source.rglob('*') if p.is_file()}
         self.policy={'sourceFiles':sorted(self.tracked-BUILD_FILES),'pilotFiles':self.allowed,'excludedPilotFiles':self.locked,'publicFiles':sorted(self.tracked-BUILD_FILES-set(self.locked))}
+        self.policy['excludedBodyFingerprints']={'algorithm':'sha256','characters':80,'hashes':[sha(('Locked chapter unique paragraph. '*8)[:80].encode())]}
         self.put(POLICY_PATH,self.policy)
 
     def tearDown(self):
@@ -130,6 +129,27 @@ class PublicationTests(unittest.TestCase):
         p.unlink()
         p.symlink_to(self.source/'library/sw.js')
         with self.assertRaisesRegex(ValueError,'Symlink'):
+            self.run_build()
+
+    def test_locked_source_reintroduction_is_rejected(self):
+        p=self.locked[0]
+        self.put(p, {'blocks':[]})
+        self.tracked.add(p)
+        self.policy['sourceFiles'].append(p)
+        self.put(POLICY_PATH,self.policy)
+        with self.assertRaisesRegex(ValueError,'must not be tracked'):
+            self.run_build()
+
+    def test_body_copy_in_build_only_file_is_rejected(self):
+        self.put('PUBLICATION.md','Locked chapter unique paragraph. '*8)
+        with self.assertRaisesRegex(ValueError,'body content'):
+            self.run_build()
+
+    def test_escaped_json_copy_is_rejected(self):
+        p='ai-briefs/AI_Brief_2026-10-08.html'
+        self.put(p,'&#76;ocked chapter unique paragraph. '+'Locked chapter unique paragraph. '*7)
+        self.tracked.add(p)
+        with self.assertRaisesRegex(ValueError,'body content'):
             self.run_build()
 
     def test_existing_output_never_overwritten(self):

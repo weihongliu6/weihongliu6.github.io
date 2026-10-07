@@ -11,11 +11,11 @@ const read=path=>fs.readFileSync(root+'/'+path,'utf8');
 const books=JSON.parse(read('library/data/books.json'));
 books[0].commerce={...books[0].commerce,mode:'pilot',sampleChapter:'chapter-01'};
 function cacheStore(){
- const data=new Map(),deleted=[];
- return {data,deleted,keys:async()=>[...data.keys()],delete:async name=>{deleted.push(name);return data.delete(name)},open:async name=>{
+ const data=new Map(),deleted=[],entryDeletes=[];
+ return {data,deleted,entryDeletes,keys:async()=>[...data.keys()],delete:async name=>{deleted.push(name);return data.delete(name)},open:async name=>{
   if(!data.has(name))data.set(name,new Map());const entries=data.get(name);
   const url=req=>typeof req==='string'?req:req.url;
-  return {put:async(req,res)=>entries.set(url(req),res.clone()),match:async req=>entries.get(url(req))?.clone(),keys:async()=>[...entries.keys()].map(url=>({url})),addAll:async()=>{}};
+  return {delete:async req=>{entryDeletes.push({name,url:url(req)});return entries.delete(url(req))},put:async(req,res)=>entries.set(url(req),res.clone()),match:async req=>entries.get(url(req))?.clone(),keys:async()=>[...entries.keys()].map(url=>({url})),addAll:async()=>{}};
  }};
 }
 async function seed(store,name,urls,data={id:'slow-down',urls,bytes:1,savedAt:1}){
@@ -40,7 +40,7 @@ function worker(store=cacheStore()){
  const events={},fetched=[];
  const c={URL,Response,Request,caches:store,self:{registration:{scope:base},location:{origin},clients:{claim:async()=>{}},addEventListener:(name,handler)=>events[name]=handler},fetch:async request=>{fetched.push(request.url);return new Response('network')}};
  vm.createContext(c);vm.runInContext(read('library/sw.js'),c);
- return {events,store,fetched,request:async (url,download=false)=>{let reply;events.fetch({request:new Request(new URL(url,base),{headers:download?{'X-Library-Download':'1'}:{}}),respondWith:p=>reply=p});return reply===undefined?null:await reply;}};
+ return {events,store,fetched,request:async (url,download=false)=>{let reply,wait;events.fetch({request:new Request(new URL(url,base),{headers:download?{'X-Library-Download':'1'}:{}}),respondWith:p=>reply=p,waitUntil:p=>wait=p});const response=reply===undefined?null:await reply;await wait;return response;}};
 }
 test('pilot download fetches only canonical first chapter, four sample images and cover',async()=>{
  const {run,store,fetched}=offline();await run('download(books[0])');
@@ -93,16 +93,35 @@ test('SW returns 403 before network, shell, old full caches or explicit download
 test('SW allows sample and other books from old complete caches, but ignores incomplete downloads',async()=>{
  const store=cacheStore(),sample='data/chapters/slow-down-full/chapter-01.json';
  const paths=[sample,'assets/books/slow-down-docx/photo-02-large.jpg',...books.slice(1).filter(b=>b.chapters?.length).map(b=>b.chapters[0].file)];
- await seed(store,prefix+'old-complete',paths.map(path=>base+path));
+ await seed(store,prefix+'old-complete',paths.map(path=>base+path),{id:'mixed-allowed',urls:paths.map(path=>base+path)});
  const sw=worker(store);for(const path of paths)assert.equal(await (await sw.request(path)).text(),'cached:'+base+path);
  assert.equal(sw.fetched.length,0);assert.equal(await sw.request(sample,true),null);
  const incomplete='assets/books/structure-pages/some-new-image.jpg';await seed(store,prefix+'incomplete',[base+incomplete],null);
  assert.equal(await (await sw.request(incomplete)).text(),'network');assert.deepEqual(sw.fetched,[base+incomplete]);
 });
-test('activation preserves every book cache and historical shell for open old tabs',async()=>{
- const store=cacheStore();await seed(store,prefix+'slow-down-full',[]);await store.open('shadow-library-shell-old');await store.open('shadow-library-shell-pilot-20261007-1');
+test('activation removes only locked Pilot cache entries and invalidates affected completion first',async()=>{
+ const store=cacheStore(),locked=base+'data/chapters/slow-down-full/chapter-%30%32.json?old=1';
+ const sample=base+'data/chapters/slow-down-full/chapter-01.json';
+ const other=base+books[1].chapters[0].file, module=base+'src/reader.js?v=old';
+ for(const name of [prefix+'slow-down-full',prefix+'mixed',prefix+'incomplete','shadow-library-shell-old']){
+  await seed(store,name,[locked,sample,other,module],name===prefix+'incomplete'?null:{id:'slow-down',urls:[locked,sample,other]});
+ }
+ await seed(store,prefix+'other',[other],{id:'slow-shutter',urls:[other],bytes:2});
+ await seed(store,'unrelated-app',[locked]);
+ const preserved=await (await (await store.open(prefix+'other')).match(marker)).text();
  const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
- assert.equal(store.data.has(prefix+'slow-down-full'),true);assert.deepEqual(store.deleted,[]);
+ for(const name of [prefix+'slow-down-full',prefix+'mixed',prefix+'incomplete','shadow-library-shell-old']){
+  const cache=await store.open(name);assert.equal(await cache.match(locked),undefined);assert.equal(await cache.match(marker),undefined);
+  for(const url of [sample,other,module])assert.ok(await cache.match(url));
+  const operations=store.entryDeletes.filter(x=>x.name===name).map(x=>x.url);
+  assert.equal(operations[0],marker);assert.ok(operations.indexOf(locked)>0);
+ }
+ assert.equal(await (await (await store.open(prefix+'other')).match(marker)).text(),preserved);
+ assert.ok(await (await store.open('unrelated-app')).match(locked));
+ assert.deepEqual(store.deleted,[]);
+ // The sweep is idempotent and does not reinterpret preserved sample bytes as a full book.
+ sw.events.activate({waitUntil:p=>wait=p});await wait;
+ assert.equal((await sw.request(locked)).status,403);
 });
 test('removing the current pilot sample preserves previous full-book and incomplete archives',async()=>{
  const store=cacheStore(),locked=base+'data/chapters/slow-down-full/chapter-02.json';
@@ -112,4 +131,54 @@ test('removing the current pilot sample preserves previous full-book and incompl
  await run('removeDownload(books[0])');assert.equal(run('isDownloaded("slow-down")'),false);
  assert.deepEqual(await store.keys(),[prefix+'slow-down-old-full',prefix+'slow-down-old-incomplete']);
  assert.equal(store.deleted.length,1);assert.equal(run('isSaved("slow-down")'),true);
+});
+
+test('activation preserves complete approved sample markers and ignores cross-origin lookalikes',async()=>{
+ const store=cacheStore(),sample=base+'data/chapters/slow-down-full/chapter-01.json';
+ const foreign='https://elsewhere.test/library/data/chapters/slow-down-full/chapter-02.json';
+ const data={id:'slow-down',scope:'sample',accessVersion:'pilot-20261007-1',chapterIds:['chapter-01'],urls:[sample]};
+ await seed(store,prefix+'slow-down-sample',[sample],data);
+ await seed(store,prefix+'other',[foreign],{id:'other',urls:[foreign]});
+ const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
+ assert.deepEqual(await (await (await store.open(prefix+'slow-down-sample')).match(marker)).json(),data);
+ assert.ok(await (await store.open(prefix+'other')).match(foreign));
+ assert.deepEqual(store.entryDeletes,[]);
+});
+
+test('late old-tab writes are retired on the next fetch and startup message',async()=>{
+ const store=cacheStore(),name=prefix+'slow-down-late',locked=base+'data/chapters/slow-down-full/chapter-02.json';
+ const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
+ await seed(store,name,[locked]);
+ assert.equal((await sw.request('data/chapters/slow-down-full/chapter-01.json')).status,200);
+ assert.equal(await (await store.open(name)).match(locked),undefined);
+ await seed(store,name,[locked]);
+ let reply;sw.events.message({data:{type:'RETIRE_PILOT_CACHES'},ports:[{postMessage:r=>reply=r}],waitUntil:p=>wait=p});await wait;
+ assert.equal(reply.complete,true);
+ assert.equal(await (await store.open(name)).match(locked),undefined);
+ assert.equal(await (await store.open(name)).match(marker),undefined);
+});
+test('interrupted cleanup invalidates marker first and retries safely on the next request',async()=>{
+ const store=cacheStore(),name=prefix+'slow-down-interrupted',locked=base+'data/chapters/slow-down-full/chapter-02.json';
+ await seed(store,name,[locked]);
+ const open=store.open;let fail=true;
+ store.open=async n=>{const cache=await open(n),remove=cache.delete;cache.delete=async req=>{
+  if(n===name&&(typeof req==='string'?req:req.url)===locked&&fail){fail=false;throw Error('interrupted deletion');}
+  return remove(req);
+ };return cache;};
+ const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await assert.rejects(wait,/interrupted/);
+ assert.equal(await (await store.open(name)).match(marker),undefined);
+ assert.ok(await (await store.open(name)).match(locked));
+ assert.equal((await sw.request(locked)).status,403);
+ assert.equal(await (await store.open(name)).match(locked),undefined);
+});
+
+test('failed cleanup does not block other books and never acknowledges completion',async()=>{
+ const store=cacheStore(),name=prefix+'slow-down-failing',locked=base+'data/chapters/slow-down-full/chapter-02.json';
+ const other=base+books[1].chapters[0].file;
+ await seed(store,name,[locked]);await seed(store,prefix+'other-safe',[other],{id:'slow-shutter',urls:[other]});
+ const open=store.open;
+ store.open=async n=>{const cache=await open(n);if(n===name)cache.delete=async()=>{throw Error('retry later');};return cache;};
+ const sw=worker(store);assert.equal(await (await sw.request(other)).text(),'cached:'+other);
+ let wait,reply;sw.events.message({data:{type:'RETIRE_PILOT_CACHES'},ports:[{postMessage:r=>reply=r}],waitUntil:p=>wait=p});await wait;
+ assert.equal(reply.complete,false);
 });

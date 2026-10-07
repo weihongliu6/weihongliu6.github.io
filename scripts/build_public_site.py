@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the whole public site from a complete tracked checkout, without editing it.
+"""Build the whole public site from the reviewed sample-only tracked checkout.
 
 This is publication minimization, not DRM. Public Git history and prior copies remain.
 Only the explicitly reviewed Pilot paths may be published. New paths fail closed.
@@ -7,6 +7,7 @@ Only the explicitly reviewed Pilot paths may be published. New paths fail closed
 import argparse
 import base64
 import hashlib
+import html
 import json
 import pathlib
 import re
@@ -83,27 +84,26 @@ def build(source, output, tracked=None):
             sample_assets.update('library/' + block[k] for k in ('src', 'fullSrc'))
     if sample_assets != set(policy['pilotFiles']) - {SAMPLE, 'library/assets/covers/slow-down.jpg'}:
         raise ValueError('Sample image policy changed')
-    # Detect copies under innocuous aliases, including escaped JSON and HTML.
-    # Use long body paragraphs, not headings/TOC text intentionally public.
-    fingerprints = set()
-    for p in excluded:
-        if p.endswith('.json'):
-            for block in json.loads(inputs[p]).get('blocks', []):
-                text = block.get('text', '')
-                if block.get('type') == 'paragraph' and len(text) >= 80:
-                    fingerprints.add(text[:80])
-    sample_text = inputs[SAMPLE].decode('utf-8')
-    fingerprints = {t for t in fingerprints if t not in sample_text}
-    for p in sorted(public):
-        raw = inputs[p]
+    # One-way paragraph fingerprints allow a clean build without private originals.
+    # Scan all tracked text (including tests/docs), so aliases cannot hide in Git.
+    rule = policy['excludedBodyFingerprints']
+    if rule.get('algorithm') != 'sha256' or rule.get('characters') != 80:
+        raise ValueError('Unsupported excluded-body fingerprint policy')
+    fingerprints = set(rule['hashes'])
+    if not fingerprints or any(not re.fullmatch(r'[0-9a-f]{64}', h) for h in fingerprints):
+        raise ValueError('Invalid excluded-body fingerprint policy')
+    if excluded & tracked or excluded & set(policy['sourceFiles']):
+        raise ValueError('Retired Pilot paths must not be tracked')
+    for p, raw in sorted(inputs.items()):
         try:
             text = raw.decode('utf-8')
         except UnicodeDecodeError:
             continue
         if p.endswith('.json'):
             text = json.dumps(json.loads(text), ensure_ascii=False)
-        if any(t in text for t in fingerprints):
-            raise ValueError('Excluded Pilot body content found in public file: ' + p)
+        text = html.unescape(text)
+        if any(sha(text[i:i+80].encode()) in fingerprints for i in range(max(0, len(text)-79))):
+            raise ValueError('Excluded Pilot body content found in tracked file: ' + p)
     worker = inputs['library/sw.js'].decode('utf-8')
     shell = re.search(r"const SHELL_FILES=\[(.*?)\];", worker, re.S)
     if not shell:
@@ -152,7 +152,7 @@ def build(source, output, tracked=None):
                 'publicFiles': {p: sha(inputs[p]) for p in sorted(public)},
                 'excludedPilotFiles': sorted(excluded), 'pilotFiles': policy['pilotFiles'],
                 'preservedBooks': preserved, 'pilotTocEntries': 22,
-                'limitation': 'Public repository, Git history, and previously saved copies remain accessible.'}
+                'limitation': 'Current Pilot source is sample-only; public Git history and previously saved copies remain accessible.'}
     # Independent output walk and digest validation, before adding the manifest.
     actual = {p.relative_to(output).as_posix(): sha(p.read_bytes()) for p in output.rglob('*') if p.is_file()}
     if actual != manifest['publicFiles']:

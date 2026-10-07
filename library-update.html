@@ -2,21 +2,21 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><meta name="library-build" content="update-20261007-1">
+<meta name="robots" content="noindex"><meta name="library-build" content="private-20261007-1">
 <title>更新数字书房 · 影子观察</title>
 <style>body{max-width:40rem;margin:10vh auto;padding:1.5rem;background:#f6f3ec;color:#242824;font:18px/1.8 system-ui}h1{font-size:1.8rem}button,a{font:inherit}button{padding:.6rem 1rem}a{color:#315e4e}small{color:#586158}#return[hidden]{display:none}</style>
 </head>
 <body>
 <h1>更新数字书房</h1>
-<p>将阅读应用更新到新版本，保留本机书架、阅读进度和已下载内容。已打开的阅读窗口不会自动刷新。</p>
+<p>将阅读应用更新到新版本，保留本机书架、阅读进度及其他书籍的下载；清理《慢下来看见世界》旧版受限章节与图片缓存。已打开的阅读窗口不会自动刷新。</p>
 <p>请在平常阅读使用的浏览器或主屏幕应用中打开此页。不同浏览器中的本机资料不会互相同步。</p>
 <button id="update" type="button">检查并更新阅读应用</button>
 <p id="status" role="status" aria-live="polite">准备好后，点击上方按钮。请保持联网。</p>
 <p><a id="return" href="/library/#/book/slow-down" hidden>返回《慢下来看见世界》书籍详情 →</a></p>
 <p><a href="/library/#/book/slow-down">暂不更新，返回书房</a></p>
-<small>目标版本：update-20261007-1。本页不会清除网站数据或卸载阅读应用。</small>
+<small>目标版本：private-20261007-1。只清理上述受限缓存，不清空网站数据或卸载阅读应用。</small>
 <script>
-const EXPECTED_BUILD='update-20261007-1';
+const EXPECTED_BUILD='private-20261007-1';
 const button=document.getElementById('update'),status=document.getElementById('status'),back=document.getElementById('return');
 function workerBuild(worker){
  return new Promise(resolve=>{
@@ -25,6 +25,17 @@ function workerBuild(worker){
   const timer=setTimeout(()=>{channel.port1.close();resolve(null);},1500);
   channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();resolve(event.data?.type==='LIBRARY_BUILD'?event.data.build:null);};
   worker.postMessage({type:'LIBRARY_BUILD'},[channel.port2]);
+ });
+}
+function retirePilotCaches(worker){
+ return new Promise(resolve=>{
+  const channel=new MessageChannel();
+  const timer=setTimeout(()=>{channel.port1.close();resolve(false);},15000);
+  channel.port1.onmessage=event=>{
+   clearTimeout(timer);channel.port1.close();
+   resolve(event.data?.type==='PILOT_CACHES_RETIRED'&&event.data.complete===true);
+  };
+  worker.postMessage({type:'RETIRE_PILOT_CACHES'},[channel.port2]);
  });
 }
 async function waitForBuild(registration){
@@ -44,6 +55,7 @@ button.addEventListener('click',async()=>{
   const registration=await navigator.serviceWorker.register('/library/sw.js',{scope:'/library/',updateViaCache:'none'});
   await registration.update();
   if(!await waitForBuild(registration))throw Error('尚未确认新版本启用。旧版本及本机资料仍保留；请联网后再次检查。');
+  if(!await retirePilotCaches(registration.active))throw Error('受限缓存清理尚未完成，请重试更新。其他书籍和阅读进度保持不变。');
   status.textContent='已确认新版本 '+EXPECTED_BUILD+' 启用。点击下方链接重新打开书籍详情；其他阅读窗口可在读完后重新打开。';
   back.hidden=false;
  }catch(error){status.textContent='更新未完成：'+error.message;}

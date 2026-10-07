@@ -66,8 +66,10 @@ test('narration and downloadable chapter policy only include first chapter; othe
  for(const book of books.slice(1))for(const chapter of book.chapters||[])assert.equal(c.canAccessChapter(book,chapter.id),true);
  assert.ok(!c.listeningHome().includes('#/read/slow-down/chapter-02'));
 });
-test('public source remains present: preview policy is not content security',()=>{
- assert.ok(fs.existsSync('library/data/chapters/slow-down-full/chapter-02.json'));
+test('current public source contains only approved sample; history remains a separate risk',()=>{
+ const policy=JSON.parse(read('scripts/public-site-policy.json'));
+ for(const path of policy.excludedPilotFiles)assert.equal(fs.existsSync(path),false,path);
+ for(const path of policy.pilotFiles)assert.ok(fs.existsSync(path),path);
  assert.match(read('library/src/components.js'),/not a server-side paywall/);
 });
 test('failed stale request does not overwrite a newer purchase screen',async()=>{
@@ -79,10 +81,11 @@ test('failed stale request does not overwrite a newer purchase screen',async()=>
  rejectFetch(Error('late failure'));await pending;
  assert.equal(vm.runInContext('main.innerHTML',c),purchase);
  assert.match(purchase,/这是购买预览页/);
+ assert.match(purchase,/href="\/reader-test\/"/);
 });
 test('HTML, module imports and catalogue exactly match service-worker precache keys',()=>{
  const sw=read('library/sw.js'), html=read('library/index.html');
- for(const asset of ['src/app.js?v=pilot-20261007-1','src/styles.css?v=pilot-20261007-1']){assert.ok(html.includes(asset));assert.ok(sw.includes(asset));}
+ for(const asset of ['src/app.js?v=private-20261007-1','src/styles.css?v=pilot-20261007-1']){assert.ok(html.includes(asset));assert.ok(sw.includes(asset));}
  const app=read('library/src/app.js');assert.ok(app.includes('data/books.json?v=pilot-20261007-1'));assert.ok(sw.includes('data/books.json?v=pilot-20261007-1'));
  for(const name of ['app','reader','listen','offline'])for(const [,asset] of read(`library/src/${name}.js`).matchAll(/from '\.\/([^']+)'/g))assert.ok(sw.includes('src/'+asset),`${name}: ${asset} not precached`);
 });

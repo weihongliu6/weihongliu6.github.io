@@ -116,7 +116,7 @@ async function render(){
     if(!page){main.innerHTML=home();document.title='影子观察 · 数字书房 | '+platform.name;}
     else if(page==='listen'){main.innerHTML=listeningHome();document.title='听书 · 数字书房';}
     else if(page==='book'&&book){main.innerHTML=bookPage(book);document.title=`${book.title} · 数字书房`;}
-    else if(page==='purchase'&&book&&pilotCommerce(book)){main.innerHTML=`<section class="purchase-page"><a class="back-link" href="${bookURL(book.id)}">← 返回书籍</a><p class="eyebrow">SHADOW LIBRARY · PILOT</p><h1>购买《${e(book.title)}》完整版</h1><p>第一章已开放阅读，后续章节尚未开放。</p><div class="purchase-card"><strong>${purchaseLabel(book)}</strong><p>这是购买预览页。正式购买尚未开放，目前不会收取任何款项，也不会产生订单或解锁记录。</p><button type="button" disabled>PayPal · 即将开放</button></div><a class="primary-link" href="${readURL(book.id,sampleChapter(book).id)}">返回第一章</a></section>`;document.title=`购买完整版 · ${book.title}`;}
+    else if(page==='purchase'&&book&&pilotCommerce(book)){main.innerHTML=`<section class="purchase-page"><a class="back-link" href="${bookURL(book.id)}">← 返回书籍</a><p class="eyebrow">SHADOW LIBRARY · PILOT</p><h1>购买《${e(book.title)}》完整版</h1><p>第一章已开放阅读，后续章节尚未开放。</p><div class="purchase-card"><strong>${purchaseLabel(book)}</strong><p>这是购买预览页。正式购买尚未开放，目前不会收取任何款项，也不会产生订单或解锁记录。</p><button type="button" disabled>PayPal · 即将开放</button></div><a class="primary-link" href="/reader-test/">已有授权？登录私密阅读</a> <a class="primary-link" href="${readURL(book.id,sampleChapter(book).id)}">返回第一章</a></section>`;document.title=`购买完整版 · ${book.title}`;}
     else if(page==='read'&&canRead(book)){
       // Guard before reading memory, network, listening or saved-progress paths.
       if(pilotCommerce(book) && !canAccessChapter(book,chapterId)){location.replace(purchaseURL(book));return;}

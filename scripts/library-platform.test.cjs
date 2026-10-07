@@ -23,7 +23,10 @@ test('five stable records, four complete and one coming; metadata has explicit u
     assert.equal(book.publication.isbn,null);
     assert.equal(book.publication.rights.exclusive,null);
     assert.equal(book.publication.publisher,null);
-    for(const chapter of book.chapters||[]) assert.ok(fs.existsSync(path.join(root,'library',chapter.file.split('?')[0])));
+    for(const chapter of book.chapters||[]){
+      const exists=fs.existsSync(path.join(root,'library',chapter.file.split('?')[0]));
+      assert.equal(exists,book.id!=='slow-down'||chapter.id==='chapter-01');
+    }
   }
 });
 test('existing Apple and WeRead destinations and reader routes remain available',()=>{

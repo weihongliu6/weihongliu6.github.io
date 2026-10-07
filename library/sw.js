@@ -1,7 +1,6 @@
-/* Only /library/ is controlled. Completed downloads survive application updates.
- * This pilot guard is a reading-flow boundary, not protection of public source files.
- * Raw files remain public when accessed outside this service worker. */
-const BUILD='update-20261007-1';
+/* Only /library/ is controlled. Retire cached locked Pilot payloads only.
+ * Public history and copies saved elsewhere remain outside this migration. */
+const BUILD='private-20261007-1';
 const SHELL='shadow-library-shell-'+BUILD;
 const BOOK_PREFIX='shadow-library-book-v1-';
 const base=self.registration.scope;
@@ -14,6 +13,8 @@ const sampleAssets=new Set([
 // Verified against the pilot's canonical chapter and the repository snapshot.
 // Keep this allowlist and the cache version in step with pilot content changes.
 function lockedPilotPath(url){
+ const scope=new URL(base);
+ if(url.origin!==scope.origin||!url.pathname.startsWith(scope.pathname))return false;
  let path;
  try{path=decodeURIComponent(url.pathname).slice(new URL(base).pathname.length);}
  catch{return true;}
@@ -25,8 +26,8 @@ function lockedPilotPath(url){
  return false;
 }
 const SHELL_FILES=[
- './','index.html','src/update.js?v=update-20261007-1','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
- 'src/app.js?v=pilot-20261007-1','src/offline.js?v=pilot-20261007-1','src/styles.css?v=pilot-20261007-1',
+ './','index.html','src/update.js?v=private-20261007-1','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
+ 'src/app.js?v=private-20261007-1','src/offline.js?v=pilot-20261007-1','src/styles.css?v=pilot-20261007-1',
  'src/components.js?v=pilot-20261007-1','src/reader.js?v=pilot-20261007-1',
  'src/listen.js?v=pilot-20261007-1','src/storage.js?v=phase2-20260925',
  'data/books.json?v=pilot-20261007-1','data/platform.json?v=1',
@@ -47,18 +48,50 @@ self.addEventListener('install',event=>event.waitUntil((async()=>{
  // Only a fully installed shell may replace the old worker. Existing pages are not reloaded.
  await self.skipWaiting();
 })()));
+async function retireLockedPilotCaches(){
+ for(const name of await caches.keys()){
+  if(!name.startsWith('shadow-library-shell-')&&!name.startsWith(BOOK_PREFIX))continue;
+  const cache=await caches.open(name), requests=await cache.keys();
+  const locked=requests.filter(request=>lockedPilotPath(new URL(request.url)));
+  let retireMarker=locked.length>0;
+  const completed=await cache.match(marker);
+  if(completed){
+   try{
+    const data=await completed.json();
+    retireMarker=retireMarker||(data.id==='slow-down'&&data.scope!=='sample')||
+     (Array.isArray(data.urls)&&data.urls.some(url=>lockedPilotPath(new URL(url,base))));
+   }catch{retireMarker=retireMarker||name.startsWith(BOOK_PREFIX+'slow-down-');}
+  }
+  // Invalidate completion first; an interrupted cleanup must not advertise a
+  // complete download with missing URLs. Keep allowed bytes for re-download.
+  if(retireMarker)await cache.delete(marker);
+  for(const request of locked)await cache.delete(request);
+ }
+}
+let retirement=null;
+function ensurePilotCacheRetirement(){
+ if(!retirement)retirement=retireLockedPilotCaches().finally(()=>{retirement=null;});
+ return retirement;
+}
 self.addEventListener('activate',event=>event.waitUntil((async()=>{
- // Retain exact historical module URLs for open old tabs, and every user book cache.
- // Do not garbage-collect during this migration: a sleeping tab may still need its graph.
- // Book caches are deliberately retained, including older full-book downloads.
+ await ensurePilotCacheRetirement();
+ // Keep old exact module URLs, other books, shelves and reading progress.
  await self.clients.claim();
 })()));
 self.addEventListener('message',event=>{
+ if(event.data?.type==='RETIRE_PILOT_CACHES')event.waitUntil(ensurePilotCacheRetirement().then(
+  ()=>event.ports?.[0]?.postMessage({type:'PILOT_CACHES_RETIRED',complete:true}),
+  ()=>event.ports?.[0]?.postMessage({type:'PILOT_CACHES_RETIRED',complete:false})
+ ));
  if(event.data?.type==='LIBRARY_BUILD')event.ports?.[0]?.postMessage({type:'LIBRARY_BUILD',build:BUILD});
 });
 self.addEventListener('fetch',event=>{
  const request=event.request, url=new URL(request.url);
  if(request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(base))return;
+ // Retry after activation, including late writes by old tabs. Single-flight sweeps
+ // reset after failure so an interrupted deletion resumes on the next request.
+ const retirement=ensurePilotCacheRetirement();
+ event.waitUntil(retirement.catch(()=>{}));
  // Reject locked payloads before every cache and network path, including downloads.
  if(lockedPilotPath(url)){
   event.respondWith(Promise.resolve(new Response(JSON.stringify({error:'pilot_sample_only',message:'试售阶段仅开放第一章。'}),{
@@ -69,6 +102,7 @@ self.addEventListener('fetch',event=>{
  // Explicit allowed downloads reach the network; incomplete caches are never served.
  if(request.headers.get('X-Library-Download')==='1')return;
  event.respondWith((async()=>{
+  await retirement.catch(()=>{});
   const shell=await caches.open(SHELL);
   if(request.mode==='navigate' && (url.pathname===new URL(base).pathname||url.pathname===new URL('index.html',base).pathname))return (await shell.match(base))||fetch(request);
   const cached=await shell.match(request);if(cached)return cached;
