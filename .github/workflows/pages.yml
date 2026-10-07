@@ -1,0 +1,76 @@
+name: Publish reviewed sample site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Publish AI Brief]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: reviewed-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      source-sha: ${{ steps.source.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Record exact source commit
+        id: source
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run source and publication regression tests
+        run: |
+          node --test scripts/library-pilot.test.cjs scripts/library-pilot-offline.test.cjs scripts/library-listen.test.cjs scripts/library-platform.test.cjs scripts/library-update.test.cjs
+          python -m unittest discover -s scripts -p test_public_site.py -v
+      - name: Build and independently audit complete public artifact
+        run: python scripts/build_public_site.py --source . --output "$RUNNER_TEMP/public-site"
+      - name: Require GitHub Actions as the only Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/${{ github.repository }}/pages --jq .build_type)" = workflow || {
+            echo 'Set Settings > Pages > Build and deployment > Source to GitHub Actions before publishing.'
+            exit 1
+          }
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/public-site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.build.outputs.source-sha }}
+          persist-credentials: false
+      - name: Verify deployed origin without a service worker
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: python scripts/verify_public_origin.py --url "$SITE_URL" --timeout 600
