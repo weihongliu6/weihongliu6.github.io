@@ -99,10 +99,10 @@ test('SW allows sample and other books from old complete caches, but ignores inc
  const incomplete='assets/books/structure-pages/some-new-image.jpg';await seed(store,prefix+'incomplete',[base+incomplete],null);
  assert.equal(await (await sw.request(incomplete)).text(),'network');assert.deepEqual(sw.fetched,[base+incomplete]);
 });
-test('activation preserves every book cache while retiring only obsolete shells',async()=>{
+test('activation preserves every book cache and historical shell for open old tabs',async()=>{
  const store=cacheStore();await seed(store,prefix+'slow-down-full',[]);await store.open('shadow-library-shell-old');await store.open('shadow-library-shell-pilot-20261007-1');
  const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
- assert.equal(store.data.has(prefix+'slow-down-full'),true);assert.deepEqual(store.deleted,['shadow-library-shell-old']);
+ assert.equal(store.data.has(prefix+'slow-down-full'),true);assert.deepEqual(store.deleted,[]);
 });
 test('removing the current pilot sample preserves previous full-book and incomplete archives',async()=>{
  const store=cacheStore(),locked=base+'data/chapters/slow-down-full/chapter-02.json';

@@ -1,7 +1,8 @@
 /* Only /library/ is controlled. Completed downloads survive application updates.
  * This pilot guard is a reading-flow boundary, not protection of public source files.
  * Raw files remain public when accessed outside this service worker. */
-const SHELL='shadow-library-shell-pilot-20261007-1';
+const BUILD='update-20261007-1';
+const SHELL='shadow-library-shell-'+BUILD;
 const BOOK_PREFIX='shadow-library-book-v1-';
 const base=self.registration.scope;
 const marker=new URL('offline-complete',base).href;
@@ -24,7 +25,7 @@ function lockedPilotPath(url){
  return false;
 }
 const SHELL_FILES=[
- './','index.html','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
+ './','index.html','src/update.js?v=update-20261007-1','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
  'src/app.js?v=pilot-20261007-1','src/offline.js?v=pilot-20261007-1','src/styles.css?v=pilot-20261007-1',
  'src/components.js?v=pilot-20261007-1','src/reader.js?v=pilot-20261007-1',
  'src/listen.js?v=pilot-20261007-1','src/storage.js?v=phase2-20260925',
@@ -34,15 +35,27 @@ const SHELL_FILES=[
 ];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(SHELL);
- try{await cache.addAll(SHELL_FILES.map(path=>new Request(new URL(path,base),{cache:'reload'})));}
+ try{
+  await cache.addAll(SHELL_FILES.map(path=>new Request(new URL(path,base),{cache:'reload'})));
+  // Reject a stale CDN document rather than activating a mixed release.
+  for(const path of ['./','index.html']){
+   const response=await cache.match(new URL(path,base).href);
+   if(!response || !(await response.text()).includes('name="library-build" content="'+BUILD+'"'))throw Error('Incomplete application release');
+  }
+ }
  catch(error){await caches.delete(SHELL);throw error;}
- // Updates wait for existing tabs to close, keeping their module versions consistent.
+ // Only a fully installed shell may replace the old worker. Existing pages are not reloaded.
+ await self.skipWaiting();
 })()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{
- for(const name of await caches.keys())if(name.startsWith('shadow-library-shell-')&&name!==SHELL)await caches.delete(name);
+ // Retain exact historical module URLs for open old tabs, and every user book cache.
+ // Do not garbage-collect during this migration: a sleeping tab may still need its graph.
  // Book caches are deliberately retained, including older full-book downloads.
  await self.clients.claim();
 })()));
+self.addEventListener('message',event=>{
+ if(event.data?.type==='LIBRARY_BUILD')event.ports?.[0]?.postMessage({type:'LIBRARY_BUILD',build:BUILD});
+});
 self.addEventListener('fetch',event=>{
  const request=event.request, url=new URL(request.url);
  if(request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(base))return;
@@ -59,6 +72,15 @@ self.addEventListener('fetch',event=>{
   const shell=await caches.open(SHELL);
   if(request.mode==='navigate' && (url.pathname===new URL(base).pathname||url.pathname===new URL('index.html',base).pathname))return (await shell.match(base))||fetch(request);
   const cached=await shell.match(request);if(cached)return cached;
+  // Legacy module graphs must use their exact cached versions, never today's file
+  // under yesterday's query key. This also covers lazy imports in old open tabs.
+  if(url.pathname.startsWith(new URL('src/',base).pathname)){
+   for(const name of await caches.keys()){
+    if(!name.startsWith('shadow-library-shell-')||name===SHELL)continue;
+    const hit=await (await caches.open(name)).match(request);if(hit)return hit;
+   }
+   return new Response('This application version is unavailable. Open /library-update.html to update safely.',{status:409,headers:{'Content-Type':'text/plain; charset=utf-8'}});
+  }
   for(const name of await caches.keys()){
    if(!name.startsWith(BOOK_PREFIX))continue;
    const cache=await caches.open(name);
