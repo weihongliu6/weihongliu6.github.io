@@ -5,5 +5,5 @@ export const CONFIG = Object.freeze({
   endpoint: 'https://vyhhzhayloesxvosbwtc.supabase.co/functions/v1/protected-read-owner-test',
   redirect: 'https://weihongliu6.github.io/reader-test/',
   // Remains false until deployment and Auth redirect are independently verified.
-  loginEnabled: false,
+  loginEnabled: true,
 });
