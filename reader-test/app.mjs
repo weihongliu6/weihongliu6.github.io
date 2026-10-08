@@ -1,6 +1,12 @@
-import {CONFIG} from './config.mjs';
-import {ProtectedReader, readProgress, saveProgress, resetProgress} from './core.mjs';
+import {CONFIG} from './config.mjs?v=signup-20261008-v3';
+import {READER_BUILD, ProtectedReader, readProgress, saveProgress, resetProgress} from './core.mjs?v=signup-20261008-v3';
 const $=id=>document.getElementById(id);
+const APP_BUILD='signup-20261008-v3';
+if (READER_BUILD!==APP_BUILD || document.querySelector('meta[name="reader-build"]')?.content!==APP_BUILD) {
+  $('login').disabled=true;if($('signup'))$('signup').disabled=true;
+  $('status').textContent='页面版本未同步，请刷新后重试。';
+  throw new Error('Reader release mismatch');
+}
 let positions;
 try { positions=window.localStorage; } catch { positions={getItem:()=>null,setItem:()=>{},removeItem:()=>{}}; }
 let catalog=null, current=null, navigation=0, fontSize=21, rendered=false;
@@ -23,7 +29,7 @@ function showReader(){
 function handleError(error, generation){
   if(error.name==='AbortError' || generation !== navigation)return;
   reader.lock(); catalog=null;
-  say(error.status===401?'登录已过期，请重新登录。':error.status===404?'当前账号没有可用阅读授权，或内容暂不可用。':'未能安全读取内容。页面已清空，请重新登录后重试。');
+  say(error.stage==='reading'?'邮箱身份已验证，但完整阅读授权未通过。本页会话与内容已清空；可返回数字书房阅读第一章试读。':error.status===401?'登录已过期，请重新登录。':error.status===404?'当前账号没有可用阅读授权，或内容暂不可用。':'未能安全读取内容。页面已清空，请重新登录后重试。');
 }
 async function openChapter(assetId, ratio=0){
   const generation=++navigation; current=assetId;
@@ -57,15 +63,17 @@ async function openChapter(assetId, ratio=0){
   }catch(error){handleError(error,generation);}
 }
 async function authenticate(){
-  const generation=++navigation;say('正在核验作者身份与阅读授权…');
+  const generation=++navigation;say('正在核验邮箱身份与阅读授权…');
   try{catalog=await reader.validate();if(generation!==navigation)return;showReader();say('已登录。可以从第一章开始，也可以选择目录中的任一条目。');}
   catch(error){handleError(error,generation);}
 }
 $('login-form').onsubmit=async event=>{
-  event.preventDefault();$('login').disabled=true;
-  try{await reader.sendLink($('email').value);say('如邮箱已获授权，登录链接已发送。请在这个浏览器中打开，链接只能使用一次。');}
-  catch{say(CONFIG.loginEnabled?'无法发送登录链接，请确认作者邮箱或稍后重试。':'测试页尚未开放登录，请等待部署验证完成。');}
-  finally{$('login').disabled=!CONFIG.loginEnabled;}
+  event.preventDefault();
+  const action=event.submitter===$('signup')?'signup':'login';
+  $('login').disabled=true;$('signup').disabled=true;
+  try{await reader.sendLink($('email').value,action);say(action==='signup'?'注册请求已提交，请检查邮箱并完成验证。普通读者身份不自动获得书籍阅读授权。':'登录请求已提交，请检查邮箱并在这个浏览器中打开一次性链接。');}
+  catch{say(CONFIG.loginEnabled?'无法提交注册 / 登录请求，请确认邮箱或稍后重试。':'测试页尚未开放登录，请等待部署验证完成。');}
+  finally{$('login').disabled=!CONFIG.loginEnabled;$('signup').disabled=!CONFIG.loginEnabled;}
 };
 $('start').onclick=()=>openChapter(catalog.sections.find(s=>s.id==='chapter-01').assetId);
 $('resume').onclick=()=>{const p=readProgress(positions,catalog);if(p)openChapter(p.assetId,p.ratio);};
@@ -87,8 +95,8 @@ function consumeCallback(){
   const params=new URLSearchParams(location.hash.slice(1));
   const token=params.get('access_token'), seconds=Number(params.get('expires_in'));
   if(location.hash||location.search)history.replaceState(null,'',location.pathname);
-  $('login').disabled=!CONFIG.loginEnabled;
+  $('login').disabled=!CONFIG.loginEnabled;$('signup').disabled=!CONFIG.loginEnabled;
   if(token){try{reader.setSession(token,seconds);authenticate();}catch{say('登录链接已失效，请重新发送。');}}
-  else say(CONFIG.loginEnabled?'请使用已授权的作者邮箱登录。':'测试页尚未开放登录。部署和授权验证完成后才会启用。');
+  else say(CONFIG.loginEnabled?'请输入邮箱注册 / 登录。第一章试读可从数字书房进入；完整阅读仍需有效授权。':'测试页尚未开放登录。部署和授权验证完成后才会启用。');
 }
 consumeCallback();
