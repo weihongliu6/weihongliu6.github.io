@@ -59,7 +59,12 @@ export class ProtectedReader {
   async validate(epoch=this.epoch) {
     const user=await this.request(`${this.config.projectUrl}/auth/v1/user`, 'json', {epoch});
     if (typeof user.id !== 'string' || !user.id) { this.lock(); throw new AccessError(403); }
-    const data=checkedCatalog(await this.request(`${this.config.endpoint}/catalog`, 'json', {epoch}));
+    let data;
+    try { data=checkedCatalog(await this.request(`${this.config.endpoint}/catalog`, 'json', {epoch})); }
+    catch(error) {
+      if(error instanceof AccessError && [401,403,404].includes(error.status)) error.stage='reading';
+      throw error;
+    }
     this.assertCurrent(epoch); this.catalog=data; return data;
   }
   async chapter(assetId) {
@@ -75,10 +80,11 @@ export class ProtectedReader {
     const blob=await this.request(`${this.config.endpoint}/asset/${id}`, 'blob', {epoch});
     this.assertCurrent(epoch); const url=this.urls.createObjectURL(blob); this.blobs.add(url); return url;
   }
-  async sendLink(email) {
+  async sendLink(email, action='login') {
+    if (!['login','signup'].includes(action)) throw new AccessError(400);
     const normalized=String(email).trim().toLowerCase();
     if (!this.config.loginEnabled || normalized.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) throw new AccessError(403);
-    return this.request(`${this.config.projectUrl}/auth/v1/otp?redirect_to=${encodeURIComponent(this.config.redirect)}`, 'none', {auth:false,method:'POST',body:{email:normalized,create_user:false},epoch:this.epoch});
+    return this.request(`${this.config.projectUrl}/auth/v1/otp?redirect_to=${encodeURIComponent(this.config.redirect)}`, 'none', {auth:false,method:'POST',body:{email:normalized,create_user:action==='signup'},epoch:this.epoch});
   }
   async logout() {
     const token=this.token; this.lock();
