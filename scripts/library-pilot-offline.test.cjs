@@ -205,5 +205,7 @@ test('mobile offline fallback reads only a current completed sample, never histo
  assert.equal(await run('downloadedChapter(books[1],books[1].chapters[3])'),null);
  await seed(store,prefix+'slow-shutter-sample',[sample],{id:'slow-shutter',scope:'sample',accessVersion:books[1].commerce.accessVersion,chapterIds:['chapter-01'],urls:[sample]});
  assert.equal(await (await run('downloadedChapter(books[1],books[1].chapters[3])')).text(),'cached:'+sample);
+ await run('catalogue=[]');
+ assert.equal(await (await run('downloadedChapter(books[1],books[1].chapters[3])')).text(),'cached:'+sample);
  assert.equal(await run('downloadedChapter(books[1],{id:"chapter-01",file:"data/chapters/slow-shutter-full/chapter-02.json"})'),null);
 });

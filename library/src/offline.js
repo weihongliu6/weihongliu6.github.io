@@ -17,7 +17,7 @@ function save(id,value){
   const ids=catalogue.filter(b=>isSaved(b.id)).map(b=>b.id);
   localStorage.setItem('shadow-library:my-books',JSON.stringify(value?[...new Set([...ids,id])]:ids.filter(x=>x!==id)));
 }
-async function scan(){
+async function scan(fallbackBook=null){
   downloaded=new Map();
   for(const name of await caches.keys()){
     if(!name.startsWith(PREFIX))continue;
@@ -25,7 +25,7 @@ async function scan(){
       const cache=await caches.open(name), record=await cache.match(marker);
       // Old or interrupted downloads are retained; scanning never removes user files.
       if(!record)continue;
-      const data=await record.json(), book=catalogue.find(book=>book.id===data.id);
+      const data=await record.json(), book=catalogue.find(book=>book.id===data.id)||(fallbackBook?.id===data.id?fallbackBook:null);
       if(!book || !Array.isArray(data.urls) || !data.urls.length)continue;
       if(pilotCommerce(book)){
         const chapters=accessibleChapters(book), chapterURLs=chapters.map(chapter=>safeURL(chapter.file));
@@ -45,7 +45,7 @@ async function scan(){
 // Read only a completed, current download and an explicitly accessible chapter.
 export async function downloadedChapter(book, entry){
   if(!accessibleChapters(book).some(chapter=>chapter.id===entry.id && chapter.file===entry.file))return null;
-  await scan();
+  await scan(book);
   const info=downloaded.get(book.id),url=safeURL(entry.file);
   if(!info || !info.urls.includes(url))return null;
   return (await caches.open(info.name)).match(url);

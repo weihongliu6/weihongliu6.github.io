@@ -37,6 +37,7 @@ const expected=JSON.parse(fs.readFileSync('library/data/chapters/slow-shutter-fu
    await page.evaluate(async()=>{localStorage.setItem('shadow-library:reading:slow-shutter',JSON.stringify({chapter:'chapter-02',fraction:.5}));const c=await caches.open('shadow-library-book-v1-slow-shutter-legacy');const locked=new URL('data/chapters/slow-shutter-full/chapter-02.json',location.href).href;await c.put(locked,new Response('legacy secret'));await c.put(new URL('offline-complete',location.href),new Response(JSON.stringify({id:'slow-shutter',scope:'full',urls:[locked]})));await fetch(locked);});
    const lockedKeys=await page.evaluate(async()=>{await fetch('data/books.json');const result=[];for(const name of await caches.keys())if(name.startsWith('shadow-library-'))for(const req of await (await caches.open(name)).keys())if(req.url.includes('slow-shutter-full/')&&!req.url.includes('chapter-01.json'))result.push(req.url);return result;});assert.deepEqual(lockedKeys,[]);
    await context.setOffline(true);await page.goto(base+'#/read/slow-shutter/chapter-01');await page.waitForSelector('.reader-main');
+   await page.reload();await page.waitForSelector('.reader-main');
    await page.goto(base+'#/read/slow-shutter/chapter-02?listen=1');await page.waitForSelector('.purchase-page');
    await context.setOffline(false);await page.goto(base+'#/read/slow-down/chapter-01');await page.waitForSelector('.reader-main');
    await page.goto(base+'#/read/slow-down/chapter-02');await page.waitForSelector('.purchase-page');
