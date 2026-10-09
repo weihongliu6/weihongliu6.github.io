@@ -16,7 +16,7 @@ const expected=JSON.parse(fs.readFileSync('library/data/chapters/slow-shutter-fu
    assert.equal(await page.locator('.book-toc > li').count(),9);assert.equal(await page.locator('.chapter-listen-link').count(),1);
    await page.goto(base+'#/read/slow-shutter/chapter-01');await page.waitForSelector('.reader-main');
    const text=await page.locator('.reader-main').innerText();for(const block of expected.blocks)if(block.text)assert.ok(text.includes(block.text),block.type);
-   assert.ok(await page.getByText('查看购买预览',{exact:true}).count());
+   assert.match(await page.locator('.sample-paywall a.primary-link').innerText(),/查看购买预览/);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await page.screenshot({path:`/tmp/slow-shutter-browser/${name}-chapter.png`,fullPage:true});
    for(const query of ['', '?listen=1&from=start','?resume=1','?section=heading']){
@@ -40,6 +40,6 @@ const expected=JSON.parse(fs.readFileSync('library/data/chapters/slow-shutter-fu
    await context.setOffline(false);await page.goto(base+'#/read/slow-down/chapter-01');await page.waitForSelector('.reader-main');
    await page.goto(base+'#/read/slow-down/chapter-02');await page.waitForSelector('.purchase-page');
    assert.deepEqual(errors,[]);console.log(name+': PASS');
-  }finally{await browser.close();}
+  }finally{await page.screenshot({path:`/tmp/slow-shutter-browser/${name}-last.png`,fullPage:true}).catch(()=>{});await browser.close();}
  }
 })().catch(e=>{console.error(e);process.exit(1)});
