@@ -25,10 +25,18 @@ class PublicationTests(unittest.TestCase):
         self.put(second_sample, {'blocks':[]})
         books.append({'id':'slow-shutter','cover':'assets/books/slow-shutter-epub/cover.png','chapters':[{'file':p.removeprefix('library/')} for p in [second_sample,*second_locked]],'toc':[{}]*9,'commerce':{'mode':'pilot','sampleChapter':'chapter-01'}})
         for name, count in [('structure',15),('metabolism',0),('renaissance',108)]:
-            chapters=[{'file':f'data/chapters/{name}/{n}.json'} for n in range(count)]
-            books.append({'id':name,'chapters':chapters})
-            for ch in chapters:
-                self.put('library/'+ch['file'], {'blocks':[]})
+            if not count:
+                books.append({'id':name,'chapters':[]})
+                continue
+            directory=name if name=='renaissance' else name+'-full'
+            sample=f'library/data/chapters/{directory}/chapter-01.json'
+            locked=[f'library/data/chapters/{directory}/section-{n}.json' for n in range(count-1)]
+            cover=f'library/assets/covers/{name}.jpg'
+            self.allowed += [sample,cover]
+            self.locked += locked
+            self.put(sample,{'blocks':[]})
+            self.put(cover,b'cover')
+            books.append({'id':name,'cover':cover.removeprefix('library/'),'chapters':[{'file':p.removeprefix('library/')} for p in [sample,*locked]],'toc':[{}]*count,'commerce':{'mode':'pilot','sampleChapter':'chapter-01'}})
         self.put('library/data/books.json', books)
         self.put('library/index.html', '<html>Original reader</html>')
         self.put('library/sw.js', "const SHELL_FILES=['./','index.html','data/books.json'];")
@@ -53,7 +61,7 @@ class PublicationTests(unittest.TestCase):
 
     def test_only_sample_and_all_other_book_content_preserved(self):
         result=self.run_build()
-        self.assertEqual(result['preservedBooks']['renaissance']['chapterCount'],108)
+        self.assertEqual(set(result['preservedBooks']),{'metabolism'})
         self.assertNotIn('slow-shutter',result['preservedBooks'])
         for p in self.policy['publicFiles']:
             self.assertEqual((self.source/p).read_bytes(),(self.output/p).read_bytes())
@@ -62,21 +70,21 @@ class PublicationTests(unittest.TestCase):
         for p in BUILD_FILES:
             self.assertFalse((self.output/p).exists())
 
-    def test_renaissance_embedded_images_preserved_inside_chapter(self):
-        p='library/data/chapters/renaissance/8.json'
+    def test_renaissance_embedded_locked_images_cannot_be_reintroduced(self):
+        p='library/data/chapters/renaissance/section-8.json'
         self.put(p, {'blocks':[{'type':'image','src':'data:image/webp;base64,V0VCUA=='}]})
-        result=self.run_build()
-        self.assertEqual(result['preservedBooks']['renaissance']['embeddedImageReferences'],1)
-        self.assertEqual((self.source/p).read_bytes(),(self.output/p).read_bytes())
+        self.tracked.add(p)
+        with self.assertRaisesRegex(ValueError,'Unreviewed'):
+            self.run_build()
 
     def test_missing_tracked_file_fails_before_output(self):
-        (self.source/'library/data/chapters/renaissance/107.json').unlink()
+        (self.source/'library/data/chapters/renaissance/chapter-01.json').unlink()
         with self.assertRaisesRegex(ValueError,'Incomplete source'):
             self.run_build()
         self.assertFalse(self.output.exists())
 
     def test_partial_tracked_tree_fails(self):
-        self.tracked.remove('library/data/chapters/renaissance/107.json')
+        self.tracked.remove('library/data/chapters/renaissance/chapter-01.json')
         with self.assertRaisesRegex(ValueError,'incomplete tracked tree'):
             self.run_build()
 

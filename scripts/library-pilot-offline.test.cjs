@@ -55,9 +55,9 @@ test('pilot download fetches only canonical first chapter, four sample images an
  assert.equal(store.deleted.length,0);
 });
 test('old full pilot markers are not advertised and are retained; other complete markers still work',async()=>{
- const store=cacheStore(),pilot=base+books[0].chapters[0].file,other=base+books[2].chapters[0].file;
+ const store=cacheStore(),pilot=base+books[0].chapters[0].file,other=base+books[2].chapters.find(ch=>ch.id==='chapter-01').file;
  await seed(store,prefix+'slow-down-old',[pilot]);
- await seed(store,prefix+'structure-old',[other],{id:'structure',urls:[other],bytes:2});
+ await seed(store,prefix+'structure-old',[other],{id:'structure',scope:'sample',accessVersion:books[2].commerce.accessVersion,chapterIds:['chapter-01'],urls:[other],bytes:2});
  await seed(store,prefix+'slow-down-1000000000000-abandoned',[pilot],null);
  const {run}=offline(store);await run('scan()');
  assert.equal(run('isDownloaded("slow-down")'),false);assert.equal(run('isDownloaded("structure")'),true);
@@ -75,9 +75,9 @@ test('invalid or mismatched pilot sample markers never count as downloaded',asyn
 test('other books retain all accessible chapters and download labels',async()=>{
  for(let i=2;i<books.length;i++){
   const {run,fetched}=offline();await run(`download(books[${i}])`);
-  assert.deepEqual(fetched.filter(url=>new URL(url).pathname.endsWith('.json')),(books[i].chapters||[]).map(chapter=>base+chapter.file));
-  assert.equal(run(`accessibleChapters(books[${i}]).length`),(books[i].chapters||[]).length);
-  assert.doesNotMatch(run(`controls(books[${i}])`),/第一章/);
+  assert.deepEqual(fetched.filter(url=>new URL(url).pathname.endsWith('.json')),(books[i].chapters||[]).filter(ch=>books[i].commerce?.mode!=='pilot'||ch.id==='chapter-01').map(chapter=>base+chapter.file));
+  assert.equal(run(`accessibleChapters(books[${i}]).length`),books[i].commerce?.mode==='pilot'?1:(books[i].chapters||[]).length);
+  if(books[i].commerce?.mode==='pilot')assert.match(run(`controls(books[${i}])`),/第一章/);else assert.doesNotMatch(run(`controls(books[${i}])`),/第一章/);
  }
 });
 test('SW returns 403 before network, shell, old full caches or explicit download bypass',async()=>{
@@ -92,21 +92,21 @@ test('SW returns 403 before network, shell, old full caches or explicit download
 });
 test('SW allows sample and other books from old complete caches, but ignores incomplete downloads',async()=>{
  const store=cacheStore(),sample='data/chapters/slow-down-full/chapter-01.json';
- const paths=[sample,'assets/books/slow-down-docx/photo-02-large.jpg',...books.slice(2).filter(b=>b.chapters?.length).map(b=>b.chapters[0].file)];
+ const paths=[sample,'assets/books/slow-down-docx/photo-02-large.jpg',...books.slice(2).filter(b=>b.chapters?.length).map(b=>b.chapters.find(ch=>ch.id==='chapter-01').file)];
  await seed(store,prefix+'old-complete',paths.map(path=>base+path),{id:'mixed-allowed',urls:paths.map(path=>base+path)});
  const sw=worker(store);for(const path of paths)assert.equal(await (await sw.request(path)).text(),'cached:'+base+path);
  assert.equal(sw.fetched.length,0);assert.equal(await sw.request(sample,true),null);
- const incomplete='assets/books/structure-pages/some-new-image.jpg';await seed(store,prefix+'incomplete',[base+incomplete],null);
+ const incomplete='assets/covers/unrelated-new-image.jpg';await seed(store,prefix+'incomplete',[base+incomplete],null);
  assert.equal(await (await sw.request(incomplete)).text(),'network');assert.deepEqual(sw.fetched,[base+incomplete]);
 });
 test('activation removes only locked Pilot cache entries and invalidates affected completion first',async()=>{
  const store=cacheStore(),locked=base+'data/chapters/slow-down-full/chapter-%30%32.json?old=1';
  const sample=base+'data/chapters/slow-down-full/chapter-01.json';
- const other=base+books[2].chapters[0].file, module=base+'src/reader.js?v=old';
+ const other=base+books[2].chapters.find(ch=>ch.id==='chapter-01').file, module=base+'src/reader.js?v=old';
  for(const name of [prefix+'slow-down-full',prefix+'mixed',prefix+'incomplete','shadow-library-shell-old']){
   await seed(store,name,[locked,sample,other,module],name===prefix+'incomplete'?null:{id:'slow-down',urls:[locked,sample,other]});
  }
- await seed(store,prefix+'other',[other],{id:'structure',urls:[other],bytes:2});
+ await seed(store,prefix+'other',[other],{id:'structure',scope:'sample',accessVersion:books[2].commerce.accessVersion,chapterIds:['chapter-01'],urls:[other],bytes:2});
  await seed(store,'unrelated-app',[locked]);
  const preserved=await (await (await store.open(prefix+'other')).match(marker)).text();
  const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
@@ -174,8 +174,8 @@ test('interrupted cleanup invalidates marker first and retries safely on the nex
 
 test('failed cleanup does not block other books and never acknowledges completion',async()=>{
  const store=cacheStore(),name=prefix+'slow-down-failing',locked=base+'data/chapters/slow-down-full/chapter-02.json';
- const other=base+books[2].chapters[0].file;
- await seed(store,name,[locked]);await seed(store,prefix+'other-safe',[other],{id:'structure',urls:[other]});
+ const other=base+books[2].chapters.find(ch=>ch.id==='chapter-01').file;
+ await seed(store,name,[locked]);await seed(store,prefix+'other-safe',[other],{id:'structure',scope:'sample',accessVersion:books[2].commerce.accessVersion,chapterIds:['chapter-01'],urls:[other]});
  const open=store.open;
  store.open=async n=>{const cache=await open(n);if(n===name)cache.delete=async()=>{throw Error('retry later');};return cache;};
  const sw=worker(store);assert.equal(await (await sw.request(other)).text(),'cached:'+other);
@@ -208,4 +208,19 @@ test('mobile offline fallback reads only a current completed sample, never histo
  await run('catalogue=[]');
  assert.equal(await (await run('downloadedChapter(books[1],books[1].chapters[3])')).text(),'cached:'+sample);
  assert.equal(await run('downloadedChapter(books[1],{id:"chapter-01",file:"data/chapters/slow-shutter-full/chapter-02.json"})'),null);
+});
+
+for(const index of [2,4])test(books[index].id+': download and SW deny every protected resource, including late writes',async()=>{
+ const book=books[index],store=cacheStore(),{run,fetched}=offline(store);
+ await run(`download(books[${index}])`);
+ const sample=book.chapters.find(ch=>ch.id==='chapter-01');
+ assert.deepEqual(fetched.filter(url=>url.endsWith('.json')),[base+sample.file]);
+ assert.equal(fetched.length,index===2?4:2);
+ assert.equal(run(`isDownloaded("${book.id}")`),true);
+ const paths=JSON.parse(read('scripts/public-site-policy.json')).excludedPilotFiles.filter(p=>p.includes(book.id)).map(p=>base+p.replace(/^library\//,''));
+ await seed(store,prefix+book.id+'-legacy',paths,{id:book.id,scope:'full',urls:paths});
+ const sw=worker(store);let wait;sw.events.activate({waitUntil:p=>wait=p});await wait;
+ const cache=await store.open(prefix+book.id+'-legacy');assert.equal(await cache.match(marker),undefined);
+ for(const path of paths){assert.equal(await cache.match(path),undefined);for(const download of [false,true])assert.equal((await sw.request(path,download)).status,403);}
+ await cache.put(paths[0],new Response('late'));assert.equal((await sw.request(paths[0])).status,403);assert.equal(await cache.match(paths[0]),undefined);
 });

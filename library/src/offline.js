@@ -1,5 +1,5 @@
 // Device-local library. No accounts, payment entitlements or cloud storage.
-import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=samples-20261009-1';
+import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=samples-20261009-2';
 const PREFIX='shadow-library-book-v1-';
 const ACCESS_VERSION='pilot-20261007-1';
 const marker=new URL('offline-complete',new URL('../',import.meta.url)).href;
