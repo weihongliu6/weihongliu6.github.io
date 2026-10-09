@@ -41,6 +41,6 @@ const expected=JSON.parse(fs.readFileSync('library/data/chapters/slow-shutter-fu
    await context.setOffline(false);await page.goto(base+'#/read/slow-down/chapter-01');await page.waitForSelector('.reader-main');
    await page.goto(base+'#/read/slow-down/chapter-02');await page.waitForSelector('.purchase-page');
    assert.deepEqual(errors,[]);console.log(name+': PASS');
-  }finally{await page.screenshot({path:`/tmp/slow-shutter-browser/${name}-last.png`,fullPage:false}).catch(()=>{});await browser.close();}
+  }catch(error){console.log(name+' diagnostic',await page.evaluate(async()=>({body:document.body.innerText,controller:!!navigator.serviceWorker.controller,keys:await caches.keys(),errors:[] })).catch(()=>null));console.log(name+' pageerrors',errors);throw error;}finally{await page.screenshot({path:`/tmp/slow-shutter-browser/${name}-last.png`,fullPage:false}).catch(()=>{});await browser.close();}
  }
 })().catch(e=>{console.error(e);process.exit(1)});
