@@ -17,7 +17,8 @@ const books=JSON.parse(fs.readFileSync('library/data/books.json','utf8'));
    assert.equal(await page.locator('.book-toc > li').count(),book.chapters.length);assert.equal(await page.locator('.chapter-listen-link').count(),1);
    await page.goto(base+`#/read/${id}/chapter-01`);await page.waitForSelector('.reader-main');
    const text=await page.locator('.reader-main').innerText();for(const block of expected.blocks)if(block.text)assert.ok(text.replace(/\s+/g,'').includes(block.text.replace(/\s+/g,'')),id+':'+block.type);
-   await page.waitForFunction(()=>[...document.querySelectorAll('.reader-main img')].every(el=>el.complete&&el.naturalWidth>0));
+   for(const img of await page.locator('.reader-main img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(el=>{if(!el.complete||!el.naturalWidth)return new Promise((resolve,reject)=>{el.onload=resolve;el.onerror=()=>reject(Error('sample image failed'));});});}
+   await page.locator('.reader-main').evaluate(el=>el.scrollIntoView());
    assert.match(await page.locator('.sample-paywall a.primary-link').innerText(),/查看购买预览/);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await page.screenshot({path:`/tmp/slow-shutter-browser/${name}-${id}-chapter.png`,fullPage:false});
