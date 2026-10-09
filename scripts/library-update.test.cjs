@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs'),vm=require('node:vm');
 const root=require('node:path').resolve(__dirname,'..');
 const read=p=>fs.readFileSync(root+'/'+p,'utf8');
-const base='https://example.test/library/',build='samples-20261009-1',shell='shadow-library-shell-'+build;
+const base='https://example.test/library/',build='samples-20261009-2',shell='shadow-library-shell-'+build;
 function harness({fail=false,stale=false}={}){
  const data=new Map(),events={},deleted=[],network=[];let skip=0,claimed=0;
  const key=r=>typeof r==='string'?r:r.url;
@@ -25,8 +25,8 @@ test('complete validated precache activates without closing old tabs, retaining 
  const h=harness();for(const name of ['shadow-library-shell-pwa-20261006-1','shadow-library-book-v1-old-full','other-app-cache']){const cache=await h.caches.open(name);await cache.put(base+'sentinel',new Response(name));}
  await h.fire('install');assert.equal(h.skipped,1);await h.fire('activate');assert.equal(h.claimed,1);assert.deepEqual(h.deleted,[]);
  for(const name of ['shadow-library-shell-pwa-20261006-1','shadow-library-book-v1-old-full','other-app-cache'])assert.equal(await (await (await h.caches.open(name)).match(base+'sentinel')).text(),name);
- assert.match(await (await h.request('./',{navigate:true})).text(),/library-build" content="samples-20261009-1/);
- assert.match(await (await h.request('index.html?reopen=1',{navigate:true})).text(),/library-build" content="samples-20261009-1/);
+ assert.match(await (await h.request('./',{navigate:true})).text(),/library-build" content="samples-20261009-2/);
+ assert.match(await (await h.request('index.html?reopen=1',{navigate:true})).text(),/library-build" content="samples-20261009-2/);
 });
 test('failed precache or stale CDN HTML never skips waiting, deletes only new incomplete shell',async()=>{
  for(const opts of [{fail:true},{stale:true}]){const h=harness(opts);await h.caches.open('shadow-library-shell-old');await h.caches.open('shadow-library-book-v1-kept');await assert.rejects(h.fire('install'));assert.equal(h.skipped,0);assert.deepEqual(h.deleted,[shell]);assert.ok(h.data.has('shadow-library-shell-old'));assert.ok(h.data.has('shadow-library-book-v1-kept'));}
@@ -36,7 +36,7 @@ test('two open generations retain exact versioned lazy modules, absent old versi
  await h.fire('install');await h.fire('activate');
  assert.equal(await (await h.request('src/listen.js?v=renaissance-20261006')).text(),'renaissance-20261006');
  assert.equal(await (await h.request('src/listen.js?v=pilot-20261007-1')).text(),'pilot-20261007-1');
- assert.equal(await (await h.request('src/listen.js?v=samples-20261009-1')).text(),'new:'+base+'src/listen.js?v=samples-20261009-1');
+ assert.equal(await (await h.request('src/listen.js?v=samples-20261009-2')).text(),'new:'+base+'src/listen.js?v=samples-20261009-2');
  assert.equal((await h.request('src/listen.js?v=unknown')).status,409);assert.equal((await h.request('src/listen.js')).status,409);assert.equal(h.network.length,0);
 });
 test('locked pilot payloads denied before historical caches, downloads and network',async()=>{
@@ -55,6 +55,6 @@ test('build handshake identifies active code; recovery requires exact activated 
  assert.match(recovery,/href="\/library\/#\/book\/slow-down"/);
 });
 test('release document and new updater are precached, unchanged pilot module graph remains aligned',()=>{
- const sw=read('library/sw.js');assert.match(read('library/index.html'),/src\/update.js\?v=samples-20261009-1/);assert.ok(sw.includes('src/update.js?v='+build));
+ const sw=read('library/sw.js');assert.match(read('library/index.html'),/src\/update.js\?v=samples-20261009-2/);assert.ok(sw.includes('src/update.js?v='+build));
  for(const file of ['app','offline','reader','listen'])for(const [,asset] of read('library/src/'+file+'.js').matchAll(/from '\.\/([^']+)'/g))assert.ok(sw.includes('src/'+asset));
 });

@@ -1555,6 +1555,15 @@
         "exclusive": null
       },
       "externalEditions": []
+    },
+    "commerce": {
+      "mode": "pilot",
+      "abstract": "从抽象思维、生命与语言，到制度、技术与人工智能，探索复杂世界的结构如何生成、复制与延续。",
+      "sampleChapter": "chapter-01",
+      "price": null,
+      "currency": "AUD",
+      "purchaseStatus": "preview",
+      "accessVersion": "structure-20261009-1"
     }
   },
   {
@@ -4371,6 +4380,15 @@
         "title": "作品插图来源与页码（续）",
         "sections": []
       }
-    ]
+    ],
+    "commerce": {
+      "mode": "pilot",
+      "abstract": "以文艺复兴艺术为线索，结合意大利文化旅行、作品辨认与现场寻宝，学习从“看过”走向“看见”。",
+      "sampleChapter": "chapter-01",
+      "price": null,
+      "currency": "AUD",
+      "purchaseStatus": "preview",
+      "accessVersion": "renaissance-20261009-1"
+    }
   }
 ]

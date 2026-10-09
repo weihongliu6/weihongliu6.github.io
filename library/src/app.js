@@ -1,7 +1,7 @@
-import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-1';
+import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-2';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-1';
-import { renderReader, bindReader } from './reader.js?v=samples-20261009-1';
+import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-2';
+import { renderReader, bindReader } from './reader.js?v=samples-20261009-2';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -63,7 +63,7 @@ function home(){
   return `<section class="library-hero"><div><p class="eyebrow">SHADOW LIBRARY</p><h1>数字书房</h1><p class="hero-invitation">在书页之间，留一点时间给自己。</p></div><a class="shelf-listen-link" href="#/listen"><span aria-hidden="true">◖◗</span> 听书<span class="listen-link-caption">设备语音朗读</span></a></section>
     ${shelfTools()}
     <section class="collection" aria-labelledby="collection-title"><div class="section-label"><h2 id="collection-title">书架 <span>THE COLLECTION</span></h2><span>${books.length} 本书 <span class="fine-divider">/</span> 一间书房</span></div><div class="bookshelf">${books.map((book,i)=>`<article class="book-card" data-book-id="${e(book.id)}"><a class="book-cover-link" href="${bookURL(book.id)}" aria-label="打开《${e(book.title)}》${canRead(book)?(book.status==='complete'?'，可在线阅读':'，可阅读样章'):'，即将进入数字书房'}"><div class="book-object">${cover(book)}<span class="book-spine" aria-hidden="true"></span></div></a><div class="book-caption"><div class="book-meta"><span class="book-number">${String(i+1).padStart(2,'0')}</span><span class="book-status ${canRead(book)?'available':''}">${canRead(book)?(pilotCommerce(book)?'第一章开放':book.status==='complete'?'完整数字版':'样章开放'):'即将进入数字书房'}</span></div><h3><a href="${bookURL(book.id)}">${e(book.title)}</a></h3>${canRead(book)?'<a class="text-link" href="'+bookURL(book.id)+'">在线阅读 / Read Online <span aria-hidden="true">→</span></a>':''}${appleBooksLink(book)}</div></article>`).join('')}</div></section>
-    <section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>现有 ${books.filter(book=>book.status==='complete'&&!pilotCommerce(book)).length} 本完整数字书可在线阅读。<br>更多作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
+    <section class="library-note"><span class="note-symbol" aria-hidden="true">〔</span><div><h2>从一本书，慢慢开始。</h2><p>现有 ${books.filter(pilotCommerce).length} 本数字书开放第一章阅读。<br>更多作品将逐步进入书房。</p></div><a href="${bookURL('slow-down')}">在线阅读 / Read Online <span aria-hidden="true">↗</span></a></section>`;
 }
 function bookPage(book){
   if(!canRead(book)) return `<section class="coming-page"><a class="back-link" href="#/">← 返回书架</a><div class="coming-cover book-object">${cover(book,true)}</div><p class="eyebrow">THE COLLECTION</p><h1>${e(book.title)}</h1><p class="coming-label">即将进入数字书房</p><p>本书的数字阅读内容尚未收录。</p>${book.appleBooksTitle?`<p class="sample-note">Apple Books 版题名：《${e(book.appleBooksTitle)}》</p>`:''}${appleBooksLink(book,'primary-link')}${otherEditionLinks(book)}<a class="primary-link" href="#/">返回数字书房 <span aria-hidden="true">→</span></a></section>`;
@@ -152,7 +152,7 @@ async function render(){
 try{
   // Platform branding must not make the existing book catalogue unavailable.
   try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
-  const response=await fetch('data/books.json?v=samples-20261009-1');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=samples-20261009-2');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();
   window.addEventListener('hashchange',render);
   await render();void initLibraryApp(books);

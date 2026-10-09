@@ -2,21 +2,21 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><meta name="library-build" content="samples-20261009-1">
+<meta name="robots" content="noindex"><meta name="library-build" content="samples-20261009-2">
 <title>更新数字书房 · 影子观察</title>
 <style>body{max-width:40rem;margin:10vh auto;padding:1.5rem;background:#f6f3ec;color:#242824;font:18px/1.8 system-ui}h1{font-size:1.8rem}button,a{font:inherit}button{padding:.6rem 1rem}a{color:#315e4e}small{color:#586158}#return[hidden]{display:none}</style>
 </head>
 <body>
 <h1>更新数字书房</h1>
-<p>将阅读应用更新到新版本，保留本机书架、阅读进度及其他书籍的下载；清理《慢下来看见世界》和《从慢门摄影到生活哲学》旧版受限章节与图片缓存。已打开的阅读窗口不会自动刷新。</p>
+<p>将阅读应用更新到新版本，保留本机书架、阅读进度及其他书籍的下载；清理《慢下来看见世界》、《从慢门摄影到生活哲学》、《结构之道》和《寻找文艺复兴》旧版受限章节与图片缓存。已打开的阅读窗口不会自动刷新。</p>
 <p>请在平常阅读使用的浏览器或主屏幕应用中打开此页。不同浏览器中的本机资料不会互相同步。</p>
 <button id="update" type="button">检查并更新阅读应用</button>
 <p id="status" role="status" aria-live="polite">准备好后，点击上方按钮。请保持联网。</p>
 <p><a id="return" href="/library/#/book/slow-down" hidden>返回《慢下来看见世界》书籍详情 →</a></p>
 <p><a href="/library/#/book/slow-down">暂不更新，返回书房</a></p>
-<small>目标版本：samples-20261009-1。只清理上述受限缓存，不清空网站数据或卸载阅读应用。</small>
+<small>目标版本：samples-20261009-2。只清理上述受限缓存，不清空网站数据或卸载阅读应用。</small>
 <script>
-const EXPECTED_BUILD='samples-20261009-1';
+const EXPECTED_BUILD='samples-20261009-2';
 const button=document.getElementById('update'),status=document.getElementById('status'),back=document.getElementById('return');
 function workerBuild(worker){
  return new Promise(resolve=>{

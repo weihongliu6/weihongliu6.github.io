@@ -128,3 +128,51 @@ sample-only commerce guards. A failed build must leave the previous release in
 place; origin verification after deployment checks all excluded URLs without SW.
 Extract the separately saved archive for private recovery only. No backend or
 production permissions changes are needed.
+
+## Books 3 and 5 preview release — 2026-10-09
+
+Scope: `structure` and `renaissance` join the existing first-chapter preview policy.
+All 15/108 directory headings, approved introduction/abstract and covers remain.
+Only canonical chapter-01 exports are readable. The structure sample retains its
+one illustration (reading and original variants); the Renaissance sample has no
+image blocks. Both sample JSON files and approved images remain byte-identical
+to base aa1a18379e317c755995fda2731db7f4a8e07118. Price is null and purchase is
+preview-only. Book 4, first/second sample accessVersions, progress storage and the
+first-book Owner entry are unchanged. No Shadow or backend settings are involved.
+
+Recoverable archive: `Books_3_5_Original_Backup_20261009.zip`, 153 original files,
+76,100,584 bytes, plus SHA256.json and RESTORE.txt; ZIP and every file digest were
+verified and the archive was saved separately before public removals. Recover to
+a private workspace and verify all digests; never upload the full archive here.
+
+Removed 146 current-source resources: 14 structure section JSON, 25 structure
+image variants and 107 Renaissance section JSON (including embedded artworks,
+reference-page content, maps and appendices). Publication allowlist, opaque-blob
+checks and paragraph fingerprints cover these removals; source/deploy protection
+is not dependent on client routing. SW denies retired paths before all network,
+cache and download routes and sweeps legacy and late writes. The versioned shell
+advances to samples-20261009-2; current first/second sample downloads remain valid.
+
+Local automated results: 68 Node and 17 Python checks passed. Minimized artifact:
+397 public paths, 244 protected exclusions across four books; coming book 4 keeps
+its cover and metadata. Direct HTTP origin verification is required without SW.
+PR browser acceptance covers all four books in desktop Chromium and iPhone 13
+WebKit: complete sample text/images, all TOC headings, direct locked routes,
+search/listen restrictions, raw retired-resource 404s, sample-only downloads,
+late legacy cache cleanup, offline samples, desktop offline reload and layout.
+Physical iPhone Safari cold restart remains unverified; device emulation does
+not substitute for that test. Browser results will be recorded on the PR.
+
+History: structure full edition entered public history in bc7b0ad; Renaissance
+in bb029f1. Removing current files cannot revoke old commit/raw URLs, PR deletion
+diffs, forks/clones, saved downloads, HTTP/CDN caches, archived deploys or copies.
+Updated SW can retire these CacheStorage bytes only when a device runs it; it
+cannot erase never-reconnected devices or extracted exports. No history rewrite
+is performed. Previously public master content is not made retroactively secret.
+
+Rollback: before merge, close the PR (production unchanged). After an approved
+release, apply a forward fix preserving all 146 removals, exclusions and SW deny
+rules. Do not wholesale revert to the base that published full books. Restore
+originals only to private storage from the verified archive. If browser or source
+checks fail, hold merge. Deploy only after owner approval; verify all 244 retired
+origin URLs and allowed hashes after release. Backend permissions need no change.
