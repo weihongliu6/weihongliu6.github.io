@@ -1,0 +1,41 @@
+name: Sample preview acceptance
+on:
+  pull_request:
+    paths: ['library/**', 'scripts/**', 'PUBLICATION.md', 'library-update.html', '.github/workflows/sample-preview-check.yml']
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Local logic and publication regressions
+        run: |
+          node --test scripts/*.test.cjs scripts/*.test.mjs
+          python -m unittest discover -s scripts -p test_public_site.py -v
+          python scripts/build_public_site.py --output "$RUNNER_TEMP/public-site"
+      - name: Install isolated browser test runtime
+        run: |
+          mkdir -p "$RUNNER_TEMP/browsers"
+          npm install --prefix "$RUNNER_TEMP/browsers" playwright@1.62.1
+          "$RUNNER_TEMP/browsers/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Desktop and iPhone WebKit acceptance
+        env:
+          NODE_PATH: ${{ runner.temp }}/browsers/node_modules
+        run: |
+          python -m http.server 8765 --directory "$RUNNER_TEMP/public-site" > "$RUNNER_TEMP/http.log" 2>&1 &
+          node scripts/slow-shutter.browser.cjs
+          python scripts/verify_public_origin.py --url http://127.0.0.1:8765 --timeout 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: slow-shutter-browser-evidence
+          path: /tmp/slow-shutter-browser

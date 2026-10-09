@@ -25,7 +25,7 @@ test('five stable records, four complete and one coming; metadata has explicit u
     assert.equal(book.publication.publisher,null);
     for(const chapter of book.chapters||[]){
       const exists=fs.existsSync(path.join(root,'library',chapter.file.split('?')[0]));
-      assert.equal(exists,book.id!=='slow-down'||chapter.id==='chapter-01');
+      assert.equal(exists,!['slow-down','slow-shutter'].includes(book.id)||chapter.id==='chapter-01');
     }
   }
 });
@@ -38,7 +38,7 @@ test('existing Apple and WeRead destinations and reader routes remain available'
     else assert.ok(html.includes('即将进入数字书房'));
   }
   assert.ok(c.bookPage(books[0]).includes('https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb'));
-  assert.ok(c.home().includes('3 本完整数字书'));
+  assert.ok(c.home().includes('2 本完整数字书'));
 });
 test('sixth book and new external channel render from metadata without code changes',()=>{
   const extra={id:'future-author',title:'A & B',author:'Another Author',status:'coming',publication:{externalEditions:[{channel:'publisher-store',label:'Publisher <store>',url:'https://example.org/book',title:'Other title'}]}};

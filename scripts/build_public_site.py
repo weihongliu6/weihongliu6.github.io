@@ -18,7 +18,7 @@ POLICY_PATH = 'scripts/public-site-policy.json'
 BUILD_FILES = {
     POLICY_PATH, 'scripts/build_public_site.py', 'scripts/test_public_site.py',
     'scripts/verify_public_origin.py', '.github/workflows/pages.yml',
-    'PUBLICATION.md',
+    'PUBLICATION.md', 'scripts/slow-shutter.browser.cjs', '.github/workflows/sample-preview-check.yml',
 }
 PILOT = 'slow-down'
 SAMPLE = 'library/data/chapters/slow-down-full/chapter-01.json'
@@ -67,23 +67,29 @@ def build(source, output, tracked=None):
     if public & excluded or set(policy['pilotFiles']) - public:
         raise ValueError('Invalid publication policy')
     for p in public:
-        if ('slow-down' in p and p not in policy['pilotFiles']):
+        if (('slow-down' in p or p.startswith(('library/data/chapters/slow-shutter', 'library/assets/books/slow-shutter'))) and p not in policy['pilotFiles']):
             raise ValueError('Unexpected Pilot public path: ' + p)
     books = json.loads(inputs['library/data/books.json'])
     if [b['id'] for b in books] != ['slow-down', 'slow-shutter', 'structure', 'metabolism', 'renaissance']:
         raise ValueError('Book catalog changed; review release policy')
-    pilot = books[0]
-    if len(pilot['chapters']) != 22 or len(pilot['toc']) != 22 or pilot['commerce']['sampleChapter'] != 'chapter-01':
-        raise ValueError('Pilot structure changed')
-    if { 'library/' + c['file'] for c in pilot['chapters']} != ({SAMPLE} | {p for p in excluded if p.startswith('library/data/chapters/slow-down-full/')}):
-        raise ValueError('Pilot chapter policy differs from catalog')
-    chapter = json.loads(inputs[SAMPLE])
-    sample_assets = set()
-    for block in chapter['blocks']:
-        if block['type'] == 'image':
-            sample_assets.update('library/' + block[k] for k in ('src', 'fullSrc'))
-    if sample_assets != set(policy['pilotFiles']) - {SAMPLE, 'library/assets/covers/slow-down.jpg'}:
-        raise ValueError('Sample image policy changed')
+    for pilot in (book for book in books if book.get('commerce', {}).get('mode') == 'pilot'):
+        book_id = pilot['id']
+        expected_count = {'slow-down': 22, 'slow-shutter': 9}[book_id]
+        sample = f'library/data/chapters/{book_id}-full/chapter-01.json'
+        if len(pilot['chapters']) != expected_count or len(pilot['toc']) != expected_count or pilot['commerce']['sampleChapter'] != 'chapter-01':
+            raise ValueError('Pilot structure changed')
+        refs = {'library/' + c['file'].split('?')[0] for c in pilot['chapters']}
+        retired = {p for p in excluded if p.startswith(f'library/data/chapters/{book_id}-full/')}
+        if refs != ({sample} | retired):
+            raise ValueError('Pilot chapter policy differs from catalog')
+        chapter = json.loads(inputs[sample])
+        sample_assets = set()
+        for block in chapter['blocks']:
+            if block['type'] == 'image':
+                sample_assets.update('library/' + block[k] for k in ('src', 'fullSrc'))
+        allowed = {p for p in policy['pilotFiles'] if book_id in p}
+        if allowed != sample_assets | {sample, 'library/' + pilot['cover']}:
+            raise ValueError('Sample image policy changed')
     # One-way paragraph fingerprints allow a clean build without private originals.
     # Scan all tracked text (including tests/docs), so aliases cannot hide in Git.
     rule = policy['excludedBodyFingerprints']
@@ -114,7 +120,9 @@ def build(source, output, tracked=None):
         if path not in public:
             raise ValueError('Service worker shell file omitted: ' + path)
     preserved = {}
-    for book in books[1:]:
+    for book in books:
+        if book.get('commerce', {}).get('mode') == 'pilot':
+            continue
         embedded_images = 0
         refs = {'library/' + book['cover']} if book.get('cover') else set()
         for entry in book.get('chapters', []):
@@ -151,7 +159,7 @@ def build(source, output, tracked=None):
     manifest = {'version': 1, 'sourceCommit': commit, 'sourceFiles': len(tracked),
                 'publicFiles': {p: sha(inputs[p]) for p in sorted(public)},
                 'excludedPilotFiles': sorted(excluded), 'pilotFiles': policy['pilotFiles'],
-                'preservedBooks': preserved, 'pilotTocEntries': 22,
+                'preservedBooks': preserved, 'pilotTocEntries': 22, 'sampleBooks': ['slow-down', 'slow-shutter'],
                 'limitation': 'Current Pilot source is sample-only; public Git history and previously saved copies remain accessible.'}
     # Independent output walk and digest validation, before adding the manifest.
     actual = {p.relative_to(output).as_posix(): sha(p.read_bytes()) for p in output.rglob('*') if p.is_file()}

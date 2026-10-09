@@ -1,7 +1,7 @@
-import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp } from './offline.js?v=pilot-20261007-1';
+import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-1';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=pilot-20261007-1';
-import { renderReader, bindReader } from './reader.js?v=pilot-20261007-1';
+import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-1';
+import { renderReader, bindReader } from './reader.js?v=samples-20261009-1';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -116,7 +116,7 @@ async function render(){
     if(!page){main.innerHTML=home();document.title='影子观察 · 数字书房 | '+platform.name;}
     else if(page==='listen'){main.innerHTML=listeningHome();document.title='听书 · 数字书房';}
     else if(page==='book'&&book){main.innerHTML=bookPage(book);document.title=`${book.title} · 数字书房`;}
-    else if(page==='purchase'&&book&&pilotCommerce(book)){main.innerHTML=`<section class="purchase-page"><a class="back-link" href="${bookURL(book.id)}">← 返回书籍</a><p class="eyebrow">SHADOW LIBRARY · PILOT</p><h1>购买《${e(book.title)}》完整版</h1><p>第一章已开放阅读，后续章节尚未开放。</p><div class="purchase-card"><strong>${purchaseLabel(book)}</strong><p>这是购买预览页。正式购买尚未开放，目前不会收取任何款项，也不会产生订单或解锁记录。</p><button type="button" disabled>PayPal · 即将开放</button></div><a class="primary-link" href="/reader-test/">已有授权？登录私密阅读</a> <a class="primary-link" href="${readURL(book.id,sampleChapter(book).id)}">返回第一章</a></section>`;document.title=`购买完整版 · ${book.title}`;}
+    else if(page==='purchase'&&book&&pilotCommerce(book)){main.innerHTML=`<section class="purchase-page"><a class="back-link" href="${bookURL(book.id)}">← 返回书籍</a><p class="eyebrow">SHADOW LIBRARY · PILOT</p><h1>购买《${e(book.title)}》完整版</h1><p>第一章已开放阅读，后续章节尚未开放。</p><div class="purchase-card"><strong>${purchaseLabel(book)}</strong><p>这是购买预览页。正式购买尚未开放，目前不会收取任何款项，也不会产生订单或解锁记录。</p><button type="button" disabled>PayPal · 即将开放</button></div>${book.id==='slow-down'?'<a class="primary-link" href="/reader-test/">已有授权？登录私密阅读</a>':''} <a class="primary-link" href="${readURL(book.id,sampleChapter(book).id)}">返回第一章</a></section>`;document.title=`购买完整版 · ${book.title}`;}
     else if(page==='read'&&canRead(book)){
       // Guard before reading memory, network, listening or saved-progress paths.
       if(pilotCommerce(book) && !canAccessChapter(book,chapterId)){location.replace(purchaseURL(book));return;}
@@ -127,7 +127,9 @@ async function render(){
       }
       const entry=book.chapters[index];
       if(!chapterCache.has(entry.file)){
-        const response=await fetch(entry.file);if(!response.ok) throw Error('章节暂时无法打开。');
+        let response;
+        try{response=await fetch(entry.file);}catch(error){response=await downloadedChapter(book,entry);if(!response)throw error;}
+        if(!response.ok) throw Error('章节暂时无法打开。');
         chapterCache.set(entry.file,await response.json());
       }
       if(version!==renderVersion) return;
@@ -150,7 +152,7 @@ async function render(){
 try{
   // Platform branding must not make the existing book catalogue unavailable.
   try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
-  const response=await fetch('data/books.json?v=pilot-20261007-1');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=samples-20261009-1');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();
   window.addEventListener('hashchange',render);
   await render();void initLibraryApp(books);

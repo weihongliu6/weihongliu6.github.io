@@ -1,5 +1,5 @@
 // Device-local library. No accounts, payment entitlements or cloud storage.
-import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=pilot-20261007-1';
+import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=samples-20261009-1';
 const PREFIX='shadow-library-book-v1-';
 const ACCESS_VERSION='pilot-20261007-1';
 const marker=new URL('offline-complete',new URL('../',import.meta.url)).href;
@@ -17,7 +17,7 @@ function save(id,value){
   const ids=catalogue.filter(b=>isSaved(b.id)).map(b=>b.id);
   localStorage.setItem('shadow-library:my-books',JSON.stringify(value?[...new Set([...ids,id])]:ids.filter(x=>x!==id)));
 }
-async function scan(){
+async function scan(fallbackBook=null){
   downloaded=new Map();
   for(const name of await caches.keys()){
     if(!name.startsWith(PREFIX))continue;
@@ -25,12 +25,12 @@ async function scan(){
       const cache=await caches.open(name), record=await cache.match(marker);
       // Old or interrupted downloads are retained; scanning never removes user files.
       if(!record)continue;
-      const data=await record.json(), book=catalogue.find(book=>book.id===data.id);
+      const data=await record.json(), book=catalogue.find(book=>book.id===data.id)||(fallbackBook?.id===data.id?fallbackBook:null);
       if(!book || !Array.isArray(data.urls) || !data.urls.length)continue;
       if(pilotCommerce(book)){
         const chapters=accessibleChapters(book), chapterURLs=chapters.map(chapter=>safeURL(chapter.file));
         // A pre-pilot full-book marker cannot advertise a current sample download.
-        if(data.accessVersion!==ACCESS_VERSION || data.scope!=='sample' ||
+        if(data.accessVersion!==(book.commerce?.accessVersion||ACCESS_VERSION) || data.scope!=='sample' ||
           !Array.isArray(data.chapterIds) || data.chapterIds.length!==chapters.length ||
           !chapters.every(chapter=>data.chapterIds.includes(chapter.id)) ||
           !chapterURLs.every(url=>data.urls.includes(url)) ||
@@ -40,6 +40,15 @@ async function scan(){
       if(data.urls.every(url=>keys.has(url)))downloaded.set(data.id,{...data,name});
     }catch{/* Ignore unreadable records without deleting other device-local books. */}
   }
+}
+// Some mobile engines fail a fetch while offline even with an active worker.
+// Read only a completed, current download and an explicitly accessible chapter.
+export async function downloadedChapter(book, entry){
+  if(!accessibleChapters(book).some(chapter=>chapter.id===entry.id && chapter.file===entry.file))return null;
+  await scan(book);
+  const info=downloaded.get(book.id),url=safeURL(entry.file);
+  if(!info || !info.urls.includes(url))return null;
+  return (await caches.open(info.name)).match(url);
 }
 function controls(book){
   const saved=isSaved(book.id), info=downloaded.get(book.id), active=job?.id===book.id, pilot=pilotCommerce(book);
@@ -103,7 +112,7 @@ async function download(book){
     if(book.cover)assets.add(book.cover);done=0;
     for(const asset of assets){await put(asset);job.progress=`图片 ${++done}/${assets.size} · ${(bytes/1048576).toFixed(1)} MB`;refresh();}
     controller.signal.throwIfAborted();
-    await cache.put(marker,new Response(JSON.stringify({id:book.id,scope:pilotCommerce(book)?'sample':'full',accessVersion:ACCESS_VERSION,chapterIds:chapters.map(chapter=>chapter.id),urls:[...urls],bytes,savedAt:Date.now()}),{headers:{'Content-Type':'application/json'}}));
+    await cache.put(marker,new Response(JSON.stringify({id:book.id,scope:pilotCommerce(book)?'sample':'full',accessVersion:book.commerce?.accessVersion||ACCESS_VERSION,chapterIds:chapters.map(chapter=>chapter.id),urls:[...urls],bytes,savedAt:Date.now()}),{headers:{'Content-Type':'application/json'}}));
     try{save(book.id,true);}catch{/* Download remains usable when localStorage is blocked. */}
     await scan();message=pilotCommerce(book)?`《${book.title}》第一章已下载，断网后也可以试读。`:`《${book.title}》已下载，断网后也可以阅读。`;
     navigator.storage?.persist?.().catch(()=>{});

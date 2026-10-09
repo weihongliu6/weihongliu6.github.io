@@ -16,8 +16,15 @@ class PublicationTests(unittest.TestCase):
         self.put(SAMPLE, {'id':'chapter-01','blocks':[{'type':'image', 'src':f'assets/books/slow-down-docx/photo-{n:02d}-reading.jpg','fullSrc':f'assets/books/slow-down-docx/photo-{n:02d}-large.jpg'} for n in (1,2)]})
         for p in self.allowed[1:]:
             self.put(p,b'image bytes')
-        books=[{'id':'slow-down','chapters':[{'file':p.removeprefix('library/')} for p in [SAMPLE,*self.locked]],'toc':[{}]*22,'commerce':{'sampleChapter':'chapter-01'}}]
-        for name, count in [('slow-shutter',9),('structure',15),('metabolism',0),('renaissance',108)]:
+        books=[{'id':'slow-down','chapters':[{'file':p.removeprefix('library/')} for p in [SAMPLE,*self.locked]],'toc':[{}]*22,'cover':'assets/covers/slow-down.jpg','commerce':{'mode':'pilot','sampleChapter':'chapter-01'}}]
+        self.put('library/assets/books/slow-shutter-epub/cover.png', b'cover')
+        second_sample='library/data/chapters/slow-shutter-full/chapter-01.json'
+        second_locked=[f'library/data/chapters/slow-shutter-full/section-{n}.json' for n in range(8)]
+        self.allowed += [second_sample, 'library/assets/books/slow-shutter-epub/cover.png']
+        self.locked += second_locked
+        self.put(second_sample, {'blocks':[]})
+        books.append({'id':'slow-shutter','cover':'assets/books/slow-shutter-epub/cover.png','chapters':[{'file':p.removeprefix('library/')} for p in [second_sample,*second_locked]],'toc':[{}]*9,'commerce':{'mode':'pilot','sampleChapter':'chapter-01'}})
+        for name, count in [('structure',15),('metabolism',0),('renaissance',108)]:
             chapters=[{'file':f'data/chapters/{name}/{n}.json'} for n in range(count)]
             books.append({'id':name,'chapters':chapters})
             for ch in chapters:
@@ -47,7 +54,7 @@ class PublicationTests(unittest.TestCase):
     def test_only_sample_and_all_other_book_content_preserved(self):
         result=self.run_build()
         self.assertEqual(result['preservedBooks']['renaissance']['chapterCount'],108)
-        self.assertEqual(result['preservedBooks']['slow-shutter']['chapterCount'],9)
+        self.assertNotIn('slow-shutter',result['preservedBooks'])
         for p in self.policy['publicFiles']:
             self.assertEqual((self.source/p).read_bytes(),(self.output/p).read_bytes())
         for p in self.locked:

@@ -1044,6 +1044,15 @@
           "title": "从慢门摄影到生活哲学"
         }
       ]
+    },
+    "commerce": {
+      "mode": "pilot",
+      "abstract": "以慢门摄影为起点，重新理解速度、模糊、时间、身体与感受，以及生活的慢态度。",
+      "sampleChapter": "chapter-01",
+      "price": null,
+      "currency": "AUD",
+      "purchaseStatus": "preview",
+      "accessVersion": "slow-shutter-20261009-1"
     }
   },
   {

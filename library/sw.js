@@ -1,6 +1,6 @@
 /* Only /library/ is controlled. Retire cached locked Pilot payloads only.
  * Public history and copies saved elsewhere remain outside this migration. */
-const BUILD='private-20261007-1';
+const BUILD='samples-20261009-1';
 const SHELL='shadow-library-shell-'+BUILD;
 const BOOK_PREFIX='shadow-library-book-v1-';
 const base=self.registration.scope;
@@ -18,6 +18,8 @@ function lockedPilotPath(url){
  let path;
  try{path=decodeURIComponent(url.pathname).slice(new URL(base).pathname.length);}
  catch{return true;}
+ if(path.startsWith('data/chapters/slow-shutter-full/'))return path!=='data/chapters/slow-shutter-full/chapter-01.json';
+ if(path.startsWith('assets/books/slow-shutter-epub/'))return path!=='assets/books/slow-shutter-epub/cover.png';
  if(path.startsWith('data/chapters/slow-down-full/'))return path!==samplePath;
  if(path.startsWith('data/chapters/slow-down/'))return true;
  if(['data/chapters/preface.json','data/chapters/author-note.json','data/chapters/chapter-01.json'].includes(path))return true;
@@ -26,11 +28,11 @@ function lockedPilotPath(url){
  return false;
 }
 const SHELL_FILES=[
- './','index.html','src/update.js?v=private-20261007-1','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
- 'src/app.js?v=private-20261007-1','src/offline.js?v=pilot-20261007-1','src/styles.css?v=pilot-20261007-1',
- 'src/components.js?v=pilot-20261007-1','src/reader.js?v=pilot-20261007-1',
- 'src/listen.js?v=pilot-20261007-1','src/storage.js?v=phase2-20260925',
- 'data/books.json?v=pilot-20261007-1','data/platform.json?v=1',
+ './','index.html','src/update.js?v=samples-20261009-1','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
+ 'src/app.js?v=samples-20261009-1','src/offline.js?v=samples-20261009-1','src/styles.css?v=pilot-20261007-1',
+ 'src/components.js?v=samples-20261009-1','src/reader.js?v=samples-20261009-1',
+ 'src/listen.js?v=samples-20261009-1','src/storage.js?v=phase2-20260925',
+ 'data/books.json?v=samples-20261009-1','data/platform.json?v=1',
  'assets/covers/slow-down.jpg','assets/books/slow-shutter-epub/cover.png',
  'assets/books/structure-pages/image-00-reading.jpg','assets/covers/metabolism.jpg','assets/covers/renaissance.jpg'
 ];
@@ -58,9 +60,9 @@ async function retireLockedPilotCaches(){
   if(completed){
    try{
     const data=await completed.json();
-    retireMarker=retireMarker||(data.id==='slow-down'&&data.scope!=='sample')||
+    retireMarker=retireMarker||(['slow-down','slow-shutter'].includes(data.id)&&data.scope!=='sample')||
      (Array.isArray(data.urls)&&data.urls.some(url=>lockedPilotPath(new URL(url,base))));
-   }catch{retireMarker=retireMarker||name.startsWith(BOOK_PREFIX+'slow-down-');}
+   }catch{retireMarker=retireMarker||['slow-down','slow-shutter'].some(id=>name.startsWith(BOOK_PREFIX+id+'-'));}
   }
   // Invalidate completion first; an interrupted cleanup must not advertise a
   // complete download with missing URLs. Keep allowed bytes for re-download.
