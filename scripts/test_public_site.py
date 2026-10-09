@@ -24,7 +24,7 @@ class PublicationTests(unittest.TestCase):
         self.locked += second_locked
         self.put(second_sample, {'blocks':[]})
         books.append({'id':'slow-shutter','cover':'assets/books/slow-shutter-epub/cover.png','chapters':[{'file':p.removeprefix('library/')} for p in [second_sample,*second_locked]],'toc':[{}]*9,'commerce':{'mode':'pilot','sampleChapter':'chapter-01'}})
-        for name, count in [('structure',15),('metabolism',0),('renaissance',108)]:
+        for name, count in [('structure',15),('metabolism',16),('renaissance',108)]:
             if not count:
                 books.append({'id':name,'chapters':[]})
                 continue
@@ -61,7 +61,7 @@ class PublicationTests(unittest.TestCase):
 
     def test_only_sample_and_all_other_book_content_preserved(self):
         result=self.run_build()
-        self.assertEqual(set(result['preservedBooks']),{'metabolism'})
+        self.assertEqual(set(result['preservedBooks']),set())
         self.assertNotIn('slow-shutter',result['preservedBooks'])
         for p in self.policy['publicFiles']:
             self.assertEqual((self.source/p).read_bytes(),(self.output/p).read_bytes())
