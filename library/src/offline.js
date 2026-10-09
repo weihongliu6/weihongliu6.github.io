@@ -1,5 +1,5 @@
 // Device-local library. No accounts, payment entitlements or cloud storage.
-import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=pilot-20261007-1';
+import { escapeHTML as e, accessibleChapters, pilotCommerce } from './components.js?v=samples-20261009-1';
 const PREFIX='shadow-library-book-v1-';
 const ACCESS_VERSION='pilot-20261007-1';
 const marker=new URL('offline-complete',new URL('../',import.meta.url)).href;
@@ -30,7 +30,7 @@ async function scan(){
       if(pilotCommerce(book)){
         const chapters=accessibleChapters(book), chapterURLs=chapters.map(chapter=>safeURL(chapter.file));
         // A pre-pilot full-book marker cannot advertise a current sample download.
-        if(data.accessVersion!==ACCESS_VERSION || data.scope!=='sample' ||
+        if(data.accessVersion!==(book.commerce?.accessVersion||ACCESS_VERSION) || data.scope!=='sample' ||
           !Array.isArray(data.chapterIds) || data.chapterIds.length!==chapters.length ||
           !chapters.every(chapter=>data.chapterIds.includes(chapter.id)) ||
           !chapterURLs.every(url=>data.urls.includes(url)) ||
@@ -103,7 +103,7 @@ async function download(book){
     if(book.cover)assets.add(book.cover);done=0;
     for(const asset of assets){await put(asset);job.progress=`图片 ${++done}/${assets.size} · ${(bytes/1048576).toFixed(1)} MB`;refresh();}
     controller.signal.throwIfAborted();
-    await cache.put(marker,new Response(JSON.stringify({id:book.id,scope:pilotCommerce(book)?'sample':'full',accessVersion:ACCESS_VERSION,chapterIds:chapters.map(chapter=>chapter.id),urls:[...urls],bytes,savedAt:Date.now()}),{headers:{'Content-Type':'application/json'}}));
+    await cache.put(marker,new Response(JSON.stringify({id:book.id,scope:pilotCommerce(book)?'sample':'full',accessVersion:book.commerce?.accessVersion||ACCESS_VERSION,chapterIds:chapters.map(chapter=>chapter.id),urls:[...urls],bytes,savedAt:Date.now()}),{headers:{'Content-Type':'application/json'}}));
     try{save(book.id,true);}catch{/* Download remains usable when localStorage is blocked. */}
     await scan();message=pilotCommerce(book)?`《${book.title}》第一章已下载，断网后也可以试读。`:`《${book.title}》已下载，断网后也可以阅读。`;
     navigator.storage?.persist?.().catch(()=>{});

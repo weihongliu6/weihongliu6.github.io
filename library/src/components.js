@@ -2,7 +2,7 @@ export const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, c =>
 export const bookURL = id => `#/book/${encodeURIComponent(id)}`;
 export const readURL = (id, chapter) => `#/read/${encodeURIComponent(id)}/${encodeURIComponent(chapter)}`;
 // Preview access is a reading-flow boundary, not a server-side paywall.
-export const pilotCommerce = book => book?.id==='slow-down' && book?.commerce?.mode==='pilot';
+export const pilotCommerce = book => ['slow-down','slow-shutter'].includes(book?.id) && book?.commerce?.mode==='pilot';
 export const purchaseURL = book => `#/purchase/${encodeURIComponent(book.id)}`;
 export const canAccessChapter = (book, id) => !!book?.chapters?.some(chapter=>chapter.id===id) && (!pilotCommerce(book) || id===book.commerce.sampleChapter);
 export const accessibleChapters = book => (book.chapters || []).filter(chapter=>canAccessChapter(book,chapter.id));
