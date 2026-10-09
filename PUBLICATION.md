@@ -103,7 +103,13 @@ full sample text, responsive layout, title search, no locked narration route,
 sample-only offline download, late-cache cleanup and first-book regression.
 WebKit device emulation is not a physical iPhone Safari test. Screenshots are
 saved in that workflow's evidence artifact. Merge/release remains HOLD until
-those browser checks pass and the owner explicitly approves.
+those browser checks pass and the owner explicitly approves. Required iPhone
+WebKit sample reading, offline reading, locked routes, cache migration and layout
+checks passed in run 37920567005, along with desktop acceptance and direct HTTP
+verification. An additional mobile offline hard-reload experiment emitted a
+WebKit internal engine error in run 37920732983; this is NOT recorded as a passed
+check. Desktop offline reload is covered; physical Safari cold restart remains
+unverified. No production change is authorized by these test results.
 
 History audit: full second-book assets entered public history in `b3a24af`; the
 chapter-five label changed in `c8431d6`. Old commit/raw URLs, PR deletion diffs,
