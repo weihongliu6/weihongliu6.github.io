@@ -195,3 +195,15 @@ test('second book download is sample-only; full markers and late protected image
  assert.equal(run('isDownloaded("slow-shutter")'),true);assert.match(run('controls(books[1])'),/第一章已离线保存/);
  await cache.put(image,new Response('late'));assert.equal((await sw.request(image)).status,403);assert.equal(await cache.match(image),undefined);
 });
+
+
+test('mobile offline fallback reads only a current completed sample, never historical locked chapters',async()=>{
+ const store=cacheStore(),sample=base+'data/chapters/slow-shutter-full/chapter-01.json',locked=base+'data/chapters/slow-shutter-full/chapter-02.json';
+ await seed(store,prefix+'slow-shutter-old',[locked],{id:'slow-shutter',scope:'full',urls:[locked]});
+ const {run}=offline(store);
+ assert.equal(await run('downloadedChapter(books[1],books[1].chapters[4])'),null);
+ assert.equal(await run('downloadedChapter(books[1],books[1].chapters[3])'),null);
+ await seed(store,prefix+'slow-shutter-sample',[sample],{id:'slow-shutter',scope:'sample',accessVersion:books[1].commerce.accessVersion,chapterIds:['chapter-01'],urls:[sample]});
+ assert.equal(await (await run('downloadedChapter(books[1],books[1].chapters[3])')).text(),'cached:'+sample);
+ assert.equal(await run('downloadedChapter(books[1],{id:"chapter-01",file:"data/chapters/slow-shutter-full/chapter-02.json"})'),null);
+});

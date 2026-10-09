@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const read=p=>fs.readFileSync(p,'utf8');
 const books=JSON.parse(read('library/data/books.json')), pilot=books[0];
 function boot(){
- const c={URL,URLSearchParams,books,platform:{name:'Test'},storage:{get:()=>null},isSaved:()=>false,isDownloaded:()=>false,matchMedia:()=>({matches:false}),window:{ShadowAnalytics:null,scrollTo(){}},mountLibraryApp(){},bindReader(){return ()=>{}},fetch:async()=>{throw Error('unexpected fetch')},location:{hash:'',replace(url){this.redirect=url}},document:{body:{classList:{remove(){},add(){}}},querySelector:()=>({setAttribute(){},removeAttribute(){},focus(){}})}};
+ const c={URL,URLSearchParams,books,platform:{name:'Test'},storage:{get:()=>null},isSaved:()=>false,isDownloaded:()=>false,matchMedia:()=>({matches:false}),window:{ShadowAnalytics:null,scrollTo(){}},mountLibraryApp(){},downloadedChapter:async()=>null,bindReader(){return ()=>{}},fetch:async()=>{throw Error('unexpected fetch')},location:{hash:'',replace(url){this.redirect=url}},document:{body:{classList:{remove(){},add(){}}},querySelector:()=>({setAttribute(){},removeAttribute(){},focus(){}})}};
  vm.createContext(c);
  vm.runInContext(read('library/src/components.js').replaceAll('export ',''),c);
  vm.runInContext('Object.assign(globalThis,{canAccessChapter,accessibleChapters,chapterURL});',c);

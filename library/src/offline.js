@@ -41,6 +41,15 @@ async function scan(){
     }catch{/* Ignore unreadable records without deleting other device-local books. */}
   }
 }
+// Some mobile engines fail a fetch while offline even with an active worker.
+// Read only a completed, current download and an explicitly accessible chapter.
+export async function downloadedChapter(book, entry){
+  if(!accessibleChapters(book).some(chapter=>chapter.id===entry.id && chapter.file===entry.file))return null;
+  await scan();
+  const info=downloaded.get(book.id),url=safeURL(entry.file);
+  if(!info || !info.urls.includes(url))return null;
+  return (await caches.open(info.name)).match(url);
+}
 function controls(book){
   const saved=isSaved(book.id), info=downloaded.get(book.id), active=job?.id===book.id, pilot=pilotCommerce(book);
   return `<div class="local-book-controls"><button type="button" data-local-save="${e(book.id)}" aria-pressed="${saved}">${saved?'✓ 已加入书架':'＋ 加入我的书架'}</button>${accessibleChapters(book).length?`<button type="button" data-local-download="${e(book.id)}" ${!ready || (job&&!active)?'disabled':''}>${active?'取消下载':info?(pilot?'删除第一章离线副本':'删除离线副本'):(pilot?'↓ 离线保存第一章':'↓ 离线下载')}</button><small data-download-state>${active?e(job.progress):info?`${pilot?'第一章已离线保存':'已离线保存'} · ${(info.bytes/1048576).toFixed(1)} MB`:(pilot?'仅可离线保存第一章':'尚未下载')}</small>`:''}</div>`;

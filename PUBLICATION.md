@@ -90,12 +90,12 @@ rejects locked second-book paths before cache/network/download paths, and
 invalidates legacy completion markers before targeted byte removal. First-book
 sample accessVersion stays unchanged. No bookshelf or progress keys are erased.
 
-Local validation: 63 Node tests passed (including second-book TOC, direct URL,
+Local validation: 64 Node tests passed (including second-book TOC, direct URL,
 section/resume/listen bypass, metadata search, progress preservation, download,
 legacy/late JSON and image cache removal, first-book and Owner-reader
 regressions). 17 Python build tests passed. The minimized artifact contains 543
 public paths and excludes 98 protected paths across the two sample books. All
-three other books retain their content digests. Local browser launch was blocked
+three other books retain their content digests. Direct local HTTP verification confirmed 98 excluded paths return 404 and 165 allowed files match their digests, without a service worker. Mobile fetch failures also have a fallback that reads only an accessible chapter from a current completed download; legacy full downloads never qualify. Local browser launch was blocked
 by absent Chromium/WebKit binaries; browser download returned invalid ZIPs.
 `Sample preview acceptance` on this PR must pass desktop Chromium and iPhone
 WebKit, including direct raw HTTP 404 for all 26 removed second-book paths,

@@ -1,4 +1,4 @@
-import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp } from './offline.js?v=samples-20261009-1';
+import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-1';
 import { storage } from './storage.js?v=phase2-20260925';
 import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-1';
 import { renderReader, bindReader } from './reader.js?v=samples-20261009-1';
@@ -127,7 +127,9 @@ async function render(){
       }
       const entry=book.chapters[index];
       if(!chapterCache.has(entry.file)){
-        const response=await fetch(entry.file);if(!response.ok) throw Error('章节暂时无法打开。');
+        let response;
+        try{response=await fetch(entry.file);}catch(error){response=await downloadedChapter(book,entry);if(!response)throw error;}
+        if(!response.ok) throw Error('章节暂时无法打开。');
         chapterCache.set(entry.file,await response.json());
       }
       if(version!==renderVersion) return;
