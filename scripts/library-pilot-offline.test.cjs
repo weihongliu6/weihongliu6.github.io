@@ -210,12 +210,12 @@ test('mobile offline fallback reads only a current completed sample, never histo
  assert.equal(await run('downloadedChapter(books[1],{id:"chapter-01",file:"data/chapters/slow-shutter-full/chapter-02.json"})'),null);
 });
 
-for(const index of [2,4])test(books[index].id+': download and SW deny every protected resource, including late writes',async()=>{
+for(const index of [2,3,4])test(books[index].id+': download and SW deny every protected resource, including late writes',async()=>{
  const book=books[index],store=cacheStore(),{run,fetched}=offline(store);
  await run(`download(books[${index}])`);
  const sample=book.chapters.find(ch=>ch.id==='chapter-01');
  assert.deepEqual(fetched.filter(url=>url.endsWith('.json')),[base+sample.file]);
- assert.equal(fetched.length,index===2?4:2);
+ const json=JSON.parse(read('library/'+sample.file));assert.equal(fetched.length,new Set([sample.file,book.cover,...json.blocks.filter(b=>b.type==='image').flatMap(b=>[b.src,b.fullSrc])]).size);
  assert.equal(run(`isDownloaded("${book.id}")`),true);
  const paths=JSON.parse(read('scripts/public-site-policy.json')).excludedPilotFiles.filter(p=>p.includes(book.id)).map(p=>base+p.replace(/^library\//,''));
  await seed(store,prefix+book.id+'-legacy',paths,{id:book.id,scope:'full',urls:paths});

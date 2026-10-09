@@ -14,10 +14,10 @@ function context(catalogue=books){
   vm.runInContext('const e=escapeHTML;\n'+app.slice(app.indexOf('function appleBooksLink'),app.indexOf('async function render')),sandbox);
   return sandbox;
 }
-test('five stable records, four complete and one coming; metadata has explicit unknowns',()=>{
+test('five stable records, five complete preview records; metadata has explicit unknowns',()=>{
   assert.deepEqual(books.map(b=>b.id),['slow-down','slow-shutter','structure','metabolism','renaissance']);
-  assert.equal(books.filter(b=>b.status==='complete').length,4);
-  assert.equal(books.filter(b=>b.status==='coming').length,1);
+  assert.equal(books.filter(b=>b.status==='complete').length,5);
+  assert.equal(books.filter(b=>b.status==='coming').length,0);
   for(const book of books){
     assert.equal(book.publication.metadataVersion,1);
     assert.equal(book.publication.isbn,null);
@@ -25,7 +25,7 @@ test('five stable records, four complete and one coming; metadata has explicit u
     assert.equal(book.publication.publisher,null);
     for(const chapter of book.chapters||[]){
       const exists=fs.existsSync(path.join(root,'library',chapter.file.split('?')[0]));
-      assert.equal(exists,!['slow-down','slow-shutter','structure','renaissance'].includes(book.id)||chapter.id==='chapter-01');
+      assert.equal(exists,!['slow-down','slow-shutter','structure','metabolism','renaissance'].includes(book.id)||chapter.id==='chapter-01');
     }
   }
 });
@@ -38,7 +38,7 @@ test('existing Apple and WeRead destinations and reader routes remain available'
     else assert.ok(html.includes('即将进入数字书房'));
   }
   assert.ok(c.bookPage(books[0]).includes('https://weread.qq.com/web/reader/67632dc0813abbcb8g0156bb'));
-  assert.ok(c.home().includes('4 本数字书开放第一章'));
+  assert.ok(c.home().includes('5 本数字书开放第一章'));
 });
 test('sixth book and new external channel render from metadata without code changes',()=>{
   const extra={id:'future-author',title:'A & B',author:'Another Author',status:'coming',publication:{externalEditions:[{channel:'publisher-store',label:'Publisher <store>',url:'https://example.org/book',title:'Other title'}]}};
@@ -90,15 +90,15 @@ test('shelf search, reading filters and listening catalogue do not advertise una
  const c=context();
  assert.equal(c.matchesShelf(books[0],'慢下','readable'),true);
  assert.equal(c.matchesShelf(books[0],'no-such-title','all'),false);
- assert.equal(c.matchesShelf(books[3],'','readable'),false);
- assert.equal(c.matchesShelf(books[3],'','coming'),true);
+ assert.equal(c.matchesShelf(books[3],'','readable'),true);
+ assert.equal(c.matchesShelf({status:'coming'},'','coming'),true);
  c.storage.get=key=>key==='reading:slow-down'?{chapter:books[0].chapters[1].id}:null;
  assert.equal(c.matchesShelf(books[0],'','reading'),true);
  assert.ok(c.shelfTools().includes('#/purchase/slow-down'));
  assert.ok(!c.shelfTools().includes(`#/read/slow-down/${books[0].chapters[1].id}?resume=1`));
  const html=c.listeningHome();
  assert.ok(html.includes('设备语音朗读'));assert.ok(html.includes('?listen=1'));
- assert.ok(html.includes('寻找文艺复兴'));assert.ok(!html.includes('人体代谢'));
+ assert.ok(html.includes('寻找文艺复兴'));assert.ok(html.includes('人体代谢'));
  c.storage.get=()=>({chapter:'deleted-chapter'});
  assert.equal(c.savedReading(books[0]),null);
 });

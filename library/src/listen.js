@@ -1,5 +1,5 @@
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, listeningChapters, pilotCommerce, canAccessChapter, purchaseURL } from './components.js?v=samples-20261009-2';
+import { escapeHTML as e, listeningChapters, pilotCommerce, canAccessChapter, purchaseURL } from './components.js?v=samples-20261009-3';
 
 // Short utterances avoid sending an entire chapter to the speech queue.
 export function speechChunks(chapter){

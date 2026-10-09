@@ -1570,24 +1570,583 @@
     "id": "metabolism",
     "title": "人体代谢：从生存优势到现代慢性代谢病",
     "cover": "assets/covers/metabolism.jpg",
-    "status": "coming",
+    "status": "complete",
     "publication": {
       "metadataVersion": 1,
       "publisher": null,
       "imprint": null,
       "language": "zh-CN",
-      "format": null,
+      "format": "web",
       "isbn": null,
-      "edition": null,
-      "contributors": [],
+      "edition": "V2.1b",
+      "contributors": [
+        {
+          "name": "刘伟宏",
+          "role": "author"
+        }
+      ],
       "rights": {
-        "holder": null,
+        "holder": "刘伟宏",
         "license": null,
-        "statement": null,
-        "platformPermission": null,
+        "statement": "© 2026 刘伟宏。保留所有权利。",
+        "platformPermission": "作者授权第一章免费试读；其他正文未开放。",
         "exclusive": null
       },
       "externalEditions": []
+    },
+    "author": "刘伟宏 医生",
+    "subtitle": "从生存优势到现代慢性代谢病",
+    "edition": "pdf-final-v2.1b-first-chapter-v1",
+    "intro": "人体代谢并不是一组静止的化验数字，而是一套为了生存不断储存、动员、分配和补偿的动态系统。许多今天看来“不合时宜”的反应，最初帮助人体应对食物间歇、活动增加、感染和压力；当现代环境让能量负荷长期持续、恢复机会减少时，同一套机制也可能逐渐接近调节边界。本书从进食与禁食的切换出发，解释胰岛素如何协调燃料使用，胰岛素抵抗为何可能伴随高胰岛素代偿，脂肪组织怎样从安全储存走向脂肪溢出，以及肝脏、血管、肾脏和胰腺如何在长期负荷中相互影响。血脂、血压、血糖、脂肪肝、体重调节与2型糖尿病因此不再是彼此孤立的问题，而可以放回同一张代谢地图。理解这些过程，不是把生理机制当成宿命，也不是用意志力责备个体，而是看见代偿、风险与器官保护之间的时间关系，在必要的监测、生活调整和医疗支持中，与这套古老的身体机制更好地生活。",
+    "introSource": "原书内容简介",
+    "editionSummary": "10 章正文、核心医学术语小词典与主要医学参考文献 · 第一章完整阅读，含 5 幅原书配图。",
+    "coverLabel": "书籍封面",
+    "chapters": [
+      {
+        "id": "front-matter",
+        "title": "书名、作者与版权医学声明",
+        "file": "data/chapters/metabolism-full/front-matter.json"
+      },
+      {
+        "id": "introduction",
+        "title": "内容简介",
+        "file": "data/chapters/metabolism-full/introduction.json"
+      },
+      {
+        "id": "original-toc",
+        "title": "原书目录",
+        "file": "data/chapters/metabolism-full/original-toc.json"
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章｜人体为什么如此“节俭”？",
+        "file": "data/chapters/metabolism-full/chapter-01.json"
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章｜进食与禁食——人体每天切换的两套程序",
+        "file": "data/chapters/metabolism-full/chapter-02.json"
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章｜身体为什么开始“听不见”胰岛素？",
+        "file": "data/chapters/metabolism-full/chapter-03.json"
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章｜脂肪应该存在哪里？",
+        "file": "data/chapters/metabolism-full/chapter-04.json"
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五章｜血脂、胆固醇与动脉粥样硬化",
+        "file": "data/chapters/metabolism-full/chapter-05.json"
+      },
+      {
+        "id": "chapter-06",
+        "title": "第六章｜高血压与肾脏——压力、容量与代谢",
+        "file": "data/chapters/metabolism-full/chapter-06.json"
+      },
+      {
+        "id": "chapter-07",
+        "title": "第七章｜2型糖尿病——不是从血糖升高那一天才开始",
+        "file": "data/chapters/metabolism-full/chapter-07.json"
+      },
+      {
+        "id": "chapter-08",
+        "title": "第八章｜为什么减重以后身体还想把体重找回来？",
+        "file": "data/chapters/metabolism-full/chapter-08.json"
+      },
+      {
+        "id": "chapter-09",
+        "title": "第九章｜为什么代谢问题总是成群出现？",
+        "file": "data/chapters/metabolism-full/chapter-09.json"
+      },
+      {
+        "id": "chapter-10",
+        "title": "第十章｜与古老的身体机制一起生活",
+        "file": "data/chapters/metabolism-full/chapter-10.json"
+      },
+      {
+        "id": "glossary",
+        "title": "核心医学术语小词典",
+        "file": "data/chapters/metabolism-full/glossary.json"
+      },
+      {
+        "id": "references",
+        "title": "主要医学参考文献",
+        "file": "data/chapters/metabolism-full/references.json"
+      },
+      {
+        "id": "back-matter",
+        "title": "全书完与封底",
+        "file": "data/chapters/metabolism-full/back-matter.json"
+      }
+    ],
+    "toc": [
+      {
+        "id": "front-matter",
+        "title": "书名、作者与版权医学声明",
+        "sections": []
+      },
+      {
+        "id": "introduction",
+        "title": "内容简介",
+        "sections": []
+      },
+      {
+        "id": "original-toc",
+        "title": "原书目录",
+        "sections": []
+      },
+      {
+        "id": "chapter-01",
+        "title": "第一章｜人体为什么如此“节俭”？",
+        "sections": [
+          {
+            "title": "开场｜你以为吃完晚饭身体就下班了？",
+            "anchor": "section-5"
+          },
+          {
+            "title": "1｜生命的难题：食物间歇到来，生命却不能停",
+            "anchor": "section-15"
+          },
+          {
+            "title": "2｜食物来了就储存，食物没来就动员",
+            "anchor": "section-28"
+          },
+          {
+            "title": "3｜为什么身体宁愿多存一点？",
+            "anchor": "section-41"
+          },
+          {
+            "title": "4｜环境变了，身体的程序没有同步改写",
+            "anchor": "section-55"
+          },
+          {
+            "title": "5｜身体不是突然坏掉，而是一直在努力维持",
+            "anchor": "section-72"
+          },
+          {
+            "title": "6｜理解身体，不等于为疾病找借口",
+            "anchor": "section-88"
+          }
+        ]
+      },
+      {
+        "id": "chapter-02",
+        "title": "第二章｜进食与禁食——人体每天切换的两套程序",
+        "sections": [
+          {
+            "title": "开场｜晚饭已经结束，身体的工作才刚刚开始",
+            "anchor": "section-9"
+          },
+          {
+            "title": "1｜进食与禁食，不是两个简单的“开关”",
+            "anchor": "section-17"
+          },
+          {
+            "title": "2｜餐后：新到的营养先被“拆包”和分流",
+            "anchor": "section-26"
+          },
+          {
+            "title": "3｜一顿饭的能量，主要有三种去向",
+            "anchor": "section-40"
+          },
+          {
+            "title": "4｜夜间：外来供应减少，肝脏接过接力棒",
+            "anchor": "section-51"
+          },
+          {
+            "title": "5｜禁食延长：脂肪和酮体逐渐增加参与",
+            "anchor": "section-64"
+          },
+          {
+            "title": "6｜代谢灵活性：不是永远燃脂，而是用对燃料",
+            "anchor": "section-72"
+          }
+        ]
+      },
+      {
+        "id": "chapter-03",
+        "title": "第三章｜身体为什么开始“听不见”胰岛素？",
+        "sections": [
+          {
+            "title": "开场｜血糖还正常，身体内部已经变了吗？",
+            "anchor": "section-9"
+          },
+          {
+            "title": "1｜胰岛素本来在做什么？",
+            "anchor": "section-18"
+          },
+          {
+            "title": "2｜什么叫“听不见”胰岛素？",
+            "anchor": "section-27"
+          },
+          {
+            "title": "3｜为什么同样的信号需要越来越大的“音量”？",
+            "anchor": "section-38"
+          },
+          {
+            "title": "4｜肌肉、肝脏和脂肪组织，各自怎样改变反应？",
+            "anchor": "section-55"
+          },
+          {
+            "title": "5｜胰腺怎样把“声音调大”？",
+            "anchor": "section-65"
+          },
+          {
+            "title": "6｜为什么“表面正常”可以持续一段时间？",
+            "anchor": "section-78"
+          },
+          {
+            "title": "7｜代偿什么时候开始接近边界？",
+            "anchor": "section-86"
+          }
+        ]
+      },
+      {
+        "id": "chapter-04",
+        "title": "第四章｜脂肪应该存在哪里？",
+        "sections": [
+          {
+            "title": "开场｜脂肪多，和脂肪放错地方，是一回事吗？",
+            "anchor": "section-8"
+          },
+          {
+            "title": "1｜为什么人体需要专门的脂肪仓库？",
+            "anchor": "section-19"
+          },
+          {
+            "title": "2｜脂肪组织怎样扩大自己的储存空间？",
+            "anchor": "section-30"
+          },
+          {
+            "title": "3｜什么时候“安全储存”开始承受压力？",
+            "anchor": "section-39"
+          },
+          {
+            "title": "4｜脂肪为什么会出现在不该长期储存它的地方？",
+            "anchor": "section-49"
+          },
+          {
+            "title": "5｜肝脏为什么容易成为一个重要现场？",
+            "anchor": "section-59"
+          },
+          {
+            "title": "6｜肌肉里的脂肪意味着什么？",
+            "anchor": "section-67"
+          },
+          {
+            "title": "7｜为什么相同BMI的人，代谢风险可能很不一样？",
+            "anchor": "section-75"
+          },
+          {
+            "title": "8｜脂肪分布怎样与胰岛素抵抗互相影响？",
+            "anchor": "section-87"
+          }
+        ]
+      },
+      {
+        "id": "chapter-05",
+        "title": "第五章｜血脂、胆固醇与动脉粥样硬化",
+        "sections": [
+          {
+            "title": "开场｜血脂报告里的几个数字，究竟在说什么？",
+            "anchor": "section-9"
+          },
+          {
+            "title": "1｜脂肪不能溶在血液里，身体怎样运输它？",
+            "anchor": "section-16"
+          },
+          {
+            "title": "2｜胆固醇和甘油三酯不是同一种东西",
+            "anchor": "section-24"
+          },
+          {
+            "title": "3｜这些运输颗粒从哪里来，又要到哪里去？",
+            "anchor": "section-32"
+          },
+          {
+            "title": "4｜化验单测到的是货物，还是车辆？",
+            "anchor": "section-42"
+          },
+          {
+            "title": "5｜哪些颗粒更容易与动脉粥样硬化有关？",
+            "anchor": "section-73"
+          },
+          {
+            "title": "6｜血管壁为什么会对滞留的颗粒作出反应？",
+            "anchor": "section-82"
+          },
+          {
+            "title": "7｜斑块怎样从修复结构变成潜在风险？",
+            "anchor": "section-91"
+          },
+          {
+            "title": "8｜为什么相似的血脂数字，风险仍可能不同？",
+            "anchor": "section-101"
+          }
+        ]
+      },
+      {
+        "id": "chapter-06",
+        "title": "第六章｜高血压与肾脏——压力、容量与代谢",
+        "sections": [
+          {
+            "title": "开场｜血压升高，是身体需要更大的推动力吗？",
+            "anchor": "section-10"
+          },
+          {
+            "title": "1｜没有压力，血液为什么不能到达所有器官？",
+            "anchor": "section-17"
+          },
+          {
+            "title": "2｜血压这个数字，究竟由什么组成？",
+            "anchor": "section-22"
+          },
+          {
+            "title": "3｜为什么短时间升压可能是正常反应？",
+            "anchor": "section-30"
+          },
+          {
+            "title": "4｜肾脏为什么掌握着长期血压的“容量旋钮”？",
+            "anchor": "section-38"
+          },
+          {
+            "title": "5｜肾素—血管紧张素—醛固酮系统在保护什么？",
+            "anchor": "section-48"
+          },
+          {
+            "title": "6｜为什么肥胖和胰岛素抵抗常常伴随高血压？",
+            "anchor": "section-64"
+          },
+          {
+            "title": "7｜睡眠呼吸暂停为什么会把夜间变成反复的应激试验？",
+            "anchor": "section-72"
+          },
+          {
+            "title": "8｜高血压与肾脏为什么会形成双向循环？",
+            "anchor": "section-79"
+          },
+          {
+            "title": "9｜没有症状，为什么仍然需要重视？",
+            "anchor": "section-88"
+          }
+        ]
+      },
+      {
+        "id": "chapter-07",
+        "title": "第七章｜2型糖尿病——不是从血糖升高那一天才开始",
+        "sections": [
+          {
+            "title": "开场｜糖尿病，是从诊断那一天才开始的吗？",
+            "anchor": "section-10"
+          },
+          {
+            "title": "1｜葡萄糖不是敌人，问题在于能否及时调度",
+            "anchor": "section-15"
+          },
+          {
+            "title": "2｜胰岛素抵抗出现后，身体首先选择代偿",
+            "anchor": "section-20"
+          },
+          {
+            "title": "3｜从代偿到失代偿：血糖为什么终于升高",
+            "anchor": "section-28"
+          },
+          {
+            "title": "4｜诊断线很重要，却不是疾病真正的起点",
+            "anchor": "section-37"
+          },
+          {
+            "title": "5｜为什么确诊时就要寻找“无声损伤”",
+            "anchor": "section-62"
+          },
+          {
+            "title": "6｜大血管风险不是“血糖越高，血管越堵”",
+            "anchor": "section-77"
+          },
+          {
+            "title": "7｜现代治疗的目标，不只是把血糖数字压下来",
+            "anchor": "section-85"
+          },
+          {
+            "title": "8｜筛查只有形成闭环，才真正改变结局",
+            "anchor": "section-97"
+          },
+          {
+            "title": "结语｜跨过诊断线之前，身体已经努力了很久",
+            "anchor": "section-102"
+          }
+        ]
+      },
+      {
+        "id": "chapter-08",
+        "title": "第八章｜为什么减重以后身体还想把体重找回来？",
+        "sections": [
+          {
+            "title": "开场｜为什么减掉十公斤以后，身体却开始“反攻”？",
+            "anchor": "section-11"
+          },
+          {
+            "title": "1｜体重不是一个被动数字，而是身体持续调节的结果",
+            "anchor": "section-17"
+          },
+          {
+            "title": "2｜大脑怎样读懂“库存、进食和外界环境”",
+            "anchor": "section-26"
+          },
+          {
+            "title": "3｜减重以后，为什么饥饿会变得更强",
+            "anchor": "section-37"
+          },
+          {
+            "title": "4｜身体为什么同时减少能量消耗",
+            "anchor": "section-48"
+          },
+          {
+            "title": "5｜平台期和反弹，是怎样一步步形成的",
+            "anchor": "section-60"
+          },
+          {
+            "title": "6｜为什么同样的方法，在不同人身上结果不同",
+            "anchor": "section-72"
+          },
+          {
+            "title": "7｜肥胖不是意志力失败，也不是无法改变的宿命",
+            "anchor": "section-81"
+          },
+          {
+            "title": "8｜长期管理：不是战胜身体，而是与调节系统重新协商",
+            "anchor": "section-90"
+          },
+          {
+            "title": "结语｜维持体重，不是意志力的耐力比赛",
+            "anchor": "section-101"
+          }
+        ]
+      },
+      {
+        "id": "chapter-09",
+        "title": "第九章｜为什么代谢问题总是成群出现？",
+        "sections": [
+          {
+            "title": "开场｜为什么体检单上的异常越来越多？",
+            "anchor": "section-8"
+          },
+          {
+            "title": "1｜代谢综合征首先是一张风险地图",
+            "anchor": "section-15"
+          },
+          {
+            "title": "2｜共同起点：安全储存开始承受压力",
+            "anchor": "section-30"
+          },
+          {
+            "title": "3｜胰岛素抵抗是重要枢纽，但不是唯一元凶",
+            "anchor": "section-48"
+          },
+          {
+            "title": "4｜肝脏、血脂与血糖为什么经常一起改变？",
+            "anchor": "section-57"
+          },
+          {
+            "title": "5｜血压和肾脏怎样进入同一张网络？",
+            "anchor": "section-74"
+          },
+          {
+            "title": "6｜为什么同一张地图，在不同人身上呈现不同组合？",
+            "anchor": "section-84"
+          },
+          {
+            "title": "7｜同一张网上，还有哪些经常被遗漏的节点？",
+            "anchor": "section-103"
+          },
+          {
+            "title": "8｜标签只能打开门，不能替代整体判断",
+            "anchor": "section-120"
+          },
+          {
+            "title": "结语｜真正的整合，是让风险之间彼此可见",
+            "anchor": "section-140"
+          }
+        ]
+      },
+      {
+        "id": "chapter-10",
+        "title": "第十章｜与古老的身体机制一起生活",
+        "sections": [
+          {
+            "title": "开场｜身体并没有“设计错”",
+            "anchor": "section-8"
+          },
+          {
+            "title": "1｜进化留下的不是疾病，而是一套生存能力",
+            "anchor": "section-17"
+          },
+          {
+            "title": "2｜适应和代偿为什么首先是好事？",
+            "anchor": "section-25"
+          },
+          {
+            "title": "3｜真正的转折：当短期机制变成长期背景",
+            "anchor": "section-41"
+          },
+          {
+            "title": "4｜从代偿到疾病，中间不是一道突然出现的悬崖",
+            "anchor": "section-60"
+          },
+          {
+            "title": "5｜为什么同一种现代环境，不会让所有人得同一种病？",
+            "anchor": "section-78"
+          },
+          {
+            "title": "6｜健康管理真正要改变的，不只是某一个数字",
+            "anchor": "section-87"
+          },
+          {
+            "title": "7｜药物不是“失败”，生活方式也不是万能答案",
+            "anchor": "section-96"
+          },
+          {
+            "title": "8｜真正可持续的管理，是改变长期轨迹",
+            "anchor": "section-105"
+          },
+          {
+            "title": "9｜与身体合作，而不是与身体开战",
+            "anchor": "section-125"
+          },
+          {
+            "title": "结语｜让古老机制重新获得恢复平衡的机会",
+            "anchor": "section-134"
+          }
+        ]
+      },
+      {
+        "id": "glossary",
+        "title": "核心医学术语小词典",
+        "sections": []
+      },
+      {
+        "id": "references",
+        "title": "主要医学参考文献",
+        "sections": []
+      },
+      {
+        "id": "back-matter",
+        "title": "全书完与封底",
+        "sections": []
+      }
+    ],
+    "commerce": {
+      "mode": "pilot",
+      "abstract": "从进食与禁食的切换出发，理解储存、动员、代偿与长期代谢风险，把血糖、血脂、血压、脂肪肝及体重调节放回同一张代谢地图。",
+      "sampleChapter": "chapter-01",
+      "price": null,
+      "currency": "AUD",
+      "purchaseStatus": "preview",
+      "accessVersion": "metabolism-20261009-1"
     }
   },
   {

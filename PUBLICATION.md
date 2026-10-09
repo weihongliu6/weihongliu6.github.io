@@ -176,3 +176,58 @@ rules. Do not wholesale revert to the base that published full books. Restore
 originals only to private storage from the verified archive. If browser or source
 checks fail, hold merge. Deploy only after owner approval; verify all 244 retired
 origin URLs and allowed hashes after release. Backend permissions need no change.
+
+## Book 4 first publication — 2026-10-09
+
+`metabolism` now offers the first chapter of 《人体代谢：从生存优势到现代慢性代谢病》,
+credited to 刘伟宏 医生. Source is the author's complete V2.1b PDF (171 pages),
+with matching V2.1b layout DOCX retained privately. The DOCX uses page images,
+so PDF coordinates determine text order. Only PDF pages 10–25 are published:
+all 16 pages of chapter 1 and five exact extracted PNG illustrations/captions.
+Soft wraps are reflowed and CJK compatibility glyphs normalized; wording and
+numbers are unchanged. The chapter's original medical notice is retained.
+Per-page normalized text SHA256 checks and image Git-blob pins validate fidelity.
+All ten chapter titles, glossary, references and original front/back matter
+remain in a 16-entry TOC; all entries except chapter-01 are locked. Synopsis is
+from the original content introduction. Purchases remain preview-only, price
+null; no payment or entitlement is created.
+
+Recoverable sources: complete V2.1b PDF and DOCX stay in private Library.
+`Metabolism_V2_1b_Private_Export_Backup_20261009.zip` contains 73 original-derived
+exports/audit files plus SHA256.json and RESTORE.txt (55,013,476 bytes). ZIP and
+all file digests were checked, and the archive saved before selecting public
+resources. Private restoration uses that archive; original PDF/DOCX are retained
+with their verified digests in source-audit.json. No master, full PDF/DOCX or
+non-sample chapter/image has been committed to the public repository.
+
+Publication includes only sample JSON, existing cover and five sample images.
+The other 15 JSON and 50 image paths are explicitly excluded; whole-tree
+paragraph scans, allowed-path checks and pinned image hashes prevent copying
+protected content into a deployment. SW denies the protected chapter/image
+namespace before network/cache/download, retires full markers and late writes,
+and preserves the existing four sample download versions and reading progress.
+Shell/recovery version becomes samples-20261009-3. The old cover is retained.
+No staging, Supabase/Auth/TLS, Owner, Resend, payment or Shadow tasks are changed.
+
+Local results: 71 Node tests and 17 Python build tests passed, including the
+fourth-book complete text/image provenance, TOC, every non-sample direct route,
+search/listen, current offline download, protected legacy caches and late writes.
+The minimized artifact must contain 403 public files and 309 excluded paths;
+raw HTTP verifies exclusions and permitted hashes without a service worker.
+PR browser workflow covers all five books in desktop Chromium and iPhone 13
+WebKit, including text/images, responsive layouts, only-one-chapter narration,
+search, deep links, seven-resource fourth-book download, offline sample reading,
+locked routes and cache migration. Desktop offline reload is covered; physical
+iPhone Safari offline cold restart remains unverified. Results and screenshots
+are recorded on the PR before merge. Owner has authorized implementation and
+online publication in this task; merge only after those checks pass and verify
+all retired URLs on the live origin after deployment.
+
+History/rollback: unlike books 1–3/5, this book's complete original has never been
+published in this change; only the earlier cover was public. No historical full
+copy is introduced. Public samples, Git history and prior exports cannot be
+retroactively revoked. On failure before merge, close the PR; after release use
+a forward fix retaining exclusions, SW guards and sample-only commerce. To roll
+back the new book UI, restore its coming metadata while retaining the deny rules
+and deployment exclusions. Never publish the private backup. Existing four
+books and their valid sample progress/download versions must remain unchanged.

@@ -1,5 +1,5 @@
 // Update without reloading open documents; retire only locked Pilot caches.
-const BUILD='samples-20261009-2';
+const BUILD='samples-20261009-3';
 const header=document.querySelector('.site-header');
 const notice=document.createElement('p');
 notice.id='library-update-status';notice.className='offline-status';

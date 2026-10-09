@@ -35,7 +35,7 @@ const books=JSON.parse(fs.readFileSync('library/data/books.json','utf8'));
    await page.locator('#book-search').fill('');await page.locator(`[data-local-download="${id}"]`).click();
    await page.waitForFunction(id=>document.querySelector(`[data-local-download="${id}"]`)?.textContent==='删除第一章离线副本',id);
    const record=await page.evaluate(async id=>{for(const name of await caches.keys()){const r=await (await caches.open(name)).match(new URL('offline-complete',location.href));if(r){const d=await r.json();if(d.id===id)return d;}}},id);
-   assert.deepEqual(record.chapterIds,['chapter-01']);assert.equal(record.urls.length,id==='slow-down'?6:id==='structure'?4:2);
+   assert.deepEqual(record.chapterIds,['chapter-01']);assert.equal(record.urls.length,id==='slow-down'?6:id==='structure'?4:id==='metabolism'?7:2);
    // Simulate a legacy full download with late bytes; new worker must clean it.
    const retiredURLs=retired.map(p=>new URL(p.replace(/^library\//,''),base).href);
    await page.evaluate(async({id,urls})=>{localStorage.setItem('shadow-library:reading:'+id,JSON.stringify({chapter:'chapter-02',fraction:.5}));const c=await caches.open('shadow-library-book-v1-'+id+'-legacy');for(const url of urls)await c.put(url,new Response('legacy secret'));await c.put(new URL('offline-complete',location.href),new Response(JSON.stringify({id,scope:'full',urls})));await fetch(urls[0]);},{id,urls:retiredURLs});

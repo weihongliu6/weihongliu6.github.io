@@ -67,14 +67,14 @@ def build(source, output, tracked=None):
     if public & excluded or set(policy['pilotFiles']) - public:
         raise ValueError('Invalid publication policy')
     for p in public:
-        if (('slow-down' in p or p.startswith(('library/data/chapters/slow-shutter', 'library/assets/books/slow-shutter', 'library/data/chapters/structure', 'library/assets/books/structure', 'library/data/chapters/renaissance'))) and p not in policy['pilotFiles']):
+        if (('slow-down' in p or p.startswith(('library/data/chapters/slow-shutter', 'library/assets/books/slow-shutter', 'library/data/chapters/structure', 'library/assets/books/structure', 'library/data/chapters/renaissance', 'library/data/chapters/metabolism', 'library/assets/books/metabolism'))) and p not in policy['pilotFiles']):
             raise ValueError('Unexpected Pilot public path: ' + p)
     books = json.loads(inputs['library/data/books.json'])
     if [b['id'] for b in books] != ['slow-down', 'slow-shutter', 'structure', 'metabolism', 'renaissance']:
         raise ValueError('Book catalog changed; review release policy')
     for pilot in (book for book in books if book.get('commerce', {}).get('mode') == 'pilot'):
         book_id = pilot['id']
-        expected_count = {'slow-down': 22, 'slow-shutter': 9, 'structure': 15, 'renaissance': 108}[book_id]
+        expected_count = {'slow-down': 22, 'slow-shutter': 9, 'structure': 15, 'metabolism': 16, 'renaissance': 108}[book_id]
         directory = book_id if book_id=='renaissance' else book_id+'-full'
         sample = f'library/data/chapters/{directory}/chapter-01.json'
         if len(pilot['chapters']) != expected_count or len(pilot['toc']) != expected_count or pilot['commerce']['sampleChapter'] != 'chapter-01':
@@ -160,7 +160,7 @@ def build(source, output, tracked=None):
     manifest = {'version': 1, 'sourceCommit': commit, 'sourceFiles': len(tracked),
                 'publicFiles': {p: sha(inputs[p]) for p in sorted(public)},
                 'excludedPilotFiles': sorted(excluded), 'pilotFiles': policy['pilotFiles'],
-                'preservedBooks': preserved, 'pilotTocEntries': 22, 'sampleBooks': ['slow-down', 'slow-shutter', 'structure', 'renaissance'],
+                'preservedBooks': preserved, 'pilotTocEntries': 22, 'sampleBooks': ['slow-down', 'slow-shutter', 'structure', 'metabolism', 'renaissance'],
                 'limitation': 'Current Pilot source is sample-only; public Git history and previously saved copies remain accessible.'}
     # Independent output walk and digest validation, before adding the manifest.
     actual = {p.relative_to(output).as_posix(): sha(p.read_bytes()) for p in output.rglob('*') if p.is_file()}

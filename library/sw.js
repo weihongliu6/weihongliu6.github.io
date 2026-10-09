@@ -1,6 +1,6 @@
 /* Only /library/ is controlled. Retire cached locked Pilot payloads only.
  * Public history and copies saved elsewhere remain outside this migration. */
-const BUILD='samples-20261009-2';
+const BUILD='samples-20261009-3';
 const SHELL='shadow-library-shell-'+BUILD;
 const BOOK_PREFIX='shadow-library-book-v1-';
 const base=self.registration.scope;
@@ -18,6 +18,8 @@ function lockedPilotPath(url){
  let path;
  try{path=decodeURIComponent(url.pathname).slice(new URL(base).pathname.length);}
  catch{return true;}
+ if(path.startsWith('data/chapters/metabolism-full/'))return path!=='data/chapters/metabolism-full/chapter-01.json';
+ if(path.startsWith('assets/books/metabolism-pages/'))return !new Set(["assets/books/metabolism-pages/page-011-image-01.png", "assets/books/metabolism-pages/page-014-image-01.png", "assets/books/metabolism-pages/page-016-image-01.png", "assets/books/metabolism-pages/page-018-image-01.png", "assets/books/metabolism-pages/page-021-image-01.png"]).has(path);
  if(path.startsWith('data/chapters/structure-full/'))return path!=='data/chapters/structure-full/chapter-01.json';
  if(path.startsWith('data/chapters/renaissance/'))return path!=='data/chapters/renaissance/chapter-01.json';
  if(path.startsWith('assets/books/structure-pages/'))return !new Set(['assets/books/structure-pages/image-00-reading.jpg','assets/books/structure-pages/image-01-reading.jpg','assets/books/structure-pages/image-01-original.png']).has(path);
@@ -31,11 +33,11 @@ function lockedPilotPath(url){
  return false;
 }
 const SHELL_FILES=[
- './','index.html','src/update.js?v=samples-20261009-2','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
- 'src/app.js?v=samples-20261009-2','src/offline.js?v=samples-20261009-2','src/styles.css?v=pilot-20261007-1',
- 'src/components.js?v=samples-20261009-2','src/reader.js?v=samples-20261009-2',
- 'src/listen.js?v=samples-20261009-2','src/storage.js?v=phase2-20260925',
- 'data/books.json?v=samples-20261009-2','data/platform.json?v=1',
+ './','index.html','src/update.js?v=samples-20261009-3','manifest.webmanifest','assets/favicon.svg','assets/app-icon-192.png','assets/app-icon-512.png',
+ 'src/app.js?v=samples-20261009-3','src/offline.js?v=samples-20261009-3','src/styles.css?v=pilot-20261007-1',
+ 'src/components.js?v=samples-20261009-3','src/reader.js?v=samples-20261009-3',
+ 'src/listen.js?v=samples-20261009-3','src/storage.js?v=phase2-20260925',
+ 'data/books.json?v=samples-20261009-3','data/platform.json?v=1',
  'assets/covers/slow-down.jpg','assets/books/slow-shutter-epub/cover.png',
  'assets/books/structure-pages/image-00-reading.jpg','assets/covers/metabolism.jpg','assets/covers/renaissance.jpg'
 ];
@@ -63,9 +65,9 @@ async function retireLockedPilotCaches(){
   if(completed){
    try{
     const data=await completed.json();
-    retireMarker=retireMarker||(['slow-down','slow-shutter','structure','renaissance'].includes(data.id)&&data.scope!=='sample')||
+    retireMarker=retireMarker||(['slow-down','slow-shutter','structure','metabolism','renaissance'].includes(data.id)&&data.scope!=='sample')||
      (Array.isArray(data.urls)&&data.urls.some(url=>lockedPilotPath(new URL(url,base))));
-   }catch{retireMarker=retireMarker||['slow-down','slow-shutter','structure','renaissance'].some(id=>name.startsWith(BOOK_PREFIX+id+'-'));}
+   }catch{retireMarker=retireMarker||['slow-down','slow-shutter','structure','metabolism','renaissance'].some(id=>name.startsWith(BOOK_PREFIX+id+'-'));}
   }
   // Invalidate completion first; an interrupted cleanup must not advertise a
   // complete download with missing URLs. Keep allowed bytes for re-download.

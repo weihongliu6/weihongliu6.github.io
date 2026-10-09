@@ -1,7 +1,7 @@
-import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-2';
+import { isSaved, isDownloaded, mountLibraryApp, initLibraryApp, downloadedChapter } from './offline.js?v=samples-20261009-3';
 import { storage } from './storage.js?v=phase2-20260925';
-import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-2';
-import { renderReader, bindReader } from './reader.js?v=samples-20261009-2';
+import { escapeHTML as e, bookURL, readURL, cover, tocItems, listeningChapters, firstListeningChapter, chapterListenURL, pilotCommerce, purchaseURL, purchaseLabel, canAccessChapter, chapterURL } from './components.js?v=samples-20261009-3';
+import { renderReader, bindReader } from './reader.js?v=samples-20261009-3';
 
 const main=document.querySelector('#main');
 const themeButton=document.querySelector('#theme-toggle');
@@ -152,7 +152,7 @@ async function render(){
 try{
   // Platform branding must not make the existing book catalogue unavailable.
   try { const response=await fetch('data/platform.json?v=1'); if(response.ok) platform={...platform,...await response.json()}; } catch { /* use static identity */ }
-  const response=await fetch('data/books.json?v=samples-20261009-2');if(!response.ok) throw Error('书架资料加载失败');
+  const response=await fetch('data/books.json?v=samples-20261009-3');if(!response.ok) throw Error('书架资料加载失败');
   books=await response.json();
   window.addEventListener('hashchange',render);
   await render();void initLibraryApp(books);
