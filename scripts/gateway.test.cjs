@@ -1,0 +1,6 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const root=path.join(__dirname,'..'),url='https://library.shadowobserverbooks.com/library/';
+for(const hash of ['', '#/read/slow-down/chapter-02','#access_token=do-not-forward'])test('gateway discards route and sensitive fragment '+hash.slice(0,12),()=>{let target;vm.runInNewContext(fs.readFileSync(path.join(root,'library/gateway.js'),'utf8'),{window:{location:{hash,search:'?secret=example',replace:x=>target=x}}});assert.equal(target,url)});
+test('worker only transition no storage removal',()=>{const s=fs.readFileSync(path.join(root,'library/sw.js'),'utf8');for(const x of ['skipWaiting','clients.claim','no-store','credentials:\'omit\''])assert.ok(s.includes(x));assert.ok(!/caches\.(delete|open)|localStorage|indexedDB/.test(s))});
+test('navigation direct formal library',()=>assert.ok(fs.readFileSync(path.join(root,'index.html'),'utf8').includes('href="'+url+'"')));
+test('all legacy entry points have safe fallback',()=>{for(const p of ['library/index.html','library-update.html','reader-test/index.html']){const s=fs.readFileSync(path.join(root,p),'utf8');assert.ok(s.includes(url));assert.ok(s.includes('/library/gateway.js'));assert.ok(!/supabase|auth-disabled/.test(s))}});

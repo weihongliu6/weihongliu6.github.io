@@ -1,4 +1,4 @@
-name: Publish reviewed sample site
+name: Publish personal site and library gateway
 on:
   push:
     branches: [main]
@@ -38,7 +38,7 @@ jobs:
           node-version: '22'
       - name: Run source and publication regression tests
         run: |
-          node --test scripts/library-pilot.test.cjs scripts/library-pilot-offline.test.cjs scripts/library-listen.test.cjs scripts/library-platform.test.cjs scripts/library-update.test.cjs
+          node --test scripts/gateway.test.cjs
           python -m unittest discover -s scripts -p test_public_site.py -v
       - name: Build and independently audit complete public artifact
         run: python scripts/build_public_site.py --source . --output "$RUNNER_TEMP/public-site"
