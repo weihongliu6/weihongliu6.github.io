@@ -1,184 +1,48 @@
 #!/usr/bin/env python3
-"""Build the whole public site from the reviewed sample-only tracked checkout.
-
-This is publication minimization, not DRM. Public Git history and prior copies remain.
-Only the explicitly reviewed Pilot paths may be published. New paths fail closed.
-"""
-import argparse
-import base64
-import hashlib
-import html
-import json
-import pathlib
-import re
-import shutil
-import subprocess
-
-POLICY_PATH = 'scripts/public-site-policy.json'
-BUILD_FILES = {
-    POLICY_PATH, 'scripts/build_public_site.py', 'scripts/test_public_site.py',
-    'scripts/verify_public_origin.py', '.github/workflows/pages.yml',
-    'PUBLICATION.md', 'scripts/slow-shutter.browser.cjs', '.github/workflows/sample-preview-check.yml',
-}
-PILOT = 'slow-down'
-SAMPLE = 'library/data/chapters/slow-down-full/chapter-01.json'
-
-def sha(data):
-    return hashlib.sha256(data).hexdigest()
-
-def tracked_files(source):
-    output = subprocess.check_output(['git', '-C', str(source), 'ls-files', '-z'])
-    return set(output.decode().rstrip('\0').split('\0'))
-
-def read_file(root, name):
-    p = pathlib.PurePosixPath(name)
-    if p.is_absolute() or '..' in p.parts:
-        raise ValueError('Unsafe path: ' + name)
-    target = root / p
-    if any(part.is_symlink() for part in [target, *target.parents] if part != root.parent):
-        raise ValueError('Symlink forbidden: ' + name)
-    if not target.is_file():
-        raise ValueError('Incomplete source: ' + name)
-    return target.read_bytes()
-
-def dynamic_brief(path):
-    return re.fullmatch(r'ai-briefs/AI_Brief_\d{4}-\d{2}-\d{2}\.html', path) is not None
-
-def build(source, output, tracked=None):
-    source, output = pathlib.Path(source).resolve(), pathlib.Path(output).resolve()
-    if output.exists() or source == output or output in source.parents or source in output.parents:
-        raise ValueError('Use a fresh output directory outside the source checkout')
-    policy = json.loads(read_file(source, POLICY_PATH))
-    tracked = tracked_files(source) if tracked is None else set(tracked)
-    expected = set(policy['sourceFiles']) | BUILD_FILES
-    missing = expected - tracked
-    unknown = {p for p in tracked - expected if not dynamic_brief(p)}
-    if missing or unknown:
-        raise ValueError('Unreviewed/incomplete tracked tree: missing=' + repr(sorted(missing)) + ' unknown=' + repr(sorted(unknown)))
-    # Read every tracked file first: a partial snapshot cannot create an artifact.
-    inputs = {p: read_file(source, p) for p in sorted(tracked)}
-    for p, expected_blob in policy.get('opaqueGitBlobs', {}).items():
-        raw = inputs[p]
-        actual_blob = hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
-        if actual_blob != expected_blob:
-            raise ValueError('Opaque file changed; content review required: ' + p)
-    excluded = set(policy['excludedPilotFiles'])
-    public = set(policy['publicFiles']) | {p for p in tracked if dynamic_brief(p)}
-    if public & excluded or set(policy['pilotFiles']) - public:
-        raise ValueError('Invalid publication policy')
-    for p in public:
-        if (('slow-down' in p or p.startswith(('library/data/chapters/slow-shutter', 'library/assets/books/slow-shutter', 'library/data/chapters/structure', 'library/assets/books/structure', 'library/data/chapters/renaissance', 'library/data/chapters/metabolism', 'library/assets/books/metabolism'))) and p not in policy['pilotFiles']):
-            raise ValueError('Unexpected Pilot public path: ' + p)
-    books = json.loads(inputs['library/data/books.json'])
-    if [b['id'] for b in books] != ['slow-down', 'slow-shutter', 'structure', 'metabolism', 'renaissance']:
-        raise ValueError('Book catalog changed; review release policy')
-    for pilot in (book for book in books if book.get('commerce', {}).get('mode') == 'pilot'):
-        book_id = pilot['id']
-        expected_count = {'slow-down': 22, 'slow-shutter': 9, 'structure': 15, 'metabolism': 16, 'renaissance': 108}[book_id]
-        directory = book_id if book_id=='renaissance' else book_id+'-full'
-        sample = f'library/data/chapters/{directory}/chapter-01.json'
-        if len(pilot['chapters']) != expected_count or len(pilot['toc']) != expected_count or pilot['commerce']['sampleChapter'] != 'chapter-01':
-            raise ValueError('Pilot structure changed')
-        refs = {'library/' + c['file'].split('?')[0] for c in pilot['chapters']}
-        retired = {p for p in excluded if p.startswith(f'library/data/chapters/{directory}/')}
-        if refs != ({sample} | retired):
-            raise ValueError('Pilot chapter policy differs from catalog')
-        chapter = json.loads(inputs[sample])
-        sample_assets = set()
-        for block in chapter['blocks']:
-            if block['type'] == 'image':
-                sample_assets.update('library/' + block[k] for k in ('src', 'fullSrc'))
-        allowed = {p for p in policy['pilotFiles'] if book_id in p}
-        if allowed != sample_assets | {sample, 'library/' + pilot['cover']}:
-            raise ValueError('Sample image policy changed')
-    # One-way paragraph fingerprints allow a clean build without private originals.
-    # Scan all tracked text (including tests/docs), so aliases cannot hide in Git.
-    rule = policy['excludedBodyFingerprints']
-    if rule.get('algorithm') != 'sha256' or rule.get('characters') != 80:
-        raise ValueError('Unsupported excluded-body fingerprint policy')
-    fingerprints = set(rule['hashes'])
-    if not fingerprints or any(not re.fullmatch(r'[0-9a-f]{64}', h) for h in fingerprints):
-        raise ValueError('Invalid excluded-body fingerprint policy')
-    if excluded & tracked or excluded & set(policy['sourceFiles']):
-        raise ValueError('Retired Pilot paths must not be tracked')
-    for p, raw in sorted(inputs.items()):
-        try:
-            text = raw.decode('utf-8')
-        except UnicodeDecodeError:
-            continue
-        if p.endswith('.json'):
-            text = json.dumps(json.loads(text), ensure_ascii=False)
-        text = html.unescape(text)
-        if any(sha(text[i:i+80].encode()) in fingerprints for i in range(max(0, len(text)-79))):
-            raise ValueError('Excluded Pilot body content found in tracked file: ' + p)
-    worker = inputs['library/sw.js'].decode('utf-8')
-    shell = re.search(r"const SHELL_FILES=\[(.*?)\];", worker, re.S)
-    if not shell:
-        raise ValueError('Service worker shell declaration changed')
-    for entry in re.findall(r"'([^']+)'", shell.group(1)):
-        path = entry.split('?')[0]
-        path = 'library/index.html' if path == './' else 'library/' + path
-        if path not in public:
-            raise ValueError('Service worker shell file omitted: ' + path)
-    preserved = {}
-    for book in books:
-        if book.get('commerce', {}).get('mode') == 'pilot':
-            continue
-        embedded_images = 0
-        refs = {'library/' + book['cover']} if book.get('cover') else set()
-        for entry in book.get('chapters', []):
-            p = 'library/' + entry['file'].split('?')[0]
-            refs.add(p)
-            data = json.loads(inputs[p])
-            for block in data.get('blocks', []):
-                if block.get('type') == 'image':
-                    for key in ('src', 'fullSrc'):
-                        image = block.get(key)
-                        if not image:
-                            continue
-                        if image.startswith('data:image/'):
-                            header, encoded = image.split(',', 1)
-                            if header not in ('data:image/webp;base64', 'data:image/png;base64', 'data:image/jpeg;base64'):
-                                raise ValueError('Unreviewed embedded image type in ' + p)
-                            base64.b64decode(encoded, validate=True)
-                            # Image bytes are preserved inside this chapter's exact hash.
-                            embedded_images += 1
-                        else:
-                            refs.add('library/' + image)
-        if refs - public:
-            raise ValueError('Other book content omitted: ' + repr(sorted(refs - public)))
-        preserved[book['id']] = {'chapterCount': len(book.get('chapters', [])), 'embeddedImageReferences': embedded_images, 'metadataSha256': sha(json.dumps(book, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()), 'files': {p: sha(inputs[p]) for p in sorted(refs)}}
-    output.mkdir(parents=True)
-    for p in sorted(public):
-        target = output / p
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(inputs[p])
-    try:
-        commit = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL).decode().strip()
-    except subprocess.CalledProcessError:
-        commit = 'fixture'
-    manifest = {'version': 1, 'sourceCommit': commit, 'sourceFiles': len(tracked),
-                'publicFiles': {p: sha(inputs[p]) for p in sorted(public)},
-                'excludedPilotFiles': sorted(excluded), 'pilotFiles': policy['pilotFiles'],
-                'preservedBooks': preserved, 'pilotTocEntries': 22, 'sampleBooks': ['slow-down', 'slow-shutter', 'structure', 'metabolism', 'renaissance'],
-                'limitation': 'Current Pilot source is sample-only; public Git history and previously saved copies remain accessible.'}
-    # Independent output walk and digest validation, before adding the manifest.
-    actual = {p.relative_to(output).as_posix(): sha(p.read_bytes()) for p in output.rglob('*') if p.is_file()}
-    if actual != manifest['publicFiles']:
-        raise ValueError('Artifact differs from verified source selection')
-    (output / 'publication-manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
-    return manifest
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--source', type=pathlib.Path, default=pathlib.Path('.'))
-    parser.add_argument('--output', type=pathlib.Path, required=True)
-    args = parser.parse_args()
-    try:
-        result = build(args.source, args.output)
-    except Exception as error:
-        # Surface a concise path-only diagnostic in public Actions annotations.
-        message = str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
-        print('::error title=Public artifact validation failed::' + message, flush=True)
-        raise
-    print(json.dumps({'sourceCommit': result['sourceCommit'], 'publicFiles': len(result['publicFiles']), 'excludedPilotFiles': len(result['excludedPilotFiles']), 'preservedBooks': {k: {'chapterCount': v['chapterCount'], 'fileCount': len(v['files'])} for k, v in result['preservedBooks'].items()}}, indent=2))
+"""Build the personal site; no dual-platform book content pipeline."""
+import argparse,hashlib,html,json,re,subprocess
+from pathlib import Path
+POLICY='scripts/public-site-policy.json'
+def build(source,output,tracked=None):
+ source,output=Path(source).resolve(),Path(output).resolve()
+ if output.exists(): raise ValueError('Output must be new; never overwrite an artifact')
+ p=json.loads((source/POLICY).read_text())
+ if tracked is None: tracked=subprocess.check_output(['git','-C',str(source),'ls-files','-z']).decode().strip('\0').split('\0')
+ expected=set(p['sourceFiles']);actual=set(tracked)
+ dynamic=lambda x:bool(re.fullmatch(r'ai-briefs/AI_Brief_\d{4}-\d{2}-\d{2}\.html',x))
+ if expected-actual or any(not dynamic(x) for x in actual-expected):raise ValueError('Unreviewed or missing source paths')
+ public=set(p['publicFiles'])|{x for x in actual if dynamic(x)};data={}
+ fingerprints=p['excludedBodyFingerprints'];bad=set(fingerprints['hashes']);width=fingerprints['characters']
+ for name in sorted(actual):
+  path=Path(name)
+  if path.is_absolute() or '..' in path.parts:raise ValueError('Unsafe source path')
+  f=source/path
+  if any(x.is_symlink() for x in [f,*f.parents]):raise ValueError('Symlinks forbidden')
+  d=f.read_bytes();data[name]=d
+  if name in p['opaqueGitBlobs']:
+   oid=hashlib.sha1(b'blob '+str(len(d)).encode()+b'\0'+d).hexdigest()
+   if oid!=p['opaqueGitBlobs'][name]:raise ValueError('Unreviewed opaque file: '+name)
+  try:text=d.decode('utf-8')
+  except UnicodeDecodeError:continue
+  variants=[text,html.unescape(text)]
+  if name.endswith('.json'):
+   try:variants.append(json.dumps(json.loads(text),ensure_ascii=False))
+   except ValueError:pass
+  variants += [''.join(text.split()) for text in variants]
+  for text in variants:
+   compact=text
+   if any(hashlib.sha256(compact[i:i+width].encode()).hexdigest() in bad for i in range(max(0,len(compact)-width+1))):raise ValueError('Controlled body fingerprint detected')
+ for name in public:
+  if name not in data:raise ValueError('Missing public file')
+  if name.startswith(('library/data/','library/assets/','library/src/')) or (name.startswith('reader-test/') and name!='reader-test/index.html'):raise ValueError('Reader resources forbidden')
+ output.mkdir(parents=True)
+ hashes={}
+ for name in sorted(public):
+  f=output/name;f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes(data[name]);hashes[name]=hashlib.sha256(data[name]).hexdigest()
+ try:commit=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],stderr=subprocess.DEVNULL).decode().strip()
+ except subprocess.CalledProcessError:commit=p['reviewedSourceCommit']+'+gateway-candidate'
+ manifest={'sourceCommit':commit,'publicFiles':hashes,'retiredFiles':p['retiredFiles'],'architecture':'personal-site-and-navigation-only'}
+ (output/'publication-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+ return manifest
+if __name__=='__main__':
+ a=argparse.ArgumentParser();a.add_argument('--source',required=True);a.add_argument('--output',required=True);x=a.parse_args();build(x.source,x.output)
